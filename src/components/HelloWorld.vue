@@ -1,9 +1,7 @@
 <template>
   <div class="hello">
-    <h1>
-      {{ msg }}
-    </h1>
-    <span v-bind:title="msg">
+    <h1>{{ msg }}</h1>
+    <span v-bind:title="title">
       鼠标悬停几秒钟查看此处动态绑定的提示信息！
     </span>
     <p>
@@ -13,9 +11,7 @@
         >vue-cli documentation</a
       >.
     </p>
-    <h3>
-      Installed CLI Plugins
-    </h3>
+    <h3>Installed CLI Plugins</h3>
     <ul>
       <li>
         <a
@@ -50,9 +46,7 @@
         >
       </li>
     </ul>
-    <h3>
-      Essential Links
-    </h3>
+    <h3>Essential Links</h3>
     <ul>
       <li>
         <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
@@ -76,9 +70,7 @@
         <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
       </li>
     </ul>
-    <h3>
-      Ecosystem
-    </h3>
+    <h3>Ecosystem</h3>
     <ul>
       <li>
         <a href="https://router.vuejs.org" target="_blank" rel="noopener"
@@ -119,6 +111,9 @@ export default {
   props: {
     msg: String,
   },
+  data: () => ({
+    title: 'test title',
+  }),
 };
 </script>
 
