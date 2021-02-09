@@ -1,9 +1,6 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <span v-bind:title="title">
-      鼠标悬停几秒钟查看此处动态绑定的提示信息！
-    </span>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -111,9 +108,6 @@ export default {
   props: {
     msg: String,
   },
-  data: () => ({
-    title: 'test title',
-  }),
 };
 </script>
 
