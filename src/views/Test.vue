@@ -1,45 +1,27 @@
 <template>
   <div class="test">
-    <h1>This is an test page</h1>
-    <table>
-      <tr>
-        <td>v-bind:</td>
-        <td>
-          <span v-bind:title="title">
-            hover this
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>v-if:</td>
-        <td><span v-if="true">visible</span></td>
-      </tr>
-      <tr>
-        <td>v-for:</td>
-        <td>
-          <ol>
-            <li v-for="(item, index) in list" v-bind:key="index">
-              {{ item.text }}
-            </li>
-          </ol>
-        </td>
-      </tr>
-      <tr>
-        <td>v-on:</td>
-        <td>
-          <button v-on:click="reverseTitle">reverse title</button>
-          <p>{{ titleReverse }}</p>
-        </td>
-      </tr>
-      <tr>
-        <!-- 實現表單輸入和應用狀態之間的雙向綁定 -->
-        <td>v-model:</td>
-        <td>
-          <input v-model="title" />
-          <p>{{ title }}</p>
-        </td>
-      </tr>
-    </table>
+    <h4>v-bind:</h4>
+    <span v-bind:title="title">
+      hover this
+    </span>
+
+    <h4>v-if:</h4>
+    <span v-if="true">visible</span>
+
+    <h4>v-for:</h4>
+    <ol>
+      <li v-for="(item, index) in list" v-bind:key="index">
+        {{ item.text }}
+      </li>
+    </ol>
+
+    <h4>v-on:</h4>
+    <button v-on:click="reverseTitle">reverse title</button>
+    <p>{{ titleReverse }}</p>
+
+    <h4>v-model:</h4>
+    <input v-model="title" />
+    <p>{{ title }}</p>
   </div>
 </template>
 
@@ -61,3 +43,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+div {
+  text-align: left;
+}
+</style>

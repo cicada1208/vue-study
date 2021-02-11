@@ -13,6 +13,6 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'linebreak-style': ['off', 'windows'],
+    'linebreak-style': ['off', 'windows'], // 關閉 win os 對換行的 lint
   },
 };
