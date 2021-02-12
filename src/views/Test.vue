@@ -1,7 +1,7 @@
 <template>
   <div class="test">
     <h4>v-bind:</h4>
-    <span v-bind:title="title">
+    <span v-bind:title="msg">
       hover this
     </span>
 
@@ -16,12 +16,13 @@
     </ol>
 
     <h4>v-on:</h4>
-    <button v-on:click="reverseTitle">reverse title</button>
-    <p>{{ titleReverse }}</p>
+    <button v-on:click="reverseMsg">reverse msg</button>
+    <p>{{ msgReverse }}</p>
 
+    <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
     <h4>v-model:</h4>
-    <input v-model="title" />
-    <p>{{ title }}</p>
+    <input v-model="msg" />
+    <p>{{ msg }}</p>
   </div>
 </template>
 
@@ -29,17 +30,22 @@
 export default {
   name: 'Test',
   data: () => ({
-    title: `v-bind title ${new Date().toLocaleString()}`,
+    msg: `${new Date().toLocaleString()}`,
+    msgReverse: '',
     list: [{ text: 'list1' }, { text: 'list2' }],
-    titleReverse: '',
   }),
   methods: {
-    reverseTitle: function() {
-      this.titleReverse = this.title
+    reverseMsg: function() {
+      this.msgReverse = this.msg
         .split('')
         .reverse()
         .join('');
     },
+  },
+  // lifecycle hook created: vm 實例被創建之後執行代碼
+  created: function() {
+    // `this` 指向 vm 實例
+    console.log(`vm created, msg is ${this.msg}`);
   },
 };
 </script>
