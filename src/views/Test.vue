@@ -23,6 +23,10 @@
     <h4>v-model:</h4>
     <input v-model="msg" />
     <p>{{ msg }}</p>
+
+    <!-- v-html: span 內容會被替換成 property rawHtml -->
+    <h4>v-html:</h4>
+    <span v-html="rawHtml">test</span>
   </div>
 </template>
 
@@ -33,6 +37,7 @@ export default {
     msg: `${new Date().toLocaleString()}`,
     msgReverse: '',
     list: [{ text: 'list1' }, { text: 'list2' }],
+    rawHtml: '<span style="color: red">This shold be red.</span>',
   }),
   methods: {
     reverseMsg: function() {
