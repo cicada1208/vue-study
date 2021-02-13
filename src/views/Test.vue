@@ -1,7 +1,12 @@
 <template>
   <div class="test">
+    <!--
+      v-bind: 能將 data property bind 在 html attribute
+      直接書寫 v-bind:title 或可用動態參數(方括號括起來的 JavaScript 表達式作為一個指令的參數)
+      完整語法: v-bind:[attributeName]
+    -->
     <h4>v-bind:</h4>
-    <span v-bind:title="msg">
+    <span :[attributeName]="msg">
       hover this
     </span>
 
@@ -16,15 +21,22 @@
     </ol>
 
     <h4>v-on:</h4>
-    <button v-on:click="reverseMsg">reverse msg</button>
-    <p>{{ msgReverse }}</p>
+    <!--
+      直接書寫 v-on:click 或可用動態參數
+      完整語法: v-on:[eventName]
+    -->
+    <button @[eventName]="reverseMsg">reverse msg</button>
+    <p>
+      <!-- Mustache 語法: 僅能單個 JavaScript 表達式 -->
+      {{ msgReverse }}
+    </p>
 
     <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
     <h4>v-model:</h4>
     <input v-model="msg" />
     <p>{{ msg }}</p>
 
-    <!-- v-html: span 內容會被替換成 property rawHtml -->
+    <!-- v-html: span 內容會被替換成 data property rawHtml -->
     <h4>v-html:</h4>
     <span v-html="rawHtml">test</span>
   </div>
@@ -37,6 +49,8 @@ export default {
     msg: `${new Date().toLocaleString()}`,
     msgReverse: '',
     list: [{ text: 'list1' }, { text: 'list2' }],
+    attributeName: 'title',
+    eventName: 'click',
     rawHtml: '<span style="color: red">This shold be red.</span>',
   }),
   methods: {
