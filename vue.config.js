@@ -10,5 +10,11 @@ const pkgJson = require('./package.json');
 process.env.VUE_APP_VERSION = pkgJson.version;
 
 module.exports = {
+  configureWebpack: {
+    // Before you can debug your Vue components from VS Code
+    // you need to update the generated webpack config to build
+    // sourcemaps that contains more information for our debugger.
+    devtool: 'source-map',
+  },
   publicPath: process.env.NODE_ENV === 'production' ? `/${pkgJson.name}/` : '/',
 };

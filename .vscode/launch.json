@@ -9,7 +9,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "launch node against file",
+      "name": "node:file",
       "program": "${file}",
       // outputCapture: if set to std, output from the process stdout/stderr
       // will be shown in the Debug Console, instead of listening to output
@@ -22,24 +22,28 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "launch chrome against file",
+      "name": "chrome:file",
       "file": "${file}",
       "skipFiles": ["<node_internals>/**", "node_modules/**/*.js"]
     },
     {
       "type": "chrome",
       "request": "launch",
-      "name": "launch chrome against live server",
-      "url": "http://localhost:5500/src",
-      "webRoot": "${workspaceFolder}/src",
-      "skipFiles": ["<node_internals>/**", "node_modules/**/*.js"]
-    },
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "launch chrome against vue",
+      "name": "chrome:vue",
       "url": "http://localhost:8080",
       "webRoot": "${workspaceFolder}",
+      "breakOnLoad": true,
+      "pathMapping": {
+        "/_karma_webpack_": "${workspaceFolder}"
+      },
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*",
+        "/./*": "${webRoot}/*",
+        "/src/*": "${webRoot}/*",
+        "/*": "*",
+        "/./~/*": "${webRoot}/node_modules/*"
+      },
+      "preLaunchTask": "serve",
       "skipFiles": ["<node_internals>/**", "node_modules/**/*.js", "runtime.js"]
     }
   ]
