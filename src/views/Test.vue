@@ -11,7 +11,9 @@
     </span>
 
     <h4>v-if:</h4>
-    <span v-if="true">visible</span>
+    <span v-if="Math.random() > 0.5">if >0.5 visible</span>
+    <span v-else-if="Math.random() === 0.5">elseif =0.5 visible</span>
+    <span v-else>else &lt;0.5 visible</span>
 
     <h4>v-for:</h4>
     <ol>
