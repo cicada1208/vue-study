@@ -28,7 +28,7 @@
     <h4>v-on:</h4>
     <button @[eventName]="reverseMsg">reverse msg</button>
     <button @[eventName]="clearMsg">clear msg</button>
-    <p id="msgDebounce">
+    <p id="debounceId">
       <!-- Mustache 語法: 僅能單個 JavaScript 表達式 -->
       msgReverse: {{ msgReverse }}
     </p>
@@ -43,6 +43,19 @@
     <!-- v-html: span 內容會被替換成 data property rawHtml -->
     <h4>v-html:</h4>
     <span v-html="rawHtml">test</span>
+
+    <h4>class and style:</h4>
+    <!--
+      若都啟用 {'text-bold': true, 'text-red': true}
+      相當於 class='text-size text-bold text-red'
+    -->
+    <p class="text-size" v-bind:class="textClass">class style test</p>
+    <p v-bind:class="['text-size', { 'text-bold': true, 'text-red': false }]">
+      class style test2
+    </p>
+    <p v-bind:style="{ color: 'blue', 'font-weight': 'bold' }">
+      class style test3
+    </p>
   </div>
 </template>
 
@@ -78,6 +91,12 @@ export default {
         this.msg = value;
       },
     },
+    textClass: function() {
+      return {
+        'text-bold': true,
+        'text-red': true,
+      };
+    },
   },
   methods: {
     // 方法 reverseMsg 每次都會重算
@@ -89,7 +108,7 @@ export default {
     },
     clearMsg: function() {
       // 延遲一秒清空
-      var debounce = _.debounce(() => $('#msgDebounce').html(''), 1000);
+      var debounce = _.debounce(() => $('#debounceId').html(''), 1000);
       debounce();
     },
   },
@@ -104,5 +123,17 @@ export default {
 <style scoped lang="scss">
 div {
   text-align: left;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-size {
+  font-size: 20px;
 }
 </style>
