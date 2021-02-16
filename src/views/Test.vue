@@ -21,6 +21,9 @@
         {{ item.text }}
       </li>
     </ol>
+    <div v-for="(value, name, index) in textClass" :key="index">
+      {{ index }}. {{ name }}: {{ value }}
+    </div>
 
     <!--
       v-on: 後接參數 eventName
@@ -46,11 +49,11 @@
     <h4>v-html:</h4>
     <span v-html="rawHtml">test</span>
 
-    <h4>class and style:</h4>
     <!--
       若都啟用 {'text-bold': true, 'text-red': true}
-      相當於 class='text-size text-bold text-red'
+      相當於 class="text-size text-bold text-red"
     -->
+    <h4>class and style:</h4>
     <p class="text-size" v-bind:class="textClass">class style test</p>
     <p v-bind:class="['text-size', { 'text-bold': true, 'text-red': false }]">
       class style test2
