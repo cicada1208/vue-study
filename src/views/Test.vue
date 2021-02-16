@@ -31,7 +31,9 @@
       完整語法: v-on:[eventName]
     -->
     <h4>v-on:</h4>
-    <button @[eventName]="reverseMsg">reverse msg</button>
+    <button @[eventName]="reverseMsg('自定義參數', $event)">
+      reverse msg
+    </button>
     <button @[eventName]="clearMsg">clear msg</button>
     <p id="debounceId">
       <!-- Mustache 語法: 僅能單個 JavaScript 表達式 -->
@@ -107,18 +109,19 @@ export default {
     },
   },
   methods: {
-    // 方法 reverseMsg 每次都會重算
-    reverseMsg: function(event) {
+    // 方法每次都會重算，不會緩存
+    reverseMsg: function(param, event) {
       this.msgReverse = this.msg
         .split('')
         .reverse()
         .join('');
-      alert(event.target.tagName);
+      alert(`tag name: ${event.target.tagName}, param: ${param}`);
     },
-    clearMsg: function() {
+    clearMsg: function(event) {
       // 延遲一秒清空
       var debounce = _.debounce(() => $('#debounceId').html(''), 1000);
       debounce();
+      alert(`tag name: ${event.target.tagName}`);
     },
   },
   created: function() {
