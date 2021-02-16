@@ -71,6 +71,8 @@ import _ from 'lodash';
 export default {
   name: 'Test',
   data: () => ({
+    // data property 才會是響應式
+    // Vue 會在初始化實例時對 property 執行 getter/setter 轉化
     msg: `${new Date().toLocaleString()}`,
     msgReverse: '',
     list: [{ text: 'list1' }, { text: 'list2' }],
@@ -80,8 +82,9 @@ export default {
   }),
   computed: {
     // msgReverseGetter is a computed property getter
-    // msgReverseGetter 依賴 msg，當響應式依賴 msg 改變，所有依賴 msgReverseGetter 的綁定也會更新；
-    // 當響應式依賴 msg 沒變，msgReverseGetter 會返回之前的緩存而不重算
+    // msgReverseGetter 依賴 msg，當響應式 msg 改變，
+    // 所有依賴 msgReverseGetter 的綁定也會更新；
+    // 當響應式 msg 沒變，msgReverseGetter 會返回之前的緩存而不重算
     msgReverseGetter: function() {
       return this.msg
         .split('')
@@ -105,11 +108,12 @@ export default {
   },
   methods: {
     // 方法 reverseMsg 每次都會重算
-    reverseMsg: function() {
+    reverseMsg: function(event) {
       this.msgReverse = this.msg
         .split('')
         .reverse()
         .join('');
+      alert(event.target.tagName);
     },
     clearMsg: function() {
       // 延遲一秒清空
