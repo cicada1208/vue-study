@@ -42,7 +42,7 @@
 
     <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
     <h4>v-model:</h4>
-    <input v-model="msg" />
+    <input v-model="msg" placeholder="edit me" />
     <p>msg: {{ msg }}</p>
     <p>msgReverseGetter: {{ msgReverseGetter }}</p>
     <p>msgGetter: {{ msgGetterAndSetter }}</p>
