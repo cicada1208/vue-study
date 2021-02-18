@@ -42,8 +42,10 @@
 
     <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
     <h4>v-model:</h4>
-    <input v-model="msg" placeholder="edit me" />
-    <p>msg: {{ msg }}</p>
+    <input v-model="msg" placeholder="single line" />
+    <br />
+    <textarea v-model="msg" placeholder="multiple lines" />
+    <p class="multi-line">msg: {{ msg }}</p>
     <p>msgReverseGetter: {{ msgReverseGetter }}</p>
     <p>msgGetter: {{ msgGetterAndSetter }}</p>
 
@@ -80,7 +82,8 @@ export default {
     list: [{ text: 'list1' }, { text: 'list2' }],
     attributeName: 'title',
     eventName: 'click',
-    rawHtml: '<span style="color: red">This shold be red.</span>',
+    rawHtml:
+      '<span style="color: red">raw html test. this shold be red.</span>',
   }),
   computed: {
     // msgReverseGetter is a computed property getter
@@ -147,5 +150,9 @@ div {
 
 .text-size {
   font-size: 20px;
+}
+
+.multi-line {
+  white-space: pre-wrap;
 }
 </style>
