@@ -4,6 +4,7 @@
       v-bind: 後接參數 html attribute 能綁定 data property
       直接書寫 v-bind:title 或可用動態參數(方括號括起來的 JavaScript 表達式作為一個指令的參數)
       完整語法: v-bind:[attributeName]
+      簡寫語法: :[attributeName]
     -->
     <h4>v-bind:</h4>
     <span :[attributeName]="msg">
@@ -31,6 +32,7 @@
       v-on: 後接參數 eventName
       直接書寫 v-on:click 或可用動態參數
       完整語法: v-on:[eventName]
+      簡寫語法: @[eventName]
     -->
     <h4>v-on:</h4>
     <button @[eventName]="reverseMsg('自定義參數', $event)">
