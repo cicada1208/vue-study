@@ -1,5 +1,5 @@
 <template>
-  <div class="test">
+  <div class="study">
     <!--
       v-bind: 後接參數 html attribute 能綁定 data property
       直接書寫 v-bind:title 或可用動態參數(方括號括起來的 JavaScript 表達式作為一個指令的參數)
@@ -15,12 +15,14 @@
     <span v-else-if="Math.random() === 0.5">elseif =0.5 visible</span>
     <span v-else>else &lt;0.5 visible</span>
 
-    <h4>v-for:</h4>
+    <h4>v-for iteration array:</h4>
     <ol>
       <li v-for="(item, index) in list" v-bind:key="index">
         {{ item.text }}
       </li>
     </ol>
+
+    <h4>v-for iteration object:</h4>
     <div v-for="(value, name, index) in textClass" :key="index">
       {{ index }}. {{ name }}: {{ value }}
     </div>
@@ -41,13 +43,84 @@
     </p>
 
     <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
-    <h4>v-model:</h4>
-    <input v-model="msg" placeholder="single line" />
+    <h4>v-model text & textarea:</h4>
+    <input v-model.trim="msg" placeholder="single line" />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" />
     <p class="multi-line">msg: {{ msg }}</p>
-    <p>msgReverseGetter: {{ msgReverseGetter }}</p>
-    <p>msgGetter: {{ msgGetterAndSetter }}</p>
+    <p class="multi-line">msgReverseGetter: {{ msgReverseGetter }}</p>
+    <p class="multi-line">msgGetter: {{ msgGetterAndSetter }}</p>
+
+    <h4>v-model number:</h4>
+    <!-- 即使在type="number"時，HTML輸入元素的值也總會返回字符串。
+    如果該值無法被parseFloat()解析，則會返回原始的值。 -->
+    <input type="number" v-model.number="num" />
+    <p>num: {{ num }}</p>
+
+    <h4>v-model single checkbox:</h4>
+    <input type="checkbox" id="chkbox" v-model="checked" />
+    <!-- The <label> for attribute specifies which form element a label is bound to.
+      for="element_id"-->
+    <label for="chkbox">{{ checked }}</label>
+    <br />
+    <input
+      type="checkbox"
+      id="chkboxValue"
+      v-model="checkedValue"
+      true-value="yes"
+      false-value="no"
+    />
+    <label for="chkboxValue">{{ checkedValue }}</label>
+
+    <h4>v-model mutiple checkbox bind to an array:</h4>
+    <template v-for="name in names">
+      <input
+        type="checkbox"
+        :id="name + 'checkbox'"
+        :value="name"
+        v-model="checkedNames"
+        :key="name + 'checkbox'"
+      />
+      <label :for="name + 'checkbox'" :key="name + 'checkboxlabel'">{{
+        name
+      }}</label>
+    </template>
+    <br />
+    <span>checked names: {{ checkedNames }}</span>
+
+    <h4>v-model radio:</h4>
+    <template v-for="name in names">
+      <input
+        type="radio"
+        :id="name + 'radio'"
+        :value="name"
+        v-model="pickedName"
+        :key="name + 'radio'"
+      />
+      <label :for="name + 'radio'" :key="name + 'radiolabel'">{{ name }}</label>
+    </template>
+    <br />
+    <span>picked name: {{ pickedName }}</span>
+
+    <h4>v-model select single selected:</h4>
+    <select v-model="selectedName">
+      <option disabled value="">請選擇</option>
+      <!-- :value="{ number: 123 }" 可為物件，選取後 selectedName.number 結果為 123 -->
+      <option v-for="name in names" :value="name" :key="name + 'option'">{{
+        name
+      }}</option>
+    </select>
+    <br />
+    <span>selected name: {{ selectedName }}</span>
+
+    <h4>v-model select multiple selected:</h4>
+    <select v-model="selectedNames" multiple style="width: 100px">
+      <option v-for="name in names" :value="name" :key="name + 'option'">{{
+        name
+      }}</option>
+    </select>
+    <br />
+    <span>selected names: {{ selectedNames }}</span>
 
     <!-- v-html: span 內容會被替換成 data property rawHtml -->
     <h4>v-html:</h4>
@@ -57,12 +130,12 @@
       若都啟用 {'text-bold': true, 'text-red': true}
       相當於 class="text-size text-bold text-red"
     -->
-    <h4>class and style:</h4>
+    <h4>class & style:</h4>
     <p class="text-size" v-bind:class="textClass">class style test</p>
     <p v-bind:class="['text-size', { 'text-bold': true, 'text-red': false }]">
       class style test2
     </p>
-    <p v-bind:style="{ color: 'blue', 'font-weight': 'bold' }">
+    <p v-bind:style="{ color: 'cornflowerblue', 'font-weight': 'bold' }">
       class style test3
     </p>
   </div>
@@ -73,7 +146,7 @@ import $ from 'jquery';
 import _ from 'lodash';
 
 export default {
-  name: 'Test',
+  name: 'Study',
   data: () => ({
     // data property 才會是響應式
     // Vue 會在初始化實例時對 property 執行 getter/setter 轉化
@@ -83,7 +156,15 @@ export default {
     attributeName: 'title',
     eventName: 'click',
     rawHtml:
-      '<span style="color: red">raw html test. this shold be red.</span>',
+      '<span style="color: crimson">raw html test. this shold be red.</span>',
+    num: 0,
+    checked: false,
+    checkedValue: '',
+    names: ['Jack', 'Mike'],
+    checkedNames: [],
+    pickedName: '',
+    selectedName: '',
+    selectedNames: [],
   }),
   computed: {
     // msgReverseGetter is a computed property getter
@@ -136,6 +217,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+h4 {
+  color: cadetblue;
+}
+
 div {
   text-align: left;
 }
@@ -145,7 +230,7 @@ div {
 }
 
 .text-red {
-  color: red;
+  color: crimson;
 }
 
 .text-size {
