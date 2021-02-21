@@ -142,13 +142,14 @@
     </p>
 
     <!--
+      單向數據流: 父級 prop 的更新會向下流動到子組件中，但是反過來則不行。
       numProp、boolProparrayProp、objectProp: 以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串
       boolPropDef: 未賦值，預設為true
       post: 傳入一個對象的所有 property
     -->
     <h4>component:</h4>
-    <CompTest
-      staticProp="static prop description"
+    <TestComp
+      staticProp="success"
       :dynamicProp="msg"
       :numProp="100"
       boolPropDef
@@ -163,7 +164,7 @@
 <script>
 import $ from 'jquery';
 import _ from 'lodash';
-import CompTest from '@/components/CompTest.vue';
+import TestComp from '@/components/TestComp.vue';
 
 export default {
   name: 'Study',
@@ -229,7 +230,7 @@ export default {
       alert(`tag name: ${event.target.tagName}`);
     },
   },
-  components: { CompTest },
+  components: { TestComp },
   created: function() {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
