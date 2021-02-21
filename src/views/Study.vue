@@ -140,12 +140,30 @@
     <p v-bind:style="{ color: 'cornflowerblue', 'font-weight': 'bold' }">
       class style test3
     </p>
+
+    <!--
+      numProp、boolProparrayProp、objectProp: 以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串
+      boolPropDef: 未賦值，預設為true
+      post: 傳入一個對象的所有 property
+    -->
+    <h4>component:</h4>
+    <CompTest
+      staticProp="static prop description"
+      :dynamicProp="msg"
+      :numProp="100"
+      boolPropDef
+      :boolProp="false"
+      :arrayProp="[1, 2, 3]"
+      :objectProp="textClass"
+      v-bind="post"
+    />
   </div>
 </template>
 
 <script>
 import $ from 'jquery';
 import _ from 'lodash';
+import CompTest from '@/components/CompTest.vue';
 
 export default {
   name: 'Study',
@@ -167,6 +185,7 @@ export default {
     pickedName: '',
     selectedName: '',
     selectedNames: [],
+    post: { id: 1, title: 'My Journey with Vue' },
   }),
   computed: {
     // msgReverseGetter is a computed property getter
@@ -210,6 +229,7 @@ export default {
       alert(`tag name: ${event.target.tagName}`);
     },
   },
+  components: { CompTest },
   created: function() {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
