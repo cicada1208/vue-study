@@ -1,5 +1,15 @@
 <template>
-  <div class="testcomp">
+  <div class="test-comp">
+    <!-- $emit: 觸發自定義事件 -->
+    <button @click="$emit('enlarge-text')">
+      enlarge text
+    </button>
+    <button @click="$emit('enlarge-text2', 1)">
+      enlarge text2
+    </button>
+    <button @click="$emit('decrease-text', -0.1)">
+      decrease text
+    </button>
     <p>staticProp: {{ staticProp }}</p>
     <p>dynamicProp: {{ dynamicProp }}</p>
     <p>numProp: {{ numProp }} num: {{ num }}</p>

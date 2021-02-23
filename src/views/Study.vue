@@ -35,10 +35,10 @@
       簡寫語法: @[eventName]
     -->
     <h4>v-on:</h4>
-    <button @[eventName]="reverseMsg('自定義參數', $event)">
+    <button @[eventName]="onReverseMsg('自定義參數', $event)">
       reverse msg
     </button>
-    <button @[eventName]="clearMsg">clear msg</button>
+    <button @[eventName]="onClearMsg">clear msg</button>
     <p id="debounceId">
       <!-- Mustache 語法: 僅能單個 JavaScript 表達式 -->
       msgReverse: {{ msgReverse }}
@@ -143,21 +143,29 @@
 
     <!--
       單向數據流: 父級 prop 的更新會向下流動到子組件中，但是反過來則不行。
-      numProp、boolProparrayProp、objectProp: 以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串
-      boolPropDef: 未賦值，預設為true
-      post: 傳入一個對象的所有 property
+      dynamicProp、numProp、boolProp、arrayProp、objectProp:
+      以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串。
+      boolPropDef: 未賦值，預設為true。
+      posts: 傳入一個對象的所有 property。
+      @enlarge-text: 監聽自定義事件。
+      @enlarge-text2、@decrease-text: 監聽子組建拋出的第二參數。
     -->
     <h4>component:</h4>
-    <TestComp
-      staticProp="success"
-      :dynamicProp="msg"
-      :numProp="100"
-      boolPropDef
-      :boolProp="false"
-      :arrayProp="[1, 2, 3]"
-      :objectProp="textClass"
-      v-bind="post"
-    />
+    <div :style="{ fontSize: postFontSize + 'em' }">
+      <TestComp
+        staticProp="success"
+        :dynamicProp="msg"
+        :numProp="100"
+        boolPropDef
+        :boolProp="false"
+        :arrayProp="[1, 2, 3]"
+        :objectProp="textClass"
+        v-bind="posts"
+        @enlarge-text="postFontSize += 0.1"
+        @enlarge-text2="postFontSize += $event"
+        @decrease-text="onDecreaseText"
+      />
+    </div>
   </div>
 </template>
 
@@ -169,7 +177,7 @@ import TestComp from '@/components/TestComp.vue';
 export default {
   name: 'Study',
   data: () => ({
-    // data property 才會是響應式
+    // data property 才會是響應式: 即 property 改變，view 會響應
     // Vue 會在初始化實例時對 property 執行 getter/setter 轉化
     msg: `${new Date().toLocaleString()}`,
     msgReverse: '',
@@ -186,7 +194,8 @@ export default {
     pickedName: '',
     selectedName: '',
     selectedNames: [],
-    post: { id: 1, title: 'My Journey with Vue' },
+    posts: { id: 1, title: 'My Journey with Vue' },
+    postFontSize: 1,
   }),
   computed: {
     // msgReverseGetter is a computed property getter
@@ -216,18 +225,21 @@ export default {
   },
   methods: {
     // 方法每次都會重算，不會緩存
-    reverseMsg: function(param, event) {
+    onReverseMsg: function(param, event) {
       this.msgReverse = this.msg
         .split('')
         .reverse()
         .join('');
       alert(`tag name: ${event.target.tagName}, param: ${param}`);
     },
-    clearMsg: function(event) {
+    onClearMsg: function(event) {
       // 延遲一秒清空
       var debounce = _.debounce(() => $('#debounceId').html(''), 1000);
       debounce();
       alert(`tag name: ${event.target.tagName}`);
+    },
+    onDecreaseText: function(size) {
+      this.postFontSize += size;
     },
   },
   components: { TestComp },
