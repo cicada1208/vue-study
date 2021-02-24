@@ -147,9 +147,12 @@
       以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串。
       boolPropDef: 未賦值，預設為true。
       posts: 傳入一個對象的所有 property。
+    -->
+    <!--
       @enlarge-text: 監聽自定義事件。
       @enlarge-text2、@decrease-text: 監聽子組建拋出的第二參數。
     -->
+    <!-- v-model="checked": component v-model -->
     <h4>component:</h4>
     <div :style="{ fontSize: postFontSize + 'em' }">
       <TestComp
@@ -164,7 +167,9 @@
         @enlarge-text="postFontSize += 0.1"
         @enlarge-text2="postFontSize += $event"
         @decrease-text="onDecreaseText"
-      />
+        v-model="checked"
+        >test slot
+      </TestComp>
     </div>
   </div>
 </template>

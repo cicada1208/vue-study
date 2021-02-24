@@ -18,12 +18,25 @@
     <p>arrayProp: {{ arrayProp }}</p>
     <p>objectProp: {{ objectProp }}</p>
     <p>id: {{ id }}, title: {{ title }}</p>
+    v-model:
+    <input
+      type="checkbox"
+      id="chkbox"
+      :checked="checked"
+      @change="$emit('change', $event.target.checked)"
+    />
+    <label for="chkbox">{{ checked }}</label>
+    <p>slot: <slot /></p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'TestComp',
+  model: {
+    prop: 'checked',
+    event: 'change',
+  },
   props: {
     // prop 會在組件實例創建前進行驗證
     // 故 data、computed property 在 default 或 validator 中不可用
@@ -52,6 +65,7 @@ export default {
     objectProp: Object,
     id: Number,
     title: String,
+    checked: Boolean,
   },
   data: function() {
     return {
