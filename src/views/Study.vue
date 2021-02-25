@@ -142,7 +142,7 @@
     </p>
 
     <!--
-      單向數據流: 父級 prop 的更新會向下流動到子組件中，但是反過來則不行。
+      prop 單向數據流: 父級 prop 的更新會向下流動到子組件中，但是反過來則不行。
       dynamicProp、numProp、boolProp、arrayProp、objectProp:
       以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串。
       boolPropDef: 未賦值，預設為true。
@@ -153,6 +153,10 @@
       @enlarge-text2、@decrease-text: 監聽子組建拋出的第二參數。
     -->
     <!-- v-model="checked": component v-model -->
+    <!--
+      twowayProp: prop 雙向綁定
+      v-bind.sync="objProp" 可將 object objProp 所有 property 傳入並雙向綁定。
+      -->
     <h4>component:</h4>
     <div :style="{ fontSize: postFontSize + 'em' }">
       <TestComp
@@ -168,8 +172,10 @@
         @enlarge-text2="postFontSize += $event"
         @decrease-text="onDecreaseText"
         v-model="checked"
+        :twowayProp.sync="twowayProp"
         >test slot
       </TestComp>
+      <p>twowayProp in parent: {{ twowayProp }}</p>
     </div>
   </div>
 </template>
@@ -201,6 +207,7 @@ export default {
     selectedNames: [],
     posts: { id: 1, title: 'My Journey with Vue' },
     postFontSize: 1,
+    twowayProp: 0,
   }),
   computed: {
     // msgReverseGetter is a computed property getter

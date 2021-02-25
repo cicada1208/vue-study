@@ -27,6 +27,10 @@
     />
     <label for="chkbox">{{ checked }}</label>
     <p>slot: <slot /></p>
+    <p>twowayProp in comonent: {{ twowayProp }}</p>
+    <button @click="onUpdateTwowayProp">
+      update two way prop
+    </button>
   </div>
 </template>
 
@@ -66,12 +70,18 @@ export default {
     id: Number,
     title: String,
     checked: Boolean,
+    twowayProp: Number,
   },
   data: function() {
     return {
       // 以 prop 作為初始值，異動 num data property
       num: this.numProp,
     };
+  },
+  methods: {
+    onUpdateTwowayProp: function() {
+      this.$emit('update:twowayProp', ++this.num);
+    },
   },
 };
 </script>
