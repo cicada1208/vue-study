@@ -173,7 +173,7 @@
         @decrease-text="onDecreaseText"
         v-model="checked"
         :twowayProp.sync="twowayProp"
-        >test slot
+        ><span style="color: crimson">test slot</span>
       </TestComp>
       <p>twowayProp in parent: {{ twowayProp }}</p>
     </div>
