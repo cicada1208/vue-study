@@ -26,7 +26,7 @@
       @change="$emit('change', $event.target.checked)"
     />
     <label for="chkbox">{{ checked }}</label>
-    <p>slot: <slot /></p>
+    <p>slot: <slot>backup slot</slot></p>
     <p>twowayProp in comonent: {{ twowayProp }}</p>
     <button @click="onUpdateTwowayProp">
       update two way prop

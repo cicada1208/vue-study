@@ -173,7 +173,9 @@
         @decrease-text="onDecreaseText"
         v-model="checked"
         :twowayProp.sync="twowayProp"
-        ><span style="color: crimson">test slot</span>
+      >
+        <!-- 若無此段 test slot，component 則顯示默認 backup slot -->
+        <span style="color: crimson">test slot</span>
       </TestComp>
       <p>twowayProp in parent: {{ twowayProp }}</p>
     </div>
