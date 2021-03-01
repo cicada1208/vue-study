@@ -154,9 +154,9 @@
     -->
     <!-- v-model="checked": component v-model -->
     <!--
-      twowayProp: prop 雙向綁定
+      twowayProp: prop 雙向綁定。
       v-bind.sync="objProp" 可將 object objProp 所有 property 傳入並雙向綁定。
-      -->
+    -->
     <h4>component:</h4>
     <div :style="{ fontSize: postFontSize + 'em' }">
       <TestComp
@@ -174,15 +174,27 @@
         v-model="checked"
         :twowayProp.sync="twowayProp"
       >
-        <!-- 未具名插槽都為 v-slot:default 的內容 -->
+        <!-- 未具名插槽: 未由 template v-slot 包覆的內容或由 template v-slot:default 包覆的內容 -->
         <!-- <template v-slot:default> -->
-        <!-- 若無此段 default slot，component 則顯示默認 default backup slot -->
-        <span style="color: crimson">default slot</span>
+        <!-- 若無此內容 default slot，component 則顯示默認 default backup slot -->
+        <span style="color: crimson">default slot </span>
         <!-- </template> -->
 
-        <!-- 具名插槽 v-slot:footer -->
-        <template v-slot:footer>
-          footer slot
+        <!-- 具名插槽: template v-slot:userName -->
+        <!-- <template v-slot:userName="slotProp">
+          slotProp: {{ slotProp.user.firstName }}
+        </template> -->
+
+        <!-- user 重命名為 person -->
+        <!-- <template v-slot:userName="{ user: person }">
+          slotProp: {{ person.firstName }}
+        </template> -->
+
+        <!-- slot prop undefObj: 為 undefined 的情形給予預設值 -->
+        <!-- 完整語法: v-slot:[slotName] -->
+        <!-- 簡寫語法: #[slotName] -->
+        <template #[slotName]="{ user, undefObj={role: 'guest'} }">
+          slotProp: name: {{ user.firstName }}, role: {{ undefObj.role }}
         </template>
       </TestComp>
       <p>twowayProp in parent: {{ twowayProp }}</p>
@@ -218,6 +230,7 @@ export default {
     post: { id: 1, title: 'My Journey with Vue' },
     postFontSize: 1,
     twowayProp: 0,
+    slotName: 'userName',
   }),
   computed: {
     // msgReverseGetter is a computed property getter

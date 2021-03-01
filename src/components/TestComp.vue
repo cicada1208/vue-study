@@ -31,9 +31,15 @@
 
     <p>
       slot:
+      <br />
       <!-- slot 若未指定 name 即為 <slot name="default"> -->
-      <slot>default backup slot</slot>
-      <slot name="footer">footer backup slot</slot>
+      <slot>default backup slot </slot>
+      <br />
+
+      <!-- slot prop user 傳遞至父級 -->
+      <slot name="userName" :user="user">
+        {{ user.lastName }}
+      </slot>
     </p>
 
     <p>twowayProp in comonent: {{ twowayProp }}</p>
@@ -85,6 +91,7 @@ export default {
     return {
       // 以 prop 作為初始值，異動 num data property
       num: this.numProp,
+      user: { firstName: 'H', lastName: 'W' },
     };
   },
   methods: {
