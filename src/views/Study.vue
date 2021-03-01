@@ -146,7 +146,7 @@
       dynamicProp、numProp、boolProp、arrayProp、objectProp:
       以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串。
       boolPropDef: 未賦值，預設為true。
-      posts: 傳入一個對象的所有 property。
+      post: 傳入一個對象的所有 property。
     -->
     <!--
       @enlarge-text: 監聽自定義事件。
@@ -167,15 +167,23 @@
         :boolProp="false"
         :arrayProp="[1, 2, 3]"
         :objectProp="textClass"
-        v-bind="posts"
+        v-bind="post"
         @enlarge-text="postFontSize += 0.1"
         @enlarge-text2="postFontSize += $event"
         @decrease-text="onDecreaseText"
         v-model="checked"
         :twowayProp.sync="twowayProp"
       >
-        <!-- 若無此段 test slot，component 則顯示默認 backup slot -->
-        <span style="color: crimson">test slot</span>
+        <!-- 未具名插槽都為 v-slot:default 的內容 -->
+        <!-- <template v-slot:default> -->
+        <!-- 若無此段 default slot，component 則顯示默認 default backup slot -->
+        <span style="color: crimson">default slot</span>
+        <!-- </template> -->
+
+        <!-- 具名插槽 v-slot:footer -->
+        <template v-slot:footer>
+          footer slot
+        </template>
       </TestComp>
       <p>twowayProp in parent: {{ twowayProp }}</p>
     </div>
@@ -207,7 +215,7 @@ export default {
     pickedName: '',
     selectedName: '',
     selectedNames: [],
-    posts: { id: 1, title: 'My Journey with Vue' },
+    post: { id: 1, title: 'My Journey with Vue' },
     postFontSize: 1,
     twowayProp: 0,
   }),

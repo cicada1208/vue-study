@@ -10,6 +10,7 @@
     <button @click="$emit('decrease-text', -0.1)">
       decrease text
     </button>
+
     <p>staticProp: {{ staticProp }}</p>
     <p>dynamicProp: {{ dynamicProp }}</p>
     <p>numProp: {{ numProp }} num: {{ num }}</p>
@@ -18,6 +19,7 @@
     <p>arrayProp: {{ arrayProp }}</p>
     <p>objectProp: {{ objectProp }}</p>
     <p>id: {{ id }}, title: {{ title }}</p>
+
     v-model:
     <input
       type="checkbox"
@@ -26,7 +28,14 @@
       @change="$emit('change', $event.target.checked)"
     />
     <label for="chkbox">{{ checked }}</label>
-    <p>slot: <slot>backup slot</slot></p>
+
+    <p>
+      slot:
+      <!-- slot 若未指定 name 即為 <slot name="default"> -->
+      <slot>default backup slot</slot>
+      <slot name="footer">footer backup slot</slot>
+    </p>
+
     <p>twowayProp in comonent: {{ twowayProp }}</p>
     <button @click="onUpdateTwowayProp">
       update two way prop
