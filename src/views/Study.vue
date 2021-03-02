@@ -190,7 +190,7 @@
           slotProp: {{ person.firstName }}
         </template> -->
 
-        <!-- slot prop undefObj: 為 undefined 的情形給予預設值 -->
+        <!-- slot prop undefObj: 因為 component 並未將 undefObj 傳遞過來，故為 undefined 的情形給予預設值 -->
         <!-- 完整語法: v-slot:[slotName] -->
         <!-- 簡寫語法: #[slotName] -->
         <template #[slotName]="{ user, undefObj={role: 'guest'} }">
@@ -199,6 +199,24 @@
       </TestComp>
       <p>twowayProp in parent: {{ twowayProp }}</p>
     </div>
+
+    <h4>dynamic component:</h4>
+    <!--
+      <keep-alive>
+        <component v-bind:is="'TestComp'" staticProp="danger"></component>
+      </keep-alive>
+    -->
+    <button
+      v-for="tab in tabs"
+      v-bind:key="tab"
+      v-bind:class="['tab-button', { active: currentTab === tab }]"
+      v-on:click="currentTab = tab"
+    >
+      {{ tab }}
+    </button>
+    <keep-alive>
+      <component v-bind:is="currentTabComponent" class="tab" />
+    </keep-alive>
   </div>
 </template>
 
@@ -206,6 +224,8 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import TestComp from '@/components/TestComp.vue';
+import PostsComp from '@/components/PostsComp.vue';
+import ArchiveComp from '@/components/ArchiveComp.vue';
 
 export default {
   name: 'Study',
@@ -231,6 +251,8 @@ export default {
     postFontSize: 1,
     twowayProp: 0,
     slotName: 'userName',
+    tabs: ['Posts', 'Archive'],
+    currentTab: 'Posts',
   }),
   computed: {
     // msgReverseGetter is a computed property getter
@@ -257,6 +279,9 @@ export default {
         'text-red': true,
       };
     },
+    currentTabComponent: function() {
+      return this.currentTab + 'Comp';
+    },
   },
   methods: {
     // 方法每次都會重算，不會緩存
@@ -277,7 +302,7 @@ export default {
       this.postFontSize += size;
     },
   },
-  components: { TestComp },
+  components: { TestComp, PostsComp, ArchiveComp }, // 局部註冊
   created: function() {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
@@ -309,5 +334,27 @@ div {
 
 .multi-line {
   white-space: pre-wrap;
+}
+
+.tab-button {
+  padding: 6px 10px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #f0f0f0;
+  margin-bottom: -1px;
+  margin-right: -1px;
+}
+.tab-button:hover {
+  background: #e0e0e0;
+}
+.tab-button.active {
+  background: #e0e0e0;
+}
+
+.tab {
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 </style>
