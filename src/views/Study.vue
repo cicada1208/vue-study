@@ -130,7 +130,7 @@
 
     <!--
       若都啟用 {'text-bold': true, 'text-red': true}
-      相當於 class="text-size text-bold text-red"
+      相當於 class="text-bold text-red"
     -->
     <h4>class & style:</h4>
     <p class="text-size" v-bind:class="textClass">class style test</p>
@@ -147,13 +147,12 @@
       以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串。
       boolPropDef: 未賦值，預設為true。
       post: 傳入一個對象的所有 property。
-    -->
-    <!--
+
       @enlarge-text: 監聽自定義事件。
       @enlarge-text2、@decrease-text: 監聽子組建拋出的第二參數。
-    -->
-    <!-- v-model="checked": component v-model -->
-    <!--
+
+      v-model="checked": component v-model。
+
       twowayProp: prop 雙向綁定。
       v-bind.sync="objProp" 可將 object objProp 所有 property 傳入並雙向綁定。
     -->
@@ -208,12 +207,16 @@
     -->
     <button
       v-for="tab in tabs"
-      v-bind:key="tab"
-      v-bind:class="['tab-button', { active: currentTab === tab }]"
-      v-on:click="currentTab = tab"
+      :key="tab"
+      :class="['tab-button', { active: currentTab === tab }]"
+      @click="currentTab = tab"
     >
       {{ tab }}
     </button>
+    <!-- is attribute: 多標籤的界面中用來切換不同的組件。 -->
+    <!-- <keep-alive>: 組件實例能夠在第一次被創建時緩存下來，保留組件狀態避免重新渲染。
+         用在其一個直屬的子組件被開關的情形。如果在其中有v-for則不會工作。
+         若為多個條件性的子元素，要求同時只有一個子元素被渲染。 -->
     <keep-alive>
       <component v-bind:is="currentTabComponent" class="tab" />
     </keep-alive>
@@ -302,7 +305,11 @@ export default {
       this.postFontSize += size;
     },
   },
-  components: { TestComp, PostsComp, ArchiveComp }, // 局部註冊
+  components: {
+    TestComp,
+    PostsComp,
+    ArchiveComp,
+  }, // 局部註冊
   created: function() {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
@@ -346,9 +353,11 @@ div {
   margin-bottom: -1px;
   margin-right: -1px;
 }
+
 .tab-button:hover {
   background: #e0e0e0;
 }
+
 .tab-button.active {
   background: #e0e0e0;
 }
