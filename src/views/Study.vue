@@ -227,8 +227,26 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import TestComp from '@/components/TestComp.vue';
-import PostsComp from '@/components/PostsComp.vue';
-import ArchiveComp from '@/components/ArchiveComp.vue';
+import LoadingComp from '@/components/LoadingComp.vue';
+import ErrorComp from '@/components/ErrorComp.vue';
+
+// 處理加載狀態
+const PostsComp = () => ({
+  // 需要加載的組件 (應該是一個 `Promise` 對象)
+  component: import(
+    /* webpackChunkName: "postscomp" */
+    '@/components/PostsComp.vue'
+  ),
+  // 異步組件加載時使用的組件
+  loading: LoadingComp,
+  // 加載失敗時使用的組件
+  error: ErrorComp,
+  // 展示加載時組件的延時時間。默認值是 200 (毫秒)
+  delay: 200,
+  // 如果提供了超時時間且組件加載也超時，
+  // 則使用加載失敗時使用的組件。默認值是：`Infinity`
+  // timeout: 3000,
+});
 
 export default {
   name: 'Study',
@@ -306,10 +324,17 @@ export default {
     },
   },
   components: {
+    // 模塊局部註冊: TestComp、PostsComp、ArchiveComp
     TestComp,
+    // async component: PostsComp、ArchiveComp
+    // 只在需要的時候才加載模塊，返回 Promise 的函式
     PostsComp,
-    ArchiveComp,
-  }, // 局部註冊
+    ArchiveComp: () =>
+      import(
+        /* webpackChunkName: "archivecomp" */
+        '@/components/ArchiveComp.vue'
+      ),
+  },
   created: function() {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
