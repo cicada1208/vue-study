@@ -46,7 +46,8 @@
 
     <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
     <h4>v-model text & textarea:</h4>
-    <!-- ref attribute: 賦予 ID 後，以此引用 element or component-->
+    <!-- ref attribute: 賦予 ID 後，以此引用 element or component。
+    避免在模板或計算屬性中訪問$refs。 -->
     <input v-model.trim="msg" placeholder="single line" ref="msgInput" />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" />
