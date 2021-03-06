@@ -278,10 +278,10 @@ export default {
     currentTab: 'Posts',
   }),
   computed: {
-    // msgReverseGetter is a computed property getter
+    // msgReverseGetter is a computed property getter.
     // msgReverseGetter 依賴 msg，當響應式 msg 改變，
     // 所有依賴 msgReverseGetter 的綁定也會更新；
-    // 當響應式 msg 沒變，msgReverseGetter 會返回之前的緩存而不重算
+    // 當響應式 msg 沒變，msgReverseGetter 會返回之前的緩存而不重算。
     msgReverseGetter: function() {
       return this.msg
         .split('')

@@ -1,6 +1,6 @@
 <template>
   <div class="test-comp">
-    <!-- $emit: 觸發自定義事件 -->
+    <!-- $emit: 被 v-on 監聽，觸發自定義事件 -->
     <button @click="$emit('enlarge-text')">
       enlarge text
     </button>
