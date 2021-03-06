@@ -46,7 +46,8 @@
 
     <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
     <h4>v-model text & textarea:</h4>
-    <input v-model.trim="msg" placeholder="single line" />
+    <!-- ref attribute: 賦予 ID 後，以此引用 element or component-->
+    <input v-model.trim="msg" placeholder="single line" ref="msgInput" />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" />
     <p class="multi-line">msg: {{ msg }}</p>
@@ -312,6 +313,7 @@ export default {
         .reverse()
         .join('');
       alert(`tag name: ${event.target.tagName}, param: ${param}`);
+      this.$refs.msgInput.focus();
     },
     onClearMsg: function(event) {
       // 延遲一秒清空
