@@ -222,6 +222,23 @@
     <keep-alive>
       <component v-bind:is="currentTabComponent" class="tab" />
     </keep-alive>
+
+    <!-- css 過渡動畫效果 -->
+    <h4>css transition:</h4>
+    <!-- <button @click="show = !show">
+      Toggle render
+    </button>
+    <transition name="slide-fade">
+      <p v-if="show">hello</p>
+    </transition> -->
+    <!-- transition: 若有指定 name，css 類名改前綴為 .slide-fade-enter-active，
+    否則使用預設前綴 .v-enter-active。 -->
+    <!-- mode: 過渡模式，out-in: 當前元素先進行過渡，完成之後新元素過渡進入。 -->
+    <transition name="slide-fade" mode="out-in">
+      <button @click="show = !show" v-bind:key="show">
+        {{ show }}
+      </button>
+    </transition>
   </div>
 </template>
 
@@ -234,7 +251,7 @@ import ErrorComp from '@/components/ErrorComp.vue';
 
 // 處理加載狀態
 const PostsComp = () => ({
-  // 需要加載的組件 (應該是一個 `Promise` 對象)
+  // 需要加載的組件 (應是個 `Promise` 對象)
   component: import(
     /* webpackChunkName: "postscomp" */
     '@/components/PostsComp.vue'
@@ -276,6 +293,7 @@ export default {
     slotName: 'userName',
     tabs: ['Posts', 'Archive'],
     currentTab: 'Posts',
+    show: true,
   }),
   computed: {
     // msgReverseGetter is a computed property getter.
@@ -393,5 +411,21 @@ div {
 .tab {
   border: 1px solid #ccc;
   padding: 10px;
+}
+
+/* 可以設置不同的進入和離開動畫 */
+/* 設置持續時間和動畫函數 */
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>
