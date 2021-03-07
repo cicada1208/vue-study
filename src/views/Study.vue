@@ -18,7 +18,7 @@
 
     <h4>v-for iteration array:</h4>
     <ol>
-      <li v-for="(item, index) in list" v-bind:key="index">
+      <li v-for="(item, index) in textList" v-bind:key="index">
         {{ item.text }}
       </li>
     </ol>
@@ -175,9 +175,9 @@
         v-model="checked"
         :twowayProp.sync="twowayProp"
       >
-        <!-- 未具名插槽: 未由 template v-slot 包覆的內容或由 template v-slot:default 包覆的內容 -->
+        <!-- 未具名插槽: 未由 template v-slot 包覆的內容，等同 template v-slot:default 包覆的內容 -->
         <!-- <template v-slot:default> -->
-        <!-- 若無此內容 default slot，component 則顯示默認 default backup slot -->
+        <!-- 若無此內容 default slot，component 則顯示子組建默認 default backup slot -->
         <span style="color: crimson">default slot </span>
         <!-- </template> -->
 
@@ -203,6 +203,7 @@
 
     <h4>dynamic component:</h4>
     <!--
+      // 也可傳入 prop
       <keep-alive>
         <component v-bind:is="'TestComp'" staticProp="danger"></component>
       </keep-alive>
@@ -215,30 +216,49 @@
     >
       {{ tab }}
     </button>
-    <!-- is attribute: 多標籤的界面中用來切換不同的組件。 -->
+    <!-- component is attribute: 動態組件，多標籤的界面中用來切換不同的組件。 -->
     <!-- <keep-alive>: 組件實例能夠在第一次被創建時緩存下來，保留組件狀態避免重新渲染。
-         用在其一個直屬的子組件被開關的情形。如果在其中有v-for則不會工作。
-         若為多個條件性的子元素，要求同時只有一個子元素被渲染。 -->
-    <keep-alive>
-      <component v-bind:is="currentTabComponent" class="tab" />
-    </keep-alive>
+    用在其一個直屬的子組件被開關的情形。如果在其中有v-for則不會工作。
+    若為多個條件性的子元素，要求同時只有一個子元素被渲染。 -->
+    <!-- transition 也可用於 dynamic component -->
+    <transition name="slide-fade" mode="out-in">
+      <keep-alive>
+        <component v-bind:is="currentTabComponent" class="tab" />
+      </keep-alive>
+    </transition>
 
     <!-- css 過渡動畫效果 -->
     <h4>css transition:</h4>
-    <!-- <button @click="show = !show">
+    <!-- transition: 應用在單個節點、同一時間渲染多個節點中的一個。
+    若有指定 name="slide-fade"，css 類名改前綴為 .slide-fade-enter-active，
+    否則使用預設前綴 .v-enter-active。
+    mode: 過渡模式，out-in: 當前元素先進行過渡，完成之後新元素過渡進入。 -->
+    <transition name="slide-fade" mode="out-in">
+      <button @click="show = !show" :key="show">
+        {{ show }}
+      </button>
+    </transition>
+    <!--
+    <button @click="show = !show">
       Toggle render
     </button>
     <transition name="slide-fade">
       <p v-if="show">hello</p>
-    </transition> -->
-    <!-- transition: 若有指定 name，css 類名改前綴為 .slide-fade-enter-active，
-    否則使用預設前綴 .v-enter-active。 -->
-    <!-- mode: 過渡模式，out-in: 當前元素先進行過渡，完成之後新元素過渡進入。 -->
-    <transition name="slide-fade" mode="out-in">
-      <button @click="show = !show" v-bind:key="show">
-        {{ show }}
-      </button>
     </transition>
+    -->
+
+    <h4>list transition:</h4>
+    <button @click="onShuffleNumList">Shuffle</button>
+    <button @click="onAddNumList">Add</button>
+    <button @click="onRemoveNumList">Remove</button>
+    <!-- 默認為一個 <span>，也可通過 tag attribute 更換為其他元素。 -->
+    <!-- 不可用過渡模式 mode。 -->
+    <!-- CSS 過渡的類將會應用在內部的元素中，而不是這個組/容器本身。 -->
+    <transition-group name="num-list" tag="p">
+      <span v-for="num in numList" :key="num" class="num-list-item">
+        {{ num }}
+      </span>
+    </transition-group>
   </div>
 </template>
 
@@ -274,7 +294,7 @@ export default {
     // Vue 會在初始化實例時對 property 執行 getter/setter 轉化
     msg: `${new Date().toLocaleString()}`,
     msgReverse: '',
-    list: [{ text: 'list1' }, { text: 'list2' }],
+    textList: [{ text: 'list1' }, { text: 'list2' }],
     attributeName: 'title',
     eventName: 'click',
     rawHtml:
@@ -294,6 +314,8 @@ export default {
     tabs: ['Posts', 'Archive'],
     currentTab: 'Posts',
     show: true,
+    numList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    nextNum: 10,
   }),
   computed: {
     // msgReverseGetter is a computed property getter.
@@ -343,9 +365,21 @@ export default {
     onDecreaseText: function(size) {
       this.postFontSize += size;
     },
+    onRandomIndex: function() {
+      return Math.floor(Math.random() * this.numList.length);
+    },
+    onAddNumList: function() {
+      this.numList.splice(this.onRandomIndex(), 0, this.nextNum++);
+    },
+    onRemoveNumList: function() {
+      this.numList.splice(this.onRandomIndex(), 1);
+    },
+    onShuffleNumList: function() {
+      this.numList = _.shuffle(this.numList);
+    },
   },
   components: {
-    // 模塊局部註冊: TestComp、PostsComp、ArchiveComp
+    // components: 模塊局部註冊
     TestComp,
     // async component: PostsComp、ArchiveComp
     // 只在需要的時候才加載模塊，返回 Promise 的函式
@@ -425,7 +459,23 @@ div {
 
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(10px);
   opacity: 0;
+  transform: translateX(10px);
+}
+
+.num-list-item {
+  transition: all 1s;
+  display: inline-block; // 因 Vue 使用的 FLIP 動畫，過渡元素不能設置為 display: inline
+  margin-right: 10px;
+}
+
+.num-list-enter, .num-list-leave-to
+/* .num-list-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.num-list-leave-active {
+  position: absolute;
 }
 </style>
