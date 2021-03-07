@@ -465,7 +465,11 @@ div {
 
 .num-list-item {
   transition: all 1s;
-  display: inline-block; // 因 Vue 使用的 FLIP 動畫，過渡元素不能設置為 display: inline
+  // 因 Vue 使用 FLIP 動畫，過渡元素不能設置為 display: inline。
+  // display: inline 不換行，不可設定 width/heigh，元素 width/heigh 由它的內容決定。
+  // display: block 換行，可設定 width/heigh。
+  // display: inline-block 不換行，可設定 width/heigh。
+  display: inline-block;
   margin-right: 10px;
 }
 
