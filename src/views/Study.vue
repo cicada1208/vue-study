@@ -39,7 +39,7 @@
       reverse msg
     </button>
     <button @[eventName]="onClearMsg">clear msg</button>
-    <p id="debounceId">
+    <p id="msgReverseP">
       <!-- Mustache 語法: 僅能單個 JavaScript 表達式 -->
       msgReverse: {{ msgReverse }}
     </p>
@@ -336,7 +336,7 @@ export default {
     },
     onClearMsg: function(event) {
       // 延遲一秒清空
-      var debounce = _.debounce(() => $('#debounceId').html(''), 1000);
+      var debounce = _.debounce(() => $('#msgReverseP').html(''), 1000);
       debounce();
       alert(`tag name: ${event.target.tagName}`);
     },
