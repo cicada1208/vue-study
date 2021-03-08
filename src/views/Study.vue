@@ -58,7 +58,7 @@
     <h4>v-model number:</h4>
     <!-- 即使在type="number"時，HTML輸入元素的值也總會返回字符串。
     如果該值無法被parseFloat()解析，則會返回原始的值。 -->
-    <input type="number" v-model.number="num" />
+    <input type="number" v-model.number="num" step="2" />
     <p>num: {{ num }}</p>
 
     <h4>v-model single checkbox:</h4>
@@ -269,7 +269,7 @@ import TestComp from '@/components/TestComp.vue';
 import LoadingComp from '@/components/LoadingComp.vue';
 import ErrorComp from '@/components/ErrorComp.vue';
 
-// 處理加載狀態
+// 處理組件加載狀態
 const PostsComp = () => ({
   // 需要加載的組件 (應是個 `Promise` 對象)
   component: import(
@@ -286,6 +286,18 @@ const PostsComp = () => ({
   // 則使用加載失敗時使用的組件。默認值是：`Infinity`
   // timeout: 3000,
 });
+
+// mixin: 可複用功能
+var reuseMixin = {
+  methods: {
+    onPrint: function() {
+      console.log('reuseMixin created first.');
+    },
+  },
+  created: function() {
+    this.onPrint();
+  },
+};
 
 export default {
   name: 'Study',
@@ -393,8 +405,10 @@ export default {
   created: function() {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
-    console.log(`vm created, msg is ${this.msg}`);
+    console.log(`vm created, msg is ${this.msg}.`);
   },
+  // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
+  mixins: [reuseMixin],
 };
 </script>
 
