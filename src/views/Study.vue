@@ -50,7 +50,7 @@
     避免在模板或計算屬性中訪問$refs。 -->
     <input v-model.trim="msg" placeholder="single line" ref="msgInput" />
     <br />
-    <textarea v-model="msg" placeholder="multiple lines" />
+    <textarea v-model="msg" placeholder="multiple lines" v-focus />
     <p class="multi-line">msg: {{ msg }}</p>
     <p class="multi-line">msgReverseGetter: {{ msgReverseGetter }}</p>
     <p class="multi-line">msgGetter: {{ msgGetterAndSetter }}</p>
@@ -409,6 +409,16 @@ export default {
   },
   // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
   mixins: [reuseMixin],
+  // directives: 自定義指令，局部註冊
+  directives: {
+    // 自定義指令 v-focus
+    focus: {
+      // 當被綁定的元素插入到 DOM 時，focus
+      inserted: function(el) {
+        el.focus();
+      },
+    },
+  },
 };
 </script>
 
