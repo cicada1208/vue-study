@@ -1,6 +1,6 @@
 <template>
   <div class="study">
-    <!--1
+    <!--
       v-bind: 後接參數 html attribute 能綁定 data property
       直接書寫 v-bind:title 或可用動態參數(方括號括起來的 JavaScript 表達式作為一個指令的參數)
       完整語法: v-bind:[attributeName]
