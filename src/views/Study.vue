@@ -50,7 +50,7 @@
     避免在模板或計算屬性中訪問$refs。 -->
     <input v-model.trim="msg" placeholder="single line" ref="msgInput" />
     <br />
-    <textarea v-model="msg" placeholder="multiple lines" v-focus />
+    <textarea v-model="msg" placeholder="multiple lines" v-focus="msg" />
     <p class="multi-line">msg: {{ msg }}</p>
     <p class="multi-line">msgReverseGetter: {{ msgReverseGetter }}</p>
     <p class="multi-line">msgGetter: {{ msgGetterAndSetter }}</p>
@@ -191,7 +191,7 @@
           slotProp: {{ person.firstName }}
         </template> -->
 
-        <!-- slot prop undefObj: 因為 component 並未將 undefObj 傳遞過來，故為 undefined 的情形給予預設值 -->
+        <!-- slot prop undefObj: 因為 child component 並未將 undefObj 傳遞過來，故為 undefined 的情形給予預設值 -->
         <!-- 完整語法: v-slot:[slotName] -->
         <!-- 簡寫語法: #[slotName] -->
         <template #[slotName]="{ user, undefObj={role: 'guest'} }">
@@ -413,7 +413,16 @@ export default {
   directives: {
     // 自定義指令 v-focus
     focus: {
-      // 當被綁定的元素插入到 DOM 時，focus
+      // Hook Functions: bind、inserted...
+      // bind: 只調用一次，指令第一次綁定到元素時調用。在這裡可以進行一次性的初始化設置。
+      bind: function(el, binding, vnode) {
+        // 除了el之外，其它參數都應只讀，勿進行修改
+        console.log('Hook Arguments binding: ' + JSON.stringify(binding));
+        console.log(
+          'Hook Arguments vnode keys: ' + Object.keys(vnode).join(', ')
+        );
+      },
+      // inserted: 當被綁定的元素插入到 DOM 時調用。
       inserted: function(el) {
         el.focus();
       },
