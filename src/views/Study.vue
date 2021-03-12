@@ -163,7 +163,7 @@
       <TestComp
         staticProp="success"
         :dynamicProp="msg"
-        :numProp="100"
+        :numProp="2"
         boolPropDef
         :boolProp="false"
         :arrayProp="[1, 2, 3]"
@@ -223,7 +223,7 @@
     <!-- transition 也可用於 dynamic component -->
     <transition name="slide-fade" mode="out-in">
       <keep-alive>
-        <component v-bind:is="currentTabComponent" class="tab" />
+        <component v-bind:is="currentTabComponent" class="tab">qaq</component>
       </keep-alive>
     </transition>
 
@@ -259,6 +259,11 @@
         {{ num }}
       </span>
     </transition-group>
+
+    <h4>render function:</h4>
+    <ArchiveComp :level="5">
+      heading element created by render function.
+    </ArchiveComp>
   </div>
 </template>
 
