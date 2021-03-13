@@ -261,9 +261,10 @@
     </transition-group>
 
     <h4>render function:</h4>
-    <ArchiveComp :level="5">
+    <RenderFuncComp :level="5">
       heading element created by render function.
-    </ArchiveComp>
+      {{ msg }}
+    </RenderFuncComp>
   </div>
 </template>
 
@@ -278,7 +279,7 @@ import ErrorComp from '@/components/ErrorComp.vue';
 const PostsComp = () => ({
   // 需要加載的組件 (應是個 `Promise` 對象)
   component: import(
-    /* webpackChunkName: "postscomp" */
+    /* webpackChunkName: "posts-comp" */
     '@/components/PostsComp.vue'
   ),
   // 異步組件加載時使用的組件
@@ -328,7 +329,7 @@ export default {
     postFontSize: 1,
     twowayProp: 0,
     slotName: 'userName',
-    tabs: ['Posts', 'Archive'],
+    tabs: ['Posts', 'RenderFunc'],
     currentTab: 'Posts',
     show: true,
     numList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -401,10 +402,10 @@ export default {
     // async component: PostsComp、ArchiveComp
     // 只在需要的時候才加載模塊，返回 Promise 的函式
     PostsComp,
-    ArchiveComp: () =>
+    RenderFuncComp: () =>
       import(
-        /* webpackChunkName: "archivecomp" */
-        '@/components/ArchiveComp.vue'
+        /* webpackChunkName: "render-func-comp" */
+        '@/components/RenderFuncComp.vue'
       ),
   },
   created: function() {
