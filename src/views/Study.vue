@@ -402,7 +402,7 @@ export default {
   components: {
     // components: 模塊局部註冊
     TestComp,
-    // async component: PostsComp、ArchiveComp
+    // async component: PostsComp、RenderFuncComp
     // 只在需要的時候才加載模塊，返回 Promise 的函式
     PostsComp,
     RenderFuncComp: () =>

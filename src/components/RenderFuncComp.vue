@@ -7,9 +7,9 @@
 <script>
 var getChildrenTextContent = function(children) {
   return children
-    .map(function(node) {
-      return node.children ? getChildrenTextContent(node.children) : node.text;
-    })
+    .map((node) =>
+      node.children ? getChildrenTextContent(node.children) : node.text
+    )
     .join('');
 };
 
@@ -21,6 +21,9 @@ export default {
       default: 2,
     },
   },
+  data: () => ({
+    textList: [{ text: 'list1' }, { text: 'list2' }],
+  }),
   computed: {
     anchorName: function() {
       return getChildrenTextContent(this.$slots.anchor)
@@ -32,7 +35,8 @@ export default {
   render: function(createElement) {
     // createElement: return virtual node(VNode)
     return createElement(
-      'div', // html tag(String)、component options(Object)、resolve 上述任一的 async function, 必選項
+      'div', // html tag(String)、component options(Object)、
+      // resolve 上述任一的 async function, 必選項
       [
         createElement('h' + this.level, this.$slots.default),
         createElement('h' + this.level, 'second heading element.'),
@@ -48,6 +52,17 @@ export default {
               },
             }, // a data object corresponding to the attributes, 可選項
             this.$slots.anchor // children VNodes, 可選項
+          ),
+        createElement(
+          'div',
+          Array.apply(null, { length: 2 }).map(function() {
+            return createElement('p', 'VNode 必須唯一');
+          }) // VNode 必須唯一: 故都從 createElement 產生
+        ),
+        this.textList.length &&
+          createElement(
+            'ul',
+            this.textList.map((item) => createElement('li', item.text))
           ),
       ].filter(Boolean) // children VNodes, 可選項
     );
