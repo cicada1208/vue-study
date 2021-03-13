@@ -262,8 +262,11 @@
 
     <h4>render function:</h4>
     <RenderFuncComp :level="5">
-      heading element created by render function.
+      heading element content from default slot created by render function.
       {{ msg }}
+      <template v-slot:anchor>
+        anchor element
+      </template>
     </RenderFuncComp>
   </div>
 </template>
