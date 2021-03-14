@@ -155,12 +155,12 @@
 
       v-model="checked": component v-model。
 
-      twowayProp: prop 雙向綁定。
+      twoWayProp: prop 雙向綁定。
       v-bind.sync="objProp" 可將 object objProp 所有 property 傳入並雙向綁定。
     -->
     <h4>component:</h4>
     <div :style="{ fontSize: postFontSize + 'em' }">
-      <TestComp
+      <PropSlotComp
         staticProp="success"
         :dynamicProp="msg"
         :numProp="2"
@@ -173,7 +173,7 @@
         @enlarge-text2="postFontSize += $event"
         @decrease-text="onDecreaseText"
         v-model="checked"
-        :twowayProp.sync="twowayProp"
+        :twoWayProp.sync="twoWayProp"
       >
         <!-- 未具名插槽: 未由 template v-slot 包覆的內容，等同 template v-slot:default 包覆的內容 -->
         <!-- <template v-slot:default> -->
@@ -197,15 +197,15 @@
         <template #[slotName]="{ user, undefObj={role: 'guest'} }">
           slotProp: name: {{ user.firstName }}, role: {{ undefObj.role }}
         </template>
-      </TestComp>
-      <p>twowayProp in parent: {{ twowayProp }}</p>
+      </PropSlotComp>
+      <p>twoWayProp in parent: {{ twoWayProp }}</p>
     </div>
 
     <h4>dynamic component:</h4>
     <!--
       // 也可傳入 prop
       <keep-alive>
-        <component v-bind:is="'TestComp'" staticProp="danger"></component>
+        <component v-bind:is="'PropSlotComp'" staticProp="danger"></component>
       </keep-alive>
     -->
     <button
@@ -255,17 +255,17 @@
     <!-- 不可用過渡模式 mode。 -->
     <!-- CSS 過渡的類將會應用在內部的元素中，而不是這個組/容器本身。 -->
     <transition-group name="num-list" tag="p">
-      <span v-for="num in numList" :key="num" class="num-list-item">
+      <span v-for="num in nums" :key="num" class="num-list-item">
         {{ num }}
       </span>
     </transition-group>
 
     <h4>render function:</h4>
     <RenderFuncComp :level="5">
-      heading element content from default slot created by render function.
+      heading VNode content from default slot created by render function.
       {{ msg }}
       <template v-slot:anchor>
-        anchor element
+        anchor VNode
       </template>
     </RenderFuncComp>
   </div>
@@ -274,7 +274,7 @@
 <script>
 import $ from 'jquery';
 import _ from 'lodash';
-import TestComp from '@/components/TestComp.vue';
+import PropSlotComp from '@/components/PropSlotComp.vue';
 import LoadingComp from '@/components/LoadingComp.vue';
 import ErrorComp from '@/components/ErrorComp.vue';
 
@@ -330,12 +330,12 @@ export default {
     selectedNames: [],
     post: { id: 1, title: 'My Journey with Vue' },
     postFontSize: 1,
-    twowayProp: 0,
+    twoWayProp: 0,
     slotName: 'userName',
     tabs: ['Posts', 'RenderFunc'],
     currentTab: 'Posts',
     show: true,
-    numList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    nums: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     nextNum: 10,
   }),
   computed: {
@@ -387,21 +387,21 @@ export default {
       this.postFontSize += size;
     },
     onRandomIndex: function() {
-      return Math.floor(Math.random() * this.numList.length);
+      return Math.floor(Math.random() * this.nums.length);
     },
     onAddNumList: function() {
-      this.numList.splice(this.onRandomIndex(), 0, this.nextNum++);
+      this.nums.splice(this.onRandomIndex(), 0, this.nextNum++);
     },
     onRemoveNumList: function() {
-      this.numList.splice(this.onRandomIndex(), 1);
+      this.nums.splice(this.onRandomIndex(), 1);
     },
     onShuffleNumList: function() {
-      this.numList = _.shuffle(this.numList);
+      this.nums = _.shuffle(this.nums);
     },
   },
   components: {
     // components: 模塊局部註冊
-    TestComp,
+    PropSlotComp,
     // async component: PostsComp、RenderFuncComp
     // 只在需要的時候才加載模塊，返回 Promise 的函式
     PostsComp,

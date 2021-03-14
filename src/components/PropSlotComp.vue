@@ -20,14 +20,16 @@
     <p>objectProp: {{ objectProp }}</p>
     <p>id: {{ id }}, title: {{ title }}</p>
 
-    v-model:
-    <input
-      type="checkbox"
-      id="chkbox"
-      :checked="checked"
-      @change="$emit('change', $event.target.checked)"
-    />
-    <label for="chkbox">{{ checked }}</label>
+    <p>
+      v-model:
+      <input
+        type="checkbox"
+        id="chkbox"
+        :checked="checked"
+        @change="$emit('change', $event.target.checked)"
+      />
+      <label for="chkbox">{{ checked }}</label>
+    </p>
 
     <p>
       slot:
@@ -42,7 +44,7 @@
       </slot>
     </p>
 
-    <p>twowayProp in comonent: {{ twowayProp }}</p>
+    <p>twoWayProp in comonent: {{ twoWayProp }}</p>
     <button @click="onUpdateTwowayProp">
       update two way prop
     </button>
@@ -51,7 +53,7 @@
 
 <script>
 export default {
-  name: 'TestComp',
+  name: 'PropSlotComp',
   model: {
     prop: 'checked',
     event: 'change',
@@ -85,7 +87,7 @@ export default {
     id: Number,
     title: String,
     checked: Boolean,
-    twowayProp: Number,
+    twoWayProp: Number,
   },
   data: function() {
     return {
@@ -96,7 +98,7 @@ export default {
   },
   methods: {
     onUpdateTwowayProp: function() {
-      this.$emit('update:twowayProp', ++this.num);
+      this.$emit('update:twoWayProp', ++this.num);
     },
   },
 };

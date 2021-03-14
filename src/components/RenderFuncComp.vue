@@ -33,14 +33,36 @@ export default {
     },
   },
   render: function(createElement) {
+    // var self = this;
+
     // createElement: return virtual node(VNode)
     return createElement(
-      'div', // html tag(String)、component options(Object)、
+      'div', // 第一參數為 html tag(String)、component options(Object)、
       // resolve 上述任一的 async function, 必選項
       [
-        createElement('h' + this.level, this.$slots.default),
-        createElement('h' + this.level, 'second heading element.'),
-        'text element.',
+        createElement(
+          'h' + this.level,
+          {
+            on: {
+              // 事件修飾符在 render function 不支援 click.once 寫法。
+              // 改為 '~click':() => {...}
+              click: () => {
+                // .self: 如果觸發事件的元素不是綁定到事件的元素則返回
+                if (event.target !== event.currentTarget) return;
+                // 如果沒有同時按下shift鍵則返回
+                // if (!event.shiftKey) return;
+                // 阻止事件冒泡
+                // event.stopPropagation();
+                // 阻止該元素默認的keyup事件
+                // event.preventDefault();
+                alert(`default slot: ${JSON.stringify(this.$slots.default)}`);
+              },
+            },
+          }, // a data object corresponding to the attributes, 可選項
+          this.$slots.default // children VNodes, 可選項
+        ),
+        createElement('h' + this.level, 'second heading VNode.'),
+        'text VNode.',
         createElement('br'),
         this.$slots.anchor &&
           createElement(
@@ -64,7 +86,7 @@ export default {
             'ul',
             this.textList.map((item) => createElement('li', item.text))
           ),
-      ].filter(Boolean) // children VNodes, 可選項
+      ] // children VNodes, 可選項
     );
   },
 };
