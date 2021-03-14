@@ -87,13 +87,14 @@ export default {
             'ul',
             this.textList.map((item) => createElement('li', item.text))
           ),
-        createElement(
-          'div',
-          // slot prop user 傳遞至父級
-          this.$scopedSlots.userName({
-            user: this.user,
-          })
-        ), // 該 createElement 相當於 `<div><slot name="userName" :user="user"></slot></div>`
+        this.$scopedSlots.userName &&
+          createElement(
+            'div',
+            // slot prop user 傳遞至父級
+            this.$scopedSlots.userName({
+              user: this.user,
+            })
+          ), // 該 createElement 相當於 `<div><slot name="userName" :user="user"></slot></div>`
       ] // children VNodes, 可選項
     );
   },

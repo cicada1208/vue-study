@@ -271,6 +271,9 @@
         slotProp: name: {{ user.firstName }}, role: {{ undefObj.role }}
       </template>
     </RenderFuncComp>
+
+    <h4>JSX:</h4>
+    <JSXComp />
   </div>
 </template>
 
@@ -412,6 +415,11 @@ export default {
       import(
         /* webpackChunkName: "render-func-comp" */
         '@/components/RenderFuncComp.vue'
+      ),
+    JSXComp: () =>
+      import(
+        /* webpackChunkName: "jsx-comp" */
+        '@/components/JSXComp.vue'
       ),
   },
   created: function() {
