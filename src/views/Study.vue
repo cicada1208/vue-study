@@ -267,6 +267,9 @@
       <template v-slot:anchor>
         anchor VNode
       </template>
+      <template #[slotName]="{ user, undefObj={role: 'guest'} }">
+        slotProp: name: {{ user.firstName }}, role: {{ undefObj.role }}
+      </template>
     </RenderFuncComp>
   </div>
 </template>

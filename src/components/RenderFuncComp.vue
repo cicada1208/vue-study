@@ -23,6 +23,7 @@ export default {
   },
   data: () => ({
     textList: [{ text: 'list1' }, { text: 'list2' }],
+    user: { firstName: 'H', lastName: 'W' },
   }),
   computed: {
     anchorName: function() {
@@ -60,7 +61,7 @@ export default {
             },
           }, // a data object corresponding to the attributes, 可選項
           this.$slots.default // children VNodes, 可選項
-        ),
+        ), // 該 createElement 相當於 `<h5><slot></slot></h5>`
         createElement('h' + this.level, 'second heading VNode.'),
         'text VNode.',
         createElement('br'),
@@ -86,6 +87,13 @@ export default {
             'ul',
             this.textList.map((item) => createElement('li', item.text))
           ),
+        createElement(
+          'div',
+          // slot prop user 傳遞至父級
+          this.$scopedSlots.userName({
+            user: this.user,
+          })
+        ), // 該 createElement 相當於 `<div><slot name="userName" :user="user"></slot></div>`
       ] // children VNodes, 可選項
     );
   },
