@@ -272,8 +272,11 @@
       </template>
     </RenderFuncComp>
 
-    <h4>JSX:</h4>
+    <h4>JSX component:</h4>
     <JSXComp />
+
+    <h4>JSX functional component:</h4>
+    <JSXFuncComp option="1" />
   </div>
 </template>
 
@@ -420,6 +423,11 @@ export default {
       import(
         /* webpackChunkName: "jsx-comp" */
         '@/components/JSXComp.vue'
+      ),
+    JSXFuncComp: () =>
+      import(
+        /* webpackChunkName: "jsx-func-comp" */
+        '@/components/JSXFuncComp.vue'
       ),
   },
   created: function() {
