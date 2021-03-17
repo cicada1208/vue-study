@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 
-Vue.use(VueRouter);
+Vue.use(VueRouter); // 使用插件，需要在調用new Vue()啟動應用之前完成
 
 const routes = [
   {
