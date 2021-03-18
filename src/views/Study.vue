@@ -277,6 +277,15 @@
 
     <h4>JSX functional component:</h4>
     <JSXFuncComp option="1" />
+
+    <!-- filters: 可被用於一些常見的文本格式化，用在雙花括號插值和v-bind表達式，可串聯。
+    | 前為第一參數 filterText，可再傳入其他參數 msg
+    -->
+    <h4>filters:</h4>
+    <input v-model="filterText" placeholder="write down text to see" />
+    text: {{ filterText }} <br />
+    <input :value="filterText | capitalize(msg) | digitRemove" />
+    text after filters: {{ filterText | capitalize(msg) | digitRemove }}
   </div>
 </template>
 
@@ -346,6 +355,7 @@ export default {
     show: true,
     nums: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     nextNum: 10,
+    filterText: '',
   }),
   computed: {
     // msgReverseGetter is a computed property getter.
@@ -411,7 +421,7 @@ export default {
   components: {
     // components: 模塊局部註冊
     PropSlotComp,
-    // async component: PostsComp、RenderFuncComp
+    // async component: PostsComp、RenderFuncComp...
     // 只在需要的時候才加載模塊，返回 Promise 的函式
     PostsComp,
     RenderFuncComp: () =>
@@ -454,6 +464,18 @@ export default {
       inserted: function(el) {
         el.focus();
       },
+    },
+  },
+  filters: {
+    capitalize: function(value, msg) {
+      if (!value) return '';
+      value = value.toString();
+      return value.charAt(0).toUpperCase() + value.slice(1) + msg;
+    },
+    digitRemove: function(value) {
+      var pat = /\d/g;
+      value = value.replace(pat, '');
+      return value;
     },
   },
 };
