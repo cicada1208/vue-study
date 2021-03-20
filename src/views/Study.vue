@@ -153,12 +153,10 @@
       @enlarge-text: 監聽自定義事件。
       @enlarge-text2、@decrease-text: 監聽子組建拋出的第二參數。
 
-      v-model="checked": component v-model。
-
       twoWayProp: prop 雙向綁定。
       v-bind.sync="objProp" 可將 object objProp 所有 property 傳入並雙向綁定。
     -->
-    <h4>component:</h4>
+    <h4>component prop & slot:</h4>
     <div :style="{ fontSize: postFontSize + 'em' }">
       <PropSlotComp
         staticProp="success"
@@ -172,7 +170,6 @@
         @enlarge-text="postFontSize += 0.1"
         @enlarge-text2="postFontSize += $event"
         @decrease-text="onDecreaseText"
-        v-model="checked"
         :twoWayProp.sync="twoWayProp"
       >
         <!-- 未具名插槽: 未由 template v-slot 包覆的內容，等同 template v-slot:default 包覆的內容 -->
@@ -200,6 +197,12 @@
       </PropSlotComp>
       <p>twoWayProp in parent: {{ twoWayProp }}</p>
     </div>
+
+    <h4>component check v-model:</h4>
+    <CheckModelInputComp v-model="checked" />
+
+    <h4>component text v-model:</h4>
+    <TodoListComp />
 
     <h4>dynamic component:</h4>
     <!--
@@ -440,6 +443,16 @@ export default {
       import(
         /* webpackChunkName: "jsx-func-comp" */
         '@/components/JSXFuncComp.vue'
+      ),
+    CheckModelInputComp: () =>
+      import(
+        /* webpackChunkName: "check-model-input-comp" */
+        '@/components/CheckModelInputComp.vue'
+      ),
+    TodoListComp: () =>
+      import(
+        /* webpackChunkName: "todo-list-comp" */
+        '@/components/TodoListComp.vue'
       ),
   },
   created: function() {
