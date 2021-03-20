@@ -51,9 +51,9 @@
     <input v-model.trim="msg" placeholder="single line" ref="msgInput" />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" v-focus="msg" />
-    <p class="multi-line">msg: {{ msg }}</p>
-    <p class="multi-line">msgReverseGetter: {{ msgReverseGetter }}</p>
-    <p class="multi-line">msgGetter: {{ msgGetterAndSetter }}</p>
+    <p :class="style2.multiline">msg: {{ msg }}</p>
+    <p :class="style2.multiline">msgReverseGetter: {{ msgReverseGetter }}</p>
+    <p :class="style2.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
 
     <h4>v-model number:</h4>
     <!-- 即使在type="number"時，HTML輸入元素的值也總會返回字符串。
@@ -295,6 +295,7 @@ import _ from 'lodash';
 import PropSlotComp from '@/components/PropSlotComp.vue';
 import LoadingComp from '@/components/LoadingComp.vue';
 import ErrorComp from '@/components/ErrorComp.vue';
+import style2 from '../css/style2.module.scss'; // CSS Modules
 
 // 處理組件加載狀態
 const PostsComp = () => ({
@@ -356,6 +357,7 @@ export default {
     nums: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     nextNum: 10,
     filterText: '',
+    style2,
   }),
   computed: {
     // msgReverseGetter is a computed property getter.
@@ -482,8 +484,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+// The @import CSS at-rule is used to import style rules from other style sheets.
+@import '../css/style.scss';
+
 h4 {
-  color: cadetblue;
+  color: $title-color;
 }
 
 div {
@@ -500,10 +505,6 @@ div {
 
 .text-size {
   font-size: 20px;
-}
-
-.multi-line {
-  white-space: pre-wrap;
 }
 
 .tab-button {
