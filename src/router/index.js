@@ -2,8 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 
-Vue.use(VueRouter); // 使用插件，需要在調用new Vue()啟動應用之前完成
+// 使用插件，需要在調用 new Vue() 啟動應用前完成
+Vue.use(VueRouter);
 
+// 定義路由
 const routes = [
   {
     path: '/',
@@ -21,6 +23,7 @@ const routes = [
   },
 ];
 
+// 創建 router 實例
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,

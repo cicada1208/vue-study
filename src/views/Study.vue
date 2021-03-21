@@ -85,9 +85,9 @@
         v-model="checkedNames"
         :key="name + 'checkbox'"
       />
-      <label :for="name + 'checkbox'" :key="name + 'checkboxlabel'">{{
-        name
-      }}</label>
+      <label :for="name + 'checkbox'" :key="name + 'checkboxlabel'">
+        {{ name }}
+      </label>
     </template>
     <br />
     <span>checked names: {{ checkedNames }}</span>
@@ -110,18 +110,18 @@
     <select v-model="selectedName">
       <option disabled value="">請選擇</option>
       <!-- :value="{ number: 123 }" 可為物件，選取後 selectedName.number 結果為 123 -->
-      <option v-for="name in names" :value="name" :key="name + 'option'">{{
-        name
-      }}</option>
+      <option v-for="name in names" :value="name" :key="name + 'option'">
+        {{ name }}
+      </option>
     </select>
     <br />
     <span>selected name: {{ selectedName }}</span>
 
     <h4>v-model select multiple selected:</h4>
     <select v-model="selectedNames" multiple style="width: 100px">
-      <option v-for="name in names" :value="name" :key="name + 'option'">{{
-        name
-      }}</option>
+      <option v-for="name in names" :value="name" :key="name + 'option'">
+        {{ name }}
+      </option>
     </select>
     <br />
     <span>selected names: {{ selectedNames }}</span>
@@ -232,7 +232,8 @@
 
     <!-- css 過渡動畫效果 -->
     <h4>css transition:</h4>
-    <!-- transition: 應用在單個節點、同一時間渲染多個節點中的一個。
+    <!-- transition:
+    應用在單個節點、同一時間渲染多個節點中的一個。
     若有指定 name="slide-fade"，css 類名改前綴為 .slide-fade-enter-active，
     否則使用預設前綴 .v-enter-active。
     mode: 過渡模式，out-in: 當前元素先進行過渡，完成之後新元素過渡進入。 -->
@@ -254,9 +255,10 @@
     <button @click="onShuffleNumList">Shuffle</button>
     <button @click="onAddNumList">Add</button>
     <button @click="onRemoveNumList">Remove</button>
-    <!-- 默認為一個 <span>，也可通過 tag attribute 更換為其他元素。 -->
-    <!-- 不可用過渡模式 mode。 -->
-    <!-- CSS 過渡的類將會應用在內部的元素中，而不是這個組/容器本身。 -->
+    <!-- transition-group:
+    默認為一個 <span>，也可通過 tag attribute 更換為其他元素。
+    不可用過渡模式 mode。
+    CSS 過渡的類將會應用在內部的元素中，而不是這個組/容器本身。 -->
     <transition-group name="num-list" tag="p">
       <span v-for="num in nums" :key="num" class="num-list-item">
         {{ num }}
@@ -282,23 +284,27 @@
     <JSXFuncComp option="1" />
 
     <!-- filters: 可被用於一些常見的文本格式化，用在雙花括號插值和v-bind表達式，可串聯。
-    | 前為第一參數 filterText，可再傳入其他參數 msg
-    -->
+    | 前為第一參數 filterText，可再傳入其他參數 msg -->
     <h4>filters:</h4>
     <input v-model="filterText" placeholder="write down text to see" />
     text: {{ filterText }} <br />
     <input :value="filterText | capitalize(msg) | digitRemove" />
     text after filters: {{ filterText | capitalize(msg) | digitRemove }}
+
+    <h4>vue router this.$route & this.$router:</h4>
+    <p>currentRoutePath: {{ currentRoutePath }}</p>
+    <button @[eventName]="onGoBack">go back</button>
   </div>
 </template>
 
 <script>
 import $ from 'jquery';
 import _ from 'lodash';
+// @ is an alias to /src
 import PropSlotComp from '@/components/PropSlotComp.vue';
 import LoadingComp from '@/components/LoadingComp.vue';
 import ErrorComp from '@/components/ErrorComp.vue';
-import style2 from '../css/style2.module.scss'; // CSS Modules
+import style2 from '@/css/style2.module.scss'; // CSS Modules
 
 // 處理組件加載狀態
 const PostsComp = () => ({
@@ -390,6 +396,9 @@ export default {
     currentTabComponent: function() {
       return this.currentTab + 'Comp';
     },
+    currentRoutePath() {
+      return this.$route.path;
+    },
   },
   methods: {
     // 方法每次都會重算，不會緩存
@@ -421,6 +430,9 @@ export default {
     },
     onShuffleNumList: function() {
       this.nums = _.shuffle(this.nums);
+    },
+    onGoBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/');
     },
   },
   components: {
@@ -498,7 +510,7 @@ export default {
 
 <style scoped lang="scss">
 // The @import CSS at-rule is used to import style rules from other style sheets.
-@import '../css/style.scss';
+@import '@/css/style.scss';
 
 h4 {
   color: $title-color;
