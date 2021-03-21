@@ -7,10 +7,7 @@
       <router-link to="/user/cicada/post/123?search=pig&type=small">
         User
       </router-link>
-      |
-      <router-link to="/user/plumes/post/456">
-        User2
-      </router-link>
+      | <router-link to="/user/plumes/post/456">User2</router-link>
     </div>
     <!-- <router-view /> 路由匹配到的組件將渲染在這裡 -->
     <router-view />
