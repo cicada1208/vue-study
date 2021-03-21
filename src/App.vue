@@ -3,7 +3,14 @@
     <div id="nav">
       <!-- <router-link> 默認會被渲染成 <a> 標籤 -->
       <router-link to="/">Home</router-link> |
-      <router-link to="/study">Study</router-link>
+      <router-link to="/study">Study</router-link> |
+      <router-link to="/user/cicada/post/123?search=pig&type=small">
+        User
+      </router-link>
+      |
+      <router-link to="/user/plumes/post/456">
+        User2
+      </router-link>
     </div>
     <!-- <router-view /> 路由匹配到的組件將渲染在這裡 -->
     <router-view />

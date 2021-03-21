@@ -21,6 +21,22 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "study" */ '../views/Study.vue'),
   },
+  {
+    // 動態路徑參數(dynamic segment)
+    // path: '/user/:userName/post/:postId', // 此路由路徑需完整才能匹配 /user/cicada/post/123
+    // vue-router 使用 path-to-regexp
+    // (post)?: make part of the path optional by wrapping with parens and add "?"
+    // :postId(\\d+): this route will only be matched if :postId is all numbers
+    path: '/user/:userName/(post)?/:postId(\\d+)?', // 此路由路徑即使無 post 也能匹配 /user/cicada
+    name: 'User',
+    component: () => import(/* webpackChunkName: "user" */ '../views/User.vue'),
+  },
+  {
+    path: '*', // 通配符，常用於客戶端404錯誤
+    name: 'NotFound',
+    component: () =>
+      import(/* webpackChunkName: "notfound" */ '../views/NotFound.vue'),
+  },
 ];
 
 // 創建 router 實例
