@@ -10,21 +10,31 @@
     <div id="nav">
       <!-- <router-link> 默認會被渲染成 <a> 標籤。
       點擊 <router-link :to="..."> 等同調用 router.push(...) -->
-      <router-link :to="'/user/' + $route.params.userName + '/profile'"
-        >profile</router-link
+      <router-link
+        v-for="(link, index) in links"
+        :to="'/user/' + $route.params.userName + '/' + link"
+        :key="link"
       >
-      |
-      <router-link :to="'/user/' + $route.params.userName + '/note'"
-        >note</router-link
-      >
+        {{ link }} {{ index !== links.length - 1 ? '|' : '' }}
+      </router-link>
     </div>
     <!-- <router-view /> 路由匹配到的組件將渲染在這裡 -->
-    children: <router-view />
+    <!-- 若未設置 name，默認為 default -->
+    <p>children default:</p>
+    <router-view />
+    <!-- 命名視圖: 有設置 name -->
+    <p>children profile:</p>
+    <router-view name="profile" />
+    <p>children note:</p>
+    <router-view name="note" />
   </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    links: ['profile', 'note', 'all'],
+  }),
   methods: {
     onGoBack() {
       // router.go(1) 等同 window.history.forward()

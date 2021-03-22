@@ -6,8 +6,8 @@ import Home from '../views/Home.vue';
 Vue.use(VueRouter);
 
 const UserHome = { template: '<div>home</div>' };
-const UserProfile = { template: '<div>route.path: {{$route.path}}</div>' };
-const UserNote = { template: '<div>route.path: {{$route.path}}</div>' };
+const UserProfile = { template: '<div>profile</div>' };
+const UserNote = { template: '<div>note</div>' };
 
 // 定義路由
 const routes = [
@@ -42,6 +42,12 @@ const routes = [
       // when /user/:userName/profile is matched
       { path: 'profile', name: 'UserProfile', component: UserProfile },
       { path: 'note', name: 'UserNote', component: UserNote },
+      {
+        path: 'all',
+        name: 'UserAll',
+        // 一個視圖(router-view)由一組件(component)渲染
+        components: { default: UserHome, profile: UserProfile, note: UserNote },
+      },
     ],
   },
   {
