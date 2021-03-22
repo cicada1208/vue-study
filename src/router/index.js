@@ -6,8 +6,8 @@ import Home from '../views/Home.vue';
 Vue.use(VueRouter);
 
 const UserHome = { template: '<div>home</div>' };
-const UserProfile = { template: '<div>{{$route.path}}</div>' };
-const UserNote = { template: '<div>{{$route.path}}</div>' };
+const UserProfile = { template: '<div>route.path: {{$route.path}}</div>' };
+const UserNote = { template: '<div>route.path: {{$route.path}}</div>' };
 
 // 定義路由
 const routes = [
@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: '/study',
-    name: 'Study',
+    name: 'Study', // name: 命名路由
     // route level code-splitting
     // this generates a separate chunk (study.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -27,22 +27,21 @@ const routes = [
   },
   {
     // 動態路徑參數(dynamic segment)
-    // path: '/user/:userName/post/:postId', // 此路由路徑需完整才能匹配 /user/cicada/post/123
+    // path: '/user/:userName/post/:postId', // 此路由路徑需完整才能匹配，如: /user/cicada/post/123
     // vue-router 使用 path-to-regexp
     // (post)?: make part of the path optional by wrapping with parens and add "?"
     // :postId(\\d+): this route will only be matched if :postId is all numbers
-    path: '/user/:userName/(post)?/:postId(\\d+)?', // 此路由路徑即使無 post 也能匹配 /user/cicada
-    // name: 'User',
+    path: '/user/:userName/(post)?/:postId(\\d+)?', // 此路由路徑即使無 post 也能匹配，如: /user/cicada
     component: () => import(/* webpackChunkName: "user" */ '../views/User.vue'),
     // children: 嵌套路由配置
     children: [
       // UserHome will be rendered inside User's <router-view>
       // when /user/:userName is matched
-      { path: '', component: UserHome },
+      { path: '', name: 'UserHome', component: UserHome },
       // UserProfile will be rendered inside User's <router-view>
       // when /user/:userName/profile is matched
-      { path: 'profile', component: UserProfile },
-      { path: 'note', component: UserNote },
+      { path: 'profile', name: 'UserProfile', component: UserProfile },
+      { path: 'note', name: 'UserNote', component: UserNote },
     ],
   },
   {

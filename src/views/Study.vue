@@ -290,10 +290,6 @@
     text: {{ filterText }} <br />
     <input :value="filterText | capitalize(msg) | digitRemove" />
     text after filters: {{ filterText | capitalize(msg) | digitRemove }}
-
-    <h4>vue router this.$route & this.$router:</h4>
-    <p>currentRoutePath: {{ currentRoutePath }}</p>
-    <button @[eventName]="onGoBack">go back</button>
   </div>
 </template>
 
@@ -396,9 +392,6 @@ export default {
     currentTabComponent: function() {
       return this.currentTab + 'Comp';
     },
-    currentRoutePath() {
-      return this.$route.path;
-    },
   },
   methods: {
     // 方法每次都會重算，不會緩存
@@ -430,9 +423,6 @@ export default {
     },
     onShuffleNumList: function() {
       this.nums = _.shuffle(this.nums);
-    },
-    onGoBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/');
     },
   },
   components: {
@@ -514,10 +504,6 @@ export default {
 
 h4 {
   color: $title-color;
-}
-
-div {
-  text-align: left;
 }
 
 .text-bold {
