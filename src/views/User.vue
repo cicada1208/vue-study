@@ -4,6 +4,16 @@
     post id: {{ $route.params.postId }} <br />
     query.search: {{ $route.query.search }} <br />
     query.type: {{ $route.query.type }}
+    <div id="nav">
+      <router-link :to="'/user/' + $route.params.userName + '/profile'"
+        >profile</router-link
+      >
+      |
+      <router-link :to="'/user/' + $route.params.userName + '/note'"
+        >note</router-link
+      >
+    </div>
+    children: <router-view />
   </div>
 </template>
 
