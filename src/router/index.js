@@ -6,8 +6,14 @@ import Home from '../views/Home.vue';
 Vue.use(VueRouter);
 
 const UserHome = { template: '<div>home</div>' };
-const UserProfile = { template: '<div>profile</div>' };
-const UserNote = { template: '<div>note</div>' };
+const UserProfile = {
+  template:
+    '<div>profile, $route.params.userName: {{$route.params.userName}}</div>',
+};
+const UserNote = {
+  props: ['userName'],
+  template: '<div>note, props.userName: {{userName}}</div>',
+};
 
 // 定義路由
 const routes = [
@@ -41,7 +47,9 @@ const routes = [
       // UserProfile will be rendered inside User's <router-view>
       // when /user/:userName/profile is matched
       { path: 'profile', name: 'UserProfile', component: UserProfile },
-      { path: 'note', name: 'UserNote', component: UserNote },
+      // 通過 props 解耦，取代 $route.params.userName
+      // 即 props 設置為 true，$route.params.userName 將會被設置為組件屬性
+      { path: 'note', name: 'UserNote', component: UserNote, props: true },
       {
         path: 'all',
         name: 'UserAll',
