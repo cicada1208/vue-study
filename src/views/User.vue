@@ -59,6 +59,7 @@ export default {
   // 從 /user/cicada 導航到 /user/plumes，原來的組件實例會被復用。
   // 因為兩個路由都渲染同個組件，復用顯得更加高效。
   // 不過，這也意味著組件的生命週期鉤子不會再被調用。
+  // params or query changes won't trigger enter/leave navigation guards.
   // 若想對路由參數的變化作出響應，可使用 watch 或 beforeRouteUpdate。
   // watch: {
   //   $route(to, from) {
@@ -72,7 +73,9 @@ export default {
     // don't forget to call next()
     console.log('from:', from);
     console.log('to:', to);
-    next();
+    next(); // resolve 這個鉤子，進行下一個鉤子
+    // next(false); // 中斷當前導航
+    // next('/'); // 跳轉到一個不同的地址
   },
 };
 </script>

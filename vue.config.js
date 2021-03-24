@@ -6,7 +6,7 @@ const pkgJson = require('./package.json');
 // 用法同 webpack 的 output.publicPath，但 Vue CLI 在其他地方也需用到此值，
 // 所以請設定在 vue.config.js 的 publicPath。
 
-// 環境變量 程式版本: VUE_APP_VERSION 為自定義變數
+// 環境變量 VUE_APP_VERSION: 程式版本為新增的自定義變數
 process.env.VUE_APP_VERSION = pkgJson.version;
 
 module.exports = {
