@@ -57,10 +57,10 @@ export default {
     },
   },
   // 從 /user/cicada 導航到 /user/plumes，原來的組件實例會被復用。
-  // 因為兩個路由都渲染同個組件，復用顯得更加高效。
+  // 因為兩個路由 /user/:userName 都渲染同個組件 UserHome，復用顯得更加高效。
   // 不過，這也意味著組件的生命週期鉤子不會再被調用。
   // params or query changes won't trigger enter/leave navigation guards.
-  // 若想對路由參數的變化作出響應，可使用 watch 或 beforeRouteUpdate。
+  // 但若想對路由參數的變化作出響應，可使用 watch 或 beforeRouteUpdate。
   // watch: {
   //   $route(to, from) {
   //     // 對路由變化作出響應...
@@ -71,11 +71,20 @@ export default {
   beforeRouteUpdate(to, from, next) {
     // react to route changes...
     // don't forget to call next()
+    // 可以訪問組件實例 this
     console.log('from:', from);
     console.log('to:', to);
     next(); // resolve 這個鉤子，進行下一個鉤子
-    // next(false); // 中斷當前導航
-    // next('/'); // 跳轉到一個不同的地址
+    // next(false); // 中斷當前導航，URL 重置到 from 路由對應的地址
+    // next('/'); // next({ name: 'Study' }); // 跳轉到一個不同的地址
+  },
+  beforeRouteLeave(to, from, next) {
+    // 通常用來禁止用戶在還未保存修改前突然離開
+    const answer = window.confirm(
+      'Do you really want to leave? you have unsaved changes!'
+    );
+    if (answer) next();
+    else next(false);
   },
 };
 </script>
