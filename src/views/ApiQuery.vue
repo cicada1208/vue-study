@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div v-if="loading" class="loading">
+    <div v-if="loading">
       Loading...
     </div>
 
-    <div v-if="error" class="error">
+    <div v-if="error">
       {{ error }}
     </div>
 
@@ -25,21 +25,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-function ApiUtil(url, data, method = 'post', resp) {
-  axios({
-    url: url,
-    method: method,
-    data: data,
-  })
-    .then((response) => {
-      resp(null, response.data);
-    })
-    .catch((error) => {
-      resp(error, null);
-    });
-}
+import apiUtil from '@/libs/api.util.js';
 
 export default {
   data() {
@@ -54,11 +40,12 @@ export default {
       this.error = this.content = null;
       this.loading = true;
       const url = 'https://itunes.apple.com/search?term=twice&limit=10';
-      ApiUtil(url, null, 'get', (err, data) => {
+      const resp = (err, data) => {
         this.loading = false;
         if (err) this.error = err.toString();
         else this.content = data.results;
-      });
+      };
+      apiUtil.axiosEx(resp, url, null, 'get');
     },
     viewAlbum(link) {
       window.open(link);
@@ -70,7 +57,7 @@ export default {
   },
   watch: {
     // 如果路由有變化，會再次執行該方法
-    $route: 'fetchData',
+    $route: 'fetchAlbum',
   },
 };
 </script>
