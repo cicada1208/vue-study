@@ -29,7 +29,7 @@ const routes = [
     // this generates a separate chunk (study.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "study" */ '../views/Study.vue'),
+      import(/* webpackChunkName: "study" */ '@/views/Study.vue'),
   },
   {
     // 動態路徑參數(dynamic segment)
@@ -38,7 +38,7 @@ const routes = [
     // (post)?: make part of the path optional by wrapping with parens and add "?"
     // :postId(\\d+): this route will only be matched if :postId is all numbers
     path: '/user/:userName/(post)?/:postId(\\d+)?', // 此路由路徑即使無 post 也能匹配，如: /user/cicada
-    component: () => import(/* webpackChunkName: "user" */ '../views/User.vue'),
+    component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
     // children: 嵌套路由配置
     children: [
       // UserHome will be rendered inside User's <router-view>
@@ -57,6 +57,12 @@ const routes = [
         components: { default: UserHome, profile: UserProfile, note: UserNote },
       },
     ],
+  },
+  {
+    path: '/api.query',
+    name: 'ApiQuery',
+    component: () =>
+      import(/* webpackChunkName: "api.query" */ '@/views/ApiQuery.vue'),
   },
   {
     path: '*', // 通配符，常用於客戶端404錯誤

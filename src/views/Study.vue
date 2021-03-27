@@ -498,7 +498,6 @@ export default {
 <style scoped lang="scss">
 // The @import CSS at-rule is used to import style rules from other style sheets.
 @import '@/css/base.style.scss';
-@import '@/css/transition.style.module.scss';
 
 h4 {
   color: $title-color;
