@@ -51,9 +51,9 @@
     <input v-model.trim="msg" placeholder="single line" ref="msgInput" />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" v-focus="msg" />
-    <p :class="style2.multiline">msg: {{ msg }}</p>
-    <p :class="style2.multiline">msgReverseGetter: {{ msgReverseGetter }}</p>
-    <p :class="style2.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
+    <p :class="baseStyle.multiline">msg: {{ msg }}</p>
+    <p :class="baseStyle.multiline">msgReverseGetter: {{ msgReverseGetter }}</p>
+    <p :class="baseStyle.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
 
     <h4>v-model number:</h4>
     <!-- 即使在type="number"時，HTML輸入元素的值也總會返回字符串。
@@ -158,7 +158,7 @@
     -->
     <h4>component prop & slot:</h4>
     <div :style="{ fontSize: postFontSize + 'em' }">
-      <PropSlotComp
+      <PropSlot
         staticProp="success"
         :dynamicProp="msg"
         :numProp="2"
@@ -194,21 +194,21 @@
         <template #[slotName]="{ user, undefObj={role: 'guest'} }">
           slotProp: name: {{ user.firstName }}, role: {{ undefObj.role }}
         </template>
-      </PropSlotComp>
+      </PropSlot>
       <p>twoWayProp in parent: {{ twoWayProp }}</p>
     </div>
 
     <h4>component check v-model:</h4>
-    <CheckModelInputComp v-model="checked" />
+    <CheckModelInput v-model="checked" />
 
     <h4>component text v-model:</h4>
-    <TodoListComp />
+    <TodoList />
 
     <h4>dynamic component:</h4>
     <!--
       // 也可傳入 prop
       <keep-alive>
-        <component v-bind:is="'PropSlotComp'" staticProp="danger"></component>
+        <component v-bind:is="'PropSlot'" staticProp="danger"></component>
       </keep-alive>
     -->
     <button
@@ -226,7 +226,7 @@
     <!-- transition 也可用於 dynamic component -->
     <transition name="slide-fade" mode="out-in">
       <keep-alive>
-        <component v-bind:is="currentTabComponent" class="tab">qaq</component>
+        <component v-bind:is="currentTab" class="tab">qaq</component>
       </keep-alive>
     </transition>
 
@@ -266,7 +266,7 @@
     </transition-group>
 
     <h4>render function:</h4>
-    <RenderFuncComp :level="5">
+    <RenderFunc :level="5">
       heading VNode content from default slot created by render function.
       {{ msg }}
       <template v-slot:anchor>
@@ -275,13 +275,13 @@
       <template #[slotName]="{ user, undefObj={role: 'guest'} }">
         slotProp: name: {{ user.firstName }}, role: {{ undefObj.role }}
       </template>
-    </RenderFuncComp>
+    </RenderFunc>
 
     <h4>JSX component:</h4>
-    <JSXComp />
+    <JSX />
 
     <h4>JSX functional component:</h4>
-    <JSXFuncComp option="1" />
+    <JSXFunc option="1" />
 
     <!-- filters: 可被用於一些常見的文本格式化，用在雙花括號插值和v-bind表達式，可串聯。
     | 前為第一參數 filterText，可再傳入其他參數 msg -->
@@ -297,22 +297,22 @@
 import $ from 'jquery';
 import _ from 'lodash';
 // @ is an alias to /src
-import PropSlotComp from '@/components/PropSlotComp.vue';
-import LoadingComp from '@/components/LoadingComp.vue';
-import ErrorComp from '@/components/ErrorComp.vue';
-import style2 from '@/css/style2.module.scss'; // CSS Modules
+import PropSlot from '@/components/PropSlot.vue';
+import Loading from '@/components/Loading.vue';
+import Error from '@/components/Error.vue';
+import baseStyle from '@/css/base.style.module.scss'; // CSS Modules
 
 // 處理組件加載狀態
-const PostsComp = () => ({
+const Posts = () => ({
   // 需要加載的組件 (應是個 `Promise` 對象)
   component: import(
-    /* webpackChunkName: "posts-comp" */
-    '@/components/PostsComp.vue'
+    /* webpackChunkName: "posts" */
+    '@/components/Posts.vue'
   ),
   // 異步組件加載時使用的組件
-  loading: LoadingComp,
+  loading: Loading,
   // 加載失敗時使用的組件
-  error: ErrorComp,
+  error: Error,
   // 展示加載時組件的延時時間。默認值是 200 (毫秒)
   delay: 200,
   // 如果提供了超時時間且組件加載也超時，
@@ -362,7 +362,7 @@ export default {
     nums: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     nextNum: 10,
     filterText: '',
-    style2,
+    baseStyle,
   }),
   computed: {
     // msgReverseGetter is a computed property getter.
@@ -388,9 +388,6 @@ export default {
         'text-bold': true,
         'text-red': true,
       };
-    },
-    currentTabComponent: function() {
-      return this.currentTab + 'Comp';
     },
   },
   methods: {
@@ -427,34 +424,34 @@ export default {
   },
   components: {
     // components: 模塊局部註冊
-    PropSlotComp,
-    // async component: PostsComp、RenderFuncComp...
+    PropSlot,
+    // async component: Posts、RenderFunc...
     // 只在需要的時候才加載模塊，返回 Promise 的函式
-    PostsComp,
-    RenderFuncComp: () =>
+    Posts,
+    RenderFunc: () =>
       import(
-        /* webpackChunkName: "render-func-comp" */
-        '@/components/RenderFuncComp.vue'
+        /* webpackChunkName: "render.func.comp" */
+        '@/components/RenderFunc.vue'
       ),
-    JSXComp: () =>
+    JSX: () =>
       import(
-        /* webpackChunkName: "jsx-comp" */
-        '@/components/JSXComp.vue'
+        /* webpackChunkName: "jsx" */
+        '@/components/JSX.vue'
       ),
-    JSXFuncComp: () =>
+    JSXFunc: () =>
       import(
-        /* webpackChunkName: "jsx-func-comp" */
-        '@/components/JSXFuncComp.vue'
+        /* webpackChunkName: "jsx.func" */
+        '@/components/JSXFunc.vue'
       ),
-    CheckModelInputComp: () =>
+    CheckModelInput: () =>
       import(
-        /* webpackChunkName: "check-model-input-comp" */
-        '@/components/CheckModelInputComp.vue'
+        /* webpackChunkName: "check.model.input" */
+        '@/components/CheckModelInput.vue'
       ),
-    TodoListComp: () =>
+    TodoList: () =>
       import(
-        /* webpackChunkName: "todo-list-comp" */
-        '@/components/TodoListComp.vue'
+        /* webpackChunkName: "todo.list" */
+        '@/components/TodoList.vue'
       ),
   },
   created: function() {
@@ -500,7 +497,8 @@ export default {
 
 <style scoped lang="scss">
 // The @import CSS at-rule is used to import style rules from other style sheets.
-@import '@/css/style.scss';
+@import '@/css/base.style.scss';
+@import '@/css/transition.style.module.scss';
 
 h4 {
   color: $title-color;
@@ -540,41 +538,5 @@ h4 {
 .tab {
   border: 1px solid #ccc;
   padding: 10px;
-}
-
-/* 可以設置不同的進入和離開動畫 */
-/* 設置持續時間和動畫函數 */
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateX(10px);
-}
-
-.num-list-item {
-  transition: all 1s;
-  // 因 Vue 使用 FLIP 動畫，過渡元素不能設置為 display: inline。
-  // display: inline 不換行，不可設定 width/heigh，元素 width/heigh 由它的內容決定。
-  // display: block 換行，可設定 width/heigh。
-  // display: inline-block 不換行，可設定 width/heigh。
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.num-list-enter, .num-list-leave-to
-/* .num-list-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.num-list-leave-active {
-  position: absolute;
 }
 </style>

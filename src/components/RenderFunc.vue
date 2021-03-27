@@ -14,7 +14,7 @@ var getChildrenTextContent = function(children) {
 };
 
 export default {
-  name: 'RenderFuncComp',
+  name: 'RenderFunc',
   props: {
     level: {
       type: Number,

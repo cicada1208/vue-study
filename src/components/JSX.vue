@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'JSXComp',
+  name: 'JSX',
   data: () => ({
     msg: 'jsx comp msg data',
     user: { firstName: 'H', lastName: 'W' },

@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'PropSlotComp',
+  name: 'PropSlot',
   props: {
     // prop 會在組件實例創建前進行驗證
     // 故 data、computed property 在 default 或 validator 中不可用

@@ -62,7 +62,7 @@ const routes = [
     path: '*', // 通配符，常用於客戶端404錯誤
     name: 'NotFound',
     component: () =>
-      import(/* webpackChunkName: "notfound" */ '../views/NotFound.vue'),
+      import(/* webpackChunkName: "notfound" */ '@/components/NotFound.vue'),
   },
 ];
 

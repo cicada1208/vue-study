@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'PostsComp',
+  name: 'Posts',
   data: function() {
     return {
       posts: [

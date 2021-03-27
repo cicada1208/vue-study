@@ -1,12 +1,12 @@
 <template>
   <div>
-    <TextModelInputComp
+    <TextModelInput
       v-model="newTodoText"
       placeholder="New todo"
       @keydown.enter="onAddTodo"
     />
     <ul v-if="todos.length">
-      <TodoListItemComp
+      <TodoListItem
         v-for="todo in todos"
         :key="todo.id"
         :todo="todo"
@@ -52,15 +52,15 @@ export default {
     },
   },
   components: {
-    TextModelInputComp: () =>
+    TextModelInput: () =>
       import(
-        /* webpackChunkName: "text-model-input-comp" */
-        '@/components/TextModelInputComp.vue'
+        /* webpackChunkName: "text.model.input" */
+        '@/components/TextModelInput.vue'
       ),
-    TodoListItemComp: () =>
+    TodoListItem: () =>
       import(
-        /* webpackChunkName: "todo-list-item-comp" */
-        '@/components/TodoListItemComp.vue'
+        /* webpackChunkName: "todo.list.item" */
+        '@/components/TodoListItem.vue'
       ),
   },
 };
