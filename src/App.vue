@@ -7,11 +7,13 @@
         >User</router-link
       >
       | <router-link to="/user/plumes/post/456">User2</router-link> |
-      <router-link to="/api.query/1">ApiQuery</router-link>
+      <router-link to="/api.query">ApiQuery</router-link>
     </div>
     <!-- <router-view> 是動態組件，可用 <transition> 組件添加過渡效果 -->
     <transition name="slide-fade" mode="out-in">
+      <!-- <keep-alive> -->
       <router-view />
+      <!-- </keep-alive> -->
     </transition>
   </div>
 </template>

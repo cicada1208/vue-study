@@ -59,7 +59,7 @@ const routes = [
     ],
   },
   {
-    path: '/api.query/:id',
+    path: '/api.query',
     name: 'ApiQuery',
     component: () =>
       import(/* webpackChunkName: "api.query" */ '@/views/ApiQuery.vue'),

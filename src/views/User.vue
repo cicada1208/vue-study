@@ -8,15 +8,18 @@
     <button @click="onGoBack">go back</button>
     <button @click="onGoUserPage">go user page</button>
     <div id="nav">
-      <!-- <router-link> 默認會被渲染成 <a> 標籤。
-      點擊 <router-link :to="..."> 等同調用 router.push(...) -->
-      <router-link
-        v-for="(link, index) in links"
-        :to="'/user/' + $route.params.userName + '/' + link"
-        :key="link"
-      >
-        {{ link }} {{ index !== links.length - 1 ? '|' : '' }}
-      </router-link>
+      <!--
+        <router-link> 默認會被渲染成 <a> 標籤。
+        點擊 <router-link :to="..."> 等同調用 router.push(...)
+      -->
+      <template v-for="(link, index) in links">
+        <router-link
+          :to="'/user/' + $route.params.userName + '/' + link"
+          :key="link"
+          >{{ link }}</router-link
+        >
+        {{ index !== links.length - 1 ? '|' : '' }}
+      </template>
     </div>
     <!-- <router-view /> 路由匹配到的組件將渲染在這裡 -->
     <!-- 若未設置 name，默認為 default -->
