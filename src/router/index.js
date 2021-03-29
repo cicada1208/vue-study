@@ -65,6 +65,11 @@ const routes = [
       import(/* webpackChunkName: "api.query" */ '@/views/ApiQuery.vue'),
   },
   {
+    path: '/vuex',
+    name: 'Vuex',
+    component: () => import(/* webpackChunkName: "vuex" */ '@/views/Vuex.vue'),
+  },
+  {
     path: '*', // 通配符，常用於客戶端404錯誤
     name: 'NotFound',
     component: () =>
