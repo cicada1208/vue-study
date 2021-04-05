@@ -1,4 +1,4 @@
-import mutationTypes from './mutation.types';
+import mutationTypes from './mutation.type';
 
 const types = {
   ...mutationTypes,

@@ -31,8 +31,10 @@
 <script>
 // import store from '@/store';
 import { mapState, mapGetters, mapActions } from 'vuex'; // mapMutations
-import mutationTypes from '@/store/mutation.types.js';
-import actionTypes from '@/store/action.types.js';
+import mutationType from '@/store/types/mutation.type.js';
+import actionType from '@/store/types/action.type.js';
+
+let counterStoreModule = 'counter/';
 
 export default {
   computed: {
@@ -44,12 +46,12 @@ export default {
     //// 當名稱相同不重命名，可直接映射 this.countState 為 store.state.countState
     // ...mapState(['countState']),
     //// 將 state 另取名字
-    ...mapState({ countStateAlias: 'countState' }),
+    ...mapState(counterStoreModule, { countStateAlias: 'countState' }),
     // countStateDesp() {
     //   return this.$store.getters.countStateDesp;
     // },
     //// mapGetters: 輔助函數將 store getters 映射到局部計算屬性
-    ...mapGetters(['countStateDesp', 'countStateDespFunc']),
+    ...mapGetters(counterStoreModule, ['countStateDesp', 'countStateDespFunc']),
     //// 將 getters 另取名字
     // ...mapGetters({
     //   countStateDespAlias: 'countStateDesp',
@@ -58,30 +60,33 @@ export default {
   },
   methods: {
     incrementCommit() {
-      this.$store.commit(mutationTypes.countStateIncrement, 2);
+      this.$store.commit(
+        counterStoreModule + mutationType.countStateIncrement,
+        2
+      );
     },
     decrementCommit(num) {
       // this.$store.commit('countStateDecrement', { amount: num });
       //// 也可改寫成如下，整個對像都作為 payload 傳給 mutation
       this.$store.commit({
-        type: mutationTypes.countStateDecrement,
+        type: mutationType.countStateDecrement,
         amount: num,
       });
     },
     // incrementDispatch() {
-    //   this.$store.dispatch(actionTypes.countStateIncrement, 3);
+    //   this.$store.dispatch(actionType.countStateIncrement, 3);
     // },
     // incrementAsyncDispatch() {
-    //   this.$store.dispatch(actionTypes.countStateIncrementAsync, 4);
+    //   this.$store.dispatch(actionType.countStateIncrementAsync, 4);
     // },
     ...mapActions({
-      incrementDispatch: actionTypes.countStateIncrement,
-      incrementAsyncDispatch: actionTypes.countStateIncrementAsync,
-      incDecAsyncDispatch: actionTypes.countStateIncDecAsync,
+      incrementDispatch: actionType.countStateIncrement,
+      incrementAsyncDispatch: actionType.countStateIncrementAsync,
+      incDecAsyncDispatch: actionType.countStateIncDecAsync,
     }),
     incrementAsyncDispatchPromise(num) {
       this.$store
-        .dispatch(actionTypes.countStateIncrementAsync, num)
+        .dispatch(actionType.countStateIncrementAsync, num)
         .then((msg) => console.log(msg));
     },
   },
