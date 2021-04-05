@@ -1,9 +1,9 @@
-// export const countStoreIncrement = 'countStoreIncrement';
-// export const countStoreDecrement = 'countStoreDecrement';
+// export const countStateIncrement = 'countStateIncrement';
+// export const countStateDecrement = 'countStateDecrement';
 
 const types = {
-  countStoreIncrement: 'countStoreIncrement',
-  countStoreDecrement: 'countStoreDecrement',
+  countStateIncrement: 'countStateIncrement',
+  countStateDecrement: 'countStateDecrement',
 };
 
 export default types;
