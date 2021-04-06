@@ -1,9 +1,17 @@
 import mutationType from '../types/mutation.type';
 import actionType from '../types/action.type';
 
+let param = {
+  state: { countState: 'countState' },
+  getters: { countStateDesp: 'countStateDesp' },
+  countStateIncrement: 'countStateIncrement',
+  countStateDecrement: 'countStateDecrement',
+};
+console.log(param);
+
 // state: 響應式資料
 const state = {
-  countState: 0,
+  ['countState']: 0,
 };
 
 // getters: 相當於 store computed property，會緩存，依賴改變才重算，

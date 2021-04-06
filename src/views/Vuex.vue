@@ -40,15 +40,17 @@ export default {
   computed: {
     // count() {
     //   // return store.state.countState;
-    //   return this.$store.state.countState;
+    //   // return this.$store.state.countState;
+    //   return this.$store.state.counter.countState; // store module namespaced: true
     // },
     //// mapState: 若要取得多個 store state 可透過 mapState 生成計算屬性，可少打幾個字，
     //// 當名稱相同不重命名，可直接映射 this.countState 為 store.state.countState
     // ...mapState(['countState']),
     //// 將 state 另取名字
     ...mapState(counterStoreModule, { countStateAlias: 'countState' }),
-    // countStateDesp() {
-    //   return this.$store.getters.countStateDesp;
+    // countDesp() {
+    //   // return this.$store.getters.countStateDesp;
+    //   return this.$store.getters['counter/countStateDesp']; // store module namespaced: true
     // },
     //// mapGetters: 輔助函數將 store getters 映射到局部計算屬性
     ...mapGetters(counterStoreModule, ['countStateDesp', 'countStateDespFunc']),
