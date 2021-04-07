@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import apiUtil from '@/libs/api.util.js';
+import apiUtil from '../libs/api.util.js';
 
 export default {
   data() {

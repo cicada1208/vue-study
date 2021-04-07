@@ -10,9 +10,16 @@ let param = {
 console.log(param);
 
 // state: 響應式資料
+// mutation 若對 state 某個 object 加入新 property，
+// 使用此方式 state.obj = { ...state.obj, newProp: 123 }。
+// 該宣告方式，若 object 來自別處和別人共用，則會互相引響。
 const state = {
   ['countState']: 0,
 };
+// 此宣告方式是 return new object。
+// const state = () => ({
+//   countState: 0,
+// });
 
 // getters: 相當於 store computed property，會緩存，依賴改變才重算，
 // 可接受參數 (state, getters, rootState, rootGetters)，
