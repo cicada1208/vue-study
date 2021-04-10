@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import counter from './modules/counter';
+import counter from './counter';
 
 Vue.use(Vuex);
 
 // 每個應用僅包含一個 store 實例
+// 改成 modules
 export default new Vuex.Store({
   modules: { counter },
 });
@@ -34,10 +35,10 @@ export default new Vuex.Store({
 //     // countStateDecrement(state, payload) {
 //     //   state.countState -= payload.amount;
 //     // },
-//     [mutationType.countStateIncrement]: (state, amount = 1) => {
+//     [type.mutations.countStateIncrement]: (state, amount = 1) => {
 //       state.countState += amount;
 //     },
-//     [mutationType.countStateDecrement](state, payload) {
+//     [type.mutations.countStateDecrement](state, payload) {
 //       state.countState -= payload.amount;
 //     },
 //   },
@@ -45,27 +46,27 @@ export default new Vuex.Store({
 //   // 可使用非同步函數，接受一參數 (context)，context 與 store 實例相仿
 //   actions: {
 //     // countStateIncrement(context) {
-//     //   context.commit(mutationTypes.countStateIncrement);
+//     //   context.commit(type.mutations.countStateIncrement);
 //     // },
-//     [actionType.countStateIncrement]({ commit }, amount = 1) {
-//       commit(mutationType.countStateIncrement, amount);
+//     [type.actions.countStateIncrement]({ commit }, amount = 1) {
+//       commit(type.mutations.countStateIncrement, amount);
 //     },
-//     [actionType.countStateIncrementAsync]({ commit }, amount = 1) {
+//     [type.actions.countStateIncrementAsync]({ commit }, amount = 1) {
 //       // setTimeout(() => {
-//       //   commit(mutationTypes.countStateIncrement, amount);
+//       //   commit(type.mutations.countStateIncrement, amount);
 //       // }, 2000);
 //       return new Promise((resolve) => {
 //         setTimeout(() => {
-//           commit(mutationType.countStateIncrement, amount);
+//           commit(type.mutations.countStateIncrement, amount);
 //           let msg = 'increment done.';
 //           resolve(msg);
 //         }, 2000);
 //       });
 //     },
-//     async [actionType.countStateIncDecAsync]({ dispatch, commit }, amount = 1) {
+//     async [type.actions.countStateIncDecAsync]({ dispatch, commit }, amount = 1) {
 //       // await: 等 + 後，再 -
-//       await dispatch(actionType.countStateIncrementAsync, amount);
-//       commit(mutationType.countStateDecrement, { amount: amount / 2 });
+//       await dispatch(type.actions.countStateIncrementAsync, amount);
+//       commit(type.mutations.countStateDecrement, { amount: amount / 2 });
 //     },
 //   },
 //   modules: {},

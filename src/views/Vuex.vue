@@ -31,29 +31,33 @@
 <script>
 // import store from '@/store';
 import { mapState, mapGetters, mapActions } from 'vuex'; // mapMutations
-import mutationType from '@/store/types/mutation.type.js';
-import actionType from '@/store/types/action.type.js';
+import counterStoreType from '../store/counter/type';
 
-let counterStoreModule = 'counter/';
+const counterStoreNS = 'counter/'; // store module counter namespaced: true
 
 export default {
   computed: {
     // count() {
     //   // return store.state.countState;
     //   // return this.$store.state.countState;
-    //   return this.$store.state.counter.countState; // store module namespaced: true
+    //   return this.$store.state.counter.countState; // store module counter
     // },
     //// mapState: 若要取得多個 store state 可透過 mapState 生成計算屬性，可少打幾個字，
     //// 當名稱相同不重命名，可直接映射 this.countState 為 store.state.countState
     // ...mapState(['countState']),
     //// 將 state 另取名字
-    ...mapState(counterStoreModule, { countStateAlias: 'countState' }),
+    ...mapState(counterStoreNS, {
+      countStateAlias: counterStoreType.state.countState,
+    }),
     // countDesp() {
     //   // return this.$store.getters.countStateDesp;
-    //   return this.$store.getters['counter/countStateDesp']; // store module namespaced: true
+    //   return this.$store.getters['counter/countStateDesp']; // store module counter namespaced: true
     // },
     //// mapGetters: 輔助函數將 store getters 映射到局部計算屬性
-    ...mapGetters(counterStoreModule, ['countStateDesp', 'countStateDespFunc']),
+    ...mapGetters(counterStoreNS, [
+      counterStoreType.getters.countStateDesp,
+      counterStoreType.getters.countStateDespFunc,
+    ]),
     //// 將 getters 另取名字
     // ...mapGetters({
     //   countStateDespAlias: 'countStateDesp',
@@ -63,32 +67,44 @@ export default {
   methods: {
     incrementCommit() {
       this.$store.commit(
-        counterStoreModule + mutationType.countStateIncrement,
+        counterStoreNS + counterStoreType.mutations.countStateIncrement,
         2
       );
     },
     decrementCommit(num) {
-      // this.$store.commit('countStateDecrement', { amount: num });
+      // this.$store.commit(
+      //   counterStoreNS + counterStoreType.mutations.countStateDecrement,
+      //   { amount: num }
+      // );
       //// 也可改寫成如下，整個對像都作為 payload 傳給 mutation
       this.$store.commit({
-        type: mutationType.countStateDecrement,
+        type: counterStoreNS + counterStoreType.mutations.countStateDecrement,
         amount: num,
       });
     },
     // incrementDispatch() {
-    //   this.$store.dispatch(actionType.countStateIncrement, 3);
+    //   this.$store.dispatch(
+    //     counterStoreNS + counterStoreType.actions.countStateIncrement,
+    //     3
+    //   );
     // },
     // incrementAsyncDispatch() {
-    //   this.$store.dispatch(actionType.countStateIncrementAsync, 4);
+    //   this.$store.dispatch(
+    //     counterStoreNS + counterStoreType.actions.countStateIncrementAsync,
+    //     4
+    //   );
     // },
-    ...mapActions({
-      incrementDispatch: actionType.countStateIncrement,
-      incrementAsyncDispatch: actionType.countStateIncrementAsync,
-      incDecAsyncDispatch: actionType.countStateIncDecAsync,
+    ...mapActions(counterStoreNS, {
+      incrementDispatch: counterStoreType.actions.countStateIncrement,
+      incrementAsyncDispatch: counterStoreType.actions.countStateIncrementAsync,
+      incDecAsyncDispatch: counterStoreType.actions.countStateIncDecAsync,
     }),
     incrementAsyncDispatchPromise(num) {
       this.$store
-        .dispatch(actionType.countStateIncrementAsync, num)
+        .dispatch(
+          counterStoreNS + counterStoreType.actions.countStateIncrementAsync,
+          num
+        )
         .then((msg) => console.log(msg));
     },
   },
