@@ -7,6 +7,7 @@ const type = {
   mutations: {
     countStateIncrement: 'countStateIncrement',
     countStateDecrement: 'countStateDecrement',
+    countStateSet: 'countStateSet',
   },
   actions: {
     countStateIncrement: 'countStateIncrement',

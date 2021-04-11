@@ -25,12 +25,16 @@
       store.dispatch async increment and then decrement:
       <button @click="incDecAsyncDispatch(200)">+</button>
     </p>
+    <p>
+      store.state v-model:
+      <input type="number" v-model.number="countState" />
+    </p>
   </div>
 </template>
 
 <script>
 // import store from '@/store';
-import { mapState, mapGetters, mapActions } from 'vuex'; // mapMutations
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 import counterStoreType from '../store/counter/type';
 
 const counterStoreNS = 'counter/'; // store module counter namespaced: true
@@ -63,6 +67,19 @@ export default {
     //   countStateDespAlias: 'countStateDesp',
     //   countStateDespFuncAlias: 'countStateDespFunc',
     // }),
+    //// store.state v-model 雙向綁定的計算屬性
+    countState: {
+      get() {
+        return this.$store.state.counter.countState;
+      },
+      set(value) {
+        // this.$store.commit(
+        //   counterStoreNS + counterStoreType.mutations.countStateSet,
+        //   value
+        // );
+        this.countStateSet(value);
+      },
+    },
   },
   methods: {
     incrementCommit() {
@@ -82,6 +99,7 @@ export default {
         amount: num,
       });
     },
+    ...mapMutations(counterStoreNS, [counterStoreType.mutations.countStateSet]),
     // incrementDispatch() {
     //   this.$store.dispatch(
     //     counterStoreNS + counterStoreType.actions.countStateIncrement,

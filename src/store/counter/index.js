@@ -43,6 +43,9 @@ const mutations = {
   [type.mutations.countStateDecrement](state, payload) {
     state.countState -= payload.amount;
   },
+  [type.mutations.countStateSet](state, amount = 1) {
+    state.countState = amount;
+  },
 };
 
 // actions: 透過 store.dispatch 觸發 action，然後 commit mutation，不直接變更狀態，
@@ -63,13 +66,13 @@ const actions = {
   [type.actions.countStateIncrementAsync]({ commit }, amount = 1) {
     // setTimeout(() => {
     //   commit(type.mutations.countStateIncrement, amount);
-    // }, 2000);
+    // }, 1000);
     return new Promise((resolve) => {
       setTimeout(() => {
         commit(type.mutations.countStateIncrement, amount);
         let msg = 'increment done.';
         resolve(msg);
-      }, 2000);
+      }, 1000);
     });
   },
   async [type.actions.countStateIncDecAsync]({ dispatch, commit }, amount = 1) {

@@ -1,5 +1,12 @@
 import _ from 'lodash';
 
+// remove object Types 'namespace/'
+// Ex:
+// const Types = {
+//   getters: {
+//     GET_FIRST_THING: 'namespace/GET_FIRST_THING',
+//   },
+// };
 function removeNamespace(namespace, types) {
   return _.reduce(
     types,

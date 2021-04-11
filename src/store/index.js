@@ -8,6 +8,8 @@ Vue.use(Vuex);
 // 改成 modules
 export default new Vuex.Store({
   modules: { counter },
+  // strict: true，不是由 mutation 引起的狀態變更，將拋出錯誤，開發時檢測即可，避免影響性能
+  strict: process.env.NODE_ENV !== 'production',
 });
 
 // // 每個應用僅包含一個 store 實例
