@@ -300,7 +300,7 @@ import _ from 'lodash';
 import PropSlot from '@/components/PropSlot.vue';
 import Loading from '@/components/Loading.vue';
 import Error from '@/components/Error.vue';
-import baseStyle from '@/css/base.style.module.scss'; // CSS Modules
+import baseStyle from '@/css/base.module.scss'; // CSS Modules
 
 // 處理組件加載狀態
 const Posts = () => ({
@@ -497,7 +497,7 @@ export default {
 
 <style scoped lang="scss">
 // The @import CSS at-rule is used to import style rules from other style sheets.
-@import '@/css/base.style.scss';
+@import '@/css/base.module.scss';
 
 h4 {
   color: $title-color;

@@ -20,7 +20,7 @@
 </template>
 
 <style lang="scss">
-@import '@/css/transition.style.module.scss';
+@import '@/css/transition.module.scss';
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
