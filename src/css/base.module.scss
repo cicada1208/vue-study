@@ -1,8 +1,8 @@
 $title-color: cadetblue;
 
 .multiline {
-  // composes: 繼承另一 class
-  composes: text-lblue from './composes.module.scss';
+  // composes: compose class names from other CSS Modules.
+  composes: textBlue from './composes.module.scss';
   composes: textBold from './composes.module.scss';
   white-space: pre-wrap;
 }
