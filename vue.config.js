@@ -1,4 +1,6 @@
-// webpack config 審查: vue inspect > webpack.output.js
+// webpack config 審查:
+// development: vue inspect > webpack.dev.output.js
+// production: vue inspect --mode production > webpack.prd.output.js
 
 const pkgJson = require('./package.json');
 

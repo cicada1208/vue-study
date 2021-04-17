@@ -1,6 +1,7 @@
 {
-  mode: 'development',
+  mode: 'production',
   context: '/Users/cicadawang/Documents/GitHub/study-vue',
+  devtool: 'source-map',
   node: {
     setImmediate: false,
     process: 'mock',
@@ -12,14 +13,14 @@
   },
   output: {
     path: '/Users/cicadawang/Documents/GitHub/study-vue/dist',
-    filename: 'js/[name].js',
-    publicPath: '/',
-    chunkFilename: 'js/[name].js'
+    filename: 'js/[name].[contenthash:8].js',
+    publicPath: '/study-vue/',
+    chunkFilename: 'js/[name].[contenthash:8].js'
   },
   resolve: {
     alias: {
       '@': '/Users/cicadawang/Documents/GitHub/study-vue/src',
-      vue$: 'vue/dist/vue.runtime.esm.js'
+      vue$: 'vue/dist/vue.esm.js'
     },
     extensions: [
       '.mjs',
@@ -35,8 +36,21 @@
       '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/@vue/cli-service/node_modules'
     ],
     plugins: [
-      /* config.resolve.plugin('pnp') */
-      {}
+      {
+        apply: function nothing() {
+          // ¯\_(ツ)_/¯
+        },
+        makePlugin: function () { /* omitted long function */ },
+        moduleLoader: function () { /* omitted long function */ },
+        topLevelLoader: {
+          apply: function nothing() {
+            // ¯\_(ツ)_/¯
+          }
+        },
+        bind: function () { /* omitted long function */ },
+        tsLoaderOptions: function () { /* omitted long function */ },
+        forkTsCheckerOptions: function () { /* omitted long function */ }
+      }
     ]
   },
   resolveLoader: {
@@ -47,8 +61,11 @@
       '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/@vue/cli-service/node_modules'
     ],
     plugins: [
-      /* config.resolve.plugin('pnp-loaders') */
-      {}
+      {
+        apply: function nothing() {
+          // ¯\_(ツ)_/¯
+        }
+      }
     ]
   },
   module: {
@@ -58,15 +75,13 @@
       {
         test: /\.vue$/,
         use: [
-          /* config.module.rule('vue').use('cache-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/cache-loader/dist/cjs.js',
             options: {
               cacheDirectory: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/.cache/vue-loader',
-              cacheIdentifier: '8f15a07c'
+              cacheIdentifier: '17ce062c'
             }
           },
-          /* config.module.rule('vue').use('vue-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-loader/lib/index.js',
             options: {
@@ -74,7 +89,7 @@
                 whitespace: 'condense'
               },
               cacheDirectory: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/.cache/vue-loader',
-              cacheIdentifier: '8f15a07c'
+              cacheIdentifier: '17ce062c'
             }
           }
         ]
@@ -83,7 +98,6 @@
       {
         test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
         use: [
-          /* config.module.rule('images').use('url-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/url-loader/dist/cjs.js',
             options: {
@@ -102,7 +116,6 @@
       {
         test: /\.(svg)(\?.*)?$/,
         use: [
-          /* config.module.rule('svg').use('file-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/file-loader/dist/cjs.js',
             options: {
@@ -115,7 +128,6 @@
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         use: [
-          /* config.module.rule('media').use('url-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/url-loader/dist/cjs.js',
             options: {
@@ -134,7 +146,6 @@
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
         use: [
-          /* config.module.rule('fonts').use('url-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/url-loader/dist/cjs.js',
             options: {
@@ -153,24 +164,21 @@
       {
         test: /\.pug$/,
         oneOf: [
-          /* config.module.rule('pug').oneOf('pug-vue') */
+          /* config.module.rule('pug').rule('pug-vue') */
           {
             resourceQuery: /vue/,
             use: [
-              /* config.module.rule('pug').oneOf('pug-vue').use('pug-plain-loader') */
               {
                 loader: 'pug-plain-loader'
               }
             ]
           },
-          /* config.module.rule('pug').oneOf('pug-template') */
+          /* config.module.rule('pug').rule('pug-template') */
           {
             use: [
-              /* config.module.rule('pug').oneOf('pug-template').use('raw') */
               {
                 loader: 'raw-loader'
               },
-              /* config.module.rule('pug').oneOf('pug-template').use('pug-plain-loader') */
               {
                 loader: 'pug-plain-loader'
               }
@@ -182,19 +190,17 @@
       {
         test: /\.css$/,
         oneOf: [
-          /* config.module.rule('css').oneOf('vue-modules') */
+          /* config.module.rule('css').rule('vue-modules') */
           {
             resourceQuery: /module/,
             use: [
-              /* config.module.rule('css').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('css').oneOf('vue-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -205,7 +211,6 @@
                   }
                 }
               },
-              /* config.module.rule('css').oneOf('vue-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -217,19 +222,17 @@
               }
             ]
           },
-          /* config.module.rule('css').oneOf('vue') */
+          /* config.module.rule('css').rule('vue') */
           {
             resourceQuery: /\?vue/,
             use: [
-              /* config.module.rule('css').oneOf('vue').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('css').oneOf('vue').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -237,7 +240,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('css').oneOf('vue').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -249,19 +251,17 @@
               }
             ]
           },
-          /* config.module.rule('css').oneOf('normal-modules') */
+          /* config.module.rule('css').rule('normal-modules') */
           {
             test: /\.module\.\w+$/,
             use: [
-              /* config.module.rule('css').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('css').oneOf('normal-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -272,7 +272,6 @@
                   }
                 }
               },
-              /* config.module.rule('css').oneOf('normal-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -284,18 +283,16 @@
               }
             ]
           },
-          /* config.module.rule('css').oneOf('normal') */
+          /* config.module.rule('css').rule('normal') */
           {
             use: [
-              /* config.module.rule('css').oneOf('normal').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('css').oneOf('normal').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -303,7 +300,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('css').oneOf('normal').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -321,19 +317,17 @@
       {
         test: /\.p(ost)?css$/,
         oneOf: [
-          /* config.module.rule('postcss').oneOf('vue-modules') */
+          /* config.module.rule('postcss').rule('vue-modules') */
           {
             resourceQuery: /module/,
             use: [
-              /* config.module.rule('postcss').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('postcss').oneOf('vue-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -344,7 +338,6 @@
                   }
                 }
               },
-              /* config.module.rule('postcss').oneOf('vue-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -356,19 +349,17 @@
               }
             ]
           },
-          /* config.module.rule('postcss').oneOf('vue') */
+          /* config.module.rule('postcss').rule('vue') */
           {
             resourceQuery: /\?vue/,
             use: [
-              /* config.module.rule('postcss').oneOf('vue').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('postcss').oneOf('vue').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -376,7 +367,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('postcss').oneOf('vue').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -388,19 +378,17 @@
               }
             ]
           },
-          /* config.module.rule('postcss').oneOf('normal-modules') */
+          /* config.module.rule('postcss').rule('normal-modules') */
           {
             test: /\.module\.\w+$/,
             use: [
-              /* config.module.rule('postcss').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('postcss').oneOf('normal-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -411,7 +399,6 @@
                   }
                 }
               },
-              /* config.module.rule('postcss').oneOf('normal-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -423,18 +410,16 @@
               }
             ]
           },
-          /* config.module.rule('postcss').oneOf('normal') */
+          /* config.module.rule('postcss').rule('normal') */
           {
             use: [
-              /* config.module.rule('postcss').oneOf('normal').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('postcss').oneOf('normal').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -442,7 +427,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('postcss').oneOf('normal').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -460,19 +444,17 @@
       {
         test: /\.scss$/,
         oneOf: [
-          /* config.module.rule('scss').oneOf('vue-modules') */
+          /* config.module.rule('scss').rule('vue-modules') */
           {
             resourceQuery: /module/,
             use: [
-              /* config.module.rule('scss').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('scss').oneOf('vue-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -483,7 +465,6 @@
                   }
                 }
               },
-              /* config.module.rule('scss').oneOf('vue-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -493,7 +474,6 @@
                   ]
                 }
               },
-              /* config.module.rule('scss').oneOf('vue-modules').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -549,19 +529,17 @@
               }
             ]
           },
-          /* config.module.rule('scss').oneOf('vue') */
+          /* config.module.rule('scss').rule('vue') */
           {
             resourceQuery: /\?vue/,
             use: [
-              /* config.module.rule('scss').oneOf('vue').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('scss').oneOf('vue').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -569,7 +547,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('scss').oneOf('vue').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -579,7 +556,6 @@
                   ]
                 }
               },
-              /* config.module.rule('scss').oneOf('vue').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -635,19 +611,17 @@
               }
             ]
           },
-          /* config.module.rule('scss').oneOf('normal-modules') */
+          /* config.module.rule('scss').rule('normal-modules') */
           {
             test: /\.module\.\w+$/,
             use: [
-              /* config.module.rule('scss').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('scss').oneOf('normal-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -658,7 +632,6 @@
                   }
                 }
               },
-              /* config.module.rule('scss').oneOf('normal-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -668,7 +641,6 @@
                   ]
                 }
               },
-              /* config.module.rule('scss').oneOf('normal-modules').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -724,18 +696,16 @@
               }
             ]
           },
-          /* config.module.rule('scss').oneOf('normal') */
+          /* config.module.rule('scss').rule('normal') */
           {
             use: [
-              /* config.module.rule('scss').oneOf('normal').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('scss').oneOf('normal').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -743,7 +713,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('scss').oneOf('normal').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -753,7 +722,6 @@
                   ]
                 }
               },
-              /* config.module.rule('scss').oneOf('normal').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -815,19 +783,17 @@
       {
         test: /\.sass$/,
         oneOf: [
-          /* config.module.rule('sass').oneOf('vue-modules') */
+          /* config.module.rule('sass').rule('vue-modules') */
           {
             resourceQuery: /module/,
             use: [
-              /* config.module.rule('sass').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('sass').oneOf('vue-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -838,7 +804,6 @@
                   }
                 }
               },
-              /* config.module.rule('sass').oneOf('vue-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -848,7 +813,6 @@
                   ]
                 }
               },
-              /* config.module.rule('sass').oneOf('vue-modules').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -907,19 +871,17 @@
               }
             ]
           },
-          /* config.module.rule('sass').oneOf('vue') */
+          /* config.module.rule('sass').rule('vue') */
           {
             resourceQuery: /\?vue/,
             use: [
-              /* config.module.rule('sass').oneOf('vue').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('sass').oneOf('vue').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -927,7 +889,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('sass').oneOf('vue').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -937,7 +898,6 @@
                   ]
                 }
               },
-              /* config.module.rule('sass').oneOf('vue').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -996,19 +956,17 @@
               }
             ]
           },
-          /* config.module.rule('sass').oneOf('normal-modules') */
+          /* config.module.rule('sass').rule('normal-modules') */
           {
             test: /\.module\.\w+$/,
             use: [
-              /* config.module.rule('sass').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('sass').oneOf('normal-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1019,7 +977,6 @@
                   }
                 }
               },
-              /* config.module.rule('sass').oneOf('normal-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1029,7 +986,6 @@
                   ]
                 }
               },
-              /* config.module.rule('sass').oneOf('normal-modules').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -1088,18 +1044,16 @@
               }
             ]
           },
-          /* config.module.rule('sass').oneOf('normal') */
+          /* config.module.rule('sass').rule('normal') */
           {
             use: [
-              /* config.module.rule('sass').oneOf('normal').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('sass').oneOf('normal').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1107,7 +1061,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('sass').oneOf('normal').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1117,7 +1070,6 @@
                   ]
                 }
               },
-              /* config.module.rule('sass').oneOf('normal').use('sass-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/sass-loader/dist/cjs.js',
                 options: {
@@ -1182,19 +1134,17 @@
       {
         test: /\.less$/,
         oneOf: [
-          /* config.module.rule('less').oneOf('vue-modules') */
+          /* config.module.rule('less').rule('vue-modules') */
           {
             resourceQuery: /module/,
             use: [
-              /* config.module.rule('less').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('less').oneOf('vue-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1205,7 +1155,6 @@
                   }
                 }
               },
-              /* config.module.rule('less').oneOf('vue-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1215,7 +1164,6 @@
                   ]
                 }
               },
-              /* config.module.rule('less').oneOf('vue-modules').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
@@ -1224,19 +1172,17 @@
               }
             ]
           },
-          /* config.module.rule('less').oneOf('vue') */
+          /* config.module.rule('less').rule('vue') */
           {
             resourceQuery: /\?vue/,
             use: [
-              /* config.module.rule('less').oneOf('vue').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('less').oneOf('vue').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1244,7 +1190,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('less').oneOf('vue').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1254,7 +1199,6 @@
                   ]
                 }
               },
-              /* config.module.rule('less').oneOf('vue').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
@@ -1263,19 +1207,17 @@
               }
             ]
           },
-          /* config.module.rule('less').oneOf('normal-modules') */
+          /* config.module.rule('less').rule('normal-modules') */
           {
             test: /\.module\.\w+$/,
             use: [
-              /* config.module.rule('less').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('less').oneOf('normal-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1286,7 +1228,6 @@
                   }
                 }
               },
-              /* config.module.rule('less').oneOf('normal-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1296,7 +1237,6 @@
                   ]
                 }
               },
-              /* config.module.rule('less').oneOf('normal-modules').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
@@ -1305,18 +1245,16 @@
               }
             ]
           },
-          /* config.module.rule('less').oneOf('normal') */
+          /* config.module.rule('less').rule('normal') */
           {
             use: [
-              /* config.module.rule('less').oneOf('normal').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('less').oneOf('normal').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1324,7 +1262,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('less').oneOf('normal').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1334,7 +1271,6 @@
                   ]
                 }
               },
-              /* config.module.rule('less').oneOf('normal').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
@@ -1349,19 +1285,17 @@
       {
         test: /\.styl(us)?$/,
         oneOf: [
-          /* config.module.rule('stylus').oneOf('vue-modules') */
+          /* config.module.rule('stylus').rule('vue-modules') */
           {
             resourceQuery: /module/,
             use: [
-              /* config.module.rule('stylus').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('stylus').oneOf('vue-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1372,7 +1306,6 @@
                   }
                 }
               },
-              /* config.module.rule('stylus').oneOf('vue-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1382,7 +1315,6 @@
                   ]
                 }
               },
-              /* config.module.rule('stylus').oneOf('vue-modules').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
@@ -1392,19 +1324,17 @@
               }
             ]
           },
-          /* config.module.rule('stylus').oneOf('vue') */
+          /* config.module.rule('stylus').rule('vue') */
           {
             resourceQuery: /\?vue/,
             use: [
-              /* config.module.rule('stylus').oneOf('vue').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('stylus').oneOf('vue').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1412,7 +1342,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('stylus').oneOf('vue').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1422,7 +1351,6 @@
                   ]
                 }
               },
-              /* config.module.rule('stylus').oneOf('vue').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
@@ -1432,19 +1360,17 @@
               }
             ]
           },
-          /* config.module.rule('stylus').oneOf('normal-modules') */
+          /* config.module.rule('stylus').rule('normal-modules') */
           {
             test: /\.module\.\w+$/,
             use: [
-              /* config.module.rule('stylus').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('stylus').oneOf('normal-modules').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1455,7 +1381,6 @@
                   }
                 }
               },
-              /* config.module.rule('stylus').oneOf('normal-modules').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1465,7 +1390,6 @@
                   ]
                 }
               },
-              /* config.module.rule('stylus').oneOf('normal-modules').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
@@ -1475,18 +1399,16 @@
               }
             ]
           },
-          /* config.module.rule('stylus').oneOf('normal') */
+          /* config.module.rule('stylus').rule('normal') */
           {
             use: [
-              /* config.module.rule('stylus').oneOf('normal').use('vue-style-loader') */
               {
-                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/vue-style-loader/index.js',
+                loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/mini-css-extract-plugin/dist/loader.js',
                 options: {
-                  sourceMap: false,
-                  shadowMode: false
+                  hmr: false,
+                  publicPath: '../'
                 }
               },
-              /* config.module.rule('stylus').oneOf('normal').use('css-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/css-loader/dist/cjs.js',
                 options: {
@@ -1494,7 +1416,6 @@
                   importLoaders: 2
                 }
               },
-              /* config.module.rule('stylus').oneOf('normal').use('postcss-loader') */
               {
                 loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/postcss-loader/src/index.js',
                 options: {
@@ -1504,7 +1425,6 @@
                   ]
                 }
               },
-              /* config.module.rule('stylus').oneOf('normal').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
@@ -1523,15 +1443,16 @@
           function () { /* omitted long function */ }
         ],
         use: [
-          /* config.module.rule('js').use('cache-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/cache-loader/dist/cjs.js',
             options: {
               cacheDirectory: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/.cache/babel-loader',
-              cacheIdentifier: '2b2296bc'
+              cacheIdentifier: '551230fc'
             }
           },
-          /* config.module.rule('js').use('babel-loader') */
+          {
+            loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/thread-loader/dist/cjs.js'
+          },
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/babel-loader/lib/index.js'
           }
@@ -1546,7 +1467,6 @@
           '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/@vue/cli-service/lib'
         ],
         use: [
-          /* config.module.rule('eslint').use('eslint-loader') */
           {
             loader: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/eslint-loader/index.js',
             options: {
@@ -1556,7 +1476,7 @@
                 '.vue'
               ],
               cache: true,
-              cacheIdentifier: '1c2ae8c2',
+              cacheIdentifier: '8287f064',
               emitWarning: false,
               emitError: false,
               eslintPath: '/Users/cicadawang/Documents/GitHub/study-vue/node_modules/eslint',
@@ -1586,9 +1506,19 @@
       }
     },
     minimizer: [
-      /* config.optimization.minimizer('terser') */
-      new TerserPlugin(
-        {
+      {
+        options: {
+          test: /\.m?js(\?.*)?$/i,
+          chunkFilter: () => true,
+          warningsFilter: () => true,
+          extractComments: false,
+          sourceMap: true,
+          cache: true,
+          cacheKeys: defaultCacheKeys => defaultCacheKeys,
+          parallel: true,
+          include: undefined,
+          exclude: undefined,
+          minify: undefined,
           terserOptions: {
             compress: {
               arrows: false,
@@ -1618,13 +1548,9 @@
             mangle: {
               safari10: true
             }
-          },
-          sourceMap: true,
-          cache: true,
-          parallel: true,
-          extractComments: false
+          }
         }
-      )
+      }
     ]
   },
   plugins: [
@@ -1634,9 +1560,9 @@
     new DefinePlugin(
       {
         'process.env': {
-          NODE_ENV: '"development"',
+          NODE_ENV: '"production"',
           VUE_APP_VERSION: '"0.1.0"',
-          BASE_URL: '"/"'
+          BASE_URL: '"/study-vue/"'
         }
       }
     ),
@@ -1653,11 +1579,49 @@
         ]
       }
     ),
+    /* config.plugin('extract-css') */
+    new MiniCssExtractPlugin(
+      {
+        filename: 'css/[name].[contenthash:8].css',
+        chunkFilename: 'css/[name].[contenthash:8].css'
+      }
+    ),
+    /* config.plugin('optimize-css') */
+    new OptimizeCssnanoPlugin(
+      {
+        sourceMap: false,
+        cssnanoOptions: {
+          preset: [
+            'default',
+            {
+              mergeLonghand: false,
+              cssDeclarationSorter: false
+            }
+          ]
+        }
+      }
+    ),
+    /* config.plugin('hash-module-ids') */
+    new HashedModuleIdsPlugin(
+      {
+        hashDigest: 'hex'
+      }
+    ),
+    /* config.plugin('named-chunks') */
+    new NamedChunksPlugin(
+      function () { /* omitted long function */ }
+    ),
     /* config.plugin('html') */
     new HtmlWebpackPlugin(
       {
         title: 'study-vue',
         templateParameters: function () { /* omitted long function */ },
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          removeScriptTypeAttributes: true
+        },
         template: '/Users/cicadawang/Documents/GitHub/study-vue/public/index.html'
       }
     ),
