@@ -36,16 +36,19 @@ export default {
     };
   },
   methods: {
-    fetchAlbum() {
+    async fetchAlbum() {
       this.error = this.content = null;
       this.loading = true;
-      const url = 'https://itunes.apple.com/search?term=twice&limit=10';
-      const resp = (err, data) => {
-        this.loading = false;
-        if (err) this.error = err.toString();
-        else this.content = data.results;
-      };
-      apiUtil.axiosEx(resp, url, null, 'get');
+      const url = 'https://itunes.apple.com/search?term=twice&limit=20';
+      // const cb = (err, data) => {
+      //   this.loading = false;
+      //   if (err) this.error = err.toString();
+      //   else this.content = data.results;
+      // };
+      // apiUtil.axiosCb({ cb, url, method: 'GET' });
+      const data = await apiUtil.axiosPs({ url, method: 'GET' });
+      this.loading = false;
+      this.content = data.results;
     },
     viewAlbum(link) {
       window.open(link);
