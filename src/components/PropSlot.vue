@@ -73,13 +73,20 @@ export default {
     title: String,
     twoWayProp: Number,
   },
-  data: function() {
+  // data: 透過 function return new object，各自獨立，避免共用。
+  data() {
     return {
       // 以 prop 作為初始值，異動 num data property
       num: this.numProp,
       user: { firstName: 'H', lastName: 'W' },
     };
   },
+  // 若使用 arrow function，則 this 不會指向組件實例，不過仍可將實例作為函數的第一個參數來訪問。
+  // data: (vm) => ({
+  //   // 以 prop 作為初始值，異動 num data property
+  //   num: vm.numProp,
+  //   user: { firstName: 'H', lastName: 'W' },
+  // }),
   methods: {
     onUpdateTwowayProp: function() {
       this.$emit('update:twoWayProp', ++this.num);
