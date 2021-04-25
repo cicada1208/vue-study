@@ -54,13 +54,19 @@ export default {
       window.open(link);
     },
   },
+  // created: 完成 data observer、property 和方法運算、watch/event事件回調，
+  // 然而，掛載階段還沒開始，$el property 尚不可用。
   created() {
     // 組件創建完後獲取數據
     this.fetchAlbum();
   },
+  // watch: 一個對象，鍵是需要觀察的表達式，若需觀察 data property e.f 鍵可為 'e.f'
   watch: {
     // 如果路由有變化，會再次執行該方法
     $route: 'fetchAlbum',
+    loading: function(newVal, oldVal) {
+      console.log('loading new: %s, old: %s', newVal, oldVal);
+    },
   },
 };
 </script>

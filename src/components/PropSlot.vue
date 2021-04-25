@@ -50,7 +50,7 @@ export default {
       type: String,
       required: true, // 必填驗證
       validator: function(value) {
-        // 自定義驗證函式: 值必須匹配下列之一
+        // 自定義驗證函式: 值必須匹配下列之一，return falsy 值就是驗證失敗
         return ['success', 'warning', 'danger'].indexOf(value) !== -1;
       },
     },
