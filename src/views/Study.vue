@@ -243,6 +243,7 @@
     否則使用預設前綴 .v-enter-active。
     mode: 過渡模式，out-in: 當前元素先進行過渡，完成之後新元素過渡進入。 -->
     <transition name="slide-fade" mode="out-in">
+      <!-- 因 key 值變更，<button> 會被替換而不是被修改，因此會觸發過渡 -->
       <button @click="show = !show" :key="show">
         {{ show }}
       </button>
