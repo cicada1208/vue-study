@@ -48,7 +48,12 @@
     <h4>v-model text & textarea:</h4>
     <!-- ref attribute: 賦予 ID 後，以此引用 element or component。
     避免在模板或計算屬性中訪問$refs。 -->
-    <input v-model.trim="msg" placeholder="single line" ref="msgInput" />
+    <input
+      v-model.trim="msg"
+      placeholder="single line"
+      ref="msgInput"
+      @keyup.enter="onEnterMsg"
+    />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" v-focus="msg" />
     <p :class="baseStyle.multiline">msg: {{ msg }}</p>
@@ -405,6 +410,9 @@ export default {
       var debounce = _.debounce(() => $('#msgReverseP').html(''), 1000);
       debounce();
       alert(`tag name: ${event.target.tagName}`);
+    },
+    onEnterMsg: function() {
+      alert(`msg: ${this.msg}`);
     },
     onDecreaseText: function(size) {
       this.postFontSize += size;

@@ -1,11 +1,12 @@
 <template>
   <div>
     <input
+      id="chkboxmi"
       type="checkbox"
       :checked="checked"
       @change="$emit('change', $event.target.checked)"
     />
-    <label for="chkbox">{{ checked }}</label>
+    <label for="chkboxmi">{{ checked }}</label>
   </div>
 </template>
 
