@@ -228,7 +228,8 @@
     <!-- <keep-alive>: 組件實例能夠在第一次被創建時緩存下來，保留組件狀態避免重新渲染。
     用在其一個直屬的子組件被開關的情形。如果在其中有v-for則不會工作。
     若為多個條件性的子元素，要求同時只有一個子元素被渲染。 -->
-    <!-- transition 也可用於 dynamic component -->
+    <!-- transition: 也可用於 dynamic component -->
+    <!-- currentTab: 可為已註冊組件的名字或一個組件的選項對象。 -->
     <transition name="slide-fade" mode="out-in">
       <keep-alive>
         <component v-bind:is="currentTab" class="tab">qaq</component>
@@ -262,6 +263,7 @@
     <button @click="onAddNumList">Add</button>
     <button @click="onRemoveNumList">Remove</button>
     <!-- transition-group:
+    多個元素/組件的過渡效果。
     默認為一個 <span>，也可通過 tag attribute 更換為其他元素。
     不可用過渡模式 mode。
     CSS 過渡的類將會應用在內部的元素中，而不是這個組/容器本身。 -->
