@@ -16,6 +16,8 @@
     <span v-else-if="Math.random() === 0.5">elseif =0.5 visible</span>
     <span v-else>else &lt;0.5 visible</span>
 
+    <!-- v-if 和 v-for 不要同時用在同一個元素上 -->
+    <!-- key 的使用最好為唯一鍵值 -->
     <h4>v-for iteration array:</h4>
     <ol>
       <li v-for="(item, index) in textList" v-bind:key="index">
@@ -331,12 +333,13 @@ const Posts = () => ({
 // mixin: 可複用功能
 var reuseMixin = {
   methods: {
-    onPrint: function() {
+    // 自定義私有 property 使用$_前綴
+    $_reuseMixin_onPrint: function() {
       console.log('reuseMixin created first.');
     },
   },
   created: function() {
-    this.onPrint();
+    this.$_reuseMixin_onPrint();
   },
 };
 
@@ -506,7 +509,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 // The @import CSS at-rule is used to import style rules from other style sheets.
 @import '@/css/base.module.scss';
 
