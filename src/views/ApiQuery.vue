@@ -62,8 +62,9 @@ export default {
   },
   // watch: 一個對象，鍵是需要觀察的表達式，若需觀察 data property e.f 鍵可為 'e.f'
   watch: {
-    // 如果路由有變化，會再次執行該方法
+    // 如果路由有變化，會再次執行該方法 fetchAlbum
     $route: 'fetchAlbum',
+    // 如果 data property loading 有變化，會再次執行該方法
     loading: function(newVal, oldVal) {
       console.log('loading new: %s, old: %s', newVal, oldVal);
     },
