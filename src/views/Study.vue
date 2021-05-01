@@ -46,7 +46,7 @@
       msgReverse: {{ msgReverse }}
     </p>
 
-    <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定 -->
+    <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定，把綁定和事件結合起來 -->
     <h4>v-model text & textarea:</h4>
     <!-- ref attribute: 賦予 ID 後，以此引用 element or component。
     避免在模板或計算屬性中訪問$refs。 -->
@@ -346,8 +346,8 @@ var reuseMixin = {
 export default {
   name: 'Study',
   data: () => ({
-    // data property 才會是響應式: 即 property 改變，view 會響應
-    // Vue 會在初始化實例時對 property 執行 getter/setter 轉化
+    // data property 是響應式: 即 property 改變，view 會響應。
+    // Vue 會在初始化實例時對 property 執行 getter/setter 轉化。
     msg: `${new Date().toLocaleString()}`,
     msgReverse: '',
     textList: [{ text: 'list1' }, { text: 'list2' }],
@@ -376,6 +376,7 @@ export default {
     baseStyle,
   }),
   computed: {
+    // computed property 是響應式:
     // msgReverseGetter is a computed property getter.
     // msgReverseGetter 依賴 msg，當響應式 msg 改變，
     // 所有依賴 msgReverseGetter 的綁定也會更新；
@@ -402,7 +403,7 @@ export default {
     },
   },
   methods: {
-    // 方法每次都會重算，不會緩存
+    // methods 不是響應式:方法每次都會重算，不會緩存。
     onReverseMsg: function(param, event) {
       this.msgReverse = this.msg
         .split('')
@@ -436,6 +437,13 @@ export default {
       this.nums = _.shuffle(this.nums);
     },
   },
+  created: function() {
+    // lifecycle hook created: vm 實例被創建之後執行此代碼
+    // `this` 指向 vm 實例
+    console.log(`vm created, msg is ${this.msg}.`);
+  },
+  // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
+  mixins: [reuseMixin],
   components: {
     // components: 模塊局部註冊
     PropSlot,
@@ -468,13 +476,6 @@ export default {
         '@/components/TodoList.vue'
       ),
   },
-  created: function() {
-    // lifecycle hook created: vm 實例被創建之後執行此代碼
-    // `this` 指向 vm 實例
-    console.log(`vm created, msg is ${this.msg}.`);
-  },
-  // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
-  mixins: [reuseMixin],
   // directives: 自定義指令，局部註冊
   directives: {
     // 自定義指令 v-focus
@@ -510,13 +511,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// scoped 樣式中，類選擇器比元素選擇器更好，因為大量使用元素選擇器是很慢的。
+
 // The @import CSS at-rule is used to import style rules from other style sheets.
 @import '@/css/base.module.scss';
 
+// 元素選擇器
 h4 {
   color: $title-color;
 }
 
+// 類選擇器
 .text-bold {
   font-weight: bold;
 }
