@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import apiUtil from '../libs/api.util.js';
+// import apiUtil from '../libs/api.util.js';
 
 export default {
   data() {
@@ -46,7 +46,7 @@ export default {
       //   else this.content = data.results;
       // };
       // apiUtil.axiosCb({ cb, url, method: 'GET' });
-      const data = await apiUtil.axiosPs({ url, method: 'GET' });
+      const data = await this.$apiUtil.axiosPs({ url, method: 'GET' });
       this.loading = false;
       this.content = data.results;
     },
