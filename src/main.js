@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import apiUtil from './libs/api.util.js';
+// import apiUtil from './libs/api.util.js';
 
 Vue.config.productionTip = false;
 
@@ -11,7 +11,7 @@ Vue.config.productionTip = false;
 // Vue 實例中以 this.$appStartTime 叫用，
 // 名稱以$開頭是在Vue所有實例中都可用的property的一個簡單約定，以避免衝突。
 Vue.prototype.$appStartTime = new Date().toLocaleTimeString(); // 程式啟動時間
-Vue.prototype.$apiUtil = apiUtil;
+// Vue.prototype.$apiUtil = apiUtil;
 
 new Vue({
   router, // 通過 router 配置參數注入路由
