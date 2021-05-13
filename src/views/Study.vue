@@ -300,6 +300,9 @@
     text: {{ filterText }} <br />
     <input :value="filterText | capitalize(msg) | digitRemove" />
     text after filters: {{ filterText | capitalize(msg) | digitRemove }}
+
+    <h4>localStorage:</h4>
+    localStorageTest: <input v-model="localStorageTest" />
   </div>
 </template>
 
@@ -374,6 +377,7 @@ export default {
     nextNum: 10,
     filterText: '',
     baseStyle,
+    localStorageTest: '',
   }),
   computed: {
     // computed property 是響應式:
@@ -441,6 +445,15 @@ export default {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
     console.log(`vm created, msg is ${this.msg}.`);
+
+    if (localStorage.localStorageTest) {
+      this.localStorageTest = localStorage.localStorageTest;
+    }
+  },
+  watch: {
+    localStorageTest(newVal) {
+      localStorage.localStorageTest = newVal;
+    },
   },
   // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
   mixins: [reuseMixin],
