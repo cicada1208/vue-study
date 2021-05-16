@@ -378,7 +378,6 @@ export default {
     nums: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     nextNum: 10,
     filterText: '',
-    baseStyle,
     localStorageTest: '',
   }),
   computed: {
@@ -406,6 +405,9 @@ export default {
         'text-bold': true,
         'text-red': true,
       };
+    },
+    baseStyle() {
+      return baseStyle;
     },
   },
   methods: {
