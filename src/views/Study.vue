@@ -135,7 +135,9 @@
 
     <!-- v-html: span 內容會被替換成 data property rawHtml -->
     <h4>v-html:</h4>
-    <span v-html="rawHtml">test</span>
+    <div class="deepParent">
+      <span v-html="rawHtml">test</span>
+    </div>
 
     <!--
       若都啟用 {'text-bold': true, 'text-red': true}
@@ -357,7 +359,7 @@ export default {
     attributeName: 'title',
     eventName: 'click',
     rawHtml:
-      '<span style="color: crimson">raw html test. this shold be red.</span>',
+      '<span class="deepChild" style="color: crimson">raw html test. this shold be red.</span>',
     num: 0,
     checked: false,
     checkedValue: '',
@@ -524,7 +526,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// scoped 樣式中，類選擇器比元素選擇器更好，因為大量使用元素選擇器是很慢的。
+// scoped 樣式中，類選擇器比元素選擇器更好，因為大量使用元素選擇器效能很慢。
 
 // The @import CSS at-rule is used to import style rules from other style sheets.
 @import '@/css/base.module.scss';
@@ -569,5 +571,10 @@ h4 {
 .tab {
   border: 1px solid #ccc;
   padding: 10px;
+}
+
+// 深度作用選擇器：例如影響子組件或動態生成的內容(v-html)
+.deepParent ::v-deep .deepChild {
+  font-weight: bold;
 }
 </style>
