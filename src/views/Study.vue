@@ -60,7 +60,7 @@
     <textarea v-model="msg" placeholder="multiple lines" v-focus="msg" />
     <p :class="baseStyle.multiline">msg: {{ msg }}</p>
     <p :class="baseStyle.multiline">msgReverseGetter: {{ msgReverseGetter }}</p>
-    <p :class="baseStyle.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
+    <p :class="baseStyleVue.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
 
     <h4>v-model number:</h4>
     <!-- 即使在type="number"時，HTML輸入元素的值也總會返回字符串。
@@ -579,4 +579,10 @@ h4 {
 .deepParent ::v-deep .deepChild {
   font-weight: bold;
 }
+</style>
+
+<style lang="scss" module="baseStyleVue" src="@/css/base.module.scss">
+// module: Vue 提供的 CSS Modules。
+// 若未指定計算屬性名稱 baseStyleVue，取用方式為 <p :class="$style.multiline">
+// 若有指定計算屬性名稱 baseStyleVue，取用方式為 <p :class="baseStyleVue.multiline">
 </style>
