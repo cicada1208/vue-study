@@ -8,11 +8,15 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint',
+    ecmaVersion: 2020,
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   extends: [
     // add more generic rulesets here
     'eslint:recommended',
-    'plugin:vue/essential',
+    'plugin:vue/essential', //'plugin:vue/recommended'
     // 'plugin:prettier/recommended',
   ],
   rules: {
