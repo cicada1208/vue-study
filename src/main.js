@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import vuetify from './plugins/vuetify'
+import vuetify from './plugins/vuetify';
 // import apiUtil from './libs/api.util.js';
 
 Vue.config.productionTip = false;
@@ -17,10 +17,8 @@ Vue.prototype.$appStartTime = new Date().toLocaleTimeString(); // 程式啟動�
 new Vue({
   // 通過 router 配置參數注入路由
   router,
-
   // 為了在 Vue 組件中訪問 this.$store property，需為 Vue 實例提供創建好的 store
   store,
-
   vuetify,
-  render: (h) => h(App)
+  render: (h) => h(App),
 }).$mount('#app');

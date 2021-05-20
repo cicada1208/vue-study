@@ -70,6 +70,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "vuex" */ '@/views/Vuex.vue'),
   },
   {
+    path: '/vuetify',
+    name: 'Vuetify',
+    component: () =>
+      import(/* webpackChunkName: "vuex" */ '@/views/Vuetify.vue'),
+  },
+  {
     path: '*', // 通配符，常用於客戶端404錯誤
     name: 'NotFound',
     component: () =>

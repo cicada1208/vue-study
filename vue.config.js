@@ -36,7 +36,5 @@ module.exports = {
 
   publicPath: process.env.NODE_ENV === 'production' ? `/${pkgJson.name}/` : '/',
 
-  transpileDependencies: [
-    'vuetify'
-  ]
+  transpileDependencies: ['vuetify'],
 };
