@@ -1,13 +1,25 @@
 <template>
   <v-container>
-    <v-switch label="tableSelect" v-model="tableSelect"> </v-switch>
+    <v-switch label="tableSelect" v-model="tableSelect" />
+    <v-text-field
+      label="tableSelect"
+      v-model="tableSelect"
+      readonly
+      append-icon="mdi-menu"
+    />
     <v-table :tableSelect="tableSelect" />
   </v-container>
 </template>
+
 <script>
-import VTable from '../components/VTable.vue';
 export default {
-  components: { VTable },
+  components: {
+    VTable: () =>
+      import(
+        /* webpackChunkName: "vtable" */
+        '@/components/VTable.vue'
+      ),
+  },
   data: () => ({
     tableSelect: false,
   }),
