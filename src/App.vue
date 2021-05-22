@@ -25,13 +25,13 @@
 
       <div id="nav">
         <router-link to="/">Home</router-link> |
-        <router-link to="/study">Study</router-link> |
+        <router-link to="/vue.core">VueCore</router-link> |
         <router-link to="/user/cicada/post/123?search=pig&type=small"
-          >User</router-link
+          >Router</router-link
         >
-        | <router-link to="/user/plumes/post/456">User2</router-link> |
-        <router-link to="/api.query">ApiQuery</router-link> |
+        | <router-link to="/user/plumes/post/456">Router2</router-link> |
         <router-link to="/vuex">Vuex</router-link> |
+        <router-link to="/api.query">ApiQuery</router-link> |
         <router-link to="/vuetify">Vuetify</router-link>
       </div>
 

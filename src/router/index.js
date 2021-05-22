@@ -23,13 +23,13 @@ const routes = [
     component: Home,
   },
   {
-    path: '/study',
-    name: 'Study', // name: 命名路由
+    path: '/vue.core',
+    name: 'VueCore', // name: 命名路由
     // route level code-splitting
-    // this generates a separate chunk (study.[hash].js) for this route
+    // this generates a separate chunk (vue.core.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "study" */ '@/views/Study.vue'),
+      import(/* webpackChunkName: "vue.core" */ '@/views/VueCore.vue'),
   },
   {
     // 動態路徑參數(dynamic segment)

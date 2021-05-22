@@ -6,22 +6,30 @@
       v-model="tableSelect"
       readonly
       append-icon="mdi-menu"
+      @click:append="showValue(tableSelect, $event)"
     />
-    <v-table :tableSelect="tableSelect" />
+    <v-table-test :tableSelect="tableSelect" />
   </v-container>
 </template>
 
 <script>
 export default {
   components: {
-    VTable: () =>
+    VTableTest: () =>
       import(
-        /* webpackChunkName: "vtable" */
-        '@/components/VTable.vue'
+        /* webpackChunkName: "vtable.test" */
+        '@/components/VTableTest.vue'
       ),
   },
+
   data: () => ({
     tableSelect: false,
   }),
+
+  methods: {
+    showValue(value, event) {
+      alert(`tag name: ${event.target.tagName}, value: ${value}`);
+    },
+  },
 };
 </script>

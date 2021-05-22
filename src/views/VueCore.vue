@@ -1,5 +1,5 @@
 <template>
-  <div class="study">
+  <v-container>
     <!--
       v-bind: 後接參數 html attribute 能綁定 data property
       直接書寫 v-bind:title 或可用動態參數(方括號括起來的 JavaScript 表達式作為一個指令的參數)
@@ -305,7 +305,7 @@
 
     <h4>localStorage:</h4>
     localStorageTest: <input v-model="localStorageTest" />
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -349,7 +349,7 @@ var reuseMixin = {
 };
 
 export default {
-  name: 'Study',
+  name: 'VueCore',
   data: () => ({
     // data property 是響應式: 即 property 改變，view 會響應。
     // Vue 會在初始化實例時對 property 執行 getter/setter 轉化。

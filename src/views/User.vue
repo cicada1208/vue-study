@@ -79,7 +79,7 @@ export default {
     console.log('to:', to);
     next(); // resolve 這個鉤子，進行下一個鉤子
     // next(false); // 中斷當前導航，URL 重置到 from 路由對應的地址
-    // next('/'); // next({ name: 'Study' }); // 跳轉到一個不同的地址
+    // next('/'); // next({ name: 'VueCore' }); // 跳轉到一個不同的地址
   },
   beforeRouteLeave(to, from, next) {
     // 通常用來禁止用戶在還未保存修改前突然離開
