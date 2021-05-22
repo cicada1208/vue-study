@@ -24,15 +24,10 @@
       <v-spacer></v-spacer>
 
       <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/vue.core">VueCore</router-link> |
-        <router-link to="/user/cicada/post/123?search=pig&type=small"
-          >Router</router-link
-        >
-        | <router-link to="/user/plumes/post/456">Router2</router-link> |
-        <router-link to="/vuex">Vuex</router-link> |
-        <router-link to="/api.query">ApiQuery</router-link> |
-        <router-link to="/vuetify">Vuetify</router-link>
+        <template v-for="(link, idx) in links">
+          <router-link :to="link.path" :key="idx">{{ link.text }}</router-link>
+          {{ idx !== links.length - 1 ? '|' : '' }}
+        </template>
       </div>
 
       <v-btn
@@ -61,7 +56,36 @@ export default {
   name: 'App',
 
   data: () => ({
-    //
+    links: [
+      {
+        path: '/',
+        text: 'Home',
+      },
+      {
+        path: '/vue.core',
+        text: 'VueCore',
+      },
+      {
+        path: '/user/cicada/post/123?search=pig&type=small',
+        text: 'Router',
+      },
+      {
+        path: '/user/plumes/post/456',
+        text: 'Router2',
+      },
+      {
+        path: '/vuex',
+        text: 'Vuex',
+      },
+      {
+        path: '/api.query',
+        text: 'ApiQuery',
+      },
+      {
+        path: '/vuetify',
+        text: 'Vuetify',
+      },
+    ],
   }),
 };
 </script>

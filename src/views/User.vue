@@ -12,13 +12,13 @@
         <router-link> 默認會被渲染成 <a> 標籤。
         點擊 <router-link :to="..."> 等同調用 router.push(...)
       -->
-      <template v-for="(link, index) in links">
+      <template v-for="(link, idx) in links">
         <router-link
           :to="'/user/' + $route.params.userName + '/' + link"
           :key="link"
           >{{ link }}</router-link
         >
-        {{ index !== links.length - 1 ? '|' : '' }}
+        {{ idx !== links.length - 1 ? '|' : '' }}
       </template>
     </div>
     <!-- <router-view /> 路由匹配到的組件將渲染在這裡 -->
@@ -38,6 +38,7 @@ export default {
   data: () => ({
     links: ['profile', 'note', 'all'],
   }),
+
   methods: {
     onGoBack() {
       // router.go(1) 等同 window.history.forward()
@@ -59,6 +60,7 @@ export default {
       );
     },
   },
+
   // 從 /user/cicada 導航到 /user/plumes，原來的組件實例會被復用。
   // 因為兩個路由 /user/:userName 都渲染同個組件 UserHome，復用顯得更加高效。
   // 不過，這也意味著組件的生命週期鉤子不會再被調用。
@@ -71,6 +73,7 @@ export default {
   //     console.log('to:', to);
   //   },
   // },
+
   beforeRouteUpdate(to, from, next) {
     // react to route changes...
     // don't forget to call next()
@@ -81,6 +84,7 @@ export default {
     // next(false); // 中斷當前導航，URL 重置到 from 路由對應的地址
     // next('/'); // next({ name: 'VueCore' }); // 跳轉到一個不同的地址
   },
+
   beforeRouteLeave(to, from, next) {
     // 通常用來禁止用戶在還未保存修改前突然離開
     const answer = window.confirm(

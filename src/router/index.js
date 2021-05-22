@@ -59,21 +59,21 @@ const routes = [
     ],
   },
   {
+    path: '/vuex',
+    name: 'Vuex',
+    component: () => import(/* webpackChunkName: "vuex" */ '@/views/Vuex.vue'),
+  },
+  {
     path: '/api.query',
     name: 'ApiQuery',
     component: () =>
       import(/* webpackChunkName: "api.query" */ '@/views/ApiQuery.vue'),
   },
   {
-    path: '/vuex',
-    name: 'Vuex',
-    component: () => import(/* webpackChunkName: "vuex" */ '@/views/Vuex.vue'),
-  },
-  {
     path: '/vuetify',
     name: 'Vuetify',
     component: () =>
-      import(/* webpackChunkName: "vuex" */ '@/views/Vuetify.vue'),
+      import(/* webpackChunkName: "vuetify" */ '@/views/Vuetify.vue'),
   },
   {
     path: '*', // 通配符，常用於客戶端404錯誤
