@@ -40,7 +40,7 @@ export default {
   mounted() {
     this.winResize();
     // passive: true 表示 listener 永遠不會調用 preventDefault()，
-    // 設定 true 的原因爲監聽事件時，頁面會有短暫的延遲來檢測是否要 preventDefault()，
+    // 設定 true 的原因爲像監聽滾屏事件時，頁面會有短暫的延遲來檢測是否要 preventDefault()，
     // 關掉可避免 mobile 端卡頓。
     window.addEventListener('resize', this.winResize, { passive: true });
   },
