@@ -1,5 +1,11 @@
 <template>
+  <!-- v-app 組件是應用程序的根節點，直接替換默認的 vue 入口 <div id="app">。 -->
   <v-app>
+    <!--
+      v-app-bar 賦予 app prop, vuetify 知道它是佈局的一部分。
+      v-main 獲取我們的 bar 的註冊高度，並從其可用內容區域中移除相應大小的空間。
+      例如 64px 的空間從 v-main 的容器頂部移除。
+    -->
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
@@ -40,6 +46,7 @@
       </v-btn>
     </v-app-bar>
 
+    <!-- v-main 組件替換 main HTML 元素和您應用程序的根節點內容的語義替代。 -->
     <v-main>
       <!-- <router-view> 是動態組件，可用 <transition> 組件添加過渡效果 -->
       <transition name="slide-fade" mode="out-in">

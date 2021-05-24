@@ -30,6 +30,7 @@ export default {
     showValue(value, event) {
       alert(`tag name: ${event.target.tagName}, value: ${value}`);
     },
+
     winResize() {
       console.log('breakpoint name:', this.$vuetify.breakpoint.name);
       console.log('breakpoint width:', this.$vuetify.breakpoint.width);
