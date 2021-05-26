@@ -5,7 +5,7 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   // vuetify 會有 defaults
-  // 再以下列 user options merge
+  // 可再以下列 user options merge
   // theme: {
   //   dark: false,
   //   themes: {

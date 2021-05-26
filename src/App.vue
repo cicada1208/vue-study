@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/css/transition.module.scss';
+@import '@/styles/transition.module.scss';
 
 #nav {
   padding: 30px;

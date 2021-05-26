@@ -315,7 +315,7 @@ import _ from 'lodash';
 import PropSlot from '@/components/PropSlot.vue';
 import Loading from '@/components/Loading.vue';
 import Error from '@/components/Error.vue';
-import baseStyle from '@/css/base.module.scss'; // CSS Modules
+import baseStyle from '@/styles/base.module.scss'; // CSS Modules
 
 // 處理組件加載狀態
 const Posts = () => ({
@@ -531,7 +531,7 @@ export default {
 // scoped 樣式中，類選擇器比元素選擇器更好，因為大量使用元素選擇器效能很慢。
 
 // The @import CSS at-rule is used to import style rules from other style sheets.
-@import '@/css/base.module.scss';
+@import '@/styles/base.module.scss';
 
 // 元素選擇器
 h4 {
@@ -581,7 +581,7 @@ h4 {
 }
 </style>
 
-<style lang="scss" module="baseStyleVue" src="@/css/base.module.scss">
+<style lang="scss" module="baseStyleVue" src="@/styles/base.module.scss">
 // module: Vue 提供的 CSS Modules。
 // 若未指定計算屬性名稱 baseStyleVue，取用方式為 <p :class="$style.multiline">
 // 若有指定計算屬性名稱 baseStyleVue，取用方式為 <p :class="baseStyleVue.multiline">
