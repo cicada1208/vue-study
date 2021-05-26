@@ -55,9 +55,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-// .JH {
-//   font-family: 'MicroSoft JhengHei' !important;
-// }
-</style>
