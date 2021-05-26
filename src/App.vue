@@ -97,7 +97,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<!--
 @import '@/css/transition.module.scss';
 
 #nav {
@@ -113,4 +113,8 @@ export default {
     }
   }
 }
+-->
+<style lang="sass">
+*
+  font-family: 'MicroSoft JhengHei' !important
 </style>

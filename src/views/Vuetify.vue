@@ -9,6 +9,9 @@
       @click:append="showValue(tableSelect, $event)"
     />
     <v-table-test :tableSelect="tableSelect" />
+    <v-card class="headline">
+      測試
+    </v-card>
   </v-container>
 </template>
 
@@ -52,3 +55,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+// .JH {
+//   font-family: 'MicroSoft JhengHei' !important;
+// }
+</style>
