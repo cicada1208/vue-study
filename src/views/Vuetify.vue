@@ -9,9 +9,9 @@
       @click:append="showValue(tableSelect, $event)"
     />
     <v-table-test :tableSelect="tableSelect" />
-    <v-card class="headline">
-      測試
-    </v-card>
+    <v-btn block color="primary" @click="$vuetify.goTo(target, options)">
+      scroll
+    </v-btn>
   </v-container>
 </template>
 
@@ -27,7 +27,24 @@ export default {
 
   data: () => ({
     tableSelect: false,
+    type: 'number',
+    number: -9999,
   }),
+
+  computed: {
+    target() {
+      const value = this[this.type];
+      if (!isNaN(value)) return Number(value);
+      else return value;
+    },
+    options() {
+      return {
+        duration: 300,
+        offset: 0,
+        easing: 'easeInOutCubic',
+      };
+    },
+  },
 
   methods: {
     showValue(value, event) {
