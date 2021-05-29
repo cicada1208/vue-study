@@ -9,14 +9,18 @@
       @click:append="showValue(tableSelect, $event)"
     />
     <v-table-test :tableSelect="tableSelect" />
-    <v-btn block color="primary" @click="$vuetify.goTo(target, options)">
-      scroll
+
+    <!-- 滾動指令:
+    target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
+    <v-btn @click="$vuetify.goTo(target, options)" color="primary" block>
+      scroll top
     </v-btn>
   </v-container>
 </template>
 
 <script>
 export default {
+  name: 'Vuetify',
   components: {
     VTableTest: () =>
       import(
@@ -37,6 +41,7 @@ export default {
       if (!isNaN(value)) return Number(value);
       else return value;
     },
+
     options() {
       return {
         duration: 300,

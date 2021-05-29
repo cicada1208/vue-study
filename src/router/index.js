@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import goTo from 'vuetify/es5/services/goto';
 
 // 使用插件，需要在調用 new Vue() 啟動應用前完成
 Vue.use(VueRouter);
@@ -88,6 +89,19 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior: (to, from, savedPosition) => {
+    // 此功能只在支持 history.pushState 的瀏覽器中可用。
+    // savedPosition: 僅當 popstate 導航（通過瀏覽器的前進/後退按鈕觸發）時才可用。
+    let scrollTo = 0;
+
+    if (to.hash) {
+      scrollTo = to.hash;
+    } else if (savedPosition) {
+      scrollTo = savedPosition.y;
+    }
+    // return 期望滾動到哪個位置
+    return goTo(scrollTo);
+  },
 });
 
 export default router;
