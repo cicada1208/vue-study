@@ -10,9 +10,16 @@
     />
     <v-table-test :tableSelect="tableSelect" />
 
-    <!-- 滾動指令:
+    <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
-    <v-btn @click="$vuetify.goTo(target, options)" color="primary" block>
+    <!-- class="rounded-lg" 設定邊框半徑 -->
+    <!-- class="blue-grey--text text--darken-3" 設定字體顏色 -->
+    <v-btn
+      @click="$vuetify.goTo(target, options)"
+      color="secondary"
+      block
+      class="rounded-lg"
+    >
       scroll top
     </v-btn>
   </v-container>

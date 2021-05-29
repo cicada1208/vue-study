@@ -16,25 +16,18 @@ export default new Vuetify({
     dark: false,
     themes: {
       light: {
-        primary: '#607d8b',
-        // primary: '#1976D2',
-        // secondary: '#424242',
-        // accent: '#82B1FF',
-        // error: '#FF5252',
-        // info: '#2196F3',
-        // success: '#4CAF50',
-        // warning: '#FB8C00',
-        // testcolor: '#b9b7b7', // 自定義顏色，可用於 component color="testcolor"
+        primary: '#90A4AE',
+        secondary: '#9E9E9E',
+        success: '#81C784',
+        error: '#E57373',
+        // testcolor: '#B9B7B7', // 自定義顏色，可用於 component color="testcolor"
       },
-      // dark: {
-      //   primary: '#2196F3',
-      //   secondary: '#424242',
-      //   accent: '#FF4081',
-      //   error: '#FF5252',
-      //   info: '#2196F3',
-      //   success: '#4CAF50',
-      //   warning: '#FB8C00',
-      // },
+      dark: {
+        primary: '#455A64',
+        secondary: '#757575',
+        success: '#33691E',
+        error: '#BF360C',
+      },
     },
     options: {
       minifyTheme,
