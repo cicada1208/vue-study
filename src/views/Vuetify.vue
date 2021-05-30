@@ -10,16 +10,24 @@
     />
     <v-table-test :tableSelect="tableSelect" />
 
+    <!-- 設定字體顏色: class="blue-grey--text text--darken-3" -->
+    <!-- 設定背景顏色: class="blue-grey darken-1" -->
+    <!-- 設定邊框半徑: class="rounded-lg" -->
+    <!-- 顯示輔助 display:
+    class="d-inline": xs、sm 斷點，inline 顯示
+    class="d-md-block": md 至 xl 斷點，block 顯示 -->
+    <div class="mt-4 mb-4">
+      <div class="d-inline d-md-block pa-2 black white--text">
+        {{ $vuetify.breakpoint.name }}
+      </div>
+      <div class="d-inline d-md-block pa-2 black white--text">
+        {{ $vuetify.breakpoint.name }}
+      </div>
+    </div>
+
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
-    <!-- class="rounded-lg" 設定邊框半徑 -->
-    <!-- class="blue-grey--text text--darken-3" 設定字體顏色 -->
-    <v-btn
-      @click="$vuetify.goTo(target, options)"
-      color="secondary"
-      block
-      class="rounded-lg"
-    >
+    <v-btn @click="$vuetify.goTo(target, options)" color="secondary" block>
       scroll top
     </v-btn>
   </v-container>
