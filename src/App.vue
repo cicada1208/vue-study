@@ -1,40 +1,32 @@
 <template>
   <!-- v-app 組件是應用程序的根節點，直接替換默認的 vue 入口 <div id="app">。 -->
   <v-app>
+    <v-navigation-drawer v-model="drawer" app>
+      <!-- <div id="nav">
+        <template v-for="(link, idx) in links">
+          <router-link :to="link.path" :key="idx">{{ link.text }}</router-link>
+          {{ idx !== links.length - 1 ? '|' : '' }}
+        </template>
+      </div> -->
+
+      <div id="nav">
+        <v-btn v-for="(link, idx) in links" :key="idx" block class="mb-4">
+          <router-link :to="link.path">{{ link.text }}</router-link>
+        </v-btn>
+      </div>
+    </v-navigation-drawer>
+
     <!--
       v-app-bar 賦予 app prop, vuetify 知道它是佈局的一部分。
       v-main 獲取我們的 bar 的註冊高度，並從其可用內容區域中移除相應大小的空間。
       例如 64px 的空間從 v-main 的容器頂部移除。
     -->
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-toolbar-title>VUE STUDY</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <div id="nav">
-        <template v-for="(link, idx) in links">
-          <router-link :to="link.path" :key="idx">{{ link.text }}</router-link>
-          {{ idx !== links.length - 1 ? '|' : '' }}
-        </template>
-      </div>
 
       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
@@ -63,6 +55,7 @@ export default {
   name: 'App',
 
   data: () => ({
+    drawer: null,
     links: [
       {
         path: '/',
