@@ -1,12 +1,12 @@
 <template>
   <v-container>
+    <h4>v-bind:</h4>
     <!--
       v-bind: 後接參數 html attribute 能綁定 data property
       直接書寫 v-bind:title 或可用動態參數(方括號括起來的 JavaScript 表達式作為一個指令的參數)
       完整語法: v-bind:[attributeName]
       簡寫語法: :[attributeName]
     -->
-    <h4>v-bind:</h4>
     <span :[attributeName]="msg">
       hover this show msg
     </span>
@@ -16,9 +16,9 @@
     <span v-else-if="Math.random() === 0.5">elseif =0.5 visible</span>
     <span v-else>else &lt;0.5 visible</span>
 
+    <h4>v-for iteration array:</h4>
     <!-- v-if 和 v-for 不要同時用在同一個元素上 -->
     <!-- key 的使用最好為唯一鍵值 -->
-    <h4>v-for iteration array:</h4>
     <ol>
       <li v-for="(item, index) in textList" v-bind:key="index">
         {{ item.text }}
@@ -30,13 +30,13 @@
       {{ index }}. {{ name }}: {{ value }}
     </div>
 
+    <h4>v-on:</h4>
     <!--
       v-on: 後接參數 eventName
       直接書寫 v-on:click 或可用動態參數
       完整語法: v-on:[eventName]
       簡寫語法: @[eventName]
     -->
-    <h4>v-on:</h4>
     <button @[eventName]="onReverseMsg('自定義參數', $event)">
       reverse msg
     </button>
@@ -46,8 +46,8 @@
       msgReverse: {{ msgReverse }}
     </p>
 
-    <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定，把綁定和事件結合起來 -->
     <h4>v-model text & textarea:</h4>
+    <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定，把綁定和事件結合起來 -->
     <!-- ref attribute: 賦予 ID 後，以此引用 element or component。
     避免在模板或計算屬性中訪問$refs。 -->
     <input
@@ -133,17 +133,17 @@
     <br />
     <span>selected names: {{ selectedNames }}</span>
 
-    <!-- v-html: span 內容會被替換成 data property rawHtml -->
     <h4>v-html:</h4>
+    <!-- v-html: span 內容會被替換成 data property rawHtml -->
     <div class="deepParent">
       <span v-html="rawHtml">test</span>
     </div>
 
+    <h4>class & style:</h4>
     <!--
       若都啟用 {'text-bold': true, 'text-red': true}
       相當於 class="text-bold text-red"
     -->
-    <h4>class & style:</h4>
     <p class="text-size" v-bind:class="textClass">class style test</p>
     <p v-bind:class="['text-size', { 'text-bold': true, 'text-red': false }]">
       class style test2
@@ -152,6 +152,7 @@
       class style test3
     </p>
 
+    <h4>component prop & slot:</h4>
     <!--
       prop 單向數據流: 父級 prop 的更新會向下流動到子組件中，但是反過來則不行。
       dynamicProp、numProp、boolProp、arrayProp、objectProp:
@@ -165,7 +166,6 @@
       twoWayProp: prop 雙向綁定。
       v-bind.sync="objProp" 可將 object objProp 所有 property 傳入並雙向綁定。
     -->
-    <h4>component prop & slot:</h4>
     <div :style="{ fontSize: postFontSize + 'em' }">
       <PropSlot
         staticProp="success"
@@ -240,8 +240,8 @@
       </keep-alive>
     </transition>
 
-    <!-- css 過渡動畫效果 -->
     <h4>css transition:</h4>
+    <!-- css 過渡動畫效果 -->
     <!-- transition:
     應用在單個節點、同一時間渲染多個節點中的一個。
     若有指定 name="slide-fade"，css 類名改前綴為 .slide-fade-enter-active，
@@ -295,9 +295,9 @@
     <h4>JSX functional component:</h4>
     <JSXFunc option="1" />
 
+    <h4>filters:</h4>
     <!-- filters: 可被用於一些常見的文本格式化，用在雙花括號插值和v-bind表達式，可串聯。
     | 前為第一參數 filterText，可再傳入其他參數 msg -->
-    <h4>filters:</h4>
     <input v-model="filterText" placeholder="write down text to see" />
     text: {{ filterText }} <br />
     <input :value="filterText | capitalize(msg) | digitRemove" />
@@ -350,6 +350,7 @@ var reuseMixin = {
 
 export default {
   name: 'VueCore',
+
   data: () => ({
     // data property 是響應式: 即 property 改變，view 會響應。
     // Vue 會在初始化實例時對 property 執行 getter/setter 轉化。
@@ -380,6 +381,7 @@ export default {
     filterText: '',
     localStorageTest: '',
   }),
+
   computed: {
     // computed property 是響應式:
     // msgReverseGetter is a computed property getter.
@@ -410,6 +412,7 @@ export default {
       return baseStyle;
     },
   },
+
   methods: {
     // methods 不是響應式:方法每次都會重算，不會緩存。
     onReverseMsg: function(param, event) {
@@ -445,6 +448,7 @@ export default {
       this.nums = _.shuffle(this.nums);
     },
   },
+
   created: function() {
     // lifecycle hook created: vm 實例被創建之後執行此代碼
     // `this` 指向 vm 實例
@@ -454,13 +458,16 @@ export default {
       this.localStorageTest = localStorage.localStorageTest;
     }
   },
+
   watch: {
     localStorageTest(newVal) {
       localStorage.localStorageTest = newVal;
     },
   },
+
   // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
   mixins: [reuseMixin],
+
   components: {
     // components: 模塊局部註冊
     PropSlot,
@@ -493,6 +500,7 @@ export default {
         '@/components/TodoList.vue'
       ),
   },
+
   // directives: 自定義指令，局部註冊
   directives: {
     // 自定義指令 v-focus
@@ -512,6 +520,7 @@ export default {
       },
     },
   },
+
   filters: {
     capitalize: function(value, msg) {
       if (!value) return '';

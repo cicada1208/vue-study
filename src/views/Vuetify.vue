@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <h4>v-data-table:</h4>
     <v-switch label="tableSelect" v-model="tableSelect" />
     <v-text-field
       label="tableSelect"
@@ -10,12 +11,17 @@
     />
     <v-table-test :tableSelect="tableSelect" />
 
+    <h4>display & hidden:</h4>
     <!-- 設定字體顏色: class="blue-grey--text text--darken-3" -->
     <!-- 設定背景顏色: class="blue-grey darken-1" -->
-    <!-- 設定邊框半徑: class="rounded-lg" -->
+    <!-- 設定邊框半徑:
+    class="rounded-lg": lg 與斷點無關，代表的是半徑大小。 -->
     <!-- 顯示輔助 display:
-    class="d-inline": xs、sm 斷點，inline 顯示
-    class="d-md-block": md 至 xl 斷點，block 顯示 -->
+    class="d-inline": xs 至 xl 斷點，inline 顯示。
+    class="d-md-block": md 至 xl 斷點，block 顯示。
+    class="d-inline d-md-block": xs 至 sm 斷點，inline 顯示；md 至 xl 斷點，block 顯示。 -->
+    <!-- 顯示輔助 hidden:
+    class="hidden-sm-and-down: xs 至 sm 斷點，隱藏。 -->
     <div class="mt-4 mb-4">
       <div class="d-inline d-md-block pa-2 black white--text">
         {{ $vuetify.breakpoint.name }}
@@ -23,7 +29,29 @@
       <div class="d-inline d-md-block pa-2 black white--text">
         {{ $vuetify.breakpoint.name }}
       </div>
+      <div class="hidden-sm-and-down d-md-block pa-2 black white--text">
+        {{ $vuetify.breakpoint.name }}
+      </div>
     </div>
+
+    <h4>flexbox:</h4>
+    <!-- d-flex 代表啟用 flexbox，方向排列預設是 flex-row。 -->
+    <!-- class="d-flex flex-column flex-md-row":
+    xs 至 sm 斷點，flex-column column 方向排列；
+    md 至 xl 斷點，flex-md-row row 方向排列。 -->
+    <!-- class="d-flex flex-column justify-start flex-md-row justify-md-end":
+    justify-content 預設為x軸對齊。
+    xs 至 sm 斷點，flex-column 爲 column 方向，justify-start 改為y軸對齊；
+    md 至 xl 斷點，flex-md-row 爲 row 方向，justify-md-end 預設x軸對齊。 -->
+    <v-card
+      class="d-flex flex-column justify-start flex-md-row justify-md-end mt-4 mb-4"
+      :height="$vuetify.breakpoint.smAndDown ? 200 : 'auto'"
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
+    >
+      <v-card v-for="n in 3" :key="n" class="pa-2 ma-1" outlined tile>
+        Flex item {{ n }}
+      </v-card>
+    </v-card>
 
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
@@ -36,6 +64,7 @@
 <script>
 export default {
   name: 'Vuetify',
+
   components: {
     VTableTest: () =>
       import(

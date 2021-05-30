@@ -35,6 +35,8 @@
 
 <script>
 export default {
+  name: 'User',
+
   data: () => ({
     links: ['profile', 'note', 'all'],
   }),

@@ -28,6 +28,8 @@
 import apiUtil from '../libs/api.util.js';
 
 export default {
+  name: 'ApiQuery',
+
   data() {
     return {
       loading: false,

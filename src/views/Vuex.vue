@@ -40,6 +40,8 @@ import counterStoreType from '../store/counter/type';
 const counterStoreNS = 'counter/'; // store module counter namespaced: true
 
 export default {
+  name: 'Vuex',
+
   computed: {
     // count() {
     //   // return store.state.countState;
