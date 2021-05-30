@@ -65,6 +65,24 @@
       </v-card>
     </v-card>
 
+    <h4>float:</h4>
+    <v-card
+      class="mt-4 mb-4"
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
+    >
+      <div class="float-left">
+        Float left on all viewport sizes
+      </div>
+      <br />
+      <div class="float-right">
+        Float right on all viewport sizes
+      </div>
+      <br />
+      <div class="float-none">
+        Don't float on all viewport sizes
+      </div>
+    </v-card>
+
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
     <v-btn @click="$vuetify.goTo(target, options)" color="secondary" block>
