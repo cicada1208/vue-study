@@ -40,15 +40,27 @@
     xs 至 sm 斷點，flex-column column 方向排列；
     md 至 xl 斷點，flex-md-row row 方向排列。 -->
     <!-- class="d-flex flex-column justify-start flex-md-row justify-md-end":
-    justify-content 預設為x軸對齊。
+    橫軸對齊 justify-content 預設為x軸對齊。
     xs 至 sm 斷點，flex-column 爲 column 方向，justify-start 改為y軸對齊；
     md 至 xl 斷點，flex-md-row 爲 row 方向，justify-md-end 預設x軸對齊。 -->
+    <!-- class="d-flex flex-column align-start flex-md-row align-md-end":
+    縱軸對齊 align-items 預設為y軸對齊。
+    xs 至 sm 斷點，flex-column 爲 column 方向，align-start 改為x軸對齊；
+    md 至 xl 斷點，flex-md-row 爲 row 方向，align-md-end 預設y軸對齊。 -->
+    <!-- class="order-1": flex item 排序。 -->
     <v-card
       class="d-flex flex-column justify-start flex-md-row justify-md-end mt-4 mb-4"
       :height="$vuetify.breakpoint.smAndDown ? 200 : 'auto'"
       :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
     >
-      <v-card v-for="n in 3" :key="n" class="pa-2 ma-1" outlined tile>
+      <v-card
+        v-for="n in 3"
+        :key="n"
+        class="pa-2 ma-1"
+        :class="`order-${3 - n + 1}`"
+        outlined
+        tile
+      >
         Flex item {{ n }}
       </v-card>
     </v-card>
