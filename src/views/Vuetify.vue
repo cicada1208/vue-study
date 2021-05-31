@@ -22,7 +22,7 @@
     class="d-inline d-md-block": xs 至 sm 斷點，inline 顯示；md 至 xl 斷點，block 顯示。 -->
     <!-- 顯示輔助 hidden:
     class="hidden-sm-and-down: xs 至 sm 斷點，隱藏。 -->
-    <div class="mt-4 mb-4">
+    <div class="my-4">
       <div class="d-inline d-md-block pa-2 black white--text">
         {{ $vuetify.breakpoint.name }}
       </div>
@@ -49,7 +49,7 @@
     md 至 xl 斷點，flex-md-row 爲 row 方向，align-md-end 預設y軸對齊。 -->
     <!-- class="order-1": flex item 排序。 -->
     <v-card
-      class="d-flex flex-column justify-start flex-md-row justify-md-end mt-4 mb-4"
+      class="d-flex flex-column justify-start flex-md-row justify-md-end my-4"
       :height="$vuetify.breakpoint.smAndDown ? 200 : 'auto'"
       :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
     >
@@ -67,25 +67,32 @@
 
     <h4>float:</h4>
     <v-card
-      class="mt-4 mb-4"
+      class="my-4"
       :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
     >
+      +++++++++++++
       <div class="float-left">
-        Float left on all viewport sizes
+        <!-- float-left: 元素浮動在容器左側 -->
+        Float left on all viewport sizes.
       </div>
+      -------------
       <br />
+      *************
       <div class="float-right">
-        Float right on all viewport sizes
+        Float right on all viewport sizes.
       </div>
+      /////////////
       <br />
+      ..............
       <div class="float-none">
-        Don't float on all viewport sizes
+        Don't float on all viewport sizes.
       </div>
+      #############
     </v-card>
 
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
-    <v-btn @click="$vuetify.goTo(target, options)" color="secondary" block>
+    <v-btn @click="$vuetify.goTo(target, options)" color="primary" block>
       scroll top
     </v-btn>
   </v-container>
