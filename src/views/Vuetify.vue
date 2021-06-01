@@ -61,7 +61,7 @@
         outlined
         tile
       >
-        Flex item {{ n }}
+        flex item {{ n }}
       </v-card>
     </v-card>
 
@@ -88,6 +88,14 @@
         Don't float on all viewport sizes.
       </div>
       #############
+    </v-card>
+
+    <h4>margin:</h4>
+    <!-- mx-auto: 水平置中 -->
+    <v-card class="mx-auto my-4" width="160px">
+      <v-card-text>
+        mx-auto: 水平置中
+      </v-card-text>
     </v-card>
 
     <!-- 滾動指令 $vuetify.goTo:
