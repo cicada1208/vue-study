@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h4>v-data-table:</h4>
+    <h2>v-data-table:</h2>
     <v-switch label="tableSelect" v-model="tableSelect" />
     <v-text-field
       label="tableSelect"
@@ -11,9 +11,11 @@
     />
     <v-table-test :tableSelect="tableSelect" />
 
-    <h4>display & hidden:</h4>
-    <!-- 設定字體顏色: class="blue-grey--text text--darken-3" -->
+    <h2>display & hidden & text:</h2>
     <!-- 設定背景顏色: class="blue-grey darken-1" -->
+    <!-- 設定字體顏色: class="blue-grey--text text--darken-3" -->
+    <!-- 設定字體大小: class="text-md-h4": md 至 xl 斷點，h4 大小。 -->
+    <!-- 設定字體強調: class="font-weight-bold font-italic" -->
     <!-- 設定邊框半徑:
     class="rounded-lg": lg 與斷點無關，代表的是半徑大小。 -->
     <!-- 顯示輔助 display:
@@ -23,18 +25,27 @@
     <!-- 顯示輔助 hidden:
     class="hidden-sm-and-down: xs 至 sm 斷點，隱藏。 -->
     <div class="my-4">
-      <div class="d-inline d-md-block pa-2 black white--text">
+      <div
+        class="d-inline d-md-block pa-2
+        black white--text text-md-h4 font-weight-bold font-italic"
+      >
         {{ $vuetify.breakpoint.name }}
       </div>
-      <div class="d-inline d-md-block pa-2 black white--text">
+      <div
+        class="d-inline d-md-block pa-2
+        black white--text text-md-h4"
+      >
         {{ $vuetify.breakpoint.name }}
       </div>
-      <div class="hidden-sm-and-down d-md-block pa-2 black white--text">
+      <div
+        class="hidden-sm-and-down d-md-block pa-2
+        black white--text text-md-h4"
+      >
         {{ $vuetify.breakpoint.name }}
       </div>
     </div>
 
-    <h4>flexbox:</h4>
+    <h2>flexbox:</h2>
     <!-- d-flex 代表啟用 flexbox，方向排列預設是 flex-row。 -->
     <!-- class="d-flex flex-column flex-md-row":
     xs 至 sm 斷點，flex-column column 方向排列；
@@ -56,7 +67,7 @@
       <v-card
         v-for="n in 3"
         :key="n"
-        class="pa-2 ma-1"
+        class="pa-2 ma-2"
         :class="`order-${3 - n + 1}`"
         outlined
         tile
@@ -65,11 +76,8 @@
       </v-card>
     </v-card>
 
-    <h4>float:</h4>
-    <v-card
-      class="my-4"
-      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
-    >
+    <h2>float:</h2>
+    <v-card class="my-4 pa-2">
       +++++++++++++
       <div class="float-left">
         <!-- float-left: 元素浮動在容器左側 -->
@@ -90,11 +98,26 @@
       #############
     </v-card>
 
-    <h4>margin:</h4>
+    <h2>margin & text alignment:</h2>
     <!-- mx-auto: 水平置中 -->
-    <v-card class="mx-auto my-4" width="160px">
+    <!-- class="text-justify text-md-right:
+    xs 至 sm 斷點，文本對齊；md 至 xl 斷點，文本靠右對齊。 -->
+    <!-- text-decoration-underline: 底線 -->
+    <v-card
+      class="my-4 mx-auto text-justify text-md-right text-decoration-underline"
+      width="300px"
+    >
       <v-card-text>
-        mx-auto: 水平置中
+        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
+        non, euismod id, nulla.
+      </v-card-text>
+      <v-card-text class="text-no-wrap">
+        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
+        non, euismod id, nulla.
+      </v-card-text>
+      <v-card-text class="text-truncate">
+        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
+        non, euismod id, nulla.
       </v-card-text>
     </v-card>
 
