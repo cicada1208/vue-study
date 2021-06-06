@@ -125,9 +125,23 @@
     <v-task-list />
 
     <h2>v-alert:</h2>
-    <v-alert type="error" color="red" dismissible dense>
-      msg...
-    </v-alert>
+    <div class="my-4">
+      <v-alert
+        v-model="alert"
+        type="error"
+        color="error"
+        dismissible
+        dense
+        outlined
+        text
+        transition="slide-x-transition"
+      >
+        alert msg...
+      </v-alert>
+      <v-btn v-if="!alert" @click="alert = true" dark>
+        reset alert
+      </v-btn>
+    </div>
 
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
@@ -161,6 +175,8 @@ export default {
     type: 'number',
 
     number: -9999,
+
+    alert: true,
   }),
 
   computed: {
