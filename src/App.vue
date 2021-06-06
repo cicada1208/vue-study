@@ -46,6 +46,10 @@
         <router-view />
         <!-- </keep-alive> -->
       </transition>
+
+      <!-- <v-fade-transition>
+        <router-view />
+      </v-fade-transition> -->
     </v-main>
   </v-app>
 </template>

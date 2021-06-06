@@ -1,16 +1,5 @@
 <template>
   <v-container>
-    <h2>v-data-table:</h2>
-    <v-switch label="tableSelect" v-model="tableSelect" />
-    <v-text-field
-      label="tableSelect"
-      v-model="tableSelect"
-      readonly
-      append-icon="mdi-menu"
-      @click:append="showValue(tableSelect, $event)"
-    />
-    <v-table-test :tableSelect="tableSelect" />
-
     <h2>display & hidden & text:</h2>
     <!-- 設定背景顏色: class="blue-grey darken-1" -->
     <!-- 設定字體顏色: class="blue-grey--text text--darken-3" -->
@@ -45,6 +34,51 @@
       </div>
     </div>
 
+    <h2>margin & text alignment:</h2>
+    <!-- mx-auto: 水平置中 -->
+    <!-- class="text-justify text-md-right:
+    xs 至 sm 斷點，文本對齊；md 至 xl 斷點，文本靠右對齊。 -->
+    <!-- text-decoration-underline: 底線 -->
+    <v-card
+      class="my-4 mx-auto text-justify text-md-right text-decoration-underline"
+      width="300px"
+    >
+      <v-card-text>
+        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
+        non, euismod id, nulla.
+      </v-card-text>
+      <v-card-text class="text-no-wrap">
+        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
+        non, euismod id, nulla.
+      </v-card-text>
+      <v-card-text class="text-truncate">
+        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
+        non, euismod id, nulla.
+      </v-card-text>
+    </v-card>
+
+    <h2>float:</h2>
+    <v-card class="my-4 pa-2">
+      +++++++++++++
+      <div class="float-left">
+        <!-- float-left: 元素浮動在容器左側 -->
+        Float left on all viewport sizes.
+      </div>
+      -------------
+      <br />
+      *************
+      <div class="float-right">
+        Float right on all viewport sizes.
+      </div>
+      /////////////
+      <br />
+      ..............
+      <div class="float-none">
+        Don't float on all viewport sizes.
+      </div>
+      #############
+    </v-card>
+
     <h2>flexbox:</h2>
     <!-- d-flex 代表啟用 flexbox，方向排列預設是 flex-row。 -->
     <!-- class="d-flex flex-column flex-md-row":
@@ -76,50 +110,24 @@
       </v-card>
     </v-card>
 
-    <h2>float:</h2>
-    <v-card class="my-4 pa-2">
-      +++++++++++++
-      <div class="float-left">
-        <!-- float-left: 元素浮動在容器左側 -->
-        Float left on all viewport sizes.
-      </div>
-      -------------
-      <br />
-      *************
-      <div class="float-right">
-        Float right on all viewport sizes.
-      </div>
-      /////////////
-      <br />
-      ..............
-      <div class="float-none">
-        Don't float on all viewport sizes.
-      </div>
-      #############
-    </v-card>
+    <h2>v-data-table:</h2>
+    <v-switch label="tableSelect" v-model="tableSelect" />
+    <v-text-field
+      label="tableSelect"
+      v-model="tableSelect"
+      readonly
+      append-icon="mdi-menu"
+      @click:append="showValue(tableSelect, $event)"
+    />
+    <v-table-test :tableSelect="tableSelect" />
 
-    <h2>margin & text alignment:</h2>
-    <!-- mx-auto: 水平置中 -->
-    <!-- class="text-justify text-md-right:
-    xs 至 sm 斷點，文本對齊；md 至 xl 斷點，文本靠右對齊。 -->
-    <!-- text-decoration-underline: 底線 -->
-    <v-card
-      class="my-4 mx-auto text-justify text-md-right text-decoration-underline"
-      width="300px"
-    >
-      <v-card-text>
-        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
-        non, euismod id, nulla.
-      </v-card-text>
-      <v-card-text class="text-no-wrap">
-        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
-        non, euismod id, nulla.
-      </v-card-text>
-      <v-card-text class="text-truncate">
-        Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus
-        non, euismod id, nulla.
-      </v-card-text>
-    </v-card>
+    <h2>task list & transition:</h2>
+    <v-task-list />
+
+    <h2>v-alert:</h2>
+    <v-alert type="error" color="red" dismissible dense>
+      msg...
+    </v-alert>
 
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
@@ -136,14 +144,22 @@ export default {
   components: {
     VTableTest: () =>
       import(
-        /* webpackChunkName: "vtable.test" */
+        /* webpackChunkName: "vtabletest" */
         '@/components/VTableTest.vue'
+      ),
+
+    VTaskList: () =>
+      import(
+        /* webpackChunkName: "vtasklist" */
+        '@/components/VTaskList.vue'
       ),
   },
 
   data: () => ({
     tableSelect: false,
+
     type: 'number',
+
     number: -9999,
   }),
 
@@ -164,14 +180,14 @@ export default {
   },
 
   methods: {
-    showValue(value, event) {
-      alert(`tag name: ${event.target.tagName}, value: ${value}`);
-    },
-
     winResize() {
       console.log('breakpoint name:', this.$vuetify.breakpoint.name);
       console.log('breakpoint width:', this.$vuetify.breakpoint.width);
       console.log('breakpoint height:', this.$vuetify.breakpoint.height);
+    },
+
+    showValue(value, event) {
+      alert(`tag name: ${event.target.tagName}, value: ${value}`);
     },
   },
 
