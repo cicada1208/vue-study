@@ -1,7 +1,7 @@
 <template>
   <!-- v-app 組件是應用程序的根節點，直接替換默認的 vue 入口 <div id="app">。 -->
   <v-app>
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer app v-model="drawer">
       <!-- <div id="nav">
         <template v-for="(link, idx) in links">
           <router-link :to="link.path" :key="idx">{{ link.text }}</router-link>
