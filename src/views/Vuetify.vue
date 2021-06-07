@@ -37,7 +37,7 @@
     <h2>margin & text alignment:</h2>
     <!-- mx-auto: 水平置中 -->
     <!-- class="text-justify text-md-right:
-    xs 至 sm 斷點，文本對齊；md 至 xl 斷點，文本靠右對齊。 -->
+    xs 至 sm 斷點，文本左右貼齊；md 至 xl 斷點，文本靠右對齊。 -->
     <!-- text-decoration-underline: 底線 -->
     <v-card
       class="my-4 mx-auto text-justify text-md-right text-decoration-underline"
@@ -125,23 +125,10 @@
     <v-task-list />
 
     <h2>v-alert:</h2>
-    <div class="my-4">
-      <v-alert
-        v-model="alert"
-        type="error"
-        color="error"
-        dismissible
-        dense
-        outlined
-        text
-        transition="slide-x-transition"
-      >
-        alert msg...
-      </v-alert>
-      <v-btn v-if="!alert" @click="alert = true" dark>
-        reset alert
-      </v-btn>
-    </div>
+    <v-alert-test />
+
+    <h2>v-badge:</h2>
+    <v-badge-test class="my-4" />
 
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
@@ -167,6 +154,18 @@ export default {
         /* webpackChunkName: "vtasklist" */
         '@/components/VTaskList.vue'
       ),
+
+    VAlertTest: () =>
+      import(
+        /* webpackChunkName: "valerttest" */
+        '@/components/VAlertTest.vue'
+      ),
+
+    VBadgeTest: () =>
+      import(
+        /* webpackChunkName: "vbadgetest" */
+        '@/components/VBadgeTest.vue'
+      ),
   },
 
   data: () => ({
@@ -175,8 +174,6 @@ export default {
     type: 'number',
 
     number: -9999,
-
-    alert: true,
   }),
 
   computed: {

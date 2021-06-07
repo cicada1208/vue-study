@@ -1,11 +1,13 @@
 <template>
-  <v-data-table
-    item-key="id"
-    :show-select="tableSelect"
-    :headers="headers"
-    :items="items"
-  >
-  </v-data-table>
+  <v-container>
+    <v-data-table
+      item-key="id"
+      :show-select="tableSelect"
+      :headers="headers"
+      :items="items"
+    >
+    </v-data-table>
+  </v-container>
 </template>
 
 <script>
