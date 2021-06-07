@@ -9,11 +9,24 @@
         </template>
       </div> -->
 
-      <div id="nav">
+      <!-- <div id="nav">
         <v-btn v-for="(link, idx) in links" :key="idx" block class="mb-4">
           <router-link :to="link.path">{{ link.text }}</router-link>
         </v-btn>
-      </div>
+      </div> -->
+
+      <v-list nav dense>
+        <v-list-item-group active-class="primary--text text--accent-4">
+          <v-list-item v-for="(link, idx) in links" :key="idx">
+            <v-list-item-icon>
+              <v-icon>{{ link.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              <router-link :to="link.path">{{ link.text }}</router-link>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
     </v-navigation-drawer>
 
     <!--
@@ -40,7 +53,7 @@
 
     <!-- v-main 組件替換 main HTML 元素和您應用程序的根節點內容的語義替代。 -->
     <v-main>
-      <!-- <router-view> 是動態組件，可用 <transition> 組件添加過渡效果 -->
+      <!-- <router-view> 是動態組件，可用 <transition> 組件添加過渡效果。 -->
       <transition name="slide-fade" mode="out-in">
         <!-- <keep-alive> -->
         <router-view />
@@ -60,34 +73,42 @@ export default {
 
   data: () => ({
     drawer: null,
+
     links: [
       {
         path: '/',
         text: 'Home',
+        icon: 'mdi-home',
       },
       {
         path: '/vue.core',
         text: 'VueCore',
+        icon: 'mdi-vuejs',
       },
       {
         path: '/user/cicada/post/123?search=pig&type=small',
         text: 'Router',
+        icon: 'mdi-router',
       },
       {
         path: '/user/plumes/post/456',
         text: 'Router2',
+        icon: 'mdi-router',
       },
       {
         path: '/vuex',
         text: 'Vuex',
+        icon: 'mdi-database',
       },
       {
         path: '/api.query',
         text: 'ApiQuery',
+        icon: 'mdi-database-search',
       },
       {
         path: '/vuetify',
         text: 'Vuetify',
+        icon: 'mdi-vuetify',
       },
     ],
   }),
