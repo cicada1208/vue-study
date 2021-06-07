@@ -127,6 +127,9 @@
     <h2>v-alert:</h2>
     <v-alert-test />
 
+    <h2>v-btn:</h2>
+    <v-btn-test />
+
     <h2>v-badge:</h2>
     <v-badge-test class="my-4" />
 
@@ -165,6 +168,12 @@ export default {
       import(
         /* webpackChunkName: "vbadgetest" */
         '@/components/VBadgeTest.vue'
+      ),
+
+    VBtnTest: () =>
+      import(
+        /* webpackChunkName: "vbtntest" */
+        '@/components/VBtnTest.vue'
       ),
   },
 
