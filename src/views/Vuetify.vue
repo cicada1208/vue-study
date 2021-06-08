@@ -132,12 +132,6 @@
 
     <h2>v-badge:</h2>
     <v-badge-test class="my-4" />
-
-    <!-- 滾動指令 $vuetify.goTo:
-    target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
-    <v-btn @click="$vuetify.goTo(target, options)" color="primary" block>
-      scroll top
-    </v-btn>
   </v-container>
 </template>
 
@@ -179,27 +173,7 @@ export default {
 
   data: () => ({
     tableSelect: false,
-
-    type: 'number',
-
-    number: -9999,
   }),
-
-  computed: {
-    target() {
-      const value = this[this.type];
-      if (!isNaN(value)) return Number(value);
-      else return value;
-    },
-
-    options() {
-      return {
-        duration: 300,
-        offset: 0,
-        easing: 'easeInOutCubic',
-      };
-    },
-  },
 
   methods: {
     winResize() {
