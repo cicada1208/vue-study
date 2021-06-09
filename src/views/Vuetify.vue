@@ -132,6 +132,9 @@
 
     <h2>v-badge:</h2>
     <v-badge-test class="my-4" />
+
+    <h2>v-calendar:</h2>
+    <v-calendar-test />
   </v-container>
 </template>
 
@@ -168,6 +171,12 @@ export default {
       import(
         /* webpackChunkName: "vbtntest" */
         '@/components/VBtnTest.vue'
+      ),
+
+    VCalendarTest: () =>
+      import(
+        /* webpackChunkName: "vcalendartest" */
+        '@/components/VCalendarTest.vue'
       ),
   },
 
