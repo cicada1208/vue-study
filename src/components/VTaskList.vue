@@ -94,7 +94,6 @@ export default {
         text: 'Fizzbuzz',
       },
     ],
-
     newTask: null,
   }),
 

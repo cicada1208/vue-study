@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 // 通過在原型上定義 $appStartTime，使其在每個 Vue 的實例中可用，
 // 甚至在實例生命週期 beforeCreate 中亦可用，
 // Vue 實例中以 this.$appStartTime 叫用，
-// 名稱以$開頭是在Vue所有實例中都可用的property的一個簡單約定，以避免衝突。
+// 名稱以$開頭是在 Vue 所有實例中都可用的 property 的一個簡單約定，以避免衝突。
 Vue.prototype.$appStartTime = new Date().toLocaleTimeString(); // 程式啟動時間
 // Vue.prototype.$apiUtil = apiUtil;
 

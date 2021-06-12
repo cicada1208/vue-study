@@ -23,6 +23,7 @@ export default {
       loading3: false,
     };
   },
+
   watch: {
     loader() {
       const l = this.loader;

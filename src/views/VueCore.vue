@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <h4>v-bind:</h4>
+    <h2>v-bind:</h2>
     <!--
-      v-bind: 後接參數 html attribute 能綁定 data property
+      v-bind: 後接參數 html attribute，並可綁定 data property
       直接書寫 v-bind:title 或可用動態參數(方括號括起來的 JavaScript 表達式作為一個指令的參數)
       完整語法: v-bind:[attributeName]
       簡寫語法: :[attributeName]
@@ -11,36 +11,42 @@
       hover this show msg
     </span>
 
-    <h4>v-if:</h4>
+    <h2>v-if:</h2>
     <span v-if="Math.random() > 0.5">if >0.5 visible</span>
     <span v-else-if="Math.random() === 0.5">elseif =0.5 visible</span>
     <span v-else>else &lt;0.5 visible</span>
 
-    <h4>v-for iteration array:</h4>
+    <h2>v-for iteration array:</h2>
     <!-- v-if 和 v-for 不要同時用在同一個元素上 -->
     <!-- key 的使用最好為唯一鍵值 -->
     <ol>
-      <li v-for="(item, index) in textList" v-bind:key="index">
+      <li v-for="(item, index) in textList" :key="index">
         {{ item.text }}
       </li>
     </ol>
 
-    <h4>v-for iteration object:</h4>
+    <h2>v-for iteration object:</h2>
     <div v-for="(value, name, index) in textClass" :key="index">
       {{ index }}. {{ name }}: {{ value }}
     </div>
 
-    <h4>v-on:</h4>
+    <h2>v-on:</h2>
     <!--
       v-on: 後接參數 eventName
       直接書寫 v-on:click 或可用動態參數
       完整語法: v-on:[eventName]
       簡寫語法: @[eventName]
     -->
-    <button @[eventName]="onReverseMsg('自定義參數', $event)">
+    <v-btn
+      @[eventName]="reverseMsg('自定義參數', $event)"
+      color="primary"
+      class="mx-1"
+    >
       reverse msg
-    </button>
-    <button @[eventName]="onClearMsg">clear msg</button>
+    </v-btn>
+    <v-btn @[eventName]="clearMsg" color="primary" class="mx-1">
+      clear msg
+    </v-btn>
     <p id="msgReverseP">
       <!-- Mustache 語法: 僅能單個 JavaScript 表達式 -->
       msgReverse: {{ msgReverse }}
@@ -54,7 +60,7 @@
       v-model.trim="msg"
       placeholder="single line"
       ref="msgInput"
-      @keyup.enter="onEnterMsg"
+      @keyup.enter="enterMsg"
     />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" v-focus="msg" />
@@ -178,7 +184,7 @@
         v-bind="post"
         @enlarge-text="postFontSize += 0.1"
         @enlarge-text2="postFontSize += $event"
-        @decrease-text="onDecreaseText"
+        @decrease-text="decreaseText"
         :twoWayProp.sync="twoWayProp"
       >
         <!-- 未具名插槽: 未由 template v-slot 包覆的內容，等同 template v-slot:default 包覆的內容 -->
@@ -263,9 +269,9 @@
     -->
 
     <h4>list transition:</h4>
-    <button @click="onShuffleNumList">Shuffle</button>
-    <button @click="onAddNumList">Add</button>
-    <button @click="onRemoveNumList">Remove</button>
+    <button @click="shuffleNumList">Shuffle</button>
+    <button @click="addNumList">Add</button>
+    <button @click="removeNumList">Remove</button>
     <!-- transition-group:
     多個元素/組件的過渡效果。
     默認為一個 <span>，也可通過 tag attribute 更換為其他元素。
@@ -343,6 +349,7 @@ var reuseMixin = {
       console.log('reuseMixin created first.');
     },
   },
+
   created: function() {
     this.$_reuseMixin_onPrint();
   },
@@ -394,6 +401,7 @@ export default {
         .reverse()
         .join('');
     },
+
     msgGetterAndSetter: {
       get: function() {
         return this.msg;
@@ -402,12 +410,14 @@ export default {
         this.msg = value;
       },
     },
+
     textClass: function() {
       return {
         'text-bold': true,
         'text-red': true,
       };
     },
+
     baseStyle() {
       return baseStyle;
     },
@@ -415,7 +425,7 @@ export default {
 
   methods: {
     // methods 不是響應式:方法每次都會重算，不會緩存。
-    onReverseMsg: function(param, event) {
+    reverseMsg: function(param, event) {
       this.msgReverse = this.msg
         .split('')
         .reverse()
@@ -423,28 +433,35 @@ export default {
       alert(`tag name: ${event.target.tagName}, param: ${param}`);
       this.$refs.msgInput.focus();
     },
-    onClearMsg: function(event) {
+
+    clearMsg: function(event) {
       // 延遲一秒清空
       var debounce = _.debounce(() => $('#msgReverseP').html(''), 1000);
       debounce();
       alert(`tag name: ${event.target.tagName}`);
     },
-    onEnterMsg: function() {
+
+    enterMsg: function() {
       alert(`msg: ${this.msg}`);
     },
-    onDecreaseText: function(size) {
+
+    decreaseText: function(size) {
       this.postFontSize += size;
     },
-    onRandomIndex: function() {
+
+    randomIndex: function() {
       return Math.floor(Math.random() * this.nums.length);
     },
-    onAddNumList: function() {
-      this.nums.splice(this.onRandomIndex(), 0, this.nextNum++);
+
+    addNumList: function() {
+      this.nums.splice(this.randomIndex(), 0, this.nextNum++);
     },
-    onRemoveNumList: function() {
-      this.nums.splice(this.onRandomIndex(), 1);
+
+    removeNumList: function() {
+      this.nums.splice(this.randomIndex(), 1);
     },
-    onShuffleNumList: function() {
+
+    shuffleNumList: function() {
       this.nums = _.shuffle(this.nums);
     },
   },
@@ -471,29 +488,35 @@ export default {
   components: {
     // components: 模塊局部註冊
     PropSlot,
+
     // async component: Posts、RenderFunc...
     // 只在需要的時候才加載模塊，返回 Promise 的函式
     Posts,
+
     RenderFunc: () =>
       import(
         /* webpackChunkName: "render.func.comp" */
         '@/components/RenderFunc.vue'
       ),
+
     JSX: () =>
       import(
         /* webpackChunkName: "jsx" */
         '@/components/JSX.vue'
       ),
+
     JSXFunc: () =>
       import(
         /* webpackChunkName: "jsx.func" */
         '@/components/JSXFunc.vue'
       ),
+
     CheckModelInput: () =>
       import(
         /* webpackChunkName: "check.model.input" */
         '@/components/CheckModelInput.vue'
       ),
+
     TodoList: () =>
       import(
         /* webpackChunkName: "todo.list" */
@@ -514,6 +537,7 @@ export default {
           'Hook Arguments vnode keys: ' + Object.keys(vnode).join(', ')
         );
       },
+
       // inserted: 當被綁定的元素插入到 DOM 時調用。
       inserted: function(el) {
         el.focus();
@@ -527,6 +551,7 @@ export default {
       value = value.toString();
       return value.charAt(0).toUpperCase() + value.slice(1) + msg;
     },
+
     digitRemove: function(value) {
       var pat = /\d/g;
       value = value.replace(pat, '');
@@ -543,6 +568,7 @@ export default {
 @import '@/styles/base.module.scss';
 
 // 元素選擇器
+h2,
 h4 {
   color: $title-color;
 }
