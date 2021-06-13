@@ -52,7 +52,7 @@
       msgReverse: {{ msgReverse }}
     </p>
 
-    <h4>v-model text & textarea:</h4>
+    <h2>v-model text & textarea:</h2>
     <!-- v-model: 實現表單輸入和應用狀態之間的雙向綁定，把綁定和事件結合起來 -->
     <!-- ref attribute: 賦予 ID 後，以此引用 element or component。
     避免在模板或計算屬性中訪問$refs。 -->
@@ -68,13 +68,13 @@
     <p :class="baseStyle.multiline">msgReverseGetter: {{ msgReverseGetter }}</p>
     <p :class="baseStyleVue.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
 
-    <h4>v-model number:</h4>
+    <h2>v-model number:</h2>
     <!-- 即使在type="number"時，HTML輸入元素的值也總會返回字符串。
     如果該值無法被parseFloat()解析，則會返回原始的值。 -->
     <input type="number" v-model.number="num" step="2" />
     <p>num: {{ num }}</p>
 
-    <h4>v-model single checkbox:</h4>
+    <h2>v-model single checkbox:</h2>
     <input type="checkbox" id="chkbox" v-model="checked" />
     <!-- The <label> for attribute specifies which form element a label is bound to.
       for="element_id"-->
@@ -89,7 +89,7 @@
     />
     <label for="chkboxValue">{{ checkedValue }}</label>
 
-    <h4>v-model mutiple checkbox bind to an array:</h4>
+    <h2>v-model mutiple checkbox bind to an array:</h2>
     <template v-for="name in names">
       <input
         type="checkbox"
@@ -105,7 +105,7 @@
     <br />
     <span>checked names: {{ checkedNames }}</span>
 
-    <h4>v-model radio:</h4>
+    <h2>v-model radio:</h2>
     <template v-for="name in names">
       <input
         type="radio"
@@ -119,7 +119,7 @@
     <br />
     <span>picked name: {{ pickedName }}</span>
 
-    <h4>v-model select single selected:</h4>
+    <h2>v-model select single selected:</h2>
     <select v-model="selectedName">
       <option disabled value="">請選擇</option>
       <!-- :value="{ number: 123 }" 可為物件，選取後 selectedName.number 結果為 123 -->
@@ -130,7 +130,7 @@
     <br />
     <span>selected name: {{ selectedName }}</span>
 
-    <h4>v-model select multiple selected:</h4>
+    <h2>v-model select multiple selected:</h2>
     <select v-model="selectedNames" multiple style="width: 100px">
       <option v-for="name in names" :value="name" :key="name + 'option'">
         {{ name }}
@@ -139,37 +139,40 @@
     <br />
     <span>selected names: {{ selectedNames }}</span>
 
-    <h4>v-html:</h4>
+    <h2>v-html:</h2>
     <!-- v-html: span 內容會被替換成 data property rawHtml -->
     <div class="deepParent">
       <span v-html="rawHtml">test</span>
     </div>
 
-    <h4>class & style:</h4>
+    <h2>class & style:</h2>
     <!--
       若都啟用 {'text-bold': true, 'text-red': true}
       相當於 class="text-bold text-red"
     -->
-    <p class="text-size" v-bind:class="textClass">class style test</p>
-    <p v-bind:class="['text-size', { 'text-bold': true, 'text-red': false }]">
+    <p class="text-size" :class="textClass">class style test</p>
+    <p :class="['text-size', { 'text-bold': true, 'text-red': false }]">
       class style test2
     </p>
-    <p v-bind:style="{ color: 'cornflowerblue', 'font-weight': 'bold' }">
+    <p :style="{ color: 'cornflowerblue', 'font-weight': 'bold' }">
       class style test3
     </p>
 
-    <h4>component prop & slot:</h4>
+    <h2>component prop & slot:</h2>
     <!--
       prop 單向數據流: 父級 prop 的更新會向下流動到子組件中，但是反過來則不行。
+
       dynamicProp、numProp、boolProp、arrayProp、objectProp:
       以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串。
+
       boolPropDef: 未賦值，預設為true。
-      post: 傳入一個對象的所有 property。
+
+      v-bind="post": 傳入一個對象的所有 property。
 
       @enlarge-text: 監聽自定義事件。
       @enlarge-text2、@decrease-text: 監聽子組建拋出的第二參數。
 
-      twoWayProp: prop 雙向綁定。
+      :twoWayProp.sync: prop 雙向綁定。
       v-bind.sync="objProp" 可將 object objProp 所有 property 傳入並雙向綁定。
     -->
     <div :style="{ fontSize: postFontSize + 'em' }">
@@ -213,13 +216,13 @@
       <p>twoWayProp in parent: {{ twoWayProp }}</p>
     </div>
 
-    <h4>component check v-model:</h4>
+    <h2>component check v-model:</h2>
     <CheckModelInput v-model="checked" />
 
-    <h4>component text v-model:</h4>
+    <h2>component text v-model:</h2>
     <TodoList />
 
-    <h4>dynamic component:</h4>
+    <h2>dynamic component:</h2>
     <!--
       // 也可傳入 prop
       <keep-alive>
@@ -243,6 +246,13 @@
     <transition name="slide-fade" mode="out-in">
       <keep-alive>
         <component v-bind:is="currentTab" class="tab">qaq</component>
+      </keep-alive>
+    </transition>
+
+    <h2>dynamic component2:</h2>
+    <transition name="slide-fade" mode="out-in">
+      <keep-alive>
+        <component :is="lazyLoading" class="tab" />
       </keep-alive>
     </transition>
 
@@ -421,6 +431,16 @@ export default {
     baseStyle() {
       return baseStyle;
     },
+
+    lazyLoading() {
+      const name = this.currentTab;
+      return () => ({
+        component: import(`@/components/${name}.vue`),
+        loading: Loading,
+        error: Error,
+        delay: 200,
+      });
+    },
   },
 
   methods: {
@@ -495,7 +515,7 @@ export default {
 
     RenderFunc: () =>
       import(
-        /* webpackChunkName: "render.func.comp" */
+        /* webpackChunkName: "render.func" */
         '@/components/RenderFunc.vue'
       ),
 

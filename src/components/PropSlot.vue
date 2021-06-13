@@ -1,15 +1,15 @@
 <template>
   <div>
     <!-- $emit: 觸發自定義事件 -->
-    <button @click="$emit('enlarge-text')">
+    <v-btn @click="$emit('enlarge-text')" color="primary" class="mx-1">
       enlarge text
-    </button>
-    <button @click="$emit('enlarge-text2', 1)">
+    </v-btn>
+    <v-btn @click="$emit('enlarge-text2', 1)" color="primary" class="mx-1">
       enlarge text2
-    </button>
-    <button @click="$emit('decrease-text', -0.1)">
+    </v-btn>
+    <v-btn @click="$emit('decrease-text', -0.1)" color="primary" class="mx-1">
       decrease text
-    </button>
+    </v-btn>
 
     <p>staticProp: {{ staticProp }}</p>
     <p>dynamicProp: {{ dynamicProp }}</p>
@@ -34,15 +34,16 @@
     </p>
 
     <p>twoWayProp in comonent: {{ twoWayProp }}</p>
-    <button @click="onUpdateTwowayProp">
+    <v-btn @click="updateTwowayProp" color="primary">
       update two way prop
-    </button>
+    </v-btn>
   </div>
 </template>
 
 <script>
 export default {
   name: 'PropSlot',
+
   props: {
     // prop 會在組件實例創建前進行驗證
     // 故 data、computed property 在 default 或 validator 中不可用
@@ -73,6 +74,7 @@ export default {
     title: String,
     twoWayProp: Number,
   },
+
   // data: 透過 function return new object，各自獨立，避免共用。
   data() {
     return {
@@ -87,8 +89,9 @@ export default {
   //   num: vm.numProp,
   //   user: { firstName: 'H', lastName: 'W' },
   // }),
+
   methods: {
-    onUpdateTwowayProp: function() {
+    updateTwowayProp: function() {
       this.$emit('update:twoWayProp', ++this.num);
     },
   },

@@ -10,6 +10,7 @@ export default {
       default: '',
     },
   },
+
   computed: {
     listeners() {
       return {

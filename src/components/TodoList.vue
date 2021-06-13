@@ -3,14 +3,14 @@
     <TextModelInput
       v-model="newTodoText"
       placeholder="New todo"
-      @keydown.enter="onAddTodo"
+      @keydown.enter="addTodo"
     />
     <ul v-if="todos.length">
       <TodoListItem
         v-for="todo in todos"
         :key="todo.id"
         :todo="todo"
-        @remove="onRemoveTodo"
+        @remove="removeTodo"
       />
     </ul>
     <p v-else>
@@ -34,8 +34,9 @@ export default {
       ],
     };
   },
+
   methods: {
-    onAddTodo() {
+    addTodo() {
       const trimmedText = this.newTodoText.trim();
       if (trimmedText) {
         this.todos.push({
@@ -45,18 +46,21 @@ export default {
         this.newTodoText = '';
       }
     },
-    onRemoveTodo(idToRemove) {
+
+    removeTodo(idToRemove) {
       this.todos = this.todos.filter((todo) => {
         return todo.id !== idToRemove;
       });
     },
   },
+
   components: {
     TextModelInput: () =>
       import(
         /* webpackChunkName: "text.model.input" */
         '@/components/TextModelInput.vue'
       ),
+
     TodoListItem: () =>
       import(
         /* webpackChunkName: "todo.list.item" */
