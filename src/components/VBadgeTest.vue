@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row justify="space-around" class="my-1">
       <div>
         <v-btn class="mx-1" color="primary" @click="messages++">
           Send Notifications

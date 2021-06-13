@@ -250,13 +250,21 @@
     </transition>
 
     <h2>dynamic component2:</h2>
+    <button
+      v-for="tab in tabs2"
+      :key="tab"
+      :class="['tab-button', { active: currentTab2 === tab }]"
+      @click="currentTab2 = tab"
+    >
+      {{ tab }}
+    </button>
     <transition name="slide-fade" mode="out-in">
       <keep-alive>
         <component :is="lazyLoading" class="tab" />
       </keep-alive>
     </transition>
 
-    <h4>css transition:</h4>
+    <h2>css transition:</h2>
     <!-- css 過渡動畫效果 -->
     <!-- transition:
     應用在單個節點、同一時間渲染多個節點中的一個。
@@ -265,9 +273,9 @@
     mode: 過渡模式，out-in: 當前元素先進行過渡，完成之後新元素過渡進入。 -->
     <transition name="slide-fade" mode="out-in">
       <!-- 因 key 值變更，<button> 會被替換而不是被修改，因此會觸發過渡 -->
-      <button @click="show = !show" :key="show">
+      <v-btn @click="show = !show" :key="show" color="primary">
         {{ show }}
-      </button>
+      </v-btn>
     </transition>
     <!--
     <button @click="show = !show">
@@ -278,10 +286,10 @@
     </transition>
     -->
 
-    <h4>list transition:</h4>
-    <button @click="shuffleNumList">Shuffle</button>
-    <button @click="addNumList">Add</button>
-    <button @click="removeNumList">Remove</button>
+    <h2>list transition:</h2>
+    <v-btn @click="shuffleNumList" color="primary" class="mx-1">Shuffle</v-btn>
+    <v-btn @click="addNumList" color="primary" class="mx-1">Add</v-btn>
+    <v-btn @click="removeNumList" color="primary" class="mx-1">Remove</v-btn>
     <!-- transition-group:
     多個元素/組件的過渡效果。
     默認為一個 <span>，也可通過 tag attribute 更換為其他元素。
@@ -293,7 +301,7 @@
       </span>
     </transition-group>
 
-    <h4>render function:</h4>
+    <h2>render function:</h2>
     <RenderFunc :level="5">
       heading VNode content from default slot created by render function.
       {{ msg }}
@@ -391,7 +399,9 @@ export default {
     twoWayProp: 0,
     slotName: 'userName',
     tabs: ['Posts', 'RenderFunc'],
+    tabs2: ['VBtnTest', 'VBadgeTest'],
     currentTab: 'Posts',
+    currentTab2: 'VBtnTest',
     show: true,
     nums: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     nextNum: 10,
@@ -433,12 +443,15 @@ export default {
     },
 
     lazyLoading() {
-      const name = this.currentTab;
+      const name = this.currentTab2;
       return () => ({
-        component: import(`@/components/${name}.vue`),
+        // [request] 會依據 ${name}-vue 命名
+        component: import(
+          /* webpackChunkName: "[request]" */
+          `@/components/${name}.vue`
+        ),
         loading: Loading,
         error: Error,
-        delay: 200,
       });
     },
   },

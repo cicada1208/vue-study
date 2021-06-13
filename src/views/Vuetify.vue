@@ -131,7 +131,7 @@
     <v-btn-test />
 
     <h2>v-badge:</h2>
-    <v-badge-test class="my-4" />
+    <v-badge-test />
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
@@ -145,37 +145,37 @@ export default {
   components: {
     VTableTest: () =>
       import(
-        /* webpackChunkName: "vtabletest" */
+        /* webpackChunkName: "vtable.test" */
         '@/components/VTableTest.vue'
       ),
 
     VTaskList: () =>
       import(
-        /* webpackChunkName: "vtasklist" */
+        /* webpackChunkName: "vtask.list" */
         '@/components/VTaskList.vue'
       ),
 
     VAlertTest: () =>
       import(
-        /* webpackChunkName: "valerttest" */
+        /* webpackChunkName: "valert.test" */
         '@/components/VAlertTest.vue'
       ),
 
     VBadgeTest: () =>
       import(
-        /* webpackChunkName: "vbadgetest" */
+        /* webpackChunkName: "vbadge.test" */
         '@/components/VBadgeTest.vue'
       ),
 
     VBtnTest: () =>
       import(
-        /* webpackChunkName: "vbtntest" */
+        /* webpackChunkName: "vbtn.test" */
         '@/components/VBtnTest.vue'
       ),
 
     VCalendarTest: () =>
       import(
-        /* webpackChunkName: "vcalendartest" */
+        /* webpackChunkName: "vcalendar.test" */
         '@/components/VCalendarTest.vue'
       ),
   },
