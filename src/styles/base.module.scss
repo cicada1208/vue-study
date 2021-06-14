@@ -1,5 +1,11 @@
 $title-color: cadetblue;
 
+// 元素選擇器
+h2 {
+  color: $title-color;
+}
+
+// 類選擇器
 .multiline {
   // composes: compose class names from other CSS Modules.
   composes: textBlue textBold from './composes.module.scss';

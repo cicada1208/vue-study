@@ -313,13 +313,13 @@
       </template>
     </RenderFunc>
 
-    <h4>JSX component:</h4>
+    <h2>JSX component:</h2>
     <JSX />
 
-    <h4>JSX functional component:</h4>
+    <h2>JSX functional component:</h2>
     <JSXFunc option="1" />
 
-    <h4>filters:</h4>
+    <h2>filters:</h2>
     <!-- filters: 可被用於一些常見的文本格式化，用在雙花括號插值和v-bind表達式，可串聯。
     | 前為第一參數 filterText，可再傳入其他參數 msg -->
     <input v-model="filterText" placeholder="write down text to see" />
@@ -327,7 +327,7 @@
     <input :value="filterText | capitalize(msg) | digitRemove" />
     text after filters: {{ filterText | capitalize(msg) | digitRemove }}
 
-    <h4>localStorage:</h4>
+    <h2>localStorage:</h2>
     localStorageTest: <input v-model="localStorageTest" />
   </v-container>
 </template>
@@ -596,15 +596,6 @@ export default {
 
 <style lang="scss" scoped>
 // scoped 樣式中，類選擇器比元素選擇器更好，因為大量使用元素選擇器效能很慢。
-
-// The @import CSS at-rule is used to import style rules from other style sheets.
-@import '@/styles/base.module.scss';
-
-// 元素選擇器
-h2,
-h4 {
-  color: $title-color;
-}
 
 // 類選擇器
 .text-bold {
