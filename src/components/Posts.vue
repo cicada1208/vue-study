@@ -25,6 +25,7 @@
 <script>
 export default {
   name: 'Posts',
+
   data: function() {
     return {
       posts: [

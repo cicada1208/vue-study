@@ -1,15 +1,18 @@
 <script>
 export default {
   name: 'JSX',
+
   data: () => ({
     msg: 'jsx comp msg data',
     user: { firstName: 'H', lastName: 'W' },
   }),
+
   methods: {
     onAlertMsg: function(event) {
       alert(event.target.value);
     },
   },
+
   render() {
     const inputAttrs = {
       type: 'email',

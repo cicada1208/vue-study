@@ -15,16 +15,19 @@ var getChildrenTextContent = function(children) {
 
 export default {
   name: 'RenderFunc',
+
   props: {
     level: {
       type: Number,
       default: 2,
     },
   },
+
   data: () => ({
     textList: [{ text: 'list1' }, { text: 'list2' }],
     user: { firstName: 'H', lastName: 'W' },
   }),
+
   computed: {
     anchorName: function() {
       return getChildrenTextContent(this.$slots.anchor)
@@ -33,6 +36,7 @@ export default {
         .replace(/(^-|-$)/g, '');
     },
   },
+
   render: function(createElement) {
     // var self = this;
 
