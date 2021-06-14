@@ -86,7 +86,7 @@ const routes = [
 
 // 創建 router 實例
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'history', // 利用 history.pushState API 來完成 URL 跳轉而無須重新加載頁面。
   base: process.env.BASE_URL,
   routes,
   scrollBehavior: (to, from, savedPosition) => {
