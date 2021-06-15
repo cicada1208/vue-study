@@ -51,14 +51,14 @@
           <v-calendar
             ref="calendar"
             v-model="focus"
-            color="primary"
+            :type="type"
             :events="events"
             :event-color="getEventColor"
-            :type="type"
             @click:event="showEvent"
             @click:more="viewDay"
             @click:date="viewDay"
             @change="updateRange"
+            color="primary"
           ></v-calendar>
           <v-menu
             v-model="selectedOpen"

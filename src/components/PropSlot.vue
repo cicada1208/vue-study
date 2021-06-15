@@ -24,13 +24,11 @@
       slot:
       <br />
       <!-- slot 若未指定 name 即為 <slot name="default"> -->
-      <slot>default backup slot </slot>
+      <slot>child: default backup slot</slot>
       <br />
 
       <!-- slot prop user 傳遞至父級 -->
-      <slot name="userName" :user="user">
-        {{ user.lastName }}
-      </slot>
+      <slot name="userName" :user="user">child: {{ user.lastName }}</slot>
     </p>
 
     <p>twoWayProp in comonent: {{ twoWayProp }}</p>

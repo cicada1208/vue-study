@@ -193,7 +193,7 @@
         <!-- 未具名插槽: 未由 template v-slot 包覆的內容，等同 template v-slot:default 包覆的內容 -->
         <!-- <template v-slot:default> -->
         <!-- 若無此內容 default slot，component 則顯示子組建默認 default backup slot -->
-        <span style="color: crimson">default slot </span>
+        <span style="color: crimson">parent: default slot</span>
         <!-- </template> -->
 
         <!-- 具名插槽: template v-slot:userName -->
@@ -210,7 +210,8 @@
         <!-- 完整語法: v-slot:[slotName] -->
         <!-- 簡寫語法: #[slotName] -->
         <template #[slotName]="{ user, undefObj={role: 'guest'} }">
-          slotProp: name: {{ user.firstName }}, role: {{ undefObj.role }}
+          parent: slotProp: name: {{ user.firstName }}, role:
+          {{ undefObj.role }}
         </template>
       </PropSlot>
       <p>twoWayProp in parent: {{ twoWayProp }}</p>
