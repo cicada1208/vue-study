@@ -135,6 +135,7 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
+    <v-calendar-test-2 />
   </v-container>
 </template>
 
@@ -177,6 +178,12 @@ export default {
       import(
         /* webpackChunkName: "vcalendar.test" */
         '@/components/VCalendarTest.vue'
+      ),
+
+    VCalendarTest2: () =>
+      import(
+        /* webpackChunkName: "vcalendar.test2" */
+        '@/components/VCalendarTest2.vue'
       ),
   },
 
