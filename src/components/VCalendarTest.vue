@@ -52,6 +52,11 @@
             ref="calendar"
             v-model="focus"
             :type="type"
+            locale="zh-tw"
+            :month-format="
+              (timestamp) => new Date(timestamp.date).getMonth() + 1 + ' /'
+            "
+            :day-format="(timestamp) => new Date(timestamp.date).getDate()"
             :events="events"
             :event-color="getEventColor"
             @click:event="showEvent"
@@ -97,6 +102,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   data: () => ({
     focus: '',
@@ -143,7 +150,7 @@ export default {
       return event.color;
     },
     setToday() {
-      this.focus = '';
+      this.focus = moment().format('yyyy-MM-DD'); // ''
     },
     prev() {
       this.$refs.calendar.prev();

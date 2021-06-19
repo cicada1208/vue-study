@@ -8,6 +8,7 @@
             v-model="value"
             color="primary"
             type="4day"
+            locale="zh-tw"
             :events="events"
             :event-color="getEventColor"
             :event-ripple="false"
