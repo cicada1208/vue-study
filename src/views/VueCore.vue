@@ -26,8 +26,8 @@
     </ol>
 
     <h2>v-for iteration object:</h2>
-    <div v-for="(value, name, index) in textClass" :key="index">
-      {{ index }}. {{ name }}: {{ value }}
+    <div v-for="(value, key, index) in textClass" :key="index">
+      {{ index }}. {{ key }}: {{ value }}
     </div>
 
     <h2>v-on:</h2>

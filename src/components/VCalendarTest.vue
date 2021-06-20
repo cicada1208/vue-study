@@ -37,9 +37,9 @@
               </template>
               <v-list>
                 <v-list-item
-                  v-for="(value, name) in typeToLabel"
-                  @click="type = name"
-                  :key="name"
+                  v-for="(value, key) in typeToLabel"
+                  @click="type = key"
+                  :key="key"
                 >
                   <v-list-item-title>{{ value }}</v-list-item-title>
                 </v-list-item>
@@ -48,21 +48,22 @@
           </v-toolbar>
         </v-sheet>
         <v-sheet height="600">
+          <!-- @change: 日曆上顯示的天數範圍更改時觸發。 -->
           <v-calendar
             ref="calendar"
-            v-model="focus"
-            :type="type"
             locale="zh-tw"
             :month-format="
               (timestamp) => new Date(timestamp.date).getMonth() + 1 + ' /'
             "
             :day-format="(timestamp) => new Date(timestamp.date).getDate()"
+            v-model="focus"
+            :type="type"
             :events="events"
             :event-color="getEventColor"
+            @change="getEvents"
             @click:event="showEvent"
-            @click:more="viewDay"
             @click:date="viewDay"
-            @change="updateRange"
+            @click:more="viewDay"
             color="primary"
           ></v-calendar>
           <v-menu
@@ -73,26 +74,21 @@
           >
             <v-card color="grey lighten-4" min-width="350px" flat>
               <v-toolbar :color="selectedEvent.color" dark>
-                <v-btn icon>
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon>
-                  <v-icon>mdi-heart</v-icon>
+                  <v-icon>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn icon>
-                  <v-icon>mdi-dots-vertical</v-icon>
+                <v-btn icon @click="deleteEvent(selectedEvent)">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+                <v-btn icon @click="selectedOpen = false">
+                  <v-icon>mdi-close</v-icon>
                 </v-btn>
               </v-toolbar>
               <v-card-text>
                 <span v-html="selectedEvent.details"></span>
               </v-card-text>
-              <v-card-actions>
-                <v-btn text color="secondary" @click="selectedOpen = false">
-                  Cancel
-                </v-btn>
-              </v-card-actions>
             </v-card>
           </v-menu>
         </v-sheet>
@@ -102,7 +98,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+// import moment from 'moment';
 
 export default {
   data: () => ({
@@ -111,22 +107,10 @@ export default {
     typeToLabel: {
       month: 'Month',
       week: 'Week',
-      '4day': '4 days',
+      '4day': '4 Days',
       day: 'Day',
     },
-    selectedEvent: {},
-    selectedElement: null,
-    selectedOpen: false,
     events: [],
-    colors: [
-      'blue',
-      'indigo',
-      'deep-purple',
-      'cyan',
-      'green',
-      'orange',
-      'grey darken-1',
-    ],
     names: [
       'Meeting',
       'Holiday',
@@ -137,20 +121,26 @@ export default {
       'Conference',
       'Party',
     ],
+    colors: [
+      'blue',
+      'indigo',
+      'deep-purple',
+      'cyan',
+      'green',
+      'orange',
+      'grey darken-1',
+    ],
+    selectedEvent: {},
+    selectedElement: null,
+    selectedOpen: false,
   }),
   mounted() {
+    // 檢查開始和結束日期的更改，如果更改，發出更改事件。
     this.$refs.calendar.checkChange();
   },
   methods: {
-    viewDay({ date }) {
-      this.focus = date;
-      this.type = 'day';
-    },
-    getEventColor(event) {
-      return event.color;
-    },
     setToday() {
-      this.focus = moment().format('yyyy-MM-DD'); // ''
+      this.focus = '';
     },
     prev() {
       this.$refs.calendar.prev();
@@ -158,25 +148,7 @@ export default {
     next() {
       this.$refs.calendar.next();
     },
-    showEvent({ nativeEvent, event }) {
-      const open = () => {
-        this.selectedEvent = event;
-        this.selectedElement = nativeEvent.target;
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => (this.selectedOpen = true))
-        );
-      };
-
-      if (this.selectedOpen) {
-        this.selectedOpen = false;
-        requestAnimationFrame(() => requestAnimationFrame(() => open()));
-      } else {
-        open();
-      }
-
-      nativeEvent.stopPropagation();
-    },
-    updateRange({ start, end }) {
+    getEvents({ start, end }) {
       const events = [];
 
       const min = new Date(`${start.date}T00:00:00`);
@@ -201,6 +173,35 @@ export default {
       }
 
       this.events = events;
+    },
+    getEventColor(event) {
+      return event.color;
+    },
+    showEvent({ nativeEvent, event }) {
+      const open = () => {
+        this.selectedEvent = event;
+        this.selectedElement = nativeEvent.target;
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => (this.selectedOpen = true))
+        );
+      };
+
+      if (this.selectedOpen) {
+        this.selectedOpen = false;
+        requestAnimationFrame(() => requestAnimationFrame(() => open()));
+      } else {
+        open();
+      }
+
+      nativeEvent.stopPropagation();
+    },
+    deleteEvent(event) {
+      this.events = this.events.filter((e) => e !== event);
+      this.selectedOpen = false;
+    },
+    viewDay({ date }) {
+      this.focus = date;
+      this.type = 'day';
     },
     rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a;

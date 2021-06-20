@@ -15,6 +15,7 @@
     "jquery": "^3.5.1",
     "minify-css-string": "^1.0.0",
     "moment": "^2.29.1",
+    "moment-taiwan": "0.0.4",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuetify": "^2.4.0",
