@@ -64,8 +64,21 @@
             @click:event="showEvent"
             @click:date="viewDay"
             @click:more="viewDay"
+            @mousedown:time="startTime"
             color="primary"
-          ></v-calendar>
+          >
+            <!-- v-slot:event: 調整事件內容顯示 -->
+            <template v-slot:event="{ event, eventParsed }">
+              <div v-if="type === 'month'" class="pl-1">
+                {{ eventParsed.start.time + ' ' + event.name }}
+              </div>
+              <div v-else class="pl-1">
+                {{ event.name }}
+                <br />
+                {{ eventParsed.start.time + ' - ' + eventParsed.end.time }}
+              </div>
+            </template>
+          </v-calendar>
           <v-menu
             v-model="selectedOpen"
             :close-on-content-click="false"
@@ -98,7 +111,7 @@
 </template>
 
 <script>
-// import moment from 'moment';
+import moment from 'moment';
 
 export default {
   data: () => ({
@@ -162,6 +175,10 @@ export default {
         const first = new Date(firstTimestamp - (firstTimestamp % 900000));
         const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
         const second = new Date(first.getTime() + secondTimestamp);
+        const details =
+          moment(first).format('YYYY/MM/DD HH:mm:ss') +
+          ' - ' +
+          moment(second).format('YYYY/MM/DD HH:mm:ss');
 
         events.push({
           name: this.names[this.rnd(0, this.names.length - 1)],
@@ -169,6 +186,7 @@ export default {
           end: second,
           color: this.colors[this.rnd(0, this.colors.length - 1)],
           timed: !allDay,
+          details,
         });
       }
 
@@ -202,6 +220,36 @@ export default {
     viewDay({ date }) {
       this.focus = date;
       this.type = 'day';
+    },
+    startTime(tms) {
+      if (this.selectedEvent !== undefined) return;
+      const mouse = this.toTime(tms);
+      const start = this.roundTime(mouse);
+      const event = {
+        name: `Event #${this.events.length}`,
+        color: this.colors[this.rnd(0, this.colors.length - 1)],
+        start,
+        end: start,
+        timed: true,
+      };
+      this.events.push(event);
+    },
+    toTime(tms) {
+      return new Date(
+        tms.year,
+        tms.month - 1,
+        tms.day,
+        tms.hour,
+        tms.minute
+      ).getTime();
+    },
+    roundTime(time, down = true) {
+      const roundTo = 15; // minutes
+      const roundDownTime = roundTo * 60 * 1000;
+
+      return down
+        ? time - (time % roundDownTime)
+        : time + (roundDownTime - (time % roundDownTime));
     },
     rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a;
