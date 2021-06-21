@@ -49,6 +49,8 @@
         </v-sheet>
         <v-sheet height="600">
           <!-- @change: 日曆上顯示的天數範圍更改時觸發。 -->
+          <!-- @click:day: 某天的點擊事件。 -->
+          <!-- @mouseup:time: day 視圖中特定時間 mouseup 事件。 -->
           <v-calendar
             ref="calendar"
             locale="zh-tw"
@@ -63,8 +65,9 @@
             @change="getEvents"
             @click:date="viewDay"
             @click:more="viewDay"
-            @click:event="showEvent"
-            @click:time="insertEvent"
+            @click:day="insertEvent"
+            @mouseup:time="insertEvent"
+            @mouseup:event="showEvent"
             color="primary"
           >
             <!-- v-slot:event: 調整事件內容顯示 -->
@@ -129,7 +132,6 @@ export default {
       'Holiday',
       'PTO',
       'Travel',
-      'Event',
       'Birthday',
       'Conference',
       'Party',
@@ -147,10 +149,6 @@ export default {
     selectedElement: null,
     selectedOpen: false,
   }),
-  mounted() {
-    // 檢查開始和結束日期的更改，如果更改，發出更改事件。
-    this.$refs.calendar.checkChange();
-  },
   methods: {
     setToday() {
       this.focus = '';
@@ -176,9 +174,9 @@ export default {
         const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
         const second = new Date(first.getTime() + secondTimestamp);
         const details =
-          moment(first).format('YYYY/MM/DD HH:mm:ss') +
+          moment(first).format('YYYY/MM/DD HH:mm') +
           ' - ' +
-          moment(second).format('YYYY/MM/DD HH:mm:ss');
+          moment(second).format('YYYY/MM/DD HH:mm');
 
         events.push({
           name: this.names[this.rnd(0, this.names.length - 1)],
@@ -213,54 +211,44 @@ export default {
 
       nativeEvent.stopPropagation();
     },
-    insertEvent(tms) {
+    insertEvent(dtm) {
       if (this.selectedOpen) return;
 
-      const mouse = this.toTime(tms);
-      const start = new Date(this.roundTime(mouse));
+      let mouse = `${dtm.date}`;
+      if (dtm.hasTime) mouse += `T${dtm.time}`;
+      const start = moment(mouse).toDate();
+      const end = moment(start)
+        .add(1, 'hours')
+        .toDate();
       const details =
-        moment(start).format('YYYY/MM/DD HH:mm:ss') +
+        moment(start).format('YYYY/MM/DD HH:mm') +
         ' - ' +
-        moment(start).format('YYYY/MM/DD HH:mm:ss');
-      const event = {
+        moment(end).format('YYYY/MM/DD HH:mm');
+
+      this.events.push({
         name: `Event #${this.events.length}`,
         color: this.colors[this.rnd(0, this.colors.length - 1)],
         start,
-        end: start,
+        end,
         timed: true,
         details,
-      };
-
-      this.events.push(event);
+      });
     },
-    deleteEvent(eventRemove) {
-      this.events = this.events.filter((e) => e !== eventRemove);
+    deleteEvent(delEvent) {
+      this.events = this.events.filter((e) => e !== delEvent);
       this.selectedOpen = false;
     },
     viewDay({ date }) {
       this.focus = date;
       this.type = 'day';
     },
-    toTime(tms) {
-      return new Date(
-        tms.year,
-        tms.month - 1,
-        tms.day,
-        tms.hour,
-        tms.minute
-      ).getTime();
-    },
-    roundTime(time, down = true) {
-      const roundTo = 15; // minutes
-      const roundDownTime = roundTo * 60 * 1000;
-
-      return down
-        ? time - (time % roundDownTime)
-        : time + (roundDownTime - (time % roundDownTime));
-    },
     rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a;
     },
+  },
+  mounted() {
+    // 檢查開始和結束日期的更改，如果更改，發出更改事件。
+    this.$refs.calendar.checkChange();
   },
 };
 </script>
