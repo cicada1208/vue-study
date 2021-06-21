@@ -61,10 +61,10 @@
             :events="events"
             :event-color="getEventColor"
             @change="getEvents"
-            @click:event="showEvent"
             @click:date="viewDay"
             @click:more="viewDay"
-            @mousedown:time="startTime"
+            @click:event="showEvent"
+            @click:time="insertEvent"
             color="primary"
           >
             <!-- v-slot:event: 調整事件內容顯示 -->
@@ -182,9 +182,9 @@ export default {
 
         events.push({
           name: this.names[this.rnd(0, this.names.length - 1)],
+          color: this.colors[this.rnd(0, this.colors.length - 1)],
           start: first,
           end: second,
-          color: this.colors[this.rnd(0, this.colors.length - 1)],
           timed: !allDay,
           details,
         });
@@ -213,26 +213,33 @@ export default {
 
       nativeEvent.stopPropagation();
     },
-    deleteEvent(event) {
-      this.events = this.events.filter((e) => e !== event);
-      this.selectedOpen = false;
-    },
-    viewDay({ date }) {
-      this.focus = date;
-      this.type = 'day';
-    },
-    startTime(tms) {
-      if (this.selectedEvent !== undefined) return;
+    insertEvent(tms) {
+      if (this.selectedOpen) return;
+
       const mouse = this.toTime(tms);
-      const start = this.roundTime(mouse);
+      const start = new Date(this.roundTime(mouse));
+      const details =
+        moment(start).format('YYYY/MM/DD HH:mm:ss') +
+        ' - ' +
+        moment(start).format('YYYY/MM/DD HH:mm:ss');
       const event = {
         name: `Event #${this.events.length}`,
         color: this.colors[this.rnd(0, this.colors.length - 1)],
         start,
         end: start,
         timed: true,
+        details,
       };
+
       this.events.push(event);
+    },
+    deleteEvent(eventRemove) {
+      this.events = this.events.filter((e) => e !== eventRemove);
+      this.selectedOpen = false;
+    },
+    viewDay({ date }) {
+      this.focus = date;
+      this.type = 'day';
     },
     toTime(tms) {
       return new Date(
