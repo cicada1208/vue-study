@@ -148,6 +148,7 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
+    catNotInsert: false,
   }),
   methods: {
     setToday() {
@@ -194,6 +195,7 @@ export default {
       return event.color;
     },
     showEvent({ nativeEvent, event }) {
+      this.catNotInsert = true;
       const open = () => {
         this.selectedEvent = event;
         this.selectedElement = nativeEvent.target;
@@ -213,6 +215,10 @@ export default {
     },
     insertEvent(dtm) {
       if (this.selectedOpen) return;
+      if (this.catNotInsert) {
+        this.catNotInsert = false;
+        return;
+      }
 
       let mouse = `${dtm.date}`;
       if (dtm.hasTime) mouse += `T${dtm.time}`;
@@ -239,6 +245,7 @@ export default {
       this.selectedOpen = false;
     },
     viewDay({ date }) {
+      this.catNotInsert = true;
       this.focus = date;
       this.type = 'day';
     },
