@@ -51,6 +51,8 @@
           <!-- @change: 日曆上顯示的天數範圍更改時觸發。 -->
           <!-- @click:day: 某天的點擊事件。 -->
           <!-- @mouseup:time: day 視圖中特定時間 mouseup 事件。 -->
+          <!-- @click:day="insertEvent"
+            @mouseup:time="insertEvent" -->
           <v-calendar
             ref="calendar"
             locale="zh-tw"
@@ -65,9 +67,7 @@
             @change="getEvents"
             @click:date="viewDay"
             @click:more="viewDay"
-            @click:day="insertEvent"
-            @mouseup:time="insertEvent"
-            @mouseup:event="showEvent"
+            @click:event="showEvent"
             color="primary"
           >
             <!-- v-slot:event: 調整事件內容顯示 -->
@@ -148,7 +148,6 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    catNotInsert: false,
   }),
   methods: {
     setToday() {
@@ -195,7 +194,6 @@ export default {
       return event.color;
     },
     showEvent({ nativeEvent, event }) {
-      this.catNotInsert = true;
       const open = () => {
         this.selectedEvent = event;
         this.selectedElement = nativeEvent.target;
@@ -215,10 +213,6 @@ export default {
     },
     insertEvent(dtm) {
       if (this.selectedOpen) return;
-      if (this.catNotInsert) {
-        this.catNotInsert = false;
-        return;
-      }
 
       let mouse = `${dtm.date}`;
       if (dtm.hasTime) mouse += `T${dtm.time}`;
@@ -245,7 +239,6 @@ export default {
       this.selectedOpen = false;
     },
     viewDay({ date }) {
-      this.catNotInsert = true;
       this.focus = date;
       this.type = 'day';
     },
