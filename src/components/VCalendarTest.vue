@@ -51,7 +51,8 @@
           <!-- @change: 日曆上顯示的天數範圍更改時觸發。 -->
           <!-- @click:day: 某天的點擊事件。 -->
           <!-- @mouseup:time: day 視圖中特定時間 mouseup 事件。 -->
-          <!-- @click:day="insertEvent"
+          <!-- 順序似乎是 mousedown->mouseup->click
+            @click:day="insertEvent"
             @mouseup:time="insertEvent" -->
           <v-calendar
             ref="calendar"

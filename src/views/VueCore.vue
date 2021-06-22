@@ -328,8 +328,13 @@
     <input :value="filterText | capitalize(msg) | digitRemove" />
     text after filters: {{ filterText | capitalize(msg) | digitRemove }}
 
-    <h2>localStorage:</h2>
+    <h2>local storage:</h2>
     localStorageTest: <input v-model="localStorageTest" />
+
+    <h2>dom event:</h2>
+    <div id="event_div">
+      <button id="event_btn">click</button>
+    </div>
   </v-container>
 </template>
 
@@ -455,6 +460,14 @@ export default {
         error: Error,
       });
     },
+
+    eventPhase() {
+      return {
+        1: 'CAPTURING_PHASE',
+        2: 'AT_TARGET',
+        3: 'BUBBLING_PHASE',
+      };
+    },
   },
 
   methods: {
@@ -498,6 +511,76 @@ export default {
     shuffleNumList: function() {
       this.nums = _.shuffle(this.nums);
     },
+
+    domEventTest() {
+      // 原則：
+      // 1. 先捕獲再冒泡。
+      // 2. 當事件傳到 target 本身，無分捕獲跟冒泡，
+      // 執行順序根據 addEventListener 的順序而定，
+      // 但 chrome 新版改為 target 本身，一樣先捕獲再冒泡。
+      var div = document.getElementById('event_div');
+      var btn = document.getElementById('event_btn');
+
+      btn.addEventListener(
+        'click',
+        (e) => {
+          console.log(
+            'btn',
+            'bubble',
+            this.eventPhase[e.eventPhase],
+            `target:${e.target.tagName}`
+          );
+        },
+        false
+      );
+      btn.addEventListener(
+        'click',
+        (e) => {
+          console.log(
+            'btn',
+            'capture',
+            this.eventPhase[e.eventPhase],
+            `target:${e.target.tagName}`
+          );
+        },
+        true
+      );
+      div.addEventListener(
+        'click',
+        (e) => {
+          console.log(
+            'div',
+            'bubble',
+            this.eventPhase[e.eventPhase],
+            `target:${e.target.tagName}`
+          );
+        },
+        false
+      );
+      div.addEventListener(
+        'click',
+        (e) => {
+          console.log(
+            'div',
+            'capture',
+            this.eventPhase[e.eventPhase],
+            `target:${e.target.tagName}`
+          );
+
+          //e.stopPropagation(); // 取消傳遞事件: 執行至此，事件不再往下傳遞，但若在此節點上有不只一個 listener，此節點所有 listener 都會被執行。
+
+          //e.stopImmediatePropagation(); // 若想讓同一層級的其他 listener 也不被執行
+        },
+        true
+      );
+      div.addEventListener(
+        'click',
+        (e) => {
+          console.log('div', 'capture2', this.eventPhase[e.eventPhase]);
+        },
+        true
+      );
+    },
   },
 
   created: function() {
@@ -510,14 +593,15 @@ export default {
     }
   },
 
+  mounted() {
+    this.domEventTest();
+  },
+
   watch: {
     localStorageTest(newVal) {
       localStorage.localStorageTest = newVal;
     },
   },
-
-  // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
-  mixins: [reuseMixin],
 
   components: {
     // components: 模塊局部註冊
@@ -557,6 +641,9 @@ export default {
         '@/components/TodoList.vue'
       ),
   },
+
+  // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
+  mixins: [reuseMixin],
 
   // directives: 自定義指令，局部註冊
   directives: {
