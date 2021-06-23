@@ -54,6 +54,7 @@
           <!-- 事件順序似乎是 mousedown->mouseup->click
             @click:day="insertEvent"
             @mouseup:time="insertEvent" -->
+          <!-- 在同一格子新增多筆事件後從頭刪除似乎有 bug，嘗試以刪除後重更新? -->
           <v-calendar
             ref="calendar"
             locale="zh-tw"
@@ -69,6 +70,8 @@
             @click:date="viewDay"
             @click:more="viewDay"
             @click:event="showEvent"
+            @click:day="insertEvent"
+            @click:time="insertEvent"
             color="primary"
           >
             <!-- v-slot:event: 調整事件內容顯示 -->
