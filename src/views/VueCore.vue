@@ -567,16 +567,21 @@ export default {
             `target:${e.target.tagName}`
           );
 
-          //e.stopPropagation(); // 取消傳遞事件: 執行至此，事件不再往下傳遞，但若在此節點上有不只一個 listener，此節點所有 listener 都會被執行。
+          //e.stopPropagation(); // 取消傳遞事件: 同一事件執行至此，事件不再往下傳遞，但若在此節點上有不只一個 listener，此節點所有 listener 都會被執行。
 
-          //e.stopImmediatePropagation(); // 若想讓同一層級的其他 listener 也不被執行
+          //e.stopImmediatePropagation(); // 同 e.stopPropagation()，但會使同一層級(同事件及同捕獲或冒泡)的其他 listener 也不被執行。
         },
         true
       );
       div.addEventListener(
         'click',
         (e) => {
-          console.log('div', 'capture2', this.eventPhase[e.eventPhase]);
+          console.log(
+            'div',
+            'capture2',
+            this.eventPhase[e.eventPhase],
+            `target:${e.target.tagName}`
+          );
         },
         true
       );
