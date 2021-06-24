@@ -152,6 +152,7 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
+    eventId: 0,
   }),
   methods: {
     setToday() {
@@ -183,6 +184,7 @@ export default {
           moment(second).format('YYYY/MM/DD HH:mm');
 
         events.push({
+          id: ++this.eventId,
           name: this.names[this.rnd(0, this.names.length - 1)],
           color: this.colors[this.rnd(0, this.colors.length - 1)],
           start: first,
@@ -230,6 +232,7 @@ export default {
         moment(end).format('YYYY/MM/DD HH:mm');
 
       this.events.push({
+        id: ++this.eventId,
         name: `Event #${this.events.length}`,
         color: this.colors[this.rnd(0, this.colors.length - 1)],
         start,
@@ -239,7 +242,7 @@ export default {
       });
     },
     deleteEvent(delEvent) {
-      this.events = this.events.filter((e) => e !== delEvent);
+      this.events = this.events.filter((e) => e.id !== delEvent.id);
       this.selectedOpen = false;
     },
     viewDay({ date }) {
