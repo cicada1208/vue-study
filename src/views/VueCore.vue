@@ -336,8 +336,8 @@
       <button id="event_btn">click</button>
     </div>
     <!-- div click.capture.self / @click.self: 點擊的 event.target 是 div 自身，才執行。 -->
-    <!-- div @click.capture.prevent: preventDefault() 往下傳遞，即使 <a> 未使用 @click.prevent，一樣不會轉跳。 -->
-    <!-- preventDefault(): 為取消瀏覽器的預設行為，事件還是會繼續往下傳遞。 -->
+    <!-- div @click.capture.prevent: preventDefault() 會往下傳遞，即使 <a> 未使用 @click.prevent，一樣不會轉跳。 -->
+    <!-- preventDefault(): 為取消瀏覽器的預設行為，事件還是會繼續執行並往下傳遞。 -->
     <div
       id="vue_event_div"
       @click.self="vueEventTest('vue div bubble', $event)"
@@ -348,7 +348,11 @@
         @click="vueEventTest('vue btn bubble', $event)"
         @click.capture="vueEventTest('vue btn capture', $event)"
       >
-        <a @click.prevent href="https://www.google.com/">vue click</a>
+        <a
+          @click.prevent="vueEventTest('vue a bubble', $event)"
+          href="https://www.google.com/"
+          >vue click</a
+        >
       </button>
     </div>
   </v-container>
