@@ -49,12 +49,9 @@
         </v-sheet>
         <v-sheet height="600">
           <!-- @change: 日曆上顯示的天數範圍更改時觸發。 -->
-          <!-- @click:day: 某天的點擊事件。 -->
-          <!-- @mouseup:time: day 視圖中特定時間 mouseup 事件。 -->
-          <!-- 事件順序似乎是 mousedown->mouseup->click
-            @click:day="insertEvent"
-            @mouseup:time="insertEvent" -->
-          <!-- 在同一格子新增多筆事件後從頭刪除似乎有 bug，嘗試以刪除後重更新? -->
+          <!-- @click:day: month 視圖中某天的點擊事件。 -->
+          <!-- @click:time: day 視圖中特定時間的點擊事件。 -->
+          <!-- 事件順序似乎是 mousedown->mouseup->click -->
           <v-calendar
             ref="calendar"
             locale="zh-tw"
@@ -86,9 +83,15 @@
               </div>
             </template>
           </v-calendar>
+          <!-- https://github.com/vuetifyjs/vuetify/issues/10783
+            This is your problem (this.selectedElement = nativeEvent.target),
+            v-menu adds a click listener to its activator that calls stopPropagation(),
+            so the click never bubbles up to the calendar event element.
+            Use nativeEvent.currentTarget and/or :open-on-click="false" -->
           <v-menu
             v-model="selectedOpen"
             :close-on-content-click="false"
+            :open-on-click="false"
             :activator="selectedElement"
             offset-x
           >
@@ -122,7 +125,7 @@ import moment from 'moment';
 
 export default {
   data: () => ({
-    focus: '',
+    focus: moment().format('YYYY-MM-DD'),
     type: 'month',
     typeToLabel: {
       month: 'Month',
@@ -152,11 +155,11 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    eventId: 0,
+    eventId: 1,
   }),
   methods: {
     setToday() {
-      this.focus = '';
+      this.focus = moment().format('YYYY-MM-DD');
     },
     prev() {
       this.$refs.calendar.prev();
@@ -214,6 +217,19 @@ export default {
       } else {
         open();
       }
+
+      // const open = () => {
+      //   this.selectedEvent = event;
+      //   this.selectedElement = nativeEvent.target;
+      //   setTimeout(() => (this.selectedOpen = true), 10);
+      // };
+
+      // if (this.selectedOpen) {
+      //   this.selectedOpen = false;
+      //   setTimeout(open, 10);
+      // } else {
+      //   open();
+      // }
 
       nativeEvent.stopPropagation();
     },
