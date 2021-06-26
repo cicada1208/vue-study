@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-slide-y-transition>
+      <v-btn v-if="!alert" @click="alert = true" dark>
+        reset alert
+      </v-btn>
+    </v-slide-y-transition>
     <v-alert
       v-model="alert"
       type="error"
@@ -8,13 +13,10 @@
       dense
       outlined
       text
-      transition="slide-x-transition"
+      transition="slide-y-reverse-transition"
     >
       alert msg...
     </v-alert>
-    <v-btn v-if="!alert" @click="alert = true" dark>
-      reset alert
-    </v-btn>
   </v-container>
 </template>
 
