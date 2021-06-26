@@ -20,6 +20,7 @@ export default new Vuetify({
         secondary: '#9E9E9E',
         success: '#81C784',
         error: '#E57373',
+        info: '#64B5F6',
         // testcolor: '#B9B7B7', // 自定義顏色，可用於 component color="testcolor"
       },
       dark: {
