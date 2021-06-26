@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="fill-height">
       <v-col>
-        <v-sheet height="64">
+        <v-sheet>
           <v-toolbar flat>
             <v-btn
               outlined
@@ -55,10 +55,9 @@
           <v-calendar
             ref="calendar"
             locale="zh-tw"
-            :month-format="
-              (timestamp) => new Date(timestamp.date).getMonth() + 1 + ' /'
-            "
-            :day-format="(timestamp) => new Date(timestamp.date).getDate()"
+            :month-format="(dtm) => dtm.month + ' /'"
+            :day-format="(dtm) => dtm.day"
+            :interval-format="(dtm) => dtm.time"
             v-model="focus"
             :type="type"
             :events="events"
@@ -96,7 +95,12 @@
             offset-x
           >
             <v-card color="grey lighten-4" min-width="350px" flat>
-              <v-toolbar :color="selectedEvent.color" dark>
+              <v-toolbar
+                :color="selectedEvent.color"
+                dark
+                extended
+                extension-height="10"
+              >
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon>
