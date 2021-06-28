@@ -104,12 +104,12 @@ export default {
       },
       {
         path: '/user/cicada/post/123?search=pig&type=small',
-        text: 'Router',
+        text: 'VueRouter',
         icon: 'mdi-router',
       },
       {
         path: '/user/plumes/post/456',
-        text: 'Router2',
+        text: 'VueRouter2',
         icon: 'mdi-router',
       },
       {

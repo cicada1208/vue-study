@@ -136,7 +136,7 @@
     <h2>v-calendar:</h2>
     <v-calendar-test />
 
-    <h2>v-card & v-toolbar</h2>
+    <h2>v-card & v-toolbar:</h2>
     <v-card-toolbar-test />
   </v-container>
 </template>
