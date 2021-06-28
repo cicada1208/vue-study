@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- position: sticky -->
     <div class="outer">
       <dl>
         <dt>A</dt>
@@ -33,11 +34,7 @@
   </v-container>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style sccop>
+<style lang="scss" scoped>
 .outer {
   height: 200px;
   overflow: auto;

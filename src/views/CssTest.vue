@@ -1,7 +1,9 @@
 <template>
   <v-container>
-    <h2>position</h2>
+    <h2>position: sticky</h2>
     <css-position />
+    <h2>z-index:</h2>
+    <css-zindex />
   </v-container>
 </template>
 
@@ -12,6 +14,11 @@ export default {
       import(
         /* webpackChunkName: "css.position" */
         '@/components/CssPosition.vue'
+      ),
+    CssZindex: () =>
+      import(
+        /* webpackChunkName: "css.zindex" */
+        '@/components/CssZindex.vue'
       ),
   },
 };
