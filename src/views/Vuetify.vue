@@ -136,8 +136,8 @@
     <h2>v-calendar:</h2>
     <v-calendar-test />
 
-    <h2>v-toolbar</h2>
-    <v-toolbar-test />
+    <h2>v-card & v-toolbar</h2>
+    <v-card-toolbar-test />
   </v-container>
 </template>
 
@@ -181,10 +181,10 @@ export default {
         /* webpackChunkName: "vcalendar.test" */
         '@/components/VCalendarTest.vue'
       ),
-    VToolbarTest: () =>
+    VCardToolbarTest: () =>
       import(
-        /* webpackChunkName: "vtoolbar.test" */
-        '@/components/VToolbarTest.vue'
+        /* webpackChunkName: "vcard.toolbar.test" */
+        '@/components/VCardToolbarTest.vue'
       ),
   },
 
