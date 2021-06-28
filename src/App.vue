@@ -127,6 +127,11 @@ export default {
         text: 'Vuetify',
         icon: 'mdi-vuetify',
       },
+      {
+        path: '/css.test',
+        text: 'CssTest',
+        icon: 'mdi-language-css3',
+      },
     ],
   }),
 
