@@ -16,7 +16,7 @@
         </v-btn>
 
         <v-toolbar-title>
-          {{ selection.length ? `${selection.length} selected` : 'Items' }}
+          {{ selection.length ? `${selection.length} selected` : 'v-card' }}
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -52,7 +52,7 @@
           :items="items"
           v-model="selection"
           multiple
-          label="select options"
+          label="select items"
         ></v-select>
       </v-card-text>
 
@@ -102,9 +102,9 @@
           v-if="reveal"
           class="v-card--reveal transition-fast-in-fast-out"
         >
-          <v-card-title>directions</v-card-title>
+          <v-card-title>reveal</v-card-title>
           <v-card-text>
-            select options and test btn.
+            select items and test btn.
           </v-card-text>
           <v-card-actions>
             <v-btn @click="reveal = false" color="orange" text>
@@ -119,7 +119,7 @@
           <v-divider></v-divider>
 
           <v-card-text>
-            another message.
+            expand message.
           </v-card-text>
         </div>
       </v-expand-transition>

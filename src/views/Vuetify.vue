@@ -138,6 +138,9 @@
 
     <h2>v-card & v-toolbar:</h2>
     <v-card-toolbar-test />
+
+    <h2>v-chip:</h2>
+    <v-chip-test />
   </v-container>
 </template>
 
@@ -185,6 +188,11 @@ export default {
       import(
         /* webpackChunkName: "vcard.toolbar.test" */
         '@/components/VCardToolbarTest.vue'
+      ),
+    VChipTest: () =>
+      import(
+        /* webpackChunkName: "vchip.test" */
+        '@/components/VChipTest.vue'
       ),
   },
 
