@@ -4,7 +4,7 @@
       <v-toolbar flat color="transparent">
         <v-toolbar-title>v-chip</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="$refs.search.focus()">
+        <v-btn icon v-if="!allSelected" @click="$refs.search.focus()">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </v-toolbar>
