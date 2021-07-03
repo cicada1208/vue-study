@@ -16,14 +16,37 @@
             :key="selection.text"
             class="shrink"
           >
-            <v-chip
-              :disabled="loading"
-              close
-              @click:close="selected.splice(i, 1)"
+            <v-menu
+              v-model="selection.showMenu"
+              :close-on-content-click="false"
+              bottom
+              right
+              transition="scale-transition"
+              origin="top left"
             >
-              <v-icon left v-text="selection.icon"></v-icon>
-              {{ selection.text }}
-            </v-chip>
+              <template v-slot:activator="{ on }">
+                <v-chip
+                  v-on="on"
+                  :disabled="loading"
+                  close
+                  @click:close="selected.splice(i, 1)"
+                >
+                  <v-icon left v-text="selection.icon"></v-icon>
+                  {{ selection.text }}
+                </v-chip>
+              </template>
+              <v-card>
+                <v-card-actions>
+                  <v-card-text>
+                    {{ selection.text }}
+                  </v-card-text>
+                  <v-spacer></v-spacer>
+                  <v-btn icon @click="selection.showMenu = false">
+                    <v-icon>mdi-close-circle</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-menu>
           </v-col>
 
           <v-col v-if="!allSelected" cols="12">
@@ -70,6 +93,31 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+
+    <v-combobox
+      v-model="chips"
+      :items="comboboxItems"
+      chips
+      clearable
+      label="Your favorite hobbies"
+      multiple
+      prepend-icon="mdi-filter-variant"
+      solo
+    >
+      <template v-slot:selection="{ attrs, item, select, selected }">
+        <v-chip
+          v-bind="attrs"
+          :input-value="selected"
+          close
+          @click="select"
+          @click:close="remove(item)"
+        >
+          <strong>{{ item }}</strong
+          >&nbsp;
+          <span>(interest)</span>
+        </v-chip>
+      </template>
+    </v-combobox>
   </v-container>
 </template>
 
@@ -101,6 +149,13 @@ export default {
     loading: false,
     search: '',
     selected: [],
+    chips: [
+      'Programming',
+      'Playing video games',
+      'Watching movies',
+      'Sleeping',
+    ],
+    comboboxItems: ['Streaming', 'Eating'],
   }),
 
   computed: {
@@ -134,6 +189,10 @@ export default {
         this.selected = [];
         this.loading = false;
       }, 2000);
+    },
+    remove(item) {
+      this.chips.splice(this.chips.indexOf(item), 1);
+      // this.chips = [...this.chips];
     },
   },
 };
