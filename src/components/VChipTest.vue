@@ -1,5 +1,45 @@
 <template>
   <v-container>
+    <v-row justify="space-around" align="center">
+      <v-switch v-model="active" label="Active"></v-switch>
+      <v-chip :input-value="active" filter>
+        I'm v-chip
+      </v-chip>
+
+      <v-chip :input-value="active" filter filter-icon="mdi-plus">
+        I'm v-chip
+      </v-chip>
+
+      <v-chip :input-value="active" filter filter-icon="mdi-minus">
+        I'm v-chip
+      </v-chip>
+    </v-row>
+
+    <v-combobox
+      v-model="comboItemsSelected"
+      :items="comboItems"
+      label="Your favorite hobbies"
+      multiple
+      clearable
+      prepend-icon="mdi-filter-variant"
+      chips
+      solo
+      class="my-4"
+    >
+      <template v-slot:selection="{ attrs, item, select, selected }">
+        <v-chip
+          v-bind="attrs"
+          :input-value="selected"
+          @click="select"
+          close
+          @click:close="remove(item)"
+          color="primary"
+        >
+          <strong>{{ item }}</strong>
+        </v-chip>
+      </template>
+    </v-combobox>
+
     <v-card class="mx-auto" max-width="500">
       <v-toolbar flat color="transparent">
         <v-toolbar-title>v-chip</v-toolbar-title>
@@ -12,7 +52,7 @@
       <v-container class="py-0">
         <v-row align="center" justify="start">
           <v-col
-            v-for="(selection, i) in selected"
+            v-for="(selection, i) in itemsSelected"
             :key="selection.text"
             class="shrink"
           >
@@ -29,7 +69,7 @@
                   v-on="on"
                   :disabled="loading"
                   close
-                  @click:close="selected.splice(i, 1)"
+                  @click:close="itemsSelected.splice(i, 1)"
                 >
                   <v-icon left v-text="selection.icon"></v-icon>
                   {{ selection.text }}
@@ -63,12 +103,12 @@
       </v-container>
 
       <v-list>
-        <template v-for="item in categories">
+        <template v-for="item in itemsFiltered">
           <v-list-item
-            v-if="!selected.includes(item)"
+            v-if="!itemsSelected.includes(item)"
             :key="item.text"
             :disabled="loading"
-            @click="selected.push(item)"
+            @click="itemsSelected.push(item)"
           >
             <v-list-item-avatar>
               <v-icon :disabled="loading" v-text="item.icon"></v-icon>
@@ -83,7 +123,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          :disabled="!selected.length"
+          :disabled="!itemsSelected.length"
           :loading="loading"
           color="purple"
           text
@@ -93,76 +133,52 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-
-    <v-combobox
-      v-model="chips"
-      :items="comboboxItems"
-      chips
-      clearable
-      label="Your favorite hobbies"
-      multiple
-      prepend-icon="mdi-filter-variant"
-      solo
-    >
-      <template v-slot:selection="{ attrs, item, select, selected }">
-        <v-chip
-          v-bind="attrs"
-          :input-value="selected"
-          close
-          @click="select"
-          @click:close="remove(item)"
-        >
-          <strong>{{ item }}</strong
-          >&nbsp;
-          <span>(interest)</span>
-        </v-chip>
-      </template>
-    </v-combobox>
   </v-container>
 </template>
 
 <script>
 export default {
   data: () => ({
+    active: false,
+    comboItems: ['Streaming', 'Eating'],
+    comboItemsSelected: [],
     items: [
       {
         text: 'Nature',
         icon: 'mdi-nature',
+        showMenu: false,
       },
       {
         text: 'Nightlife',
         icon: 'mdi-glass-wine',
+        showMenu: false,
       },
       {
         text: 'November',
         icon: 'mdi-calendar-range',
+        showMenu: false,
       },
       {
         text: 'Portland',
         icon: 'mdi-map-marker',
+        showMenu: false,
       },
       {
         text: 'Biking',
         icon: 'mdi-bike',
+        showMenu: false,
       },
     ],
+    itemsSelected: [],
     loading: false,
     search: '',
-    selected: [],
-    chips: [
-      'Programming',
-      'Playing video games',
-      'Watching movies',
-      'Sleeping',
-    ],
-    comboboxItems: ['Streaming', 'Eating'],
   }),
 
   computed: {
     allSelected() {
-      return this.selected.length === this.items.length;
+      return this.itemsSelected.length === this.items.length;
     },
-    categories() {
+    itemsFiltered() {
       const search = this.search.toLowerCase();
 
       if (!search) return this.items;
@@ -175,24 +191,23 @@ export default {
   },
 
   watch: {
-    selected() {
+    itemsSelected() {
       this.search = '';
     },
   },
 
   methods: {
+    remove(item) {
+      this.comboItemsSelected.splice(this.comboItemsSelected.indexOf(item), 1);
+    },
     next() {
       this.loading = true;
 
       setTimeout(() => {
         this.search = '';
-        this.selected = [];
+        this.itemsSelected = [];
         this.loading = false;
       }, 2000);
-    },
-    remove(item) {
-      this.chips.splice(this.chips.indexOf(item), 1);
-      // this.chips = [...this.chips];
     },
   },
 };
