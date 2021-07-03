@@ -12,7 +12,7 @@
       <v-container class="py-0">
         <v-row align="center" justify="start">
           <v-col
-            v-for="(selection, i) in selections"
+            v-for="(selection, i) in selected"
             :key="selection.text"
             class="shrink"
           >
@@ -38,8 +38,6 @@
           </v-col>
         </v-row>
       </v-container>
-
-      <v-divider v-if="!allSelected"></v-divider>
 
       <v-list>
         <template v-for="item in categories">
@@ -116,18 +114,8 @@ export default {
 
       return this.items.filter((item) => {
         const text = item.text.toLowerCase();
-
         return text.indexOf(search) > -1;
       });
-    },
-    selections() {
-      const selections = [];
-
-      for (const selection of this.selected) {
-        selections.push(selection);
-      }
-
-      return selections;
     },
   },
 
