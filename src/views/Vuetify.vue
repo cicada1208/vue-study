@@ -141,6 +141,9 @@
 
     <h2>v-chip:</h2>
     <v-chip-test />
+
+    <h2>v-dialog:</h2>
+    <v-dialog-test />
   </v-container>
 </template>
 
@@ -193,6 +196,11 @@ export default {
       import(
         /* webpackChunkName: "vchip.test" */
         '@/components/VChipTest.vue'
+      ),
+    VDialogTest: () =>
+      import(
+        /* webpackChunkName: "vdialog.test" */
+        '@/components/VDialogTest.vue'
       ),
   },
 
