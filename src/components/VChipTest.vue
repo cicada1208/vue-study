@@ -24,7 +24,8 @@
       prepend-icon="mdi-filter-variant"
       chips
       solo
-      class="my-4"
+      class="mt-4 mx-auto"
+      style="width: 500px"
     >
       <template v-slot:selection="{ attrs, item, select, selected }">
         <v-chip

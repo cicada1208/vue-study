@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-if="loading">
-      Loading...
-    </div>
+    <loading-dialog :loading="loading" />
 
     <div v-if="error">
       {{ error }}
@@ -30,6 +28,14 @@ import apiUtil from '../libs/api.util.js';
 export default {
   name: 'ApiQuery',
 
+  components: {
+    LoadingDialog: () =>
+      import(
+        /* webpackChunkName: "loading.dialog" */
+        '@/components/LoadingDialog.vue'
+      ),
+  },
+
   data() {
     return {
       loading: false,
@@ -42,7 +48,7 @@ export default {
     async fetchAlbum() {
       this.error = this.content = null;
       this.loading = true;
-      const url = 'https://itunes.apple.com/search?term=twice&limit=20';
+      const url = 'https://itunes.apple.com/search?term=twice&limit=100';
       // const cb = (err, data) => {
       //   this.loading = false;
       //   if (err) this.error = err.toString();

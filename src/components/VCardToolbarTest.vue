@@ -3,9 +3,9 @@
     <v-card :loading="loading" max-width="500" class="mx-auto">
       <template slot="progress">
         <v-progress-linear
+          indeterminate
           color="primary"
           height="4"
-          indeterminate
         ></v-progress-linear>
       </template>
 
