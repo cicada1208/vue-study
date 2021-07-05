@@ -144,6 +144,9 @@
 
     <h2>v-dialog:</h2>
     <v-dialog-test />
+
+    <h2>v-expansion-panel:</h2>
+    <v-expansion-panel-test />
   </v-container>
 </template>
 
@@ -201,6 +204,11 @@ export default {
       import(
         /* webpackChunkName: "vdialog.test" */
         '@/components/VDialogTest.vue'
+      ),
+    VExpansionPanelTest: () =>
+      import(
+        /* webpackChunkName: "vexpansion.panel.test" */
+        '@/components/VExpansionPanelTest.vue'
       ),
   },
 
