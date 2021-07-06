@@ -1,8 +1,17 @@
 <template>
   <v-container>
-    <v-expansion-panels accordion>
-      <v-expansion-panel v-for="(item, i) in 2" :key="i">
-        <v-expansion-panel-header>Item</v-expansion-panel-header>
+    <div class="align-center d-flex pb-2">
+      <v-btn @click="expandAll">
+        Expand All
+      </v-btn>
+      <v-btn @click="expandNone">
+        Expand None
+      </v-btn>
+      <div>Expand Idxes:{{ expandIdxes }}</div>
+    </div>
+    <v-expansion-panels v-model="expandIdxes" multiple accordion focusable>
+      <v-expansion-panel v-for="(panel, i) in panelCount" :key="i">
+        <v-expansion-panel-header>{{ panel }}</v-expansion-panel-header>
         <v-expansion-panel-content>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -15,5 +24,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      expandIdxes: [],
+      panelCount: 2,
+    };
+  },
+  methods: {
+    expandAll() {
+      this.expandIdxes = [...Array(this.panelCount).keys()];
+    },
+    expandNone() {
+      this.expandIdxes = [];
+    },
+  },
+};
 </script>
