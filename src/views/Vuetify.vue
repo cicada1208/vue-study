@@ -147,6 +147,9 @@
 
     <h2>v-expansion-panel:</h2>
     <v-expansion-panel-test />
+
+    <h2>v-autocomplete:</h2>
+    <v-autocomplete-test />
   </v-container>
 </template>
 
@@ -209,6 +212,11 @@ export default {
       import(
         /* webpackChunkName: "vexpansion.panel.test" */
         '@/components/VExpansionPanelTest.vue'
+      ),
+    VAutocompleteTest: () =>
+      import(
+        /* webpackChunkName: "vautocomplete.test" */
+        '@/components/VAutocompleteTest.vue'
       ),
   },
 

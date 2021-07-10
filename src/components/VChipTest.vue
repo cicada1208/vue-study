@@ -20,10 +20,11 @@
       :items="comboItems"
       label="Your favorite hobbies"
       multiple
+      auto-select-first
       clearable
-      prepend-icon="mdi-filter-variant"
       chips
       solo
+      prepend-icon="mdi-filter-variant"
       class="mt-4 mx-auto"
       style="width: 500px"
     >
