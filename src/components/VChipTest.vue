@@ -16,9 +16,9 @@
     </v-row>
 
     <v-combobox
+      label="Your favorite hobbies"
       v-model="comboItemsSelected"
       :items="comboItems"
-      label="Your favorite hobbies"
       multiple
       auto-select-first
       clearable
