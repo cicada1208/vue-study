@@ -55,6 +55,13 @@
           </v-list-item-content>
         </template>
       </template>
+      <template v-slot:no-data>
+        <v-list-item>
+          <v-list-item-title>
+            查無資料
+          </v-list-item-title>
+        </v-list-item>
+      </template>
     </v-autocomplete>
 
     <v-card color="red lighten-2" dark>
@@ -66,7 +73,7 @@
           label="Public APIs"
           placeholder="Start typing to Search"
           v-model="apiSelected"
-          :items="apiRst.result.entries"
+          :items="apiRst.content.entries"
           item-text="Description"
           item-value="API"
           return-object
@@ -120,7 +127,7 @@ export default {
     ],
     aItemsSelected: [],
 
-    apiRst: { loading: false, result: {}, error: '' },
+    apiRst: { loading: false, content: {}, error: '' },
     apiSelected: null,
     apiSearch: null,
   }),
@@ -136,7 +143,7 @@ export default {
       return textOne.includes(searchText) || textTwo.includes(searchText);
     },
     removeAItem(item) {
-      this.aItemsSelected.splice(this.aItemsSelected.indexOf(item), 1);
+      this.aItemsSelected.splice(this.aItemsSelected.indexOf(item.id), 1);
     },
   },
 
@@ -145,7 +152,7 @@ export default {
       console.log('apiSearch:', text);
 
       // Items have already been loaded
-      if (this.apiRst.result.entries) return;
+      if (this.apiRst.content.entries) return;
 
       // Items have already been requested
       if (this.apiRst.loading) return;

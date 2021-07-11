@@ -6,7 +6,7 @@
       {{ albumRst.error }}
     </div>
 
-    <div v-for="(album, index) in albumRst.result.results" :key="index">
+    <div v-for="(album, index) in albumRst.content.results" :key="index">
       <div class="album">
         <img
           class="album-img"
@@ -38,7 +38,7 @@ export default {
 
   data() {
     return {
-      albumRst: { loading: false, result: {}, error: '' },
+      albumRst: { loading: false, content: {}, error: '' },
     };
   },
 

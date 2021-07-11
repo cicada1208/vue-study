@@ -12,7 +12,7 @@ function axiosRs(
   }
 ) {
   rs.loading = true;
-  rs.result = {};
+  rs.content = {};
   rs.error = '';
 
   axios({
@@ -25,9 +25,9 @@ function axiosRs(
     },
     ...restOption,
   })
-    .then((response) => (rs.result = response.data))
+    .then((response) => (rs.content = response.data))
     .catch((error) => {
-      if (error.response) rs.result = error.response.data;
+      if (error.response) rs.content = error.response.data;
       else rs.error = error.message;
     })
     .finally(() => (rs.loading = false));
