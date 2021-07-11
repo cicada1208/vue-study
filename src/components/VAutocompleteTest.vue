@@ -35,7 +35,7 @@
           :input-value="selected"
           @click="select"
           close
-          @click:close="remove(item)"
+          @click:close="removeAItem(item)"
           color="primary"
         >
           {{ item.name }}
@@ -62,46 +62,40 @@
         Search for Public APIs
       </v-card-title>
       <v-card-text>
-        Explore hundreds of free API's ready for consumption! For more
-        information visit
-        <a
-          class="grey--text text--lighten-3"
-          href="https://github.com/toddmotto/public-apis"
-          target="_blank"
-          >the GitHub repository</a
-        >.
-      </v-card-text>
-      <v-card-text>
         <v-autocomplete
           label="Public APIs"
           placeholder="Start typing to Search"
-          v-model="model"
-          :items="items"
+          v-model="apiSelected"
+          :items="apiRst.result.entries"
           item-text="Description"
           item-value="API"
-          :loading="isLoading"
-          :search-input.sync="search"
-          color="white"
+          return-object
+          :search-input.sync="apiSearch"
+          :loading="apiRst.loading"
           hide-no-data
           hide-selected
           prepend-icon="mdi-database-search"
-          return-object
+          color="white"
         ></v-autocomplete>
       </v-card-text>
       <v-divider></v-divider>
       <v-expand-transition>
-        <v-list v-if="model" class="red lighten-3">
-          <v-list-item v-for="(field, i) in fields" :key="i">
+        <v-list v-if="apiSelected" class="red lighten-3">
+          <v-list-item v-for="(value, key, i) in apiSelected" :key="i">
             <v-list-item-content>
-              <v-list-item-title v-text="field.value"></v-list-item-title>
-              <v-list-item-subtitle v-text="field.key"></v-list-item-subtitle>
+              <v-list-item-title v-text="value"></v-list-item-title>
+              <v-list-item-subtitle v-text="key"></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-expand-transition>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :disabled="!model" color="grey darken-3" @click="model = null">
+        <v-btn
+          :disabled="!apiSelected"
+          @click="apiSelected = null"
+          color="grey darken-3"
+        >
           Clear
           <v-icon right>
             mdi-close-circle
@@ -126,35 +120,10 @@ export default {
     ],
     aItemsSelected: [],
 
-    descriptionLimit: 60,
-    entries: [],
-    isLoading: false,
-    model: null,
-    search: null,
+    apiRst: { loading: false, result: {}, error: '' },
+    apiSelected: null,
+    apiSearch: null,
   }),
-
-  computed: {
-    fields() {
-      if (!this.model) return [];
-
-      return Object.keys(this.model).map((key) => {
-        return {
-          key,
-          value: this.model[key] || 'n/a',
-        };
-      });
-    },
-    items() {
-      return this.entries.map((entry) => {
-        const Description =
-          entry.Description.length > this.descriptionLimit
-            ? entry.Description.slice(0, this.descriptionLimit) + '...'
-            : entry.Description;
-
-        return Object.assign({}, entry, { Description });
-      });
-    },
-  },
 
   methods: {
     nameAbbrFilter(item, queryText, itemText) {
@@ -166,28 +135,26 @@ export default {
       const searchText = queryText.toLowerCase();
       return textOne.includes(searchText) || textTwo.includes(searchText);
     },
-    remove(item) {
+    removeAItem(item) {
       this.aItemsSelected.splice(this.aItemsSelected.indexOf(item), 1);
     },
   },
 
   watch: {
-    async search(text) {
-      console.log('search:', text);
+    apiSearch(text) {
+      console.log('apiSearch:', text);
 
       // Items have already been loaded
-      if (this.items.length > 0) return;
+      if (this.apiRst.result.entries) return;
 
       // Items have already been requested
-      if (this.isLoading) return;
-
-      this.isLoading = true;
+      if (this.apiRst.loading) return;
 
       // Lazily load input items
-      const url = 'https://api.publicapis.org/entries';
-      const data = await apiUtil.axiosPs({ url, method: 'GET' });
-      this.entries = data.entries;
-      this.isLoading = false;
+      apiUtil.axiosRs(this.apiRst, {
+        url: 'https://api.publicapis.org/entries',
+        method: 'GET',
+      });
     },
   },
 };

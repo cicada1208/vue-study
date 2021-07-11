@@ -1,8 +1,41 @@
 import axios from 'axios';
 
+function axiosRs(
+  rs,
+  {
+    url,
+    params, // url parameters
+    data, // request body
+    method = 'POST',
+    headers,
+    ...restOption
+  }
+) {
+  rs.loading = true;
+  rs.result = {};
+  rs.error = '';
+
+  axios({
+    url,
+    params,
+    data,
+    method,
+    headers: headers || {
+      'content-type': 'application/json',
+    },
+    ...restOption,
+  })
+    .then((response) => (rs.result = response.data))
+    .catch((error) => {
+      if (error.response) rs.result = error.response.data;
+      else rs.error = error.message;
+    })
+    .finally(() => (rs.loading = false));
+}
+
 function axiosPs({
   url,
-  params, // URL parameters
+  params, // url parameters
   data, // request body
   method = 'POST',
   headers,
@@ -20,9 +53,8 @@ function axiosPs({
   })
     .then((response) => response.data)
     .catch((error) => {
-      if (error.response) {
-        return error.response.data;
-      } else return error.message;
+      if (error.response) return error.response.data;
+      else return error.message;
     });
 }
 
@@ -54,6 +86,7 @@ function axiosCb({
 }
 
 export default {
+  axiosRs,
   axiosPs,
   axiosCb,
 };

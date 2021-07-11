@@ -1,12 +1,12 @@
 <template>
   <div>
-    <loading-dialog :loading="loading" />
+    <loading-dialog :loading="albumRst.loading" />
 
-    <div v-if="error">
-      {{ error }}
+    <div v-if="albumRst.error">
+      {{ albumRst.error }}
     </div>
 
-    <div v-for="(album, index) in content" :key="index">
+    <div v-for="(album, index) in albumRst.result.results" :key="index">
       <div class="album">
         <img
           class="album-img"
@@ -38,26 +38,25 @@ export default {
 
   data() {
     return {
-      loading: false,
-      error: null,
-      content: null,
+      albumRst: { loading: false, result: {}, error: '' },
     };
   },
 
   methods: {
     async fetchAlbum() {
-      this.error = this.content = null;
-      this.loading = true;
-      const url = 'https://itunes.apple.com/search?term=twice&limit=100';
-      // const cb = (err, data) => {
-      //   this.loading = false;
-      //   if (err) this.error = err.toString();
-      //   else this.content = data.results;
-      // };
-      // apiUtil.axiosCb({ cb, url, method: 'GET' });
-      const data = await apiUtil.axiosPs({ url, method: 'GET' });
-      this.content = data.results;
-      this.loading = false;
+      // this.error = this.content = null;
+      // this.loading = true;
+      const url = 'https://itunes.apple.com/search?term=twice&limit=150';
+      // // const cb = (err, data) => {
+      // //   this.loading = false;
+      // //   if (err) this.error = err.toString();
+      // //   else this.content = data.results;
+      // // };
+      // // apiUtil.axiosCb({ cb, url, method: 'GET' });
+      // const data = await apiUtil.axiosPs({ url, method: 'GET' });
+      // this.content = data.results;
+      // this.loading = false;
+      apiUtil.axiosRs(this.albumRst, { url, method: 'GET' });
     },
     viewAlbum(link) {
       window.open(link);
@@ -76,8 +75,8 @@ export default {
     // 如果路由有變化，會再次執行該方法 fetchAlbum
     $route: 'fetchAlbum',
     // 如果 data property loading 有變化，會再次執行該方法
-    loading: function(newVal, oldVal) {
-      console.log('loading new: %s, old: %s', newVal, oldVal);
+    'albumRst.loading': function(newVal, oldVal) {
+      console.log('albumRst.loading new: %s, old: %s', newVal, oldVal);
     },
   },
 };
