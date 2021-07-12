@@ -15,7 +15,6 @@
       outlined
     ></v-autocomplete> -->
     <v-autocomplete
-      label="v-autocomplete"
       v-model="aItemsSelected"
       :items="aItems"
       item-text="name"
@@ -26,6 +25,11 @@
       clearable
       chips
       deletable-chips
+      :label="`State — ${isEditing ? 'Editable' : 'Readonly'}`"
+      :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
+      persistent-hint
+      :disabled="!isEditing"
+      :readonly="!isEditing"
       outlined
     >
       <!-- v-slot:selection: 自定義 selection 樣式 -->
@@ -37,6 +41,7 @@
           close
           @click:close="removeAItem(item)"
           color="primary"
+          :disabled="!isEditing"
         >
           {{ item.name }}
         </v-chip>
@@ -61,6 +66,16 @@
             查無資料
           </v-list-item-title>
         </v-list-item>
+      </template>
+      <template v-slot:append-outer>
+        <v-slide-x-reverse-transition mode="out-in">
+          <v-icon
+            :key="`icon-${isEditing}`"
+            @click="isEditing = !isEditing"
+            :color="isEditing ? 'success' : 'info'"
+            v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
+          ></v-icon>
+        </v-slide-x-reverse-transition>
       </template>
     </v-autocomplete>
 
@@ -126,6 +141,7 @@ export default {
       { name: 'New York', abbr: 'NY', id: 3 },
     ],
     aItemsSelected: [],
+    isEditing: false,
 
     apiRst: { loading: false, content: {}, error: '' },
     apiSelected: null,
