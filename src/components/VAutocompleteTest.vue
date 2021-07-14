@@ -33,13 +33,14 @@
       outlined
     >
       <!-- v-slot:selection: 自定義 selection 樣式 -->
-      <template v-slot:selection="{ attrs, item, select, selected }">
+      <template v-slot:selection="{ attrs, item, select, selected, parent }">
+        <!-- @click:close="removeAItem(item)" -->
         <v-chip
           v-bind="attrs"
           :input-value="selected"
           @click="select"
           close
-          @click:close="removeAItem(item)"
+          @click:close="parent.selectItem(item)"
           color="primary"
           :disabled="!isEditing"
         >
