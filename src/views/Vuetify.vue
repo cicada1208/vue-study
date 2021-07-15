@@ -150,6 +150,9 @@
 
     <h2>v-autocomplete:</h2>
     <v-autocomplete-test />
+
+    <h2>v-combobox:</h2>
+    <v-combobox-test />
   </v-container>
 </template>
 
@@ -217,6 +220,12 @@ export default {
       import(
         /* webpackChunkName: "vautocomplete.test" */
         '@/components/VAutocompleteTest.vue'
+      ),
+
+    VComboboxTest: () =>
+      import(
+        /* webpackChunkName: "vcombobox.test" */
+        '@/components/VComboboxTest.vue'
       ),
   },
 
