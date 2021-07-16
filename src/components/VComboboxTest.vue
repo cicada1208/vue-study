@@ -5,10 +5,10 @@
       v-model="model"
       :items="items"
       :search-input.sync="search"
+      :filter="filter"
       :hide-no-data="!search"
       hide-selected
       multiple
-      :filter="filter"
       small-chips
       solo
     >
@@ -24,8 +24,8 @@
         <v-chip
           v-if="item === Object(item)"
           v-bind="attrs"
-          :color="`${item.color} lighten-3`"
           :input-value="selected"
+          :color="`${item.color} lighten-3`"
           label
           small
         >
@@ -41,12 +41,12 @@
         <v-text-field
           v-if="editing === item"
           v-model="editing.text"
-          autofocus
-          flat
-          background-color="transparent"
-          hide-details
-          solo
           @keyup.enter="edit(index, item)"
+          autofocus
+          hide-details
+          background-color="transparent"
+          flat
+          solo
         ></v-text-field>
         <v-chip v-else :color="`${item.color} lighten-3`" dark label small>
           {{ item.text }}
