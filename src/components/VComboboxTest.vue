@@ -1,8 +1,47 @@
 <template>
   <v-container>
+    <!-- 允許輸入不存在於 items 的項目 -->
+    <v-combobox
+      label="Your favorite hobbies"
+      v-model="comboItemsSelected"
+      :items="comboItems"
+      :search-input.sync="comboSearch"
+      multiple
+      hide-selected
+      clearable
+      chips
+      solo
+      prepend-icon="mdi-filter-variant"
+      class="mx-auto"
+    >
+      <template v-slot:selection="{ attrs, item, select, selected, parent }">
+        <!-- @click:close="remove(item)" -->
+        <v-chip
+          v-bind="attrs"
+          :input-value="selected"
+          @click="select"
+          close
+          @click:close="parent.selectItem(item)"
+          color="primary"
+        >
+          <strong>{{ item }}</strong>
+        </v-chip>
+      </template>
+      <template v-slot:no-data>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>
+              No results matching "<strong>{{ comboSearch }}</strong
+              >". Press <kbd>enter</kbd> to create a new one
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+    </v-combobox>
+
     <v-combobox
       label="Search for an option"
-      v-model="model"
+      v-model="itemsSelected"
       :items="items"
       :search-input.sync="search"
       :filter="filter"
@@ -26,6 +65,7 @@
           v-bind="attrs"
           :input-value="selected"
           :color="`${item.color} lighten-3`"
+          dark
           label
           small
         >
@@ -37,11 +77,11 @@
           </v-icon>
         </v-chip>
       </template>
-      <template v-slot:item="{ index, item }">
+      <template v-slot:item="{ item }">
         <v-text-field
-          v-if="editing === item"
-          v-model="editing.text"
-          @keyup.enter="edit(index, item)"
+          v-if="itemEditing === item"
+          v-model="itemEditing.text"
+          @keyup.enter="edit(item)"
           autofocus
           hide-details
           background-color="transparent"
@@ -53,8 +93,10 @@
         </v-chip>
         <v-spacer></v-spacer>
         <v-list-item-action @click.stop>
-          <v-btn icon @click.stop.prevent="edit(index, item)">
-            <v-icon>{{ editing !== item ? 'mdi-pencil' : 'mdi-check' }}</v-icon>
+          <v-btn icon @click.stop.prevent="edit(item)">
+            <v-icon>{{
+              itemEditing !== item ? 'mdi-pencil' : 'mdi-check'
+            }}</v-icon>
           </v-btn>
         </v-list-item-action>
       </template>
@@ -65,11 +107,11 @@
 <script>
 export default {
   data: () => ({
-    activator: null,
-    attach: null,
+    comboItems: ['Streaming', 'Eating'],
+    comboItemsSelected: [],
+    comboSearch: null,
+
     colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
-    editing: null,
-    editingIndex: -1,
     items: [
       { header: 'Select an option or create one' },
       {
@@ -81,55 +123,32 @@ export default {
         color: 'red',
       },
     ],
-    nonce: 1,
-    menu: false,
-    model: [
+    itemsSelected: [
       {
         text: 'Foo',
         color: 'blue',
       },
     ],
-    x: 0,
     search: null,
-    y: 0,
+    itemEditing: null,
+    nonce: 1,
   }),
 
-  watch: {
-    model(val, prev) {
-      if (val.length === prev.length) return;
-
-      this.model = val.map((v) => {
-        if (typeof v === 'string') {
-          v = {
-            text: v,
-            color: this.colors[this.nonce - 1],
-          };
-
-          this.items.push(v);
-
-          this.nonce++;
-        }
-
-        return v;
-      });
-    },
-  },
-
   methods: {
-    edit(index, item) {
-      if (!this.editing) {
-        this.editing = item;
-        this.editingIndex = index;
+    remove(item) {
+      this.comboItemsSelected.splice(this.comboItemsSelected.indexOf(item), 1);
+    },
+    edit(item) {
+      if (!this.itemEditing) {
+        this.itemEditing = item;
       } else {
-        this.editing = null;
-        this.editingIndex = -1;
+        this.itemEditing = null;
       }
     },
     filter(item, queryText, itemText) {
       if (item.header) return false;
 
       const hasValue = (val) => (val != null ? val : '');
-
       const text = hasValue(itemText);
       const query = hasValue(queryText);
 
@@ -139,6 +158,26 @@ export default {
           .toLowerCase()
           .indexOf(query.toString().toLowerCase()) > -1
       );
+    },
+  },
+
+  watch: {
+    itemsSelected(val, prev) {
+      if (val.length === prev.length) return;
+
+      this.itemsSelected = val.map((v) => {
+        if (typeof v === 'string') {
+          v = {
+            text: v,
+            color: this.colors[this.nonce - 1],
+          };
+
+          this.items.push(v);
+          this.nonce++;
+        }
+
+        return v;
+      });
     },
   },
 };

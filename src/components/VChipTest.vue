@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around" align="center">
+    <v-row justify="space-around" align="center" class="mb-1">
       <v-switch v-model="active" label="Active"></v-switch>
       <v-chip :input-value="active" filter>
         I'm v-chip
@@ -14,46 +14,6 @@
         I'm v-chip
       </v-chip>
     </v-row>
-
-    <!-- 允許輸入不存在於 items 的項目 -->
-    <v-combobox
-      label="Your favorite hobbies"
-      v-model="comboItemsSelected"
-      :items="comboItems"
-      :search-input.sync="comboSearch"
-      multiple
-      hide-selected
-      clearable
-      chips
-      solo
-      prepend-icon="mdi-filter-variant"
-      class="mt-4 mx-auto"
-      style="width: 500px"
-    >
-      <template v-slot:selection="{ attrs, item, select, selected, parent }">
-        <!-- @click:close="remove(item)" -->
-        <v-chip
-          v-bind="attrs"
-          :input-value="selected"
-          @click="select"
-          close
-          @click:close="parent.selectItem(item)"
-          color="primary"
-        >
-          <strong>{{ item }}</strong>
-        </v-chip>
-      </template>
-      <template v-slot:no-data>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              No results matching "<strong>{{ comboSearch }}</strong
-              >". Press <kbd>enter</kbd> to create a new one
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
-    </v-combobox>
 
     <v-card class="mx-auto" max-width="500">
       <v-toolbar flat color="transparent">
@@ -155,9 +115,7 @@
 export default {
   data: () => ({
     active: false,
-    comboItems: ['Streaming', 'Eating'],
-    comboItemsSelected: [],
-    comboSearch: null,
+
     items: [
       {
         text: 'Nature',
@@ -213,9 +171,6 @@ export default {
   },
 
   methods: {
-    remove(item) {
-      this.comboItemsSelected.splice(this.comboItemsSelected.indexOf(item), 1);
-    },
     next() {
       this.loading = true;
 
