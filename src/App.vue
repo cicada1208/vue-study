@@ -65,8 +65,6 @@
       </v-fade-transition> -->
     </v-main>
 
-    <v-bottom-navigation app hide-on-scroll> </v-bottom-navigation>
-
     <!-- 滾動指令 $vuetify.goTo:
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
     <v-btn
@@ -76,6 +74,8 @@
       bottom
       right
       fixed
+      small
+      style="opacity:80%"
     >
       <v-icon>
         mdi-chevron-up

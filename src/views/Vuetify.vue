@@ -153,6 +153,9 @@
 
     <h2>v-combobox:</h2>
     <v-combobox-test />
+
+    <h2>v-file-input:</h2>
+    <v-file-input-test />
   </v-container>
 </template>
 
@@ -226,6 +229,11 @@ export default {
       import(
         /* webpackChunkName: "vcombobox.test" */
         '@/components/VComboboxTest.vue'
+      ),
+    VFileInputTest: () =>
+      import(
+        /* webpackChunkName: "vfile.input.test" */
+        '@/components/VFileInputTest.vue'
       ),
   },
 
