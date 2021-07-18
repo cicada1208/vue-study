@@ -6,7 +6,7 @@
       :items="aItems"
       item-text="name"
       item-value="id"
-      :filter="nameAbbrFilter"
+      :filter="filterNameAbbr"
       multiple
       auto-select-first
       clearable
@@ -15,21 +15,21 @@
       outlined
     ></v-autocomplete> -->
     <v-autocomplete
-      v-model="aItemsSelected"
-      :items="aItems"
-      item-text="name"
-      item-value="id"
-      :filter="nameAbbrFilter"
-      multiple
-      auto-select-first
-      clearable
-      chips
-      deletable-chips
       :label="`State — ${isEditing ? 'Editable' : 'Readonly'}`"
       :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
       persistent-hint
       :disabled="!isEditing"
       :readonly="!isEditing"
+      v-model="aItemsSelected"
+      :items="aItems"
+      item-text="name"
+      item-value="id"
+      :filter="filterNameAbbr"
+      multiple
+      auto-select-first
+      clearable
+      chips
+      deletable-chips
       outlined
     >
       <!-- v-slot:selection: 自定義 selection 樣式 -->
@@ -95,8 +95,8 @@
           return-object
           :search-input.sync="apiSearch"
           :loading="apiRst.loading"
-          hide-no-data
           hide-selected
+          hide-no-data
           prepend-icon="mdi-database-search"
           color="white"
         ></v-autocomplete>
@@ -135,7 +135,7 @@ export default {
   data: () => ({
     aItems: [
       { header: 'Group 1' },
-      { name: 'Florida', abbr: 'FL', id: 1 },
+      { name: 'Florida', abbr: 'FL', id: 1, disabled: true },
       { name: 'Georgia', abbr: 'GA', id: 2 },
       { divider: true },
       { header: 'Group 2' },
@@ -150,7 +150,7 @@ export default {
   }),
 
   methods: {
-    nameAbbrFilter(item, queryText, itemText) {
+    filterNameAbbr(item, queryText, itemText) {
       // 自定義篩選：加入縮寫的篩選
       console.log('itemText:', itemText);
       if (itemText === '') return;
@@ -160,6 +160,7 @@ export default {
       return textOne.includes(searchText) || textTwo.includes(searchText);
     },
     removeAItem(item) {
+      // aItemsSelected is [1,2, ...]
       this.aItemsSelected.splice(this.aItemsSelected.indexOf(item.id), 1);
     },
   },

@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <!-- 允許輸入不存在於 items 的項目 -->
+    <!-- v-combobox 允許輸入不存在於 items 的項目 -->
     <v-combobox
-      label="Your favorite hobbies"
+      label="Favorite hobbies"
       v-model="comboItemsSelected"
       :items="comboItems"
       :search-input.sync="comboSearch"
@@ -10,12 +10,9 @@
       hide-selected
       clearable
       chips
-      solo
-      prepend-icon="mdi-filter-variant"
-      class="mx-auto"
     >
       <template v-slot:selection="{ attrs, item, select, selected, parent }">
-        <!-- @click:close="remove(item)" -->
+        <!-- @click:close="removeComboItem(item)" -->
         <v-chip
           v-bind="attrs"
           :input-value="selected"
@@ -40,14 +37,13 @@
     </v-combobox>
 
     <v-combobox
-      label="Search for an option"
+      label="Search for options"
       v-model="itemsSelected"
       :items="items"
       :search-input.sync="search"
-      :filter="filter"
       :hide-no-data="!search"
-      hide-selected
       multiple
+      hide-selected
       small-chips
       solo
     >
@@ -81,7 +77,7 @@
         <v-text-field
           v-if="itemEditing === item"
           v-model="itemEditing.text"
-          @keyup.enter="edit(item)"
+          @keyup.enter="editItem(item)"
           autofocus
           hide-details
           background-color="transparent"
@@ -93,7 +89,7 @@
         </v-chip>
         <v-spacer></v-spacer>
         <v-list-item-action @click.stop>
-          <v-btn icon @click.stop.prevent="edit(item)">
+          <v-btn icon @click.stop.prevent="editItem(item)">
             <v-icon>{{
               itemEditing !== item ? 'mdi-pencil' : 'mdi-check'
             }}</v-icon>
@@ -135,29 +131,12 @@ export default {
   }),
 
   methods: {
-    remove(item) {
+    removeComboItem(item) {
       this.comboItemsSelected.splice(this.comboItemsSelected.indexOf(item), 1);
     },
-    edit(item) {
-      if (!this.itemEditing) {
-        this.itemEditing = item;
-      } else {
-        this.itemEditing = null;
-      }
-    },
-    filter(item, queryText, itemText) {
-      if (item.header) return false;
-
-      const hasValue = (val) => (val != null ? val : '');
-      const text = hasValue(itemText);
-      const query = hasValue(queryText);
-
-      return (
-        text
-          .toString()
-          .toLowerCase()
-          .indexOf(query.toString().toLowerCase()) > -1
-      );
+    editItem(item) {
+      if (!this.itemEditing) this.itemEditing = item;
+      else this.itemEditing = null;
     },
   },
 
