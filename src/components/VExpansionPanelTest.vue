@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="align-center d-flex pb-2">
+    <v-card-actions>
       <v-btn @click="expandAll">
         Expand All
       </v-btn>
@@ -8,7 +8,7 @@
         Expand None
       </v-btn>
       <div>Expand Idxes:{{ expandIdxes }}</div>
-    </div>
+    </v-card-actions>
 
     <v-expansion-panels v-model="expandIdxes" multiple accordion focusable>
       <v-expansion-panel>

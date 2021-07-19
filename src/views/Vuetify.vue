@@ -156,6 +156,9 @@
 
     <h2>v-file-input:</h2>
     <v-file-input-test />
+
+    <h2>v-form:</h2>
+    <v-form-test />
   </v-container>
 </template>
 
@@ -234,6 +237,11 @@ export default {
       import(
         /* webpackChunkName: "vfile.input.test" */
         '@/components/VFileInputTest.vue'
+      ),
+    VFormTest: () =>
+      import(
+        /* webpackChunkName: "vform.test" */
+        '@/components/VFormTest.vue'
       ),
   },
 

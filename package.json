@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
+    "lodash": "^4.17.21",
     "minify-css-string": "^1.0.0",
     "moment": "^2.29.1",
     "moment-taiwan": "0.0.4",

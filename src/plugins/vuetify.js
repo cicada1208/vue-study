@@ -18,9 +18,11 @@ export default new Vuetify({
       light: {
         primary: '#90A4AE',
         secondary: '#9E9E9E',
+        accent: '#B0BEC5',
         success: '#81C784',
         error: '#E57373',
         info: '#64B5F6',
+        warning: '#FFB74D',
         // testcolor: '#B9B7B7', // 自定義顏色，可用於 component color="testcolor"
       },
       dark: {
