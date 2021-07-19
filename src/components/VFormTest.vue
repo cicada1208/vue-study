@@ -2,7 +2,7 @@
   <v-container>
     <v-form v-model="valid" ref="form">
       <v-row>
-        <v-col cols="12" md="4">
+        <v-col cols="12" md="3">
           <v-text-field
             label="First name"
             v-model="firstName"
@@ -10,7 +10,7 @@
           ></v-text-field>
         </v-col>
 
-        <v-col cols="12" md="4">
+        <v-col cols="12" md="3">
           <v-text-field
             label="Last name"
             v-model="lastName"
@@ -18,12 +18,26 @@
           ></v-text-field>
         </v-col>
 
-        <v-col cols="12" md="4">
+        <v-col cols="12" md="3">
           <v-text-field
             label="E-mail"
             v-model="email"
             :rules="emailRules"
           ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" md="3">
+          <v-file-input
+            label="File input"
+            placeholder="Pick an image"
+            v-model="files"
+            accept="image/*"
+            :rules="fileRules"
+            multiple
+            counter
+            show-size
+            chips
+          ></v-file-input>
         </v-col>
       </v-row>
       <v-card-actions>
@@ -49,15 +63,28 @@ export default {
       (v) => !!v || 'E-mail is required',
       (v) => /.+@.+/.test(v) || 'E-mail must be valid',
     ],
+    files: [],
+    fileRules: [
+      (v) => {
+        // when multiple: param v is an array of files
+        // when not multiple: param v is a file
+        // return false or error message 表示為錯誤狀態
+        let result =
+          !v.length ||
+          !v.filter((f) => f.size > 2000000).length ||
+          'Each size should be less than 2 MB!';
+        return result;
+      },
+    ],
   }),
   methods: {
     save() {
       console.log('valid:', this.valid);
     },
     validate() {
-      // 頁面載入時雖然會執行 nameRules、emailRules 驗證，
-      // 但需 focus 過才會顯示錯誤訊息，
-      // 執行 validate() 可顯示錯誤訊息。
+      // 頁面載入時雖會執行 nameRules、emailRules 驗證，
+      // 但需 focus 過欄位才會顯示錯誤訊息，
+      // 執行 validate() 可驗證並顯示所有欄位錯誤訊息。
       this.$refs.form.validate();
     },
   },
