@@ -19,11 +19,11 @@
         </v-col>
 
         <v-col cols="12" md="3">
-          <v-text-field
-            label="E-mail"
-            v-model="email"
-            :rules="emailRules"
-          ></v-text-field>
+          <v-text-field label="E-mail" v-model="email" :rules="emailRules">
+            <v-icon slot="prepend" color="primary">
+              mdi-email
+            </v-icon>
+          </v-text-field>
         </v-col>
 
         <v-col cols="12" md="3">
@@ -61,7 +61,10 @@ export default {
     email: '',
     emailRules: [
       (v) => !!v || 'E-mail is required',
-      (v) => /.+@.+/.test(v) || 'E-mail must be valid',
+      (v) => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(v) || 'E-mail must be valid';
+      },
     ],
     files: [],
     fileRules: [
