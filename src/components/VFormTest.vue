@@ -39,9 +39,31 @@
             chips
           ></v-file-input>
         </v-col>
+
+        <v-col cols="12" md="3">
+          <v-radio-group label="v-radio-group" v-model="radioGroup">
+            <v-radio
+              v-for="n in 3"
+              :label="`Radio ${n}`"
+              :value="n"
+              :key="n"
+            ></v-radio>
+          </v-radio-group>
+        </v-col>
+
+        <v-col cols="12" md="3">
+          <v-checkbox
+            v-model="checkbox"
+            v-for="n in 3"
+            :label="`Checkbox ${n}`"
+            :value="`Checkbox ${n}`"
+            :key="n"
+          >
+          </v-checkbox>
+        </v-col>
       </v-row>
       <v-card-actions>
-        <v-btn color="success" @click="save">save</v-btn>
+        <v-btn color="success" @click="log">log</v-btn>
         <v-btn color="error" @click="validate">validate</v-btn>
       </v-card-actions>
     </v-form>
@@ -79,10 +101,14 @@ export default {
         return result;
       },
     ],
+    radioGroup: null,
+    checkbox: [],
   }),
   methods: {
-    save() {
+    log() {
       console.log('valid:', this.valid);
+      console.log('radioGroup:', this.radioGroup);
+      console.log('checkbox:', this.checkbox);
     },
     validate() {
       // 頁面載入時雖會執行 nameRules、emailRules 驗證，
