@@ -61,6 +61,23 @@
           >
           </v-checkbox>
         </v-col>
+
+        <v-col cols="12" md="3">
+          <v-slider
+            :label="slider.label"
+            v-model="slider.val"
+            :min="slider.min"
+            :max="slider.max"
+            :step="slider.step"
+            :thumb-color="slider.thumbColor"
+            thumb-label="always"
+            append-icon="mdi-magnify-plus-outline"
+            prepend-icon="mdi-magnify-minus-outline"
+            @click:append="zoomIn"
+            @click:prepend="zoomOut"
+            ticks
+          ></v-slider>
+        </v-col>
       </v-row>
       <v-card-actions>
         <v-btn color="success" @click="log">log</v-btn>
@@ -103,6 +120,14 @@ export default {
     ],
     radioGroup: null,
     checkbox: [],
+    slider: {
+      label: 'v-slider',
+      val: 50,
+      min: 0,
+      max: 100,
+      step: 10,
+      thumbColor: 'info',
+    },
   }),
   methods: {
     log() {
@@ -115,6 +140,12 @@ export default {
       // 但需 focus 過欄位才會顯示錯誤訊息，
       // 執行 validate() 可驗證並顯示所有欄位錯誤訊息。
       this.$refs.form.validate();
+    },
+    zoomOut() {
+      this.slider.val = this.slider.val - this.slider.step || this.slider.min;
+    },
+    zoomIn() {
+      this.slider.val = this.slider.val + this.slider.step || this.slider.max;
     },
   },
 };
