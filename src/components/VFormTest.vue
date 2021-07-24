@@ -4,22 +4,18 @@
       <v-row>
         <v-col cols="12" md="3">
           <v-text-field
-            label="First name"
-            v-model="firstName"
-            :rules="nameRules"
+            label="Name"
+            v-model="name"
+            :rules="[ruleUtil.required(), ruleUtil.maxLen(10)]"
           ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="3">
           <v-text-field
-            label="Last name"
-            v-model="lastName"
-            :rules="nameRules"
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" md="3">
-          <v-text-field label="E-mail" v-model="email" :rules="emailRules">
+            label="E-mail"
+            v-model="email"
+            :rules="[ruleUtil.required(), ruleUtil.email()]"
+          >
             <v-icon slot="prepend" color="primary">
               mdi-email
             </v-icon>
@@ -28,11 +24,11 @@
 
         <v-col cols="12" md="3">
           <v-file-input
-            label="File input"
+            label="File"
             placeholder="Pick an image"
             v-model="files"
+            :rules="[ruleUtil.file(2)]"
             accept="image/*"
-            :rules="fileRules"
             multiple
             counter
             show-size
@@ -41,7 +37,24 @@
         </v-col>
 
         <v-col cols="12" md="3">
-          <v-radio-group label="v-radio-group" v-model="radioGroup">
+          <v-textarea
+            label="Note"
+            v-model="note"
+            :rules="[ruleUtil.required()]"
+            auto-grow
+            rows="2"
+            clearable
+            clear-icon="mdi-close-circle"
+            prepend-icon="mdi-comment"
+          ></v-textarea>
+        </v-col>
+
+        <v-col cols="12" md="3">
+          <v-radio-group
+            label="v-radio-group"
+            v-model="radioGroup"
+            :rules="[ruleUtil.required()]"
+          >
             <v-radio
               v-for="n in 3"
               :label="`Radio ${n}`"
@@ -93,42 +106,25 @@
       <v-card-actions>
         <v-btn color="success" @click="log">log</v-btn>
         <v-btn color="error" @click="validate">validate</v-btn>
+        <v-btn color="secondary" @click="$refs.form.reset()">
+          Clear
+        </v-btn>
       </v-card-actions>
     </v-form>
   </v-container>
 </template>
 
 <script>
+import ruleUtil from '../libs/rule.util';
+
 export default {
   data: () => ({
     valid: false, // v-form 內的驗證皆正確=true，否則＝false
-    firstName: '',
-    lastName: '',
-    nameRules: [
-      (v) => !!v || 'Name is required',
-      (v) => v.length <= 10 || 'Name must be less than 10 characters',
-    ],
+    ruleUtil,
+    name: '',
     email: '',
-    emailRules: [
-      (v) => !!v || 'E-mail is required',
-      (v) => {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(v) || 'E-mail must be valid';
-      },
-    ],
     files: [],
-    fileRules: [
-      (v) => {
-        // when multiple: param v is an array of files
-        // when not multiple: param v is a file
-        // return false or error message 表示為錯誤狀態
-        let result =
-          !v.length ||
-          !v.filter((f) => f.size > 2000000).length ||
-          'Each size should be less than 2 MB!';
-        return result;
-      },
-    ],
+    note: '',
     radioGroup: null,
     checkbox: [],
     vswitch: [],
