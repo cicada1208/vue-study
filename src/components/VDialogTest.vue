@@ -46,7 +46,7 @@
           persistent
           scrollable
           transition="dialog-top-transition"
-          max-width="500"
+          max-width="70%"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" color="primary"

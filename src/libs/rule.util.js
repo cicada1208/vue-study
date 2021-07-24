@@ -1,5 +1,6 @@
 export default {
-  required: (label = '') => (v) => !!v || `${label || '欄位'} 必填`,
+  required: (label = '') => (v) =>
+    (v || '').toString().trim().length > 0 || `${label || '欄位'} 必填`,
 
   maxLen: (maxLen, label = '') => (v) =>
     (v || '').length <= maxLen || `${label || '欄位'} 字長超過 ${maxLen}`,
