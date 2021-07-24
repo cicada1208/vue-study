@@ -63,6 +63,17 @@
         </v-col>
 
         <v-col cols="12" md="3">
+          <v-switch
+            v-model="vswitch"
+            v-for="n in 3"
+            :label="`Switch ${n}`"
+            :value="`Switch ${n}`"
+            :key="n"
+          >
+          </v-switch>
+        </v-col>
+
+        <v-col cols="12" md="3">
           <v-slider
             :label="slider.label"
             v-model="slider.val"
@@ -120,6 +131,7 @@ export default {
     ],
     radioGroup: null,
     checkbox: [],
+    vswitch: [],
     slider: {
       label: 'v-slider',
       val: 50,
@@ -134,6 +146,7 @@ export default {
       console.log('valid:', this.valid);
       console.log('radioGroup:', this.radioGroup);
       console.log('checkbox:', this.checkbox);
+      console.log('vswitch:', this.vswitch);
     },
     validate() {
       // 頁面載入時雖會執行 nameRules、emailRules 驗證，
