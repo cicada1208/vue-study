@@ -42,6 +42,19 @@
             </v-col>
 
             <v-col cols="12" md="3">
+              <v-text-field
+                label="Password"
+                v-model="password"
+                :rules="[ruleUtil.required()]"
+                :type="showPw ? 'text' : 'password'"
+                :append-icon="showPw ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showPw = !showPw"
+                clearable
+                clear-icon="mdi-close-circle"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="3">
               <v-file-input
                 label="File"
                 placeholder="Pick an image"
@@ -147,6 +160,8 @@ export default {
     valid: false, // v-form 內的驗證皆正確=true，否則＝false
     name: '',
     email: '',
+    password: '',
+    showPw: false,
     files: [],
     note: '',
     radioGroup: null,
