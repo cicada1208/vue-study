@@ -17,6 +17,7 @@
         <!-- v-container: 內容居中和水平填充。
         fluid: 將容器在所有設備 viewport 上完全擴展。 -->
         <v-container fluid>
+          <!-- v-row: flexbox -->
           <v-row>
             <v-col cols="12" md="3">
               <v-text-field
@@ -82,7 +83,7 @@
               ></v-textarea>
             </v-col>
 
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="3" order="1" order-md="2">
               <v-radio-group
                 label="v-radio-group"
                 v-model="radioGroup"
@@ -97,7 +98,7 @@
               </v-radio-group>
             </v-col>
 
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="3" order="2" order-md="1">
               <v-checkbox
                 v-model="checkbox"
                 v-for="n in 3"
@@ -119,7 +120,8 @@
               </v-switch>
             </v-col>
 
-            <v-col cols="12" md="3">
+            <!-- order: first = -1, last = 13 -->
+            <v-col cols="12" md="3" offset-md="3" order="first" order-md="last">
               <v-slider
                 :label="slider.label"
                 v-model="slider.val"
