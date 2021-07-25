@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <!-- <v-autocomplete
       label="v-autocomplete"
       v-model="aItemsSelected"

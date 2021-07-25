@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-card>
       <v-snackbar
         v-model="snackbar"
@@ -14,6 +14,8 @@
         </v-icon>
       </v-snackbar>
       <v-form v-model="valid" ref="form" @submit.prevent="submit">
+        <!-- v-container: 內容居中和水平填充。
+        fluid: 將容器在所有設備 viewport 上完全擴展。 -->
         <v-container fluid>
           <v-row>
             <v-col cols="12" md="3">

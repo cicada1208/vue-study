@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <h2>position: sticky</h2>
     <css-position />
     <h2>z-index:</h2>

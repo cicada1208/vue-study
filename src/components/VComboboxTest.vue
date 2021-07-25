@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <!-- v-combobox 允許輸入不存在於 items 的項目 -->
     <v-combobox
       label="Favorite hobbies"

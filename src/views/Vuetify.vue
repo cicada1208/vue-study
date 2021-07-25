@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <h2>display & hidden & text:</h2>
     <!-- 設定背景顏色: class="blue-grey darken-1" -->
     <!-- 設定字體顏色: class="blue-grey--text text--darken-3" -->

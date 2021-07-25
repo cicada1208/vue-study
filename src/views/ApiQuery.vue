@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <loading-dialog :loading="albumRst.loading" />
 
     <div v-if="albumRst.error">
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>

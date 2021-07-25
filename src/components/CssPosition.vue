@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <!-- position: sticky -->
     <div class="outer">
       <dl>

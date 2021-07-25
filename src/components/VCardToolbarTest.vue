@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-card :loading="loading" max-width="500" class="mx-auto">
       <template slot="progress">
         <v-progress-linear

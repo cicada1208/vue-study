@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-slide-y-transition>
       <v-btn v-if="!alert" @click="alert = true" dark>
         reset alert

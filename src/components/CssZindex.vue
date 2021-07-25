@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <div class="relative" id="z" style="height:150px">
       <div class="item success absolute"></div>
       <div class="item error absolute"></div>

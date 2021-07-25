@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row justify="space-around" align="center" class="mb-1">
       <v-switch v-model="active" label="Active"></v-switch>
       <v-chip :input-value="active" filter>
@@ -24,7 +24,7 @@
         </v-btn>
       </v-toolbar>
 
-      <v-container class="py-0">
+      <v-container fluid class="py-0">
         <v-row align="center" justify="start">
           <v-col
             v-for="(selection, i) in itemsSelected"

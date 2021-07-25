@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row justify="start">
       <v-col cols="auto">
         <v-btn color="primary" @click="messages++">

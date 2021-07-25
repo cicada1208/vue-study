@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <p>route.path: {{ $route.path }}</p>
     <p>params.userName: {{ $route.params.userName }}</p>
     <p>params.postId: {{ $route.params.postId }}</p>
@@ -30,7 +30,7 @@
     <router-view name="profile" />
     <p>children note:</p>
     <router-view name="note" />
-  </div>
+  </v-container>
 </template>
 
 <script>

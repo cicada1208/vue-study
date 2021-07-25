@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-card-actions>
       <v-btn @click="expandAll">
         Expand All

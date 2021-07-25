@@ -1,5 +1,5 @@
 <template>
-  <v-container style="max-width: 500px">
+  <v-container fluid style="max-width: 500px">
     <v-text-field
       v-model="newTask"
       label="What are you working on?"

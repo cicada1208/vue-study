@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <h2>v-bind:</h2>
     <!--
       v-bind: 後接參數 html attribute，並可綁定 data property

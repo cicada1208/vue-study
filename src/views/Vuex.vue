@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <p>store.state: {{ countStateAlias }}</p>
     <p>store.getters: {{ countStateDesp }}</p>
     <p>store.getters: {{ countStateDespFunc('count') }}</p>
@@ -29,7 +29,7 @@
       store.state v-model:
       <input type="number" v-model.number="countState" />
     </p>
-  </div>
+  </v-container>
 </template>
 
 <script>
