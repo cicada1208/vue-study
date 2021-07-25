@@ -5,14 +5,13 @@
         v-model="snackbar"
         timeout="3000"
         color="success"
-        absolute
-        bottom
-        right
+        fixed
+        centered
       >
-        <v-icon dark>
+        <span class="mx-4">submit successful!</span>
+        <v-icon dark @click="snackbar = !snackbar">
           mdi-checkbox-marked-circle
         </v-icon>
-        <span>submit successful!</span>
       </v-snackbar>
       <v-form v-model="valid" ref="form" @submit.prevent="submit">
         <v-container fluid>

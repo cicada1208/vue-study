@@ -69,12 +69,12 @@
     target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
     <v-btn
       @click="$vuetify.goTo(target, options)"
-      color="primary"
-      fab
+      fixed
       bottom
       right
-      fixed
+      fab
       small
+      color="primary"
       style="opacity:80%"
     >
       <v-icon>
