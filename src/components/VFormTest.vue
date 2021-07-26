@@ -83,10 +83,10 @@
               ></v-textarea>
             </v-col>
 
-            <v-col cols="12" md="3" order="1" order-md="2">
+            <v-col cols="12" md="3">
               <v-radio-group
                 label="v-radio-group"
-                v-model="radioGroup"
+                v-model="vRadioGroup"
                 :rules="[ruleUtil.required()]"
               >
                 <v-radio
@@ -98,18 +98,29 @@
               </v-radio-group>
             </v-col>
 
-            <v-col cols="12" md="3" order="2" order-md="1">
+            <v-col cols="12" md="3">
+              <!-- v-btn-toggle: 可單選、多選，但無法驗證 -->
+              <span>v-btn-toggle</span>
+              <v-btn-toggle v-model="vBtnToggle" multiple group>
+                <v-btn v-for="n in 3" :value="n" :key="n">
+                  {{ `btn ${n}` }}
+                </v-btn>
+              </v-btn-toggle>
+            </v-col>
+
+            <v-col cols="12" md="3" order="1" order-md="2">
               <v-checkbox
-                v-model="checkbox"
+                v-model="vcheckbox"
                 v-for="n in 3"
                 :label="`checkbox ${n}`"
                 :value="`checkbox ${n}`"
                 :key="n"
+                :rules="[ruleUtil.required()]"
               >
               </v-checkbox>
             </v-col>
 
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="3" order="2" order-md="1">
               <v-switch
                 v-model="vswitch"
                 v-for="n in 3"
@@ -167,8 +178,9 @@ export default {
     showPw: false,
     files: [],
     note: '',
-    radioGroup: null,
-    checkbox: [],
+    vRadioGroup: null,
+    vBtnToggle: [], // null,
+    vcheckbox: [],
     vswitch: [],
     slider: {
       label: 'v-slider',
@@ -183,9 +195,10 @@ export default {
   methods: {
     log() {
       console.log('valid:', this.valid);
-      console.log('radioGroup:', this.radioGroup);
-      console.log('checkbox:', this.checkbox);
-      console.log('vswitch:', this.vswitch);
+      console.log('vRadioGroup:', this.vRadioGroup, typeof this.vRadioGroup);
+      console.log('vBtnToggle:', this.vBtnToggle, typeof this.vBtnToggle);
+      console.log('vcheckbox:', this.vcheckbox, typeof this.vcheckbox);
+      console.log('vswitch:', this.vswitch, typeof this.vswitch);
     },
     validate() {
       // 頁面載入時雖會執行 nameRules、emailRules 驗證，
