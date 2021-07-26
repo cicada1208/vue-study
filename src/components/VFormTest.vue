@@ -1,10 +1,10 @@
 <template>
+  <!-- v-container: 內容居中和水平填充。
+  fluid: 將容器在所有設備 viewport 上完全擴展。 -->
   <v-container fluid>
     <v-card>
       <v-form v-model="valid" ref="form" @submit.prevent="submit">
-        <!-- v-container: 內容居中和水平填充。
-        fluid: 將容器在所有設備 viewport 上完全擴展。 -->
-        <v-container fluid>
+        <v-card-text>
           <!-- v-row: flexbox，class="flex-column": column 方向排列 -->
           <v-row>
             <v-col cols="12" md="3">
@@ -103,9 +103,16 @@
             </v-col>
 
             <v-col cols="12" md="3">
+              <!-- v-chip-group: 可單選、多選，
+              但無法 form.validate() and form.reset() -->
               <span>v-chip-group</span>
-              <v-chip-group active-class="primary--text">
-                <v-chip v-for="n in 3" :key="n">
+              <v-chip-group
+                v-model="vChipGroup"
+                multiple
+                column
+                active-class="primary--text"
+              >
+                <v-chip v-for="n in 3" :value="n" :key="n" filter outlined>
                   {{ `chip ${n}` }}
                 </v-chip>
               </v-chip-group>
@@ -152,18 +159,22 @@
               ></v-slider>
             </v-col>
           </v-row>
+        </v-card-text>
 
-          <v-card-actions>
-            <v-btn color="info" @click="log">log</v-btn>
-            <v-btn color="error" @click="validate">validate</v-btn>
-            <v-btn color="secondary" @click="$refs.form.reset()">
-              clear
-            </v-btn>
-            <v-btn type="submit" :disabled="!valid" color="success">
-              submit
-            </v-btn>
-          </v-card-actions>
-        </v-container>
+        <v-divider class="mx-4"></v-divider>
+
+        <v-card-actions
+          style="position: -webkit-sticky; position: sticky; bottom: 0px;"
+        >
+          <v-btn color="info" @click="log">log</v-btn>
+          <v-btn color="error" @click="validate">validate</v-btn>
+          <v-btn color="secondary" @click="$refs.form.reset()">
+            clear
+          </v-btn>
+          <v-btn type="submit" :disabled="!valid" color="success">
+            submit
+          </v-btn>
+        </v-card-actions>
       </v-form>
 
       <v-snackbar
@@ -197,6 +208,7 @@ export default {
     note: '',
     vRadioGroup: null,
     vBtnToggle: [], // null,
+    vChipGroup: [], // null,
     vcheckbox: [],
     vswitch: [],
     slider: {
@@ -214,6 +226,7 @@ export default {
       console.log('valid:', this.valid);
       console.log('vRadioGroup:', this.vRadioGroup, typeof this.vRadioGroup);
       console.log('vBtnToggle:', this.vBtnToggle, typeof this.vBtnToggle);
+      console.log('vChipGroup:', this.vChipGroup, typeof this.vChipGroup);
       console.log('vcheckbox:', this.vcheckbox, typeof this.vcheckbox);
       console.log('vswitch:', this.vswitch, typeof this.vswitch);
     },

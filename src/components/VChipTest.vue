@@ -25,7 +25,7 @@
       </v-toolbar>
 
       <v-container fluid class="py-0">
-        <v-row align="center" justify="start">
+        <v-row justify="start" align="center">
           <v-col
             v-for="(selection, i) in itemsSelected"
             :key="selection.text"
