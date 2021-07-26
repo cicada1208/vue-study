@@ -1,23 +1,11 @@
 <template>
   <v-container fluid>
     <v-card>
-      <v-snackbar
-        v-model="snackbar"
-        timeout="3000"
-        color="success"
-        fixed
-        centered
-      >
-        <span class="mx-4">submit successful!</span>
-        <v-icon dark @click="snackbar = !snackbar">
-          mdi-checkbox-marked-circle
-        </v-icon>
-      </v-snackbar>
       <v-form v-model="valid" ref="form" @submit.prevent="submit">
         <!-- v-container: 內容居中和水平填充。
         fluid: 將容器在所有設備 viewport 上完全擴展。 -->
         <v-container fluid>
-          <!-- v-row: flexbox -->
+          <!-- v-row: flexbox，class="flex-column": column 方向排列 -->
           <v-row>
             <v-col cols="12" md="3">
               <v-text-field
@@ -99,13 +87,28 @@
             </v-col>
 
             <v-col cols="12" md="3">
-              <!-- v-btn-toggle: 可單選、多選，但無法驗證 -->
+              <!-- v-btn-toggle: 可單選、多選，
+              但無法 form.validate() and form.reset() -->
               <span>v-btn-toggle</span>
-              <v-btn-toggle v-model="vBtnToggle" multiple group>
+              <v-btn-toggle
+                v-model="vBtnToggle"
+                multiple
+                group
+                active-class="primary--text"
+              >
                 <v-btn v-for="n in 3" :value="n" :key="n">
                   {{ `btn ${n}` }}
                 </v-btn>
               </v-btn-toggle>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <span>v-chip-group</span>
+              <v-chip-group active-class="primary--text">
+                <v-chip v-for="n in 3" :key="n">
+                  {{ `chip ${n}` }}
+                </v-chip>
+              </v-chip-group>
             </v-col>
 
             <v-col cols="12" md="3" order="1" order-md="2">
@@ -149,6 +152,7 @@
               ></v-slider>
             </v-col>
           </v-row>
+
           <v-card-actions>
             <v-btn color="info" @click="log">log</v-btn>
             <v-btn color="error" @click="validate">validate</v-btn>
@@ -161,6 +165,19 @@
           </v-card-actions>
         </v-container>
       </v-form>
+
+      <v-snackbar
+        v-model="snackbar"
+        timeout="3000"
+        color="success"
+        fixed
+        centered
+      >
+        <span class="mx-4">submit successful!</span>
+        <v-icon dark @click="snackbar = !snackbar">
+          mdi-checkbox-marked-circle
+        </v-icon>
+      </v-snackbar>
     </v-card>
   </v-container>
 </template>
