@@ -163,9 +163,7 @@
 
         <v-divider class="mx-4"></v-divider>
 
-        <v-card-actions
-          style="position: -webkit-sticky; position: sticky; bottom: 0px;"
-        >
+        <v-card-actions class="sticky-bottom">
           <v-btn color="info" @click="log">log</v-btn>
           <v-btn color="error" @click="validate">validate</v-btn>
           <v-btn color="secondary" @click="$refs.form.reset()">

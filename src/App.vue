@@ -155,8 +155,9 @@ export default {
 
 <style lang="scss">
 // The @import CSS at-rule is used to import style rules from other style sheets.
-@import '@/styles/transition.module.scss';
 @import '@/styles/base.module.scss';
+@import '@/styles/transition.module.scss';
+@import '@/styles/position.module.scss';
 
 #nav {
   padding: 30px;

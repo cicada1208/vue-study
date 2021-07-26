@@ -1,0 +1,6 @@
+.sticky-bottom {
+  // 相對於最近的滾動祖先基於 top, right, bottom, left 偏移
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0px;
+}
