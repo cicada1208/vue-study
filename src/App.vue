@@ -16,13 +16,14 @@
       </div> -->
 
       <v-list nav dense>
-        <v-list-item-group active-class="primary--text text--accent-4">
-          <v-list-item v-for="(link, idx) in links" :key="idx">
+        <v-list-item-group color="primary">
+          <v-list-item v-for="(link, idx) in links" :to="link.path" :key="idx">
             <v-list-item-icon>
               <v-icon>{{ link.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link :to="link.path">{{ link.text }}</router-link>
+              {{ link.text }}
+              <!-- <router-link :to="link.path">{{ link.text }}</router-link> -->
             </v-list-item-title>
           </v-list-item>
         </v-list-item-group>

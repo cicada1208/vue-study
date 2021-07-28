@@ -110,12 +110,45 @@
                 v-model="vChipGroup"
                 multiple
                 column
-                active-class="primary--text"
+                color="primary"
               >
                 <v-chip v-for="n in 3" :value="n" :key="n" filter outlined>
                   {{ `chip ${n}` }}
                 </v-chip>
               </v-chip-group>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <!-- v-list-item-group: 可單選、多選，
+              但無法 form.validate() and form.reset() -->
+              <span>v-list-item-group</span>
+              <v-list>
+                <v-list-item-group
+                  v-model="vListItemGroup"
+                  multiple
+                  color="primary"
+                  :rules="[ruleUtil.required()]"
+                >
+                  <v-list-item
+                    v-for="(item, i) in items"
+                    :value="item.text"
+                    :key="i"
+                  >
+                    <template v-slot:default="{ active }">
+                      <v-list-item-icon>
+                        <v-icon v-text="item.icon"></v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item.text">
+                        </v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox :input-value="active"></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
             </v-col>
 
             <v-col cols="12" md="3" order="1" order-md="2">
@@ -207,6 +240,17 @@ export default {
     vRadioGroup: null,
     vBtnToggle: [], // null,
     vChipGroup: [], // null,
+    vListItemGroup: [],
+    items: [
+      {
+        icon: 'mdi-star',
+        text: 'Star',
+      },
+      {
+        icon: 'mdi-email-open',
+        text: 'Drafts',
+      },
+    ],
     vcheckbox: [],
     vswitch: [],
     slider: {
@@ -225,6 +269,11 @@ export default {
       console.log('vRadioGroup:', this.vRadioGroup, typeof this.vRadioGroup);
       console.log('vBtnToggle:', this.vBtnToggle, typeof this.vBtnToggle);
       console.log('vChipGroup:', this.vChipGroup, typeof this.vChipGroup);
+      console.log(
+        'vListItemGroup:',
+        this.vListItemGroup,
+        typeof this.vListItemGroup
+      );
       console.log('vcheckbox:', this.vcheckbox, typeof this.vcheckbox);
       console.log('vswitch:', this.vswitch, typeof this.vswitch);
     },
