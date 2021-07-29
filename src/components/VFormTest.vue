@@ -110,7 +110,7 @@
                 v-model="vChipGroup"
                 multiple
                 column
-                color="primary"
+                active-class="primary--text"
               >
                 <v-chip v-for="n in 3" :value="n" :key="n" filter outlined>
                   {{ `chip ${n}` }}
@@ -126,29 +126,56 @@
                 <v-list-item-group
                   v-model="vListItemGroup"
                   multiple
-                  color="primary"
-                  :rules="[ruleUtil.required()]"
+                  active-class="primary--text"
                 >
                   <v-list-item
                     v-for="(item, i) in items"
                     :value="item.text"
                     :key="i"
+                    v-slot="{ active }"
                   >
-                    <template v-slot:default="{ active }">
-                      <v-list-item-icon>
-                        <v-icon v-text="item.icon"></v-icon>
-                      </v-list-item-icon>
-                      <v-list-item-content>
-                        <v-list-item-title v-text="item.text">
-                        </v-list-item-title>
-                      </v-list-item-content>
-                      <v-list-item-action>
-                        <v-checkbox :input-value="active"></v-checkbox>
-                      </v-list-item-action>
-                    </template>
+                    <!-- <template v-slot:default="{ active }"> -->
+                    <v-list-item-icon>
+                      <v-icon v-text="item.icon"></v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.text">
+                      </v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                      <v-checkbox :input-value="active"></v-checkbox>
+                    </v-list-item-action>
+                    <!-- </template> -->
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <span>v-slide-group</span>
+              <v-slide-group
+                v-model="vSlideGroup"
+                multiple
+                show-arrows
+                active-class="primary--text"
+              >
+                <v-slide-item
+                  v-for="n in 10"
+                  :value="n"
+                  :key="n"
+                  v-slot="{ active, toggle }"
+                >
+                  <v-chip
+                    :input-value="active"
+                    @click="toggle"
+                    class="mx-2"
+                    filter
+                    outlined
+                  >
+                    slide {{ n }}
+                  </v-chip>
+                </v-slide-item>
+              </v-slide-group>
             </v-col>
 
             <v-col cols="12" md="3" order="1" order-md="2">
@@ -251,6 +278,7 @@ export default {
         text: 'Drafts',
       },
     ],
+    vSlideGroup: [],
     vcheckbox: [],
     vswitch: [],
     slider: {
@@ -274,6 +302,7 @@ export default {
         this.vListItemGroup,
         typeof this.vListItemGroup
       );
+      console.log('vSlideGroup:', this.vSlideGroup, typeof this.vSlideGroup);
       console.log('vcheckbox:', this.vcheckbox, typeof this.vcheckbox);
       console.log('vswitch:', this.vswitch, typeof this.vswitch);
     },
