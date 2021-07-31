@@ -5,7 +5,9 @@
     <v-card>
       <v-form v-model="valid" ref="form" @submit.prevent="submit">
         <v-card-text>
-          <!-- v-row: flexbox，class="flex-column": column 方向排列 -->
+          <!-- v-row: flexbox，
+          class="flex-column": column 方向排列。
+          cols="auto": v-col 寬度會依內容展開，多筆 v-col 若超過 v-row 寬度會 wrap。 -->
           <v-row>
             <v-col cols="12" md="3">
               <v-text-field
