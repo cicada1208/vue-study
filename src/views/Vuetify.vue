@@ -156,6 +156,9 @@
 
     <h2>v-form:</h2>
     <v-form-test />
+
+    <h2>v-window:</h2>
+    <v-window-test />
   </v-container>
 </template>
 
@@ -169,31 +172,26 @@ export default {
         /* webpackChunkName: "vtable.test" */
         '@/components/VTableTest.vue'
       ),
-
     VTaskList: () =>
       import(
         /* webpackChunkName: "vtask.list" */
         '@/components/VTaskList.vue'
       ),
-
     VAlertTest: () =>
       import(
         /* webpackChunkName: "valert.test" */
         '@/components/VAlertTest.vue'
       ),
-
     VBadgeTest: () =>
       import(
         /* webpackChunkName: "vbadge.test" */
         '@/components/VBadgeTest.vue'
       ),
-
     VBtnTest: () =>
       import(
         /* webpackChunkName: "vbtn.test" */
         '@/components/VBtnTest.vue'
       ),
-
     VCalendarTest: () =>
       import(
         /* webpackChunkName: "vcalendar.test" */
@@ -224,7 +222,6 @@ export default {
         /* webpackChunkName: "vautocomplete.test" */
         '@/components/VAutocompleteTest.vue'
       ),
-
     VComboboxTest: () =>
       import(
         /* webpackChunkName: "vcombobox.test" */
@@ -234,6 +231,11 @@ export default {
       import(
         /* webpackChunkName: "vform.test" */
         '@/components/VFormTest.vue'
+      ),
+    VWindowTest: () =>
+      import(
+        /* webpackChunkName: "vwindow.test" */
+        '@/components/VWindowTest.vue'
       ),
   },
 
