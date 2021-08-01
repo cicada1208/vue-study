@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <v-switch label="tableSelect" v-model="tableSelect" />
     <v-data-table
       item-key="id"
       :show-select="tableSelect"
@@ -12,11 +13,8 @@
 
 <script>
 export default {
-  props: {
-    tableSelect: { type: Boolean, default: false },
-  },
-
   data: () => ({
+    tableSelect: false,
     headers: [
       { text: '員工編號', value: 'id' },
       { text: '部門', value: 'dep' },

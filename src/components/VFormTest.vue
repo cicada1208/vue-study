@@ -70,6 +70,7 @@
                 clearable
                 clear-icon="mdi-close-circle"
                 prepend-icon="mdi-comment"
+                @click:prepend="showNote(note, $event)"
               ></v-textarea>
             </v-col>
 
@@ -322,6 +323,9 @@ export default {
     },
     zoomIn() {
       this.slider.val = this.slider.val + this.slider.step || this.slider.max;
+    },
+    showNote(value, event) {
+      alert(`tag name: ${event.target.tagName}, value: ${value}`);
     },
   },
 };

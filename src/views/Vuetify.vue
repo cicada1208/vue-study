@@ -110,20 +110,6 @@
       </v-card>
     </v-card>
 
-    <h2>v-data-table:</h2>
-    <v-switch label="tableSelect" v-model="tableSelect" />
-    <v-text-field
-      label="tableSelect"
-      v-model="tableSelect"
-      readonly
-      append-icon="mdi-menu"
-      @click:append="showValue(tableSelect, $event)"
-    />
-    <v-table-test :tableSelect="tableSelect" />
-
-    <h2>task list & transition:</h2>
-    <v-task-list />
-
     <h2>v-alert:</h2>
     <v-alert-test />
 
@@ -133,20 +119,11 @@
     <h2>v-badge:</h2>
     <v-badge-test />
 
-    <h2>v-calendar:</h2>
-    <v-calendar-test />
-
-    <h2>v-card & v-toolbar:</h2>
-    <v-card-toolbar-test />
-
     <h2>v-chip:</h2>
     <v-chip-test />
 
-    <h2>v-dialog:</h2>
-    <v-dialog-test />
-
-    <h2>v-expansion-panel:</h2>
-    <v-expansion-panel-test />
+    <h2>v-card & v-toolbar & v-hover:</h2>
+    <v-card-toolbar-test />
 
     <h2>v-autocomplete:</h2>
     <v-autocomplete-test />
@@ -157,8 +134,23 @@
     <h2>v-form:</h2>
     <v-form-test />
 
+    <h2>v-dialog:</h2>
+    <v-dialog-test />
+
+    <h2>v-expansion-panel:</h2>
+    <v-expansion-panel-test />
+
     <h2>v-window:</h2>
     <v-window-test />
+
+    <h2>task list & transition:</h2>
+    <v-task-list />
+
+    <h2>v-data-table:</h2>
+    <v-table-test />
+
+    <h2>v-calendar:</h2>
+    <v-calendar-test />
   </v-container>
 </template>
 
@@ -239,19 +231,13 @@ export default {
       ),
   },
 
-  data: () => ({
-    tableSelect: false,
-  }),
+  data: () => ({}),
 
   methods: {
     winResize() {
       console.log('breakpoint name:', this.$vuetify.breakpoint.name);
       console.log('breakpoint width:', this.$vuetify.breakpoint.width);
       console.log('breakpoint height:', this.$vuetify.breakpoint.height);
-    },
-
-    showValue(value, event) {
-      alert(`tag name: ${event.target.tagName}, value: ${value}`);
     },
   },
 

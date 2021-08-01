@@ -59,32 +59,37 @@
       <v-container fluid>
         <v-row dense>
           <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
-            <v-card>
-              <v-img
-                :src="card.src"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                :aspect-ratio="16 / 9"
+            <v-hover v-slot="{ hover }">
+              <v-card
+                :elevation="hover ? 6 : 1"
+                :class="{ 'v-card--hover': true, 'on-hover': hover }"
               >
-                <v-card-title v-text="card.title"></v-card-title>
-              </v-img>
+                <v-img
+                  :src="card.src"
+                  class="white--text align-end"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  :aspect-ratio="16 / 9"
+                >
+                  <v-card-title v-text="card.title"></v-card-title>
+                </v-img>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
 
-                <v-btn icon>
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
+                  <v-btn icon>
+                    <v-icon>mdi-heart</v-icon>
+                  </v-btn>
 
-                <v-btn icon>
-                  <v-icon>mdi-bookmark</v-icon>
-                </v-btn>
+                  <v-btn icon>
+                    <v-icon>mdi-bookmark</v-icon>
+                  </v-btn>
 
-                <v-btn icon>
-                  <v-icon>mdi-share-variant</v-icon>
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+                  <v-btn icon>
+                    <v-icon>mdi-share-variant</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-hover>
           </v-col>
         </v-row>
       </v-container>
@@ -163,10 +168,18 @@ export default {
 </script>
 
 <style scoped>
+.v-card--hover {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.v-card--hover:not(.on-hover) {
+  opacity: 0.9;
+}
+
 .v-card--reveal {
+  position: absolute;
   bottom: 0;
   opacity: 1 !important;
-  position: absolute;
   width: 100%;
   height: 100%;
 }

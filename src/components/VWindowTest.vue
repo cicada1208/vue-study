@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-card>
       <v-card-actions class="justify-space-between">
-        <v-btn :disabled="step === 1" @click="step--" text icon>
+        <v-btn :disabled="step === 1" @click="step--" icon>
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
         <v-item-group v-model="step" class="text-center" mandatory>
@@ -17,7 +17,7 @@
             </v-btn>
           </v-item>
         </v-item-group>
-        <v-btn :disabled="step === list.length" @click="step++" text icon>
+        <v-btn :disabled="step === list.length" @click="step++" icon>
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-card-actions>
