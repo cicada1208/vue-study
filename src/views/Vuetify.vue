@@ -151,6 +151,9 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
+
+    <h2>v-list:</h2>
+    <v-list-test />
   </v-container>
 </template>
 
@@ -228,6 +231,11 @@ export default {
       import(
         /* webpackChunkName: "vwindow.test" */
         '@/components/VWindowTest.vue'
+      ),
+    VListTest: () =>
+      import(
+        /* webpackChunkName: "vlist.test" */
+        '@/components/VListTest.vue'
       ),
   },
 

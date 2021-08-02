@@ -22,22 +22,12 @@
         <v-spacer></v-spacer>
 
         <v-scale-transition>
-          <v-btn
-            v-if="selection.length"
-            @click="itemsLoading"
-            key="delete"
-            icon
-          >
+          <v-btn v-if="selection.length" @click="itemsLoading" icon>
             <v-icon>mdi-delete</v-icon>
           </v-btn>
         </v-scale-transition>
         <v-scale-transition>
-          <v-btn
-            v-if="selection.length"
-            @click="itemsLoading"
-            key="export"
-            icon
-          >
+          <v-btn v-if="selection.length" @click="itemsLoading" icon>
             <v-icon>mdi-export-variant</v-icon>
           </v-btn>
         </v-scale-transition>
