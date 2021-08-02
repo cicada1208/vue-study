@@ -1,46 +1,49 @@
 <template>
   <v-container fluid>
-    <v-card>
+    <v-card class="mx-auto" width="300">
       <v-list dense>
-        <template v-for="(grp, i) in list">
-          <v-list-group v-if="grp.subgroup" :key="i" :prepend-icon="grp.icon">
+        <template v-for="(item, i) in list">
+          <v-list-group v-if="item.group" :key="i" :prepend-icon="item.icon">
             <template v-slot:activator>
-              <v-list-item-title v-text="grp.text"></v-list-item-title>
+              <v-list-item-title v-text="item.text"></v-list-item-title>
             </template>
-            <template v-for="(subg, i) in grp.subgroup">
+            <template v-for="(sitem, i) in item.group">
               <v-list-group
-                v-if="subg.subitem"
+                v-if="sitem.group"
                 :key="i"
                 no-action
                 sub-group
                 class="ml-2"
               >
                 <template v-slot:activator>
-                  <v-list-item-title v-text="subg.text"></v-list-item-title>
-                </template>
-                <v-list-item v-for="(subi, i) in subg.subitem" :key="i" link>
-                  <v-list-item-title v-text="subi.text"></v-list-item-title>
+                  <v-list-item-title v-text="sitem.text"></v-list-item-title>
                   <v-list-item-icon>
-                    <v-icon v-text="subi.icon"></v-icon>
+                    <v-icon v-text="sitem.icon"></v-icon>
+                  </v-list-item-icon>
+                </template>
+                <v-list-item v-for="(ssitem, i) in sitem.group" :key="i" link>
+                  <v-list-item-title v-text="ssitem.text"></v-list-item-title>
+                  <v-list-item-icon>
+                    <v-icon v-text="ssitem.icon"></v-icon>
                   </v-list-item-icon>
                 </v-list-item>
               </v-list-group>
               <v-list-item v-else :key="i" link>
                 <v-list-item-title
-                  v-text="subg.text"
+                  v-text="sitem.text"
                   class="ml-14"
                 ></v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon v-text="subg.icon"></v-icon>
+                  <v-icon v-text="sitem.icon"></v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </template>
           </v-list-group>
           <v-list-item v-else :key="i" link>
             <v-list-item-icon>
-              <v-icon v-text="grp.icon"></v-icon>
+              <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
-            <v-list-item-title v-text="grp.text"></v-list-item-title>
+            <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item>
         </template>
       </v-list>
@@ -56,17 +59,17 @@ export default {
       {
         text: 'Users',
         icon: 'mdi-account-circle',
-        subgroup: [
+        group: [
           {
             text: 'Admin',
-            subitem: [
+            group: [
               { text: 'Management', icon: 'mdi-account-multiple-outline' },
               { text: 'Settings', icon: 'mdi-cog-outline' },
             ],
           },
           {
             text: 'Actions',
-            subitem: [
+            group: [
               { text: 'Create', icon: 'mdi-plus-outline' },
               { text: 'Read', icon: 'mdi-file-outline' },
             ],

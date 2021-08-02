@@ -125,6 +125,9 @@
     <h2>v-card & v-toolbar & v-hover & v-img:</h2>
     <v-card-toolbar-test />
 
+    <h2>v-list:</h2>
+    <v-list-test />
+
     <h2>v-autocomplete:</h2>
     <v-autocomplete-test />
 
@@ -151,9 +154,6 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
-
-    <h2>v-list:</h2>
-    <v-list-test />
   </v-container>
 </template>
 
