@@ -122,7 +122,7 @@
     <h2>v-chip:</h2>
     <v-chip-test />
 
-    <h2>v-card & v-toolbar & v-hover:</h2>
+    <h2>v-card & v-toolbar & v-hover & v-img:</h2>
     <v-card-toolbar-test />
 
     <h2>v-autocomplete:</h2>
