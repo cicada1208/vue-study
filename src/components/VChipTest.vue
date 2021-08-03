@@ -34,9 +34,10 @@
             <v-menu
               v-model="selection.showMenu"
               :close-on-content-click="false"
+              open-on-hover
+              transition="scale-transition"
               bottom
               right
-              transition="scale-transition"
               origin="top left"
             >
               <template v-slot:activator="{ on }">
