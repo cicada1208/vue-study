@@ -8,10 +8,19 @@
           hide-overlay
           transition="dialog-bottom-transition"
         >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" color="error">
-              Fullscreen dialog
-            </v-btn>
+          <template v-slot:activator="{ on: dig, attrs }">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on: tooltip }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="{ ...tooltip, ...dig }"
+                  color="error"
+                >
+                  Fullscreen dialog
+                </v-btn>
+              </template>
+              <span>Im A ToolTip</span>
+            </v-tooltip>
           </template>
 
           <v-card>
