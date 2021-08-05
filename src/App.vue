@@ -38,7 +38,7 @@
       </div> -->
 
       <v-list nav dense>
-        <v-list-item-group color="primary">
+        <v-list-item-group active-class="primary--text">
           <v-list-item v-for="(link, idx) in links" :to="link.path" :key="idx">
             <v-list-item-icon>
               <v-icon>{{ link.icon }}</v-icon>

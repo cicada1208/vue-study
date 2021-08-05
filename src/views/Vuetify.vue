@@ -140,6 +140,9 @@
     <h2>v-dialog:</h2>
     <v-dialog-test />
 
+    <h2>v-menu:</h2>
+    <v-menu-test />
+
     <h2>v-expansion-panel:</h2>
     <v-expansion-panel-test />
 
@@ -154,9 +157,6 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
-
-    <h2>v-menu:</h2>
-    <v-menu-test />
   </v-container>
 </template>
 
