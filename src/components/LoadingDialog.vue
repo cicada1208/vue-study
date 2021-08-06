@@ -1,7 +1,12 @@
 <template>
-  <v-dialog v-model="loading" persistent hide-overlay width="300">
-    <v-card color="primary" dark>
-      <v-card-text>
+  <v-dialog
+    v-model="loading"
+    persistent
+    :hide-overlay="hideOverlay"
+    width="300"
+  >
+    <v-card color="primary" dark style="opacity:85%">
+      <v-card-text class="pt-1">
         loading...
         <v-progress-linear
           indeterminate
@@ -19,6 +24,10 @@ export default {
 
   props: {
     loading: {
+      type: Boolean,
+      default: false,
+    },
+    hideOverlay: {
       type: Boolean,
       default: false,
     },

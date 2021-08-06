@@ -88,7 +88,7 @@
         >
           Loading Dialog
         </v-btn>
-        <loading-dialog :loading="loading" />
+        <loading-dialog :loading="loading" hide-overlay />
       </v-col>
     </v-row>
   </v-container>
@@ -113,8 +113,8 @@ export default {
 
   watch: {
     loading(newVal) {
-      if (!newVal) return;
-      setTimeout(() => (this.loading = false), 3000);
+      // if (!newVal) return;
+      newVal && setTimeout(() => (this.loading = false), 3000);
     },
   },
 };
