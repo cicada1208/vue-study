@@ -146,7 +146,7 @@
     <h2>v-expansion-panel:</h2>
     <v-expansion-panel-test />
 
-    <h2>v-window:</h2>
+    <h2>v-window & v-pagination:</h2>
     <v-window-test />
 
     <h2>task list & transition:</h2>

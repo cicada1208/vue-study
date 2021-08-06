@@ -51,6 +51,12 @@
           </v-card-text>
         </v-window-item>
       </v-window>
+
+      <v-divider></v-divider>
+
+      <v-card-actions class="justify-center">
+        <v-pagination v-model="step" :length="list.length"></v-pagination>
+      </v-card-actions>
     </v-card>
   </v-container>
 </template>
