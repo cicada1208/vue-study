@@ -43,6 +43,7 @@
                 @click:append="showPw = !showPw"
                 clearable
                 clear-icon="mdi-close-circle"
+                prepend-icon="mdi-form-textbox-password"
               ></v-text-field>
             </v-col>
 
@@ -72,6 +73,59 @@
                 prepend-icon="mdi-comment"
                 @click:prepend="showNote(note, $event)"
               ></v-textarea>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <v-menu
+                ref="dateMenu"
+                :return-value.sync="dates"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-combobox
+                    label="Date"
+                    v-model="dates"
+                    multiple
+                    clearable
+                    readonly
+                    chips
+                    small-chips
+                    prepend-icon="mdi-calendar"
+                    v-bind="attrs"
+                    v-on="on"
+                    :rules="[ruleUtil.required()]"
+                  ></v-combobox>
+                </template>
+                <v-date-picker
+                  locale="zh-TW"
+                  v-model="dates"
+                  :min="minDate"
+                  :allowed-dates="allowedDates"
+                  :picker-date.sync="pickerDate"
+                  multiple
+                  no-title
+                  scrollable
+                >
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.dateMenu.isActive = false"
+                  >
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.dateMenu.save(dates)"
+                  >
+                    OK
+                  </v-btn>
+                </v-date-picker>
+              </v-menu>
             </v-col>
 
             <v-col cols="12" md="3">
@@ -256,6 +310,7 @@
 
 <script>
 import ruleUtil from '../libs/rule.util';
+import moment from 'moment';
 
 export default {
   data: () => ({
@@ -267,6 +322,9 @@ export default {
     showPw: false,
     files: [],
     note: '',
+    dates: [moment().format('YYYY-MM-DD')],
+    minDate: moment().format('YYYY-MM-01'),
+    pickerDate: null,
     vRadioGroup: null,
     vBtnToggle: [], // null,
     vChipGroup: [], // null,
@@ -308,6 +366,8 @@ export default {
       console.log('vSlideGroup:', this.vSlideGroup, typeof this.vSlideGroup);
       console.log('vcheckbox:', this.vcheckbox, typeof this.vcheckbox);
       console.log('vswitch:', this.vswitch, typeof this.vswitch);
+      console.log('dates:', this.dates);
+      console.log('pickerDate:', this.pickerDate);
     },
     validate() {
       // 頁面載入時雖會執行 nameRules、emailRules 驗證，
@@ -327,6 +387,7 @@ export default {
     showNote(value, event) {
       alert(`tag name: ${event.target.tagName}, value: ${value}`);
     },
+    allowedDates: (val) => parseInt(val.split('-')[2], 10) % 2 === 0,
   },
 };
 </script>

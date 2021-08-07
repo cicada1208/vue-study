@@ -101,10 +101,10 @@
             <v-col cols="3">
               <v-menu
                 ref="startMenu"
-                :close-on-content-click="false"
                 :return-value.sync="trip.start"
+                :close-on-content-click="false"
                 offset-y
-                min-width="290px"
+                min-width="auto"
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
@@ -139,10 +139,10 @@
             <v-col cols="3">
               <v-menu
                 ref="endMenu"
-                :close-on-content-click="false"
                 :return-value.sync="trip.end"
+                :close-on-content-click="false"
                 offset-y
-                min-width="290px"
+                min-width="auto"
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field

@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <!-- v-autocomplete 只允許輸入存在於 items 的項目 -->
     <!-- <v-autocomplete
       label="v-autocomplete"
       v-model="aItemsSelected"

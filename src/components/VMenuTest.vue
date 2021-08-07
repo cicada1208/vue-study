@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-menu :nudge-width="200" offset-x>
+    <v-menu min-width="auto" offset-x>
       <template v-slot:activator="{ on: menu, attrs }">
         <v-tooltip bottom>
           <template v-slot:activator="{ on: tooltip }">
