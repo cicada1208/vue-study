@@ -78,7 +78,6 @@
             <v-col cols="12" md="3">
               <v-menu
                 ref="dateMenu"
-                :return-value.sync="dates"
                 :close-on-content-click="false"
                 transition="scale-transition"
                 offset-y
@@ -108,23 +107,7 @@
                   multiple
                   no-title
                   scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.dateMenu.isActive = false"
-                  >
-                    Cancel
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.dateMenu.save(dates)"
-                  >
-                    OK
-                  </v-btn>
-                </v-date-picker>
+                ></v-date-picker>
               </v-menu>
             </v-col>
 

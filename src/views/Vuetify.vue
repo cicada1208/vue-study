@@ -143,7 +143,7 @@
     <h2>v-menu:</h2>
     <v-menu-test />
 
-    <h2>v-expansion-panel:</h2>
+    <h2>v-expansion-panel & v-date-picker:</h2>
     <v-expansion-panel-test />
 
     <h2>v-window & v-pagination:</h2>
