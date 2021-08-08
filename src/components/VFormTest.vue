@@ -77,7 +77,6 @@
 
             <v-col cols="12" md="3">
               <v-menu
-                ref="dateMenu"
                 :close-on-content-click="false"
                 transition="scale-transition"
                 offset-y
@@ -88,8 +87,8 @@
                     label="Date"
                     v-model="dates"
                     multiple
-                    clearable
                     readonly
+                    clearable
                     chips
                     small-chips
                     prepend-icon="mdi-calendar"
@@ -99,8 +98,9 @@
                   ></v-combobox>
                 </template>
                 <v-date-picker
-                  locale="zh-TW"
                   v-model="dates"
+                  locale="zh-TW"
+                  :day-format="(date) => new Date(date).getDate()"
                   :min="minDate"
                   :allowed-dates="allowedDates"
                   :picker-date.sync="pickerDate"
@@ -108,6 +108,36 @@
                   no-title
                   scrollable
                 ></v-date-picker>
+              </v-menu>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <v-menu
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="time"
+                    label="Time"
+                    readonly
+                    clearable
+                    prepend-icon="mdi-clock-time-four-outline"
+                    v-bind="attrs"
+                    v-on="on"
+                    :rules="[ruleUtil.required()]"
+                  ></v-text-field>
+                </template>
+                <!-- format="ampm": 只是顯示格式，v-model 格式皆為 24hr -->
+                <v-time-picker
+                  v-model="time"
+                  format="ampm"
+                  ampm-in-title
+                  scrollable
+                  use-seconds
+                ></v-time-picker>
               </v-menu>
             </v-col>
 
@@ -124,6 +154,30 @@
                   :key="n"
                 ></v-radio>
               </v-radio-group>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <v-checkbox
+                v-model="vcheckbox"
+                v-for="n in 3"
+                :label="`checkbox ${n}`"
+                :value="`checkbox ${n}`"
+                :key="n"
+                :rules="[ruleUtil.required()]"
+              >
+              </v-checkbox>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <v-switch
+                v-model="vswitch"
+                v-for="n in 3"
+                :label="`switch ${n}`"
+                :value="`switch ${n}`"
+                :key="n"
+                :rules="[ruleUtil.required()]"
+              >
+              </v-switch>
             </v-col>
 
             <v-col cols="12" md="3">
@@ -158,7 +212,7 @@
               </v-chip-group>
             </v-col>
 
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="3" order="1" order-md="2">
               <!-- v-list-item-group: 可單選、多選，
               但無法 form.validate() and form.reset() -->
               <span>v-list-item-group</span>
@@ -191,7 +245,7 @@
               </v-list>
             </v-col>
 
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="3" order="2" order-md="1">
               <span>v-slide-group</span>
               <v-slide-group
                 v-model="vSlideGroup"
@@ -216,29 +270,6 @@
                   </v-chip>
                 </v-slide-item>
               </v-slide-group>
-            </v-col>
-
-            <v-col cols="12" md="3" order="1" order-md="2">
-              <v-checkbox
-                v-model="vcheckbox"
-                v-for="n in 3"
-                :label="`checkbox ${n}`"
-                :value="`checkbox ${n}`"
-                :key="n"
-                :rules="[ruleUtil.required()]"
-              >
-              </v-checkbox>
-            </v-col>
-
-            <v-col cols="12" md="3" order="2" order-md="1">
-              <v-switch
-                v-model="vswitch"
-                v-for="n in 3"
-                :label="`switch ${n}`"
-                :value="`switch ${n}`"
-                :key="n"
-              >
-              </v-switch>
             </v-col>
 
             <!-- order: first = -1, last = 13 -->
@@ -306,9 +337,12 @@ export default {
     files: [],
     note: '',
     dates: [moment().format('YYYY-MM-DD')],
+    time: null,
     minDate: moment().format('YYYY-MM-01'),
     pickerDate: null,
     vRadioGroup: null,
+    vcheckbox: [],
+    vswitch: [],
     vBtnToggle: [], // null,
     vChipGroup: [], // null,
     vListItemGroup: [],
@@ -323,8 +357,6 @@ export default {
       },
     ],
     vSlideGroup: [],
-    vcheckbox: [],
-    vswitch: [],
     slider: {
       label: 'v-slider',
       val: 50,
@@ -351,6 +383,7 @@ export default {
       console.log('vswitch:', this.vswitch, typeof this.vswitch);
       console.log('dates:', this.dates);
       console.log('pickerDate:', this.pickerDate);
+      console.log('time:', this.time);
     },
     validate() {
       // 頁面載入時雖會執行 nameRules、emailRules 驗證，

@@ -157,9 +157,6 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
-
-    <h2>v-date-picker:</h2>
-    <v-date-picker-test />
   </v-container>
 </template>
 
@@ -247,11 +244,6 @@ export default {
       import(
         /* webpackChunkName: "vmenu.test" */
         '@/components/VMenuTest.vue'
-      ),
-    VDatePickerTest: () =>
-      import(
-        /* webpackChunkName: "vdate.picker.test" */
-        '@/components/VDatePickerTest.vue'
       ),
   },
 
