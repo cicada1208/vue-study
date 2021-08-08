@@ -100,7 +100,7 @@
                 <v-date-picker
                   v-model="dates"
                   locale="zh-TW"
-                  :day-format="(date) => new Date(date).getDate()"
+                  :day-format="date => new Date(date).getDate()"
                   :min="minDate"
                   :allowed-dates="allowedDates"
                   :picker-date.sync="pickerDate"
@@ -349,12 +349,12 @@ export default {
     items: [
       {
         icon: 'mdi-star',
-        text: 'Star',
+        text: 'Star'
       },
       {
         icon: 'mdi-email-open',
-        text: 'Drafts',
-      },
+        text: 'Drafts'
+      }
     ],
     vSlideGroup: [],
     slider: {
@@ -363,9 +363,9 @@ export default {
       min: 0,
       max: 100,
       step: 10,
-      thumbColor: 'info',
+      thumbColor: 'info'
     },
-    snackbar: false,
+    snackbar: false
   }),
   methods: {
     log() {
@@ -403,7 +403,7 @@ export default {
     showNote(value, event) {
       alert(`tag name: ${event.target.tagName}, value: ${value}`);
     },
-    allowedDates: (val) => parseInt(val.split('-')[2], 10) % 2 === 0,
-  },
+    allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0
+  }
 };
 </script>
