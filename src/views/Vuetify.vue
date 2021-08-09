@@ -157,6 +157,9 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
+
+    <h2>v-progress-linear:</h2>
+    <v-progress-linear-test />
   </v-container>
 </template>
 
@@ -245,6 +248,11 @@ export default {
         /* webpackChunkName: "vmenu.test" */
         '@/components/VMenuTest.vue'
       ),
+    VProgressLinearTest: () =>
+      import(
+        /* webpackChunkName: "vprogress.linear.test" */
+        '@/components/VProgressLinearTest.vue'
+      )
   },
 
   data: () => ({}),
@@ -254,7 +262,7 @@ export default {
       console.log('breakpoint name:', this.$vuetify.breakpoint.name);
       console.log('breakpoint width:', this.$vuetify.breakpoint.width);
       console.log('breakpoint height:', this.$vuetify.breakpoint.height);
-    },
+    }
   },
 
   mounted() {
@@ -268,6 +276,6 @@ export default {
   beforeDestroy() {
     if (typeof window === 'undefined') return;
     window.removeEventListener('resize', this.winResize, { passive: true });
-  },
+  }
 };
 </script>
