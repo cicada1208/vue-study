@@ -142,6 +142,37 @@
             </v-col>
 
             <v-col cols="12" md="3">
+              <v-datetime-picker
+                label="Datetime"
+                v-model="datetime"
+                date-format="yyyy-MM-dd"
+                time-format="HH:mm:ss"
+                :text-field-props="{
+                  'prepend-icon': 'mdi-calendar',
+                  clearable: true,
+                  rules: [ruleUtil.required()]
+                }"
+                :date-picker-props="{
+                  locale: 'zh-TW',
+                  'day-format': date => new Date(date).getDate(),
+                  scrollable: true
+                }"
+                :time-picker-props="{
+                  scrollable: true,
+                  'ampm-in-title': true,
+                  'use-seconds': true
+                }"
+              >
+                <template v-slot:dateIcon>
+                  <v-icon>mdi-calendar</v-icon>
+                </template>
+                <template v-slot:timeIcon>
+                  <v-icon>mdi-clock-time-four-outline</v-icon>
+                </template>
+              </v-datetime-picker>
+            </v-col>
+
+            <v-col cols="12" md="3">
               <v-radio-group
                 label="v-radio-group"
                 v-model="vRadioGroup"
@@ -337,9 +368,10 @@ export default {
     files: [],
     note: '',
     dates: [moment().format('YYYY-MM-DD')],
-    time: null,
     minDate: moment().format('YYYY-MM-01'),
     pickerDate: null,
+    time: null,
+    datetime: '2021-08-01 01:02:03', // or new Date()
     vRadioGroup: null,
     vcheckbox: [],
     vswitch: [],
@@ -383,7 +415,8 @@ export default {
       console.log('vswitch:', this.vswitch, typeof this.vswitch);
       console.log('dates:', this.dates);
       console.log('pickerDate:', this.pickerDate);
-      console.log('time:', this.time);
+      console.log('time:', this.time, typeof this.time);
+      console.log('datetime:', this.datetime, typeof this.datetime);
     },
     validate() {
       // 頁面載入時雖會執行 nameRules、emailRules 驗證，

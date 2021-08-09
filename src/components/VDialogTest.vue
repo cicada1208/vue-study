@@ -101,13 +101,13 @@ export default {
       import(
         /* webpackChunkName: "loading.dialog" */
         '@/components/LoadingDialog.vue'
-      ),
+      )
   },
 
   data() {
     return {
       dialog: false,
-      loading: false,
+      loading: false
     };
   },
 
@@ -115,7 +115,7 @@ export default {
     loading(newVal) {
       // if (!newVal) return;
       newVal && setTimeout(() => (this.loading = false), 3000);
-    },
-  },
+    }
+  }
 };
 </script>

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
+import DatetimePicker from 'vuetify-datetime-picker';
 
 // minify-css-string: Remove new lines and extra space from a string of css.
 // 縮小生成的主題樣式
@@ -7,6 +8,7 @@ import Vuetify from 'vuetify/lib/framework';
 import minifyTheme from 'minify-css-string';
 
 Vue.use(Vuetify);
+Vue.use(DatetimePicker);
 
 // 可再自定更改主題: this.$vuetify.theme.dark = true;
 export default new Vuetify({
@@ -22,18 +24,18 @@ export default new Vuetify({
         success: '#81C784',
         error: '#E57373',
         info: '#64B5F6',
-        warning: '#FFB74D',
+        warning: '#FFB74D'
         // testcolor: '#B9B7B7', // 自定義顏色，可用於 component color="testcolor"
       },
       dark: {
         primary: '#455A64',
         secondary: '#757575',
         success: '#33691E',
-        error: '#BF360C',
-      },
+        error: '#BF360C'
+      }
     },
     options: {
-      minifyTheme,
-    },
-  },
+      minifyTheme
+    }
+  }
 });

@@ -379,7 +379,7 @@ const Posts = () => ({
   // 加載失敗時使用的組件
   error: Error,
   // 展示加載時組件的延時時間。默認值是 200 (毫秒)
-  delay: 200,
+  delay: 200
   // 如果提供了超時時間且組件加載也超時，
   // 則使用加載失敗時使用的組件。默認值是：`Infinity`
   // timeout: 3000,
@@ -391,12 +391,12 @@ var reuseMixin = {
     // 自定義私有 property 使用$_前綴
     $_reuseMixin_onPrint: function() {
       console.log('reuseMixin created first.');
-    },
+    }
   },
 
   created: function() {
     this.$_reuseMixin_onPrint();
-  },
+  }
 };
 
 export default {
@@ -432,7 +432,7 @@ export default {
     nums: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     nextNum: 10,
     filterText: '',
-    localStorageTest: '',
+    localStorageTest: ''
   }),
 
   computed: {
@@ -454,13 +454,13 @@ export default {
       },
       set: function(value) {
         this.msg = value;
-      },
+      }
     },
 
     textClass: function() {
       return {
         'text-bold': true,
-        'text-red': true,
+        'text-red': true
       };
     },
 
@@ -477,7 +477,7 @@ export default {
           `@/components/${name}.vue`
         ),
         loading: Loading,
-        error: Error,
+        error: Error
       });
     },
 
@@ -485,9 +485,9 @@ export default {
       return {
         1: 'CAPTURING_PHASE',
         2: 'AT_TARGET',
-        3: 'BUBBLING_PHASE',
+        3: 'BUBBLING_PHASE'
       };
-    },
+    }
   },
 
   methods: {
@@ -543,7 +543,7 @@ export default {
 
       btn.addEventListener(
         'click',
-        (e) => {
+        e => {
           console.log(
             'btn',
             'bubble',
@@ -555,7 +555,7 @@ export default {
       );
       btn.addEventListener(
         'click',
-        (e) => {
+        e => {
           console.log(
             'btn',
             'capture',
@@ -567,7 +567,7 @@ export default {
       );
       div.addEventListener(
         'click',
-        (e) => {
+        e => {
           console.log(
             'div',
             'bubble',
@@ -579,7 +579,7 @@ export default {
       );
       div.addEventListener(
         'click',
-        (e) => {
+        e => {
           console.log(
             'div',
             'capture',
@@ -595,7 +595,7 @@ export default {
       );
       div.addEventListener(
         'click',
-        (e) => {
+        e => {
           console.log(
             'div',
             'capture2',
@@ -615,7 +615,7 @@ export default {
         `target:${e.target.tagName}`
       );
       // 原生事件可執行 e.preventDefault();
-    },
+    }
   },
 
   created: function() {
@@ -635,7 +635,7 @@ export default {
   watch: {
     localStorageTest(newVal) {
       localStorage.localStorageTest = newVal;
-    },
+    }
   },
 
   components: {
@@ -674,7 +674,7 @@ export default {
       import(
         /* webpackChunkName: "todo.list" */
         '@/components/TodoList.vue'
-      ),
+      )
   },
 
   // 當組件使用 mixin 時，所有 mixin 的選項將被“混合”進入該組件本身的選項。
@@ -697,8 +697,8 @@ export default {
       // inserted: 當被綁定的元素插入到 DOM 時調用。
       inserted: function(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
 
   filters: {
@@ -712,8 +712,8 @@ export default {
       var pat = /\d/g;
       value = value.replace(pat, '');
       return value;
-    },
-  },
+    }
+  }
 };
 </script>
 

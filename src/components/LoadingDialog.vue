@@ -1,8 +1,8 @@
 <template>
   <v-dialog
     v-model="loading"
-    persistent
     :hide-overlay="hideOverlay"
+    persistent
     width="300"
   >
     <v-card color="primary" dark style="opacity:85%">
@@ -25,12 +25,12 @@ export default {
   props: {
     loading: {
       type: Boolean,
-      default: false,
+      default: false
     },
     hideOverlay: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 };
 </script>

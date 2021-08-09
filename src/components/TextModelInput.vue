@@ -7,8 +7,8 @@ export default {
   props: {
     value: {
       type: String,
-      default: '',
-    },
+      default: ''
+    }
   },
 
   computed: {
@@ -17,9 +17,9 @@ export default {
         // Pass all component listeners directly to input(不含.native修飾器)
         ...this.$listeners,
         // Override input listener to work with v-model
-        input: (event) => this.$emit('input', event.target.value),
+        input: event => this.$emit('input', event.target.value)
       };
-    },
-  },
+    }
+  }
 };
 </script>
