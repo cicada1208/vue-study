@@ -119,6 +119,9 @@
     <h2>v-badge:</h2>
     <v-badge-test />
 
+    <h2>v-progress-linear:</h2>
+    <v-progress-linear-test />
+
     <h2>v-chip:</h2>
     <v-chip-test />
 
@@ -157,9 +160,6 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
-
-    <h2>v-progress-linear:</h2>
-    <v-progress-linear-test />
   </v-container>
 </template>
 
