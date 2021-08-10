@@ -122,6 +122,9 @@
     <h2>v-progress-linear:</h2>
     <v-progress-linear-test />
 
+    <h2>v-rating:</h2>
+    <v-rating-test />
+
     <h2>v-chip:</h2>
     <v-chip-test />
 
@@ -252,6 +255,11 @@ export default {
       import(
         /* webpackChunkName: "vprogress.linear.test" */
         '@/components/VProgressLinearTest.vue'
+      ),
+    VRatingTest: () =>
+      import(
+        /* webpackChunkName: "vrating.test" */
+        '@/components/VRatingTest.vue'
       )
   },
 
