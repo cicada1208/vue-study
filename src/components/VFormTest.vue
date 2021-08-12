@@ -337,18 +337,17 @@
         </v-card-actions>
       </v-form>
 
-      <v-snackbar
-        v-model="snackbar"
-        timeout="3000"
-        color="success"
-        fixed
-        centered
-      >
-        <span class="mx-4">submit successful!</span>
-        <v-icon dark @click="snackbar = !snackbar">
-          mdi-checkbox-marked-circle
-        </v-icon>
+      <v-snackbar v-model="snackbar" timeout="3000" color="success" centered>
+        <span>submit successful!</span>
+        <template v-slot:action="{ attrs }">
+          <v-icon v-bind="attrs" @click="snackbar = !snackbar">
+            mdi-close-circle
+          </v-icon>
+        </template>
       </v-snackbar>
+      <v-btn dark @click="snackbar = true">
+        Open Snackbar
+      </v-btn>
     </v-card>
   </v-container>
 </template>
