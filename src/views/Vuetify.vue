@@ -155,6 +155,9 @@
     <h2>v-window & v-pagination:</h2>
     <v-window-test />
 
+    <h2>v-stepper:</h2>
+    <v-stepper-test />
+
     <h2>task list & transition:</h2>
     <v-task-list />
 
@@ -168,7 +171,7 @@
 
 <script>
 export default {
-  name: 'Vuetify',
+  name: 'vuetify',
 
   components: {
     VTableTest: () =>
@@ -260,10 +263,13 @@ export default {
       import(
         /* webpackChunkName: "vrating.test" */
         '@/components/VRatingTest.vue'
+      ),
+    VStepperTest: () =>
+      import(
+        /* webpackChunkName: "vstepper.test" */
+        '@/components/VStepperTest.vue'
       )
   },
-
-  data: () => ({}),
 
   methods: {
     winResize() {

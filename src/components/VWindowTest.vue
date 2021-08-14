@@ -67,7 +67,7 @@ export default {
     step: 1,
     list: ['Email', 'Password'],
     email: '',
-    password: '',
-  }),
+    password: ''
+  })
 };
 </script>

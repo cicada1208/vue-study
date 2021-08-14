@@ -40,7 +40,7 @@ import counterStoreType from '../store/counter/type';
 const counterStoreNS = 'counter/'; // store module counter namespaced: true
 
 export default {
-  name: 'Vuex',
+  name: 'vuex',
 
   computed: {
     // count() {
@@ -53,7 +53,7 @@ export default {
     // ...mapState(['countState']),
     //// 將 state 另取名字
     ...mapState(counterStoreNS, {
-      countStateAlias: counterStoreType.state.countState,
+      countStateAlias: counterStoreType.state.countState
     }),
     // countDesp() {
     //   // return this.$store.getters.countStateDesp;
@@ -62,7 +62,7 @@ export default {
     //// mapGetters: 輔助函數將 store getters 映射到局部計算屬性
     ...mapGetters(counterStoreNS, [
       counterStoreType.getters.countStateDesp,
-      counterStoreType.getters.countStateDespFunc,
+      counterStoreType.getters.countStateDespFunc
     ]),
     //// 將 getters 另取名字
     // ...mapGetters({
@@ -80,8 +80,8 @@ export default {
         //   value
         // );
         this.countStateSet(value);
-      },
-    },
+      }
+    }
   },
   methods: {
     incrementCommit() {
@@ -98,7 +98,7 @@ export default {
       //// 也可改寫成如下，整個對像都作為 payload 傳給 mutation
       this.$store.commit({
         type: counterStoreNS + counterStoreType.mutations.countStateDecrement,
-        amount: num,
+        amount: num
       });
     },
     ...mapMutations(counterStoreNS, [counterStoreType.mutations.countStateSet]),
@@ -117,7 +117,7 @@ export default {
     ...mapActions(counterStoreNS, {
       incrementDispatch: counterStoreType.actions.countStateIncrement,
       incrementAsyncDispatch: counterStoreType.actions.countStateIncrementAsync,
-      incDecAsyncDispatch: counterStoreType.actions.countStateIncDecAsync,
+      incDecAsyncDispatch: counterStoreType.actions.countStateIncDecAsync
     }),
     incrementAsyncDispatchPromise(num) {
       this.$store
@@ -125,8 +125,8 @@ export default {
           counterStoreNS + counterStoreType.actions.countStateIncrementAsync,
           num
         )
-        .then((msg) => console.log(msg));
-    },
-  },
+        .then(msg => console.log(msg));
+    }
+  }
 };
 </script>

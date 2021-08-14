@@ -400,7 +400,7 @@ var reuseMixin = {
 };
 
 export default {
-  name: 'VueCore',
+  name: 'vue-core',
 
   data: () => ({
     // data property 是響應式: 即 property 改變，view 會響應。

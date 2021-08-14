@@ -35,10 +35,10 @@
 
 <script>
 export default {
-  name: 'User',
+  name: 'user',
 
   data: () => ({
-    links: ['profile', 'note', 'all'],
+    links: ['profile', 'note', 'all']
   }),
 
   methods: {
@@ -55,12 +55,12 @@ export default {
         {
           name: 'UserHome',
           params: { userName: 'panda', postId: '999' },
-          query: { search: 'dog', type: 'big' },
+          query: { search: 'dog', type: 'big' }
         },
         () => console.log('complete'), // 導航成功完成後執行(在所有的異步鉤子被解析之後)
         () => console.log('abort') // 終止後執行(導航到相同的路由、或在當前導航完成之前導航到另一個不同的路由)
       );
-    },
+    }
   },
 
   // 從 /user/cicada 導航到 /user/plumes，原來的組件實例會被復用。
@@ -94,6 +94,6 @@ export default {
     );
     if (answer) next();
     else next(false);
-  },
+  }
 };
 </script>

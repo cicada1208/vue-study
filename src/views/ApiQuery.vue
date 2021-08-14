@@ -26,7 +26,7 @@
 import apiUtil from '../libs/api-util';
 
 export default {
-  name: 'ApiQuery',
+  name: 'api-query',
 
   components: {
     LoadingDialog: () =>
