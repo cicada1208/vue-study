@@ -326,14 +326,37 @@
         <v-divider class="mx-4"></v-divider>
 
         <v-card-actions class="sticky-bottom">
-          <v-btn color="info" @click="log">log</v-btn>
-          <v-btn color="error" @click="validate">validate</v-btn>
-          <v-btn color="secondary" @click="$refs.form.reset()">
-            clear
-          </v-btn>
-          <v-btn type="submit" :disabled="!valid" color="success">
-            submit
-          </v-btn>
+          <v-speed-dial
+            v-model="func"
+            direction="right"
+            open-on-hover
+            transition="slide-x-transition"
+          >
+            <template v-slot:activator>
+              <v-btn
+                v-model="func"
+                color="primary"
+                style="opacity:70%"
+                fab
+                small
+              >
+                <v-icon v-if="func">
+                  mdi-close
+                </v-icon>
+                <v-icon v-else>
+                  mdi-content-save-cog
+                </v-icon>
+              </v-btn>
+            </template>
+            <v-btn color="info" @click="log">log</v-btn>
+            <v-btn color="error" @click="validate">validate</v-btn>
+            <v-btn color="secondary" @click="$refs.form.reset()">
+              clear
+            </v-btn>
+            <v-btn type="submit" :disabled="!valid" color="success">
+              submit
+            </v-btn>
+          </v-speed-dial>
         </v-card-actions>
       </v-form>
 
@@ -355,6 +378,7 @@ export default {
       )
   },
   data: () => ({
+    func: false,
     ruleUtil,
     valid: false, // v-form 內的驗證皆正確=true，否則＝false
     name: '',
