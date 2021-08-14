@@ -343,7 +343,7 @@
 </template>
 
 <script>
-import ruleUtil from '../libs/rule.util';
+import ruleUtil from '../libs/rule-util';
 import moment from 'moment';
 
 export default {

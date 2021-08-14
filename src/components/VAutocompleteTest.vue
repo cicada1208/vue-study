@@ -131,7 +131,7 @@
 </template>
 
 <script>
-import apiUtil from '../libs/api.util';
+import apiUtil from '../libs/api-util';
 export default {
   data: () => ({
     aItems: [
@@ -140,14 +140,14 @@ export default {
       { name: 'Georgia', abbr: 'GA', id: 2 },
       { divider: true },
       { header: 'Group 2' },
-      { name: 'New York', abbr: 'NY', id: 3 },
+      { name: 'New York', abbr: 'NY', id: 3 }
     ],
     aItemsSelected: [],
     isEditing: false,
 
     apiRst: { loading: false, content: {}, error: '' },
     apiSelected: null,
-    apiSearch: null,
+    apiSearch: null
   }),
 
   methods: {
@@ -163,7 +163,7 @@ export default {
     removeAItem(item) {
       // aItemsSelected is [1,2, ...]
       this.aItemsSelected.splice(this.aItemsSelected.indexOf(item.id), 1);
-    },
+    }
   },
 
   watch: {
@@ -179,9 +179,9 @@ export default {
       // Lazily load input items
       apiUtil.axiosRs(this.apiRst, {
         url: 'https://api.publicapis.org/entries',
-        method: 'GET',
+        method: 'GET'
       });
-    },
-  },
+    }
+  }
 };
 </script>

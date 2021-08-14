@@ -81,25 +81,25 @@
 
 <script>
 export default {
-  name: 'VTaskList',
+  name: 'v-task-list',
 
   data: () => ({
     tasks: [
       {
         done: false,
-        text: 'Foobar',
+        text: 'Foobar'
       },
       {
         done: false,
-        text: 'Fizzbuzz',
-      },
+        text: 'Fizzbuzz'
+      }
     ],
-    newTask: null,
+    newTask: null
   }),
 
   computed: {
     completedTasks() {
-      return this.tasks.filter((task) => task.done).length;
+      return this.tasks.filter(task => task.done).length;
     },
 
     progress() {
@@ -108,18 +108,18 @@ export default {
 
     remainingTasks() {
       return this.tasks.length - this.completedTasks;
-    },
+    }
   },
 
   methods: {
     create() {
       this.tasks.push({
         done: false,
-        text: this.newTask,
+        text: this.newTask
       });
 
       this.newTask = null;
-    },
-  },
+    }
+  }
 };
 </script>

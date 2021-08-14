@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'PropSlot',
+  name: 'prop-slot',
 
   props: {
     // prop 會在組件實例創建前進行驗證
@@ -51,12 +51,12 @@ export default {
       validator: function(value) {
         // 自定義驗證函式: 值必須匹配下列之一，return falsy 值就是驗證失敗
         return ['success', 'warning', 'danger'].indexOf(value) !== -1;
-      },
+      }
     },
     dynamicProp: String,
     numProp: {
       type: Number,
-      default: 1, // 預設值
+      default: 1 // 預設值
     },
     boolPropDef: Boolean,
     boolProp: Boolean,
@@ -65,12 +65,12 @@ export default {
       // object、array 預設值須以 function 獲取
       default: function() {
         return [9, 8, 7];
-      },
+      }
     },
     objectProp: Object,
     id: Number,
     title: String,
-    twoWayProp: Number,
+    twoWayProp: Number
   },
 
   // data: 透過 function return new object，各自獨立，避免共用。
@@ -78,7 +78,7 @@ export default {
     return {
       // 以 prop 作為初始值，異動 num data property
       num: this.numProp,
-      user: { firstName: 'H', lastName: 'W' },
+      user: { firstName: 'H', lastName: 'W' }
     };
   },
   // 若使用 arrow function，則 this 不會指向組件實例，不過仍可將實例作為函數的第一個參數來訪問。
@@ -91,7 +91,7 @@ export default {
   methods: {
     updateTwowayProp: function() {
       this.$emit('update:twoWayProp', ++this.num);
-    },
-  },
+    }
+  }
 };
 </script>

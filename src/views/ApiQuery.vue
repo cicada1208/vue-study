@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import apiUtil from '../libs/api.util';
+import apiUtil from '../libs/api-util';
 
 export default {
   name: 'ApiQuery',

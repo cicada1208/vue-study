@@ -7,25 +7,25 @@
 <script>
 var getChildrenTextContent = function(children) {
   return children
-    .map((node) =>
+    .map(node =>
       node.children ? getChildrenTextContent(node.children) : node.text
     )
     .join('');
 };
 
 export default {
-  name: 'RenderFunc',
+  name: 'render-func',
 
   props: {
     level: {
       type: Number,
-      default: 2,
-    },
+      default: 2
+    }
   },
 
   data: () => ({
     textList: [{ text: 'list1' }, { text: 'list2' }],
-    user: { firstName: 'H', lastName: 'W' },
+    user: { firstName: 'H', lastName: 'W' }
   }),
 
   computed: {
@@ -34,7 +34,7 @@ export default {
         .toLowerCase()
         .replace(/\W+/g, '-')
         .replace(/(^-|-$)/g, '');
-    },
+    }
   },
 
   render: function(createElement) {
@@ -61,8 +61,8 @@ export default {
                 // 阻止該元素默認的keyup事件
                 // event.preventDefault();
                 alert(`default slot: ${JSON.stringify(this.$slots.default)}`);
-              },
-            },
+              }
+            }
           }, // a data object corresponding to the attributes, 可選項
           this.$slots.default // children VNodes, 可選項
         ), // 該 createElement 相當於 `<h5><slot></slot></h5>`
@@ -75,8 +75,8 @@ export default {
             {
               attrs: {
                 name: this.anchorName,
-                href: '#' + this.anchorName,
-              },
+                href: '#' + this.anchorName
+              }
             }, // a data object corresponding to the attributes, 可選項
             this.$slots.anchor // children VNodes, 可選項
           ),
@@ -89,18 +89,18 @@ export default {
         this.textList.length &&
           createElement(
             'ul',
-            this.textList.map((item) => createElement('li', item.text))
+            this.textList.map(item => createElement('li', item.text))
           ),
         this.$scopedSlots.userName &&
           createElement(
             'div',
             // slot prop user 傳遞至父級
             this.$scopedSlots.userName({
-              user: this.user,
+              user: this.user
             })
-          ), // 該 createElement 相當於 `<div><slot name="userName" :user="user"></slot></div>`
+          ) // 該 createElement 相當於 `<div><slot name="userName" :user="user"></slot></div>`
       ] // children VNodes, 可選項
     );
-  },
+  }
 };
 </script>

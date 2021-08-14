@@ -88,7 +88,7 @@
         >
           Loading Dialog
         </v-btn>
-        <loading-dialog :loading="loading" hide-overlay />
+        <loading-dialog v-model="loading" hide-overlay />
       </v-col>
     </v-row>
   </v-container>

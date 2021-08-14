@@ -8,6 +8,6 @@ h2 {
 // 類選擇器
 .multiline {
   // composes: compose class names from other CSS Modules.
-  composes: textBlue textBold from './composes.module.scss';
+  composes: text-blue text-bold from './composes.module.scss';
   white-space: pre-wrap;
 }

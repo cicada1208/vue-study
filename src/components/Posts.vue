@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'Posts',
+  name: 'posts',
 
   data: function() {
     return {
@@ -32,22 +32,22 @@ export default {
         {
           id: 1,
           title: 'Cat Ipsum',
-          content: '<p>Cat Ipsum Text</p>',
+          content: '<p>Cat Ipsum Text</p>'
         },
         {
           id: 2,
           title: 'Hipster Ipsum',
-          content: '<p>Hipster Ipsum Text</p>',
+          content: '<p>Hipster Ipsum Text</p>'
         },
         {
           id: 3,
           title: 'Cupcake Ipsum',
-          content: '<p>Cupcake Ipsum Text</p>',
-        },
+          content: '<p>Cupcake Ipsum Text</p>'
+        }
       ],
-      selectedPost: null,
+      selectedPost: null
     };
-  },
+  }
 };
 </script>
 
