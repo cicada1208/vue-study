@@ -337,17 +337,7 @@
         </v-card-actions>
       </v-form>
 
-      <v-snackbar v-model="snackbar" timeout="3000" color="success" centered>
-        <span>submit successful!</span>
-        <template v-slot:action="{ attrs }">
-          <v-icon v-bind="attrs" @click="snackbar = !snackbar">
-            mdi-close-circle
-          </v-icon>
-        </template>
-      </v-snackbar>
-      <v-btn dark @click="snackbar = true">
-        Open Snackbar
-      </v-btn>
+      <msg-snackbar v-model="snackbar" :msgType="true" />
     </v-card>
   </v-container>
 </template>
@@ -357,6 +347,13 @@ import ruleUtil from '../libs/rule.util';
 import moment from 'moment';
 
 export default {
+  components: {
+    MsgSnackbar: () =>
+      import(
+        /* webpackChunkName: "msg.snackbar" */
+        '@/components/MsgSnackbar.vue'
+      )
+  },
   data: () => ({
     ruleUtil,
     valid: false, // v-form 內的驗證皆正確=true，否則＝false

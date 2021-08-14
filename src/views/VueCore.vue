@@ -160,7 +160,7 @@
 
     <h2>component prop & slot:</h2>
     <!--
-      prop 單向數據流: 父級 prop 的更新會向下流動到子組件中，但是反過來則不行。
+      prop 單向數據流: 父級對 prop 的更新會向下流動到子組件中，但是反過來則不行。
 
       dynamicProp、numProp、boolProp、arrayProp、objectProp:
       以 v-bind 告訴 Vue 是 JavaScript 表達式而非字串。

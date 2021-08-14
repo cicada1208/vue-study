@@ -33,12 +33,12 @@ export default {
       import(
         /* webpackChunkName: "loading.dialog" */
         '@/components/LoadingDialog.vue'
-      ),
+      )
   },
 
   data() {
     return {
-      albumRst: { loading: false, content: {}, error: '' },
+      albumRst: { loading: false, content: {}, error: '' }
     };
   },
 
@@ -46,7 +46,7 @@ export default {
     async fetchAlbum() {
       // this.error = this.content = null;
       // this.loading = true;
-      const url = 'https://itunes.apple.com/search?term=twice&limit=150';
+      const url = 'https://itunes.apple.com/search?term=twice&limit=50';
       // // const cb = (err, data) => {
       // //   this.loading = false;
       // //   if (err) this.error = err.toString();
@@ -60,7 +60,7 @@ export default {
     },
     viewAlbum(link) {
       window.open(link);
-    },
+    }
   },
 
   // created: 完成 data observer、property 和方法運算、watch/event事件回調，
@@ -77,8 +77,8 @@ export default {
     // 如果 data property loading 有變化，會再次執行該方法
     'albumRst.loading': function(newVal, oldVal) {
       console.log('albumRst.loading new: %s, old: %s', newVal, oldVal);
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,8 +1,15 @@
 <template>
-  <v-snackbar v-model="visible" :color="colorDisplay" timeout="3000" centered>
-    <span>{{ msgDisplay }}</span>
+  <!-- or using @input="visibleChange" -->
+  <v-snackbar
+    :value="visible"
+    :color="colorDisplay"
+    :timeout="timeout"
+    centered
+    @input="$emit('input', $event)"
+  >
+    <span class="text-break">{{ msgDisplay }}</span>
     <template v-slot:action="{ attrs }">
-      <v-icon v-bind="attrs" @click="snackbar = !snackbar">
+      <v-icon v-bind="attrs" @click="$emit('input', false)">
         mdi-close-circle
       </v-icon>
     </template>
@@ -12,6 +19,10 @@
 <script>
 export default {
   name: 'MsgSnackbar',
+  model: {
+    prop: 'visible',
+    event: 'input'
+  },
   props: {
     visible: {
       type: Boolean,
@@ -19,19 +30,30 @@ export default {
     },
     msgType: {
       type: [Boolean, String],
-      default: undefined
-      // success error warnning info
+      default: false,
+      //required: true,
+      validator: function(value) {
+        return (
+          [true, false, 'success', 'error', 'warning', 'info'].indexOf(
+            value
+          ) !== -1
+        );
+      }
     },
     msg: {
       type: String,
       default: ''
+    },
+    timeout: {
+      type: Number,
+      default: 5000
     }
   },
   computed: {
     msgDisplay() {
       let result = this.msg;
       if (!this.msg) {
-        if (!this.msgType) result = '處理失敗！';
+        if (!this.msgType || this.msgType === 'error') result = '處理失敗！';
         else result = '處理成功。';
       }
       return result;
@@ -41,6 +63,12 @@ export default {
       if (!this.msgType) result = 'error';
       else if (this.msgType === true) result = 'success';
       return result;
+    }
+  },
+  methods: {
+    visibleChange(visible) {
+      console.log('visible:', visible);
+      this.$emit('input', visible);
     }
   }
 };
