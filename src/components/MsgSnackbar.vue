@@ -4,8 +4,8 @@
     :value="visible"
     :color="colorDisplay"
     :timeout="timeout"
-    centered
     @input="$emit('input', $event)"
+    centered
   >
     <span class="text-break">{{ msgDisplay }}</span>
     <template v-slot:action="{ attrs }">
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'MsgSnackbar',
+  name: 'msg-snackbar',
   model: {
     prop: 'visible',
     event: 'input'

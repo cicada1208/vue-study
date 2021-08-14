@@ -1,7 +1,8 @@
 <template>
   <v-dialog
-    v-model="loading"
+    :value="loading"
     :hide-overlay="hideOverlay"
+    @input="$emit('input', $event)"
     persistent
     width="300"
   >
@@ -20,8 +21,11 @@
 
 <script>
 export default {
-  name: 'LoadingDialog',
-
+  name: 'loading-dialog',
+  model: {
+    prop: 'loading',
+    event: 'input'
+  },
   props: {
     loading: {
       type: Boolean,
