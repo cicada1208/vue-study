@@ -15,31 +15,32 @@
       <template v-slot:header>
         <v-toolbar class="mb-3" color="primary" dark>
           <v-text-field
+            label="Search"
             v-model="search"
             clearable
             flat
             solo-inverted
             hide-details
             prepend-inner-icon="mdi-magnify"
-            label="Search"
+            class="mx-1"
           ></v-text-field>
-          <template v-if="$vuetify.breakpoint.mdAndUp">
+          <template v-if="$vuetify.breakpoint.smAndUp">
             <v-spacer></v-spacer>
             <v-select
+              label="Sort by"
               v-model="sortBy"
+              :items="sortKeys"
               flat
               solo-inverted
               hide-details
-              :items="keys"
               prepend-inner-icon="mdi-magnify"
-              label="Sort by"
+              class="mx-1"
             ></v-select>
-            <v-spacer></v-spacer>
-            <v-btn-toggle v-model="sortDesc" mandatory>
-              <v-btn large depressed color="blue" :value="false">
+            <v-btn-toggle v-model="sortDesc" mandatory tile>
+              <v-btn :value="false" color="primary">
                 <v-icon>mdi-arrow-up</v-icon>
               </v-btn>
-              <v-btn large depressed color="blue" :value="true">
+              <v-btn :value="true" color="primary">
                 <v-icon>mdi-arrow-down</v-icon>
               </v-btn>
             </v-btn-toggle>
@@ -81,16 +82,16 @@
       </template>
       <template v-slot:footer>
         <v-row class="mt-2" align="center" justify="center">
-          <span class="grey--text">Items per page</span>
+          <span class="grey--text ml-3">Items per page</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                dark
-                text
-                color="primary"
-                class="ml-2"
                 v-bind="attrs"
                 v-on="on"
+                color="primary"
+                class="ml-2"
+                dark
+                text
               >
                 {{ itemsPerPage }}
                 <v-icon>mdi-chevron-down</v-icon>
@@ -137,14 +138,12 @@
 export default {
   data: () => ({
     singleExpand: false,
+    search: '',
+    sortBy: 'name',
+    sortDesc: false,
     itemsPerPage: 2,
     itemsPerPageArray: [1, 2, 4],
     page: 1,
-    search: '',
-    filter: {},
-    sortBy: 'name',
-    sortDesc: false,
-    keys: ['Name', 'Calories'],
     items: [
       {
         name: 'Frozen Yogurt',
@@ -165,6 +164,9 @@ export default {
     ]
   }),
   computed: {
+    sortKeys() {
+      return this.items.length > 0 ? Object.keys(this.items[0]) : [];
+    },
     numberOfPages() {
       return Math.ceil(this.items.length / this.itemsPerPage);
     }
