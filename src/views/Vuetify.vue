@@ -34,6 +34,9 @@
       </div>
     </div>
 
+    <v-subheader inset>subheader</v-subheader>
+    <small>small print</small>
+
     <h2>margin & text alignment:</h2>
     <!-- mx-auto: 水平置中 -->
     <!-- class="text-justify text-md-right:

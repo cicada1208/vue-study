@@ -64,23 +64,23 @@ export default {
             text: 'Admin',
             group: [
               { text: 'Management', icon: 'mdi-account-multiple-outline' },
-              { text: 'Settings', icon: 'mdi-cog-outline' },
-            ],
+              { text: 'Settings', icon: 'mdi-cog-outline' }
+            ]
           },
           {
             text: 'Actions',
             group: [
               { text: 'Create', icon: 'mdi-plus-outline' },
-              { text: 'Read', icon: 'mdi-file-outline' },
-            ],
+              { text: 'Read', icon: 'mdi-file-outline' }
+            ]
           },
           {
             text: 'Test',
-            icon: 'mdi-close',
-          },
-        ],
-      },
-    ],
-  }),
+            icon: 'mdi-close'
+          }
+        ]
+      }
+    ]
+  })
 };
 </script>
