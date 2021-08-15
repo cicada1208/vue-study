@@ -1,55 +1,43 @@
 <template>
   <v-container fluid>
-    <v-stepper v-model="e6" vertical>
-      <v-stepper-step :complete="e6 > 1" step="1" editable>
+    <v-stepper v-model="step" vertical>
+      <v-stepper-step :step="1" :complete="step > 1" editable>
         Select an app
         <small>Summarize if needed</small>
       </v-stepper-step>
-      <v-stepper-content step="1">
+      <!--v-stepper-content: 未展開的 v-stepper-content 其內容也會 render -->
+      <v-stepper-content :step="1">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
-        <v-btn color="primary" @click="e6 = 2">
+        <v-btn color="primary" @click="step = step + 1">
           Continue
         </v-btn>
-        <v-btn text>
+        <v-btn text @click="step = 3">
           Cancel
         </v-btn>
       </v-stepper-content>
 
-      <v-stepper-step :complete="e6 > 2" step="2" editable>
+      <v-stepper-step :step="2" :complete="step > 2" editable>
         Configure analytics for this app
       </v-stepper-step>
-      <v-stepper-content step="2">
+      <v-stepper-content :step="2">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
-        <v-btn color="primary" @click="e6 = 3">
+        <v-btn color="primary" @click="step = step + 1">
           Continue
         </v-btn>
-        <v-btn text>
+        <v-btn text @click="step = step - 1">
           Cancel
         </v-btn>
       </v-stepper-content>
 
-      <v-stepper-step :complete="e6 > 3" step="3" editable>
+      <v-stepper-step :step="3" editable>
         Select an ad format and name ad unit
       </v-stepper-step>
-      <v-stepper-content step="3">
+      <v-stepper-content :step="3">
         <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
-        <v-btn color="primary" @click="e6 = 4">
+        <v-btn color="primary" @click="step = 1">
           Continue
         </v-btn>
-        <v-btn text>
-          Cancel
-        </v-btn>
-      </v-stepper-content>
-
-      <v-stepper-step step="4" editable>
-        View setup instructions
-      </v-stepper-step>
-      <v-stepper-content step="4">
-        <v-card color="grey lighten-1" class="mb-12" height="200px"></v-card>
-        <v-btn color="primary" @click="e6 = 1">
-          Continue
-        </v-btn>
-        <v-btn text>
+        <v-btn text @click="step = step - 1">
           Cancel
         </v-btn>
       </v-stepper-content>
@@ -60,7 +48,7 @@
 <script>
 export default {
   data: () => ({
-    e6: 1
+    step: 1
   })
 };
 </script>

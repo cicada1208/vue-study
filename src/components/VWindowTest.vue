@@ -35,6 +35,7 @@
       </v-card-title>
 
       <v-window v-model="step">
+        <!-- v-window-item: 展開的 v-window-item 其內容才會 render -->
         <v-window-item v-for="n in list.length" :value="n" :key="n">
           <v-card-text v-if="n === 1">
             <v-text-field
