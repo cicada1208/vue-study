@@ -164,8 +164,11 @@
     <h2>task list & transition:</h2>
     <v-task-list />
 
+    <h2>v-data-iterator:</h2>
+    <v-data-iterator-test />
+
     <h2>v-data-table:</h2>
-    <v-table-test />
+    <v-data-table-test />
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
@@ -177,10 +180,10 @@ export default {
   name: 'vuetify',
 
   components: {
-    VTableTest: () =>
+    VDataTableTest: () =>
       import(
-        /* webpackChunkName: "vtable.test" */
-        '@/components/VTableTest.vue'
+        /* webpackChunkName: "vdata.table.test" */
+        '@/components/VDataTableTest.vue'
       ),
     VTaskList: () =>
       import(
@@ -271,6 +274,11 @@ export default {
       import(
         /* webpackChunkName: "vstepper.test" */
         '@/components/VStepperTest.vue'
+      ),
+    VDataIteratorTest: () =>
+      import(
+        /* webpackChunkName: "vdata.iterator.test" */
+        '@/components/VDataIteratorTest.vue'
       )
   },
 
