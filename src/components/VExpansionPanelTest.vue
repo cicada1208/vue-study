@@ -186,7 +186,7 @@ export default {
         name: '',
         location: null,
         start: null,
-        end: null,
+        end: null
       },
       locations: [
         'Australia',
@@ -194,9 +194,9 @@ export default {
         'Chile',
         'Denmark',
         'Ecuador',
-        'France',
+        'France'
       ],
-      date: null,
+      date: null
     };
   },
   methods: {
@@ -205,7 +205,7 @@ export default {
     },
     expandNone() {
       this.expandIdxes = [];
-    },
-  },
+    }
+  }
 };
 </script>
