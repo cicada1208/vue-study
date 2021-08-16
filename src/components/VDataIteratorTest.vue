@@ -25,7 +25,6 @@
             class="mx-1"
           ></v-text-field>
           <template v-if="$vuetify.breakpoint.smAndUp">
-            <v-spacer></v-spacer>
             <v-select
               label="Sort by"
               v-model="sortBy"
@@ -110,22 +109,13 @@
 
           <v-spacer></v-spacer>
 
-          <span
-            class="mr-4
-            grey--text"
-          >
+          <span class="grey--text mr-4">
             Page {{ page }} of {{ numberOfPages }}
           </span>
-          <v-btn
-            fab
-            dark
-            color="blue darken-3"
-            class="mr-1"
-            @click="formerPage"
-          >
+          <v-btn @click="formerPage" icon color="primary">
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
-          <v-btn fab dark color="blue darken-3" class="ml-1" @click="nextPage">
+          <v-btn @click="nextPage" icon color="primary">
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
         </v-row>
