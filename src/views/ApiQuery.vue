@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <loading-dialog :loading="albumRst.loading" />
+    <loading-dialog v-model="albumRst.loading" />
 
     <div v-if="albumRst.error">
       {{ albumRst.error }}

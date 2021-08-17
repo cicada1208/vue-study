@@ -14,6 +14,7 @@
         :items="items"
         item-key="id"
         :show-select="tableSelect"
+        fixed-header
       >
       </v-data-table>
     </v-container>

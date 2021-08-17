@@ -167,7 +167,7 @@
     <h2>v-data-iterator:</h2>
     <v-data-iterator-test />
 
-    <h2>v-data-table:</h2>
+    <h2>v-data-table & v-lazy:</h2>
     <v-data-table-test />
 
     <h2>v-calendar:</h2>

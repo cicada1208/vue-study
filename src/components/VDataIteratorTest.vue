@@ -11,6 +11,7 @@
       :sort-desc="sortDesc"
       :single-expand="singleExpand"
       hide-default-footer
+      dark
     >
       <template v-slot:header>
         <v-toolbar class="mb-3" color="primary" dark>
