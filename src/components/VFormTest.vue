@@ -195,6 +195,7 @@
                 :value="`checkbox ${n}`"
                 :key="n"
                 :rules="[ruleUtil.required()]"
+                hide-details="auto"
               >
               </v-checkbox>
             </v-col>

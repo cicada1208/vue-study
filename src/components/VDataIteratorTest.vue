@@ -29,7 +29,7 @@
             <v-select
               label="Sort by"
               v-model="sortBy"
-              :items="sortKeys"
+              :items="sortCols"
               flat
               solo-inverted
               hide-details
@@ -155,7 +155,7 @@ export default {
     ]
   }),
   computed: {
-    sortKeys() {
+    sortCols() {
       return this.items.length > 0 ? Object.keys(this.items[0]) : [];
     },
     numberOfPages() {
