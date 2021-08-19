@@ -11,14 +11,24 @@
       <v-switch label="tableSelect" v-model="tableSelect" />
       <!-- custom-filter 會覆蓋 search 的默認過濾，
       若 header 有自定義 filter，custom-filter 不會應用於該 header。 -->
+      <!-- v-data-table 使用 v-data-footer 渲染 footer。 -->
       <v-data-table
         :headers="headers"
         :items="items"
         item-key="name"
         :search="search"
         :custom-filter="filterTextCol"
+        multi-sort
+        :sort-by="['calories', 'fat']"
+        :sort-desc="[false, true]"
+        group-by="category"
+        group-desc
+        show-group-by
         fixed-header
         height="500px"
+        :footer-props="{
+          showFirstLastPage: true
+        }"
         class="elevation-2"
         :show-select="tableSelect"
       >
@@ -61,7 +71,8 @@ export default {
         fat: 6.0,
         carbs: 24,
         protein: 4.0,
-        iron: '1%'
+        iron: '1%',
+        category: 'Ice cream'
       },
       {
         name: 'Ice cream sandwich',
@@ -69,7 +80,8 @@ export default {
         fat: 9.0,
         carbs: 37,
         protein: 4.3,
-        iron: '1%'
+        iron: '1%',
+        category: 'Ice cream'
       },
       {
         name: 'Eclair',
@@ -77,7 +89,8 @@ export default {
         fat: 16.0,
         carbs: 23,
         protein: 6.0,
-        iron: '7%'
+        iron: '7%',
+        category: 'Cookie'
       },
       {
         name: 'Cupcake',
@@ -85,7 +98,8 @@ export default {
         fat: 3.7,
         carbs: 67,
         protein: 4.3,
-        iron: '8%'
+        iron: '8%',
+        category: 'Pastry'
       },
       {
         name: 'Gingerbread',
@@ -93,7 +107,8 @@ export default {
         fat: 16.0,
         carbs: 49,
         protein: 3.9,
-        iron: '16%'
+        iron: '16%',
+        category: 'Cookie'
       },
       {
         name: 'Jelly bean',
@@ -101,7 +116,8 @@ export default {
         fat: 0.0,
         carbs: 94,
         protein: 0.0,
-        iron: '0%'
+        iron: '0%',
+        category: 'Candy'
       },
       {
         name: 'Lollipop',
@@ -109,7 +125,8 @@ export default {
         fat: 0.2,
         carbs: 98,
         protein: 0,
-        iron: '2%'
+        iron: '2%',
+        category: 'Candy'
       },
       {
         name: 'Honeycomb',
@@ -117,7 +134,8 @@ export default {
         fat: 3.2,
         carbs: 87,
         protein: 6.5,
-        iron: '45%'
+        iron: '45%',
+        category: 'Toffee'
       },
       {
         name: 'Donut',
@@ -125,7 +143,8 @@ export default {
         fat: 25.0,
         carbs: 51,
         protein: 4.9,
-        iron: '22%'
+        iron: '22%',
+        category: 'Pastry'
       },
       {
         name: 'KitKat',
@@ -133,7 +152,8 @@ export default {
         fat: 26.0,
         carbs: 65,
         protein: 7,
-        iron: '6%'
+        iron: '6%',
+        category: 'Candy'
       }
     ]
   }),
@@ -142,22 +162,30 @@ export default {
       return [
         {
           text: 'Dessert (100g serving)',
+          value: 'name',
           align: 'start',
           sortable: false,
-          value: 'name'
+          groupable: false
         },
         {
           text: 'Calories',
           value: 'calories',
+          groupable: false,
           filter: value => {
             if (!this.calories) return true;
             return value < parseInt(this.calories);
           }
         },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Iron (%)', value: 'iron' }
+        { text: 'Fat (g)', value: 'fat', groupable: false },
+        { text: 'Carbs (g)', value: 'carbs', groupable: false },
+        { text: 'Protein (g)', value: 'protein', groupable: false },
+        {
+          text: 'Iron (%)',
+          value: 'iron',
+          filterable: false,
+          groupable: false
+        },
+        { text: 'Category', value: 'category' }
       ];
     }
   },
