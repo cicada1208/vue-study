@@ -45,7 +45,7 @@
     <v-divider class="mb-4"></v-divider>
 
     <v-card v-if="tasks.length > 0">
-      <v-slide-y-transition class="py-0" group>
+      <v-slide-y-transition class="py-0" group tag="v-list">
         <template v-for="(task, i) in tasks">
           <v-divider v-if="i !== 0" :key="`${i}-divider`"></v-divider>
 
