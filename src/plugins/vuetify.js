@@ -2,12 +2,20 @@ import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import DatetimePicker from 'vuetify-datetime-picker';
 
+// [Vue warn]: Failed to resolve directive: ripple
+// issue: https://github.com/vuetifyjs/vuetify/issues/12224
+import Ripple from 'vuetify/lib/directives/ripple';
+
 // minify-css-string: Remove new lines and extra space from a string of css.
 // 縮小生成的主題樣式
 // npm install minify-css-string
 import minifyTheme from 'minify-css-string';
 
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  directives: {
+    Ripple
+  }
+});
 Vue.use(DatetimePicker);
 
 // 可再自定更改主題: this.$vuetify.theme.dark = true;
