@@ -85,6 +85,14 @@
             </td>
           </tr>
         </template>
+        <template v-slot:item.calories="{ item }">
+          <v-chip :color="getColor(item.calories)" dark>
+            {{ item.calories }}
+          </v-chip>
+        </template>
+        <template v-slot:item.glutenfree="{ item }">
+          <v-simple-checkbox v-model="item.glutenfree"></v-simple-checkbox>
+        </template>
         <template v-slot:footer>
           <div class="ml-4">
             This is a footer
@@ -111,7 +119,8 @@ export default {
         carbs: 24,
         protein: 4.0,
         iron: '1%',
-        category: 'Ice cream'
+        category: 'Ice cream',
+        glutenfree: true
       },
       {
         name: 'Ice cream sandwich',
@@ -224,7 +233,8 @@ export default {
           filterable: false,
           groupable: false
         },
-        { text: 'Category', value: 'category' }
+        { text: 'Category', value: 'category' },
+        { text: 'Gluten-Free', value: 'glutenfree', groupable: false }
       ];
     }
   },
@@ -245,6 +255,11 @@ export default {
     },
     log() {
       console.log('itemSelected:', this.itemSelected);
+    },
+    getColor(calories) {
+      if (calories > 400) return 'red';
+      else if (calories > 200) return 'orange';
+      else return 'green';
     }
   }
 };
