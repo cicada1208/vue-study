@@ -8,7 +8,6 @@
     transition="fade-transition"
   >
     <v-container fluid>
-      <v-switch label="tableSelect" v-model="tableSelect" />
       <!-- custom-filter 會覆蓋 search 的默認過濾，
       若 header 有自定義 filter，custom-filter 不會應用於該 header。 -->
       <!-- v-data-table 使用 v-data-footer 渲染 footer。 -->
@@ -16,6 +15,9 @@
         :headers="headers"
         :items="items"
         item-key="name"
+        v-model="itemSelected"
+        show-select
+        :single-select="singleSelect"
         :search="search"
         :custom-filter="filterTextCol"
         multi-sort
@@ -30,10 +32,14 @@
           showFirstLastPage: true
         }"
         class="elevation-2"
-        :show-select="tableSelect"
       >
         <template v-slot:top>
           <v-toolbar color="primary" dark>
+            <v-switch
+              label="Single select"
+              v-model="singleSelect"
+              hide-details
+            ></v-switch>
             <v-text-field
               label="Search"
               v-model="search"
@@ -50,6 +56,7 @@
               hide-details
               class="mx-2"
             ></v-text-field>
+            <v-btn @click="log">log</v-btn>
           </v-toolbar>
         </template>
       </v-data-table>
@@ -61,7 +68,8 @@
 export default {
   data: () => ({
     tableActive: false,
-    tableSelect: false,
+    singleSelect: false,
+    itemSelected: [],
     search: '',
     calories: '',
     items: [
@@ -203,6 +211,9 @@ export default {
           .toLocaleUpperCase()
           .indexOf(search.toLocaleUpperCase()) !== -1
       );
+    },
+    log() {
+      console.log('itemSelected:', this.itemSelected);
     }
   }
 };

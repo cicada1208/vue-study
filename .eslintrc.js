@@ -4,19 +4,19 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
-    node: true,
+    node: true
   },
   parserOptions: {
     parser: 'babel-eslint',
     ecmaVersion: 2020,
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   extends: [
     // add more generic rulesets here
     'eslint:recommended',
-    'plugin:vue/essential', //'plugin:vue/recommended'
+    'plugin:vue/essential' //'plugin:vue/recommended'
     // 'plugin:prettier/recommended',
   ],
   rules: {
@@ -24,5 +24,6 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'linebreak-style': ['off', 'windows'], // 關閉 win os 對換行的 lint
-  },
+    'vue/valid-v-slot': ['error', { allowModifiers: true }] // to disable errors, when slots use modifiers
+  }
 };
