@@ -34,6 +34,7 @@
         class="elevation-2"
       >
         <template v-slot:top>
+          <!-- table 上方添加內容 -->
           <v-toolbar color="primary" dark>
             <v-switch
               label="Single select"
@@ -58,6 +59,36 @@
             ></v-text-field>
             <v-btn @click="log">log</v-btn>
           </v-toolbar>
+        </template>
+        <template v-slot:header="{ props: { headers } }">
+          <thead>
+            <tr>
+              <th :colspan="headers.length">
+                This is a header
+              </th>
+            </tr>
+          </thead>
+        </template>
+        <template v-slot:body.prepend="{ headers }">
+          <!-- <tbody> 開頭添加內容 -->
+          <tr>
+            <td :colspan="headers.length">
+              This is a prepended row
+            </td>
+          </tr>
+        </template>
+        <template v-slot:body.append="{ headers }">
+          <!-- <tbody> 結尾添加內容 -->
+          <tr>
+            <td :colspan="headers.length">
+              This is an appended row
+            </td>
+          </tr>
+        </template>
+        <template v-slot:footer>
+          <div class="ml-4">
+            This is a footer
+          </div>
         </template>
       </v-data-table>
     </v-container>
