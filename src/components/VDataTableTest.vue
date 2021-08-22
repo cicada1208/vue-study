@@ -86,7 +86,7 @@
           </tr>
         </template>
         <template v-slot:item.calories="{ item }">
-          <v-chip :color="getColor(item.calories)" dark>
+          <v-chip :color="getCaloriesColor(item.calories)" dark>
             {{ item.calories }}
           </v-chip>
         </template>
@@ -111,7 +111,6 @@ export default {
   data: () => ({
     tableActive: false,
     singleSelect: false,
-    itemSelected: [],
     search: '',
     calories: '',
     items: [
@@ -215,7 +214,8 @@ export default {
         category: 'Candy',
         glutenfree: false
       }
-    ]
+    ],
+    itemSelected: []
   }),
   computed: {
     headers() {
@@ -245,8 +245,9 @@ export default {
           filterable: false,
           groupable: false
         },
+        { text: 'Gluten-Free', value: 'glutenfree', groupable: false },
         { text: 'Category', value: 'category' },
-        { text: 'Gluten-Free', value: 'glutenfree', groupable: false }
+        { text: 'Actions', value: 'actions', sortable: false, groupable: false }
       ];
     }
   },
@@ -268,7 +269,7 @@ export default {
     log() {
       console.log('itemSelected:', this.itemSelected);
     },
-    getColor(calories) {
+    getCaloriesColor(calories) {
       if (calories > 400) return 'red';
       else if (calories > 200) return 'orange';
       else return 'green';

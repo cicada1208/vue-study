@@ -27,7 +27,7 @@
 <script>
 export default {
   data: () => ({
-    items: [{ title: 'Click Me1' }, { title: 'Click Me2' }],
-  }),
+    items: [{ title: 'Click Me1' }, { title: 'Click Me2' }]
+  })
 };
 </script>

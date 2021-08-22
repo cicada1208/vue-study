@@ -26,7 +26,7 @@
               {{ $refs.calendar.title }}
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-menu bottom right>
+            <v-menu bottom right open-on-hover>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
                   <span>{{ typeToLabel[type] }}</span>
@@ -55,9 +55,9 @@
           <v-calendar
             ref="calendar"
             locale="zh-tw"
-            :month-format="(dtm) => dtm.month + ' /'"
-            :day-format="(dtm) => dtm.day"
-            :interval-format="(dtm) => dtm.time"
+            :month-format="dtm => dtm.month + ' /'"
+            :day-format="dtm => dtm.day"
+            :interval-format="dtm => dtm.time"
             v-model="focus"
             :type="type"
             :events="events"
@@ -135,7 +135,7 @@ export default {
       month: 'Month',
       week: 'Week',
       '4day': '4 Days',
-      day: 'Day',
+      day: 'Day'
     },
     events: [],
     names: [
@@ -145,7 +145,7 @@ export default {
       'Travel',
       'Birthday',
       'Conference',
-      'Party',
+      'Party'
     ],
     colors: [
       'blue',
@@ -154,12 +154,12 @@ export default {
       'cyan',
       'green',
       'orange',
-      'grey darken-1',
+      'grey darken-1'
     ],
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    eventId: 1,
+    eventId: 1
   }),
   methods: {
     setToday() {
@@ -197,7 +197,7 @@ export default {
           start: first,
           end: second,
           timed: !allDay,
-          details,
+          details
         });
       }
 
@@ -258,11 +258,11 @@ export default {
         start,
         end,
         timed: true,
-        details,
+        details
       });
     },
     deleteEvent(delEvent) {
-      this.events = this.events.filter((e) => e.id !== delEvent.id);
+      this.events = this.events.filter(e => e.id !== delEvent.id);
       this.selectedOpen = false;
     },
     viewDay({ date }) {
@@ -271,11 +271,11 @@ export default {
     },
     rnd(a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a;
-    },
+    }
   },
   mounted() {
     // 檢查開始和結束日期的更改，如果更改，發出更改事件。
     this.$refs.calendar.checkChange();
-  },
+  }
 };
 </script>

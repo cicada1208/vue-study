@@ -73,9 +73,8 @@
                   </template>
                 </v-img>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-
+                <v-card-actions class="justify-end">
+                  <!-- <v-spacer></v-spacer> -->
                   <v-btn icon>
                     <v-icon>mdi-heart</v-icon>
                   </v-btn>
@@ -94,9 +93,8 @@
         </v-row>
       </v-container>
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
-
+      <v-card-actions class="justify-end">
+        <!-- <v-spacer></v-spacer> -->
         <v-btn @click="expand = !expand" icon>
           <v-icon>{{ expand ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
         </v-btn>
@@ -107,12 +105,14 @@
           v-if="reveal"
           class="v-card--reveal transition-fast-in-fast-out"
         >
-          <v-card-title>reveal</v-card-title>
+          <v-card-title class="text-h5 grey lighten-2">reveal</v-card-title>
           <v-card-text>
-            select items and test btn.
+            select items and test btn
+            .......................................................................................................................................................................................................................................................................
           </v-card-text>
-          <v-card-actions>
-            <v-btn @click="reveal = false" color="orange" text>
+          <v-divider></v-divider>
+          <v-card-actions class="justify-end">
+            <v-btn @click="reveal = false" color="warning" text>
               CLOSE
             </v-btn>
           </v-card-actions>
@@ -122,7 +122,6 @@
       <v-expand-transition>
         <div v-if="expand">
           <v-divider></v-divider>
-
           <v-card-text>
             expand message.
           </v-card-text>

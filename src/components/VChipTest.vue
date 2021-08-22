@@ -34,7 +34,6 @@
             <v-menu
               v-model="selection.showMenu"
               :close-on-content-click="false"
-              open-on-hover
               transition="scale-transition"
               bottom
               right
@@ -96,12 +95,11 @@
 
       <v-divider></v-divider>
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
+      <v-card-actions class="justify-end">
         <v-btn
           :disabled="!itemsSelected.length"
           :loading="loading"
-          color="purple"
+          color="primary"
           text
           @click="next"
         >
@@ -121,32 +119,32 @@ export default {
       {
         text: 'Nature',
         icon: 'mdi-nature',
-        showMenu: false,
+        showMenu: false
       },
       {
         text: 'Nightlife',
         icon: 'mdi-glass-wine',
-        showMenu: false,
+        showMenu: false
       },
       {
         text: 'November',
         icon: 'mdi-calendar-range',
-        showMenu: false,
+        showMenu: false
       },
       {
         text: 'Portland',
         icon: 'mdi-map-marker',
-        showMenu: false,
+        showMenu: false
       },
       {
         text: 'Biking',
         icon: 'mdi-bike',
-        showMenu: false,
-      },
+        showMenu: false
+      }
     ],
     itemsSelected: [],
     loading: false,
-    search: '',
+    search: ''
   }),
 
   computed: {
@@ -158,17 +156,17 @@ export default {
 
       if (!search) return this.items;
 
-      return this.items.filter((item) => {
+      return this.items.filter(item => {
         const text = item.text.toLowerCase();
         return text.indexOf(search) > -1;
       });
-    },
+    }
   },
 
   watch: {
     itemsSelected() {
       this.search = '';
-    },
+    }
   },
 
   methods: {
@@ -180,7 +178,7 @@ export default {
         this.itemsSelected = [];
         this.loading = false;
       }, 2000);
-    },
-  },
+    }
+  }
 };
 </script>

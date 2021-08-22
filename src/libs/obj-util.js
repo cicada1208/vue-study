@@ -26,5 +26,5 @@ function removeNamespace(namespace, types) {
 }
 
 export default {
-  removeNamespace,
+  removeNamespace
 };

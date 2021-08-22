@@ -113,8 +113,7 @@
           </v-list-item>
         </v-list>
       </v-expand-transition>
-      <v-card-actions>
-        <v-spacer></v-spacer>
+      <v-card-actions class="justify-end">
         <v-btn
           :disabled="!apiSelected"
           @click="apiSelected = null"

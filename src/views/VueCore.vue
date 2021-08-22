@@ -360,7 +360,8 @@
 
 <script>
 import $ from 'jquery';
-import _ from 'lodash';
+import _debounce from 'lodash/debounce';
+import _shuffle from 'lodash/shuffle';
 // @ is an alias to /src
 import PropSlot from '@/components/PropSlot.vue';
 import Loading from '@/components/Loading.vue';
@@ -503,8 +504,8 @@ export default {
 
     clearMsg: function(event) {
       // 延遲一秒清空
-      var debounce = _.debounce(() => $('#msgReverseP').html(''), 1000);
-      debounce();
+      var delay1s = _debounce(() => $('#msgReverseP').html(''), 1000);
+      delay1s();
       alert(`tag name: ${event.target.tagName}`);
     },
 
@@ -529,7 +530,7 @@ export default {
     },
 
     shuffleNumList: function() {
-      this.nums = _.shuffle(this.nums);
+      this.nums = _shuffle(this.nums);
     },
 
     domEventTest() {

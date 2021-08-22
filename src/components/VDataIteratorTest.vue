@@ -87,7 +87,7 @@
       <template v-slot:footer>
         <v-row class="mt-2" align="center" justify="center">
           <span class="grey--text ml-3">Items per page</span>
-          <v-menu offset-y>
+          <v-menu offset-y open-on-hover>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 v-bind="attrs"

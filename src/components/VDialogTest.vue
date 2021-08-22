@@ -65,9 +65,9 @@
 
           <template v-slot:default="dialog">
             <v-card>
-              <v-toolbar color="primary" dark>
-                <v-card-title>Opening from the top</v-card-title>
-              </v-toolbar>
+              <v-card-title class="grey lighten-2"
+                >opening from the top</v-card-title
+              >
               <v-card-text style="height: 100px">
                 <div class="text-h2 pa-12">Hello world!</div>
               </v-card-text>
