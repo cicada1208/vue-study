@@ -35,7 +35,7 @@
       >
         <template v-slot:top>
           <!-- table 上方添加內容 -->
-          <v-toolbar color="primary" dark>
+          <v-toolbar color="secondary" dark>
             <v-switch
               label="Single select"
               v-model="singleSelect"
@@ -91,7 +91,10 @@
           </v-chip>
         </template>
         <template v-slot:item.glutenfree="{ item }">
-          <v-simple-checkbox v-model="item.glutenfree"></v-simple-checkbox>
+          <v-simple-checkbox
+            v-model="item.glutenfree"
+            color="primary"
+          ></v-simple-checkbox>
         </template>
         <template v-slot:footer>
           <div class="ml-4">
@@ -129,7 +132,8 @@ export default {
         carbs: 37,
         protein: 4.3,
         iron: '1%',
-        category: 'Ice cream'
+        category: 'Ice cream',
+        glutenfree: false
       },
       {
         name: 'Eclair',
@@ -138,7 +142,8 @@ export default {
         carbs: 23,
         protein: 6.0,
         iron: '7%',
-        category: 'Cookie'
+        category: 'Cookie',
+        glutenfree: false
       },
       {
         name: 'Cupcake',
@@ -147,7 +152,8 @@ export default {
         carbs: 67,
         protein: 4.3,
         iron: '8%',
-        category: 'Pastry'
+        category: 'Pastry',
+        glutenfree: false
       },
       {
         name: 'Gingerbread',
@@ -156,7 +162,8 @@ export default {
         carbs: 49,
         protein: 3.9,
         iron: '16%',
-        category: 'Cookie'
+        category: 'Cookie',
+        glutenfree: false
       },
       {
         name: 'Jelly bean',
@@ -165,7 +172,8 @@ export default {
         carbs: 94,
         protein: 0.0,
         iron: '0%',
-        category: 'Candy'
+        category: 'Candy',
+        glutenfree: false
       },
       {
         name: 'Lollipop',
@@ -174,7 +182,8 @@ export default {
         carbs: 98,
         protein: 0,
         iron: '2%',
-        category: 'Candy'
+        category: 'Candy',
+        glutenfree: false
       },
       {
         name: 'Honeycomb',
@@ -183,7 +192,8 @@ export default {
         carbs: 87,
         protein: 6.5,
         iron: '45%',
-        category: 'Toffee'
+        category: 'Toffee',
+        glutenfree: false
       },
       {
         name: 'Donut',
@@ -192,7 +202,8 @@ export default {
         carbs: 51,
         protein: 4.9,
         iron: '22%',
-        category: 'Pastry'
+        category: 'Pastry',
+        glutenfree: false
       },
       {
         name: 'KitKat',
@@ -201,7 +212,8 @@ export default {
         carbs: 65,
         protein: 7,
         iron: '6%',
-        category: 'Candy'
+        category: 'Candy',
+        glutenfree: false
       }
     ]
   }),

@@ -9,7 +9,7 @@
         ></v-progress-linear>
       </template>
 
-      <v-toolbar :color="selection.length ? 'secondary' : 'primary'" dark>
+      <v-toolbar :color="selection.length ? 'primary' : 'secondary'" dark>
         <v-app-bar-nav-icon v-if="!selection.length"></v-app-bar-nav-icon>
         <v-btn v-else icon @click="selection = []">
           <v-icon>mdi-close</v-icon>

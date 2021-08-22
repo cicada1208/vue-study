@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    <v-switch label="Expand Single Item" v-model="singleExpand"></v-switch>
     <v-data-iterator
       :items="items"
       item-key="name"
@@ -14,7 +13,12 @@
       dark
     >
       <template v-slot:header>
-        <v-toolbar class="mb-3" color="primary" dark>
+        <v-toolbar class="mb-3" color="secondary" dark>
+          <v-switch
+            label="Single expand"
+            v-model="singleExpand"
+            hide-details
+          ></v-switch>
           <v-text-field
             label="Search"
             v-model="search"
@@ -23,7 +27,7 @@
             solo-inverted
             hide-details
             prepend-inner-icon="mdi-magnify"
-            class="mx-1"
+            class="mx-2"
           ></v-text-field>
           <template v-if="$vuetify.breakpoint.smAndUp">
             <v-select
@@ -34,13 +38,13 @@
               solo-inverted
               hide-details
               prepend-inner-icon="mdi-magnify"
-              class="mx-1"
+              class="mx-2"
             ></v-select>
-            <v-btn-toggle v-model="sortDesc" mandatory tile>
-              <v-btn :value="false" color="primary">
+            <v-btn-toggle v-model="sortDesc" mandatory>
+              <v-btn :value="false">
                 <v-icon>mdi-arrow-up</v-icon>
               </v-btn>
-              <v-btn :value="true" color="primary">
+              <v-btn :value="true">
                 <v-icon>mdi-arrow-down</v-icon>
               </v-btn>
             </v-btn-toggle>
