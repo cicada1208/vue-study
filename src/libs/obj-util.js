@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { reduce } from 'lodash-es';
 
 // remove object Types 'namespace/'
 // Ex:
@@ -8,10 +8,10 @@ import _ from 'lodash';
 //   },
 // };
 function removeNamespace(namespace, types) {
-  return _.reduce(
+  return reduce(
     types,
     (typeObj, typeValue, typeName) => {
-      typeObj[typeName] = _.reduce(
+      typeObj[typeName] = reduce(
         typeValue,
         (obj, v, k) => {
           obj[k] = v.replace(namespace, '');
