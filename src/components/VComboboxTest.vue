@@ -112,22 +112,22 @@ export default {
       { header: 'Select an option or create one' },
       {
         text: 'Foo',
-        color: 'blue',
+        color: 'blue'
       },
       {
         text: 'Bar',
-        color: 'red',
-      },
+        color: 'red'
+      }
     ],
     itemsSelected: [
       {
         text: 'Foo',
-        color: 'blue',
-      },
+        color: 'blue'
+      }
     ],
     search: null,
     itemEditing: null,
-    nonce: 1,
+    nonce: 1
   }),
 
   methods: {
@@ -137,18 +137,18 @@ export default {
     editItem(item) {
       if (!this.itemEditing) this.itemEditing = item;
       else this.itemEditing = null;
-    },
+    }
   },
 
   watch: {
     itemsSelected(val, prev) {
       if (val.length === prev.length) return;
 
-      this.itemsSelected = val.map((v) => {
+      this.itemsSelected = val.map(v => {
         if (typeof v === 'string') {
           v = {
             text: v,
-            color: this.colors[this.nonce - 1],
+            color: this.colors[this.nonce - 1]
           };
 
           this.items.push(v);
@@ -157,7 +157,7 @@ export default {
 
         return v;
       });
-    },
-  },
+    }
+  }
 };
 </script>

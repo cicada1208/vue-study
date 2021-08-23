@@ -63,15 +63,15 @@ export default {
           {
             text: 'Admin',
             group: [
-              { text: 'Management', icon: 'mdi-account-multiple-outline' },
-              { text: 'Settings', icon: 'mdi-cog-outline' }
+              { text: 'Management', icon: 'mdi-account-multiple' },
+              { text: 'Settings', icon: 'mdi-cog' }
             ]
           },
           {
             text: 'Actions',
             group: [
-              { text: 'Create', icon: 'mdi-plus-outline' },
-              { text: 'Read', icon: 'mdi-file-outline' }
+              { text: 'Create', icon: 'mdi-plus' },
+              { text: 'Read', icon: 'mdi-file' }
             ]
           },
           {

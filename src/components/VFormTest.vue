@@ -124,7 +124,7 @@
                     label="Time"
                     readonly
                     clearable
-                    prepend-icon="mdi-clock-time-four-outline"
+                    prepend-icon="mdi-clock-outline"
                     v-bind="attrs"
                     v-on="on"
                     :rules="[ruleUtil.required()]"
@@ -148,7 +148,7 @@
                 date-format="yyyy-MM-dd"
                 time-format="HH:mm:ss"
                 :text-field-props="{
-                  'prepend-icon': 'mdi-calendar',
+                  'prepend-icon': 'mdi-calendar-clock',
                   clearable: true,
                   rules: [ruleUtil.required()]
                 }"
@@ -167,7 +167,7 @@
                   <v-icon>mdi-calendar</v-icon>
                 </template>
                 <template v-slot:timeIcon>
-                  <v-icon>mdi-clock-time-four-outline</v-icon>
+                  <v-icon>mdi-clock-outline</v-icon>
                 </template>
               </v-datetime-picker>
             </v-col>
