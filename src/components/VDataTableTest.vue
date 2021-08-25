@@ -200,6 +200,8 @@
 </template>
 
 <script>
+import { dessert } from '../models/dessert';
+
 export default {
   data: () => ({
     tableActive: false,
@@ -312,20 +314,7 @@ export default {
     dialog: false,
     dialogDelete: false,
     editedIndex: -1,
-    editedItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    },
-    defaultItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    }
+    editedItem: dessert()
   }),
 
   computed: {
@@ -405,12 +394,12 @@ export default {
     },
 
     close() {
-      this.dialog = false;
+      this.dialog = false; // 先執行該函式 close 後面程式段，再執行 dialog watch
       // this.$nextTick(() => {
       //   this.editedItem = Object.assign({}, this.defaultItem);
       //   this.editedIndex = -1;
       // });
-      this.editedItem = Object.assign({}, this.defaultItem);
+      this.editedItem = dessert();
       this.editedIndex = -1;
     },
 
@@ -429,7 +418,7 @@ export default {
       //   this.editedItem = Object.assign({}, this.defaultItem);
       //   this.editedIndex = -1;
       // });
-      this.editedItem = Object.assign({}, this.defaultItem);
+      this.editedItem = dessert();
       this.editedIndex = -1;
     },
 
@@ -440,13 +429,15 @@ export default {
 
     editItem(item) {
       this.editedIndex = this.items.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      // this.editedItem = Object.assign({}, item);
+      this.editedItem = item;
       this.dialog = true;
     },
 
     deleteItem(item) {
       this.editedIndex = this.items.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      // this.editedItem = Object.assign({}, item);
+      this.editedItem = item;
       this.dialogDelete = true;
     }
   }
