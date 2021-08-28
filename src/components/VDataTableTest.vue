@@ -8,28 +8,42 @@
     transition="fade-transition"
   >
     <v-container fluid>
-      <!-- custom-filter 會覆蓋 search 的默認過濾，
+      <!-- custom-filter: 會覆蓋 search 的默認過濾，
       若 header 有自定義 filter，custom-filter 不會應用於該 header。 -->
-      <!-- v-data-table 使用 v-data-footer 渲染 footer。 -->
+      <!-- select、expand: 其行為會使用到 item-key 需設定。 -->
+      <!-- fixed-header: 與 height 搭配使用 -->
+      <!-- footer-props: v-data-footer property，v-data-table 使用 v-data-footer 渲染 footer -->
       <v-data-table
         :headers="headers"
         :items="items"
-        v-model="selectedItem"
+        item-key="name"
         show-select
         :single-select="singleSelect"
+        v-model="selectedItems"
+        checkbox-color="info"
+        show-expand
+        :single-expand="singleExpand"
+        :expanded.sync="expandedItems"
         :search="search"
         :custom-filter="filterTextCol"
         multi-sort
         :sort-by="['calories', 'fat']"
         :sort-desc="[false, true]"
+        show-group-by
         group-by="category"
         group-desc
-        show-group-by
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        @page-count="pageCount = $event"
+        :footer-props="{
+          showFirstLastPage: true,
+          'items-per-page-all-text': '全部',
+          'items-per-page-options': [1, 5, 10, -1],
+          'items-per-page-text': '每頁筆數：',
+          'show-current-page': true
+        }"
         fixed-header
         height="500px"
-        :footer-props="{
-          showFirstLastPage: true
-        }"
         class="elevation-2"
       >
         <template v-slot:top>
@@ -40,8 +54,13 @@
               v-model="singleSelect"
               hide-details
             ></v-switch>
+            <v-switch
+              label="Single expand"
+              v-model="singleExpand"
+              hide-details
+            ></v-switch>
             <v-text-field
-              label="Search"
+              label="Search string"
               v-model="search"
               clearable
               hide-details
@@ -181,21 +200,22 @@
             color="primary"
           ></v-simple-checkbox>
         </template>
-        <template v-slot:item.name="{ item }">
-          <!-- v-data-table 若設定 item-key="name"
+        <template v-slot:item.protein="{ item }">
+          <!-- v-data-table 若設定 item-key="protein"
           會影響 v-edit-dialog 使其鍵入一字便跳開 -->
           <v-edit-dialog
-            :return-value.sync="item.name"
+            :return-value.sync="item.protein"
             @save="saveCol(item)"
             @cancel="cancelCol"
             @open="openCol"
             @close="closeCol"
           >
-            {{ item.name }}
+            {{ item.protein }}
             <template v-slot:input>
               <v-text-field
-                v-model="item.name"
+                v-model="item.protein"
                 label="Edit"
+                type="number"
                 single-line
               ></v-text-field>
             </template>
@@ -238,9 +258,13 @@
             This is a footer
           </div>
         </template>
+        <template v-slot:expanded-item="{ headers, item }">
+          <td :colspan="headers.length">More info about {{ item.name }}</td>
+        </template>
       </v-data-table>
+      <v-pagination v-model="page" :length="pageCount"></v-pagination>
 
-      <msg-snackbar v-model="msgShow" :msgType="msgType" :msg="msg" top />
+      <msg-snackbar v-model="msgShow" :msgType="msgType" :msg="msg" bottom />
     </v-container>
   </v-lazy>
 </template>
@@ -259,9 +283,6 @@ export default {
 
   data: () => ({
     tableActive: false,
-    singleSelect: false,
-    search: '',
-    calories: '',
     items: [
       {
         name: 'Frozen Yogurt',
@@ -364,7 +385,15 @@ export default {
         glutenfree: false
       }
     ],
-    selectedItem: [],
+    singleSelect: false,
+    selectedItems: [],
+    singleExpand: false,
+    expandedItems: [],
+    search: '',
+    calories: '',
+    page: 1,
+    pageCount: 0,
+    itemsPerPage: -1,
     dialog: false,
     dialogDelete: false,
     editedIndex: -1,
@@ -404,7 +433,13 @@ export default {
         },
         { text: 'Gluten-Free', value: 'glutenfree', groupable: false },
         { text: 'Category', value: 'category' },
-        { text: 'Actions', value: 'actions', sortable: false, groupable: false }
+        {
+          text: 'Actions',
+          value: 'actions',
+          sortable: false,
+          groupable: false
+        },
+        { text: 'Expand', value: 'data-table-expand', groupable: false }
       ];
     },
 
@@ -440,8 +475,9 @@ export default {
     },
 
     log() {
-      console.log('selectedItem:', this.selectedItem);
       console.log('items:', this.items);
+      console.log('selectedItems:', this.selectedItems);
+      console.log('expandedItems:', this.expandedItems);
     },
 
     getCaloriesColor(calories) {
