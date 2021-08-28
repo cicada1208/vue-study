@@ -14,7 +14,6 @@
       <v-data-table
         :headers="headers"
         :items="items"
-        item-key="name"
         v-model="selectedItem"
         show-select
         :single-select="singleSelect"
@@ -128,6 +127,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
+
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="text-h5 grey lighten-3"
@@ -181,6 +181,50 @@
             color="primary"
           ></v-simple-checkbox>
         </template>
+        <template v-slot:item.name="{ item }">
+          <!-- v-data-table 若設定 item-key="name"
+          會影響 v-edit-dialog 使其鍵入一字便跳開 -->
+          <v-edit-dialog
+            :return-value.sync="item.name"
+            @save="saveCol(item)"
+            @cancel="cancelCol"
+            @open="openCol"
+            @close="closeCol"
+          >
+            {{ item.name }}
+            <template v-slot:input>
+              <v-text-field
+                v-model="item.name"
+                label="Edit"
+                single-line
+              ></v-text-field>
+            </template>
+          </v-edit-dialog>
+        </template>
+        <template v-slot:item.iron="{ item }">
+          <v-edit-dialog
+            :return-value.sync="item.iron"
+            large
+            persistent
+            @save="saveCol(item)"
+            @cancel="cancelCol"
+            @open="openCol"
+            @close="closeCol"
+          >
+            {{ item.iron }}
+            <template v-slot:input>
+              <div class="mt-4 text-h6">
+                Update Iron
+              </div>
+              <v-text-field
+                v-model="item.iron"
+                label="Edit"
+                single-line
+                autofocus
+              ></v-text-field>
+            </template>
+          </v-edit-dialog>
+        </template>
         <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
@@ -195,6 +239,8 @@
           </div>
         </template>
       </v-data-table>
+
+      <msg-snackbar v-model="msgShow" :msgType="msgType" :msg="msg" top />
     </v-container>
   </v-lazy>
 </template>
@@ -203,6 +249,14 @@
 import { dessert } from '../models/dessert';
 
 export default {
+  components: {
+    MsgSnackbar: () =>
+      import(
+        /* webpackChunkName: "msg.snackbar" */
+        '@/components/MsgSnackbar.vue'
+      )
+  },
+
   data: () => ({
     tableActive: false,
     singleSelect: false,
@@ -314,7 +368,10 @@ export default {
     dialog: false,
     dialogDelete: false,
     editedIndex: -1,
-    editedItem: dessert()
+    editedItem: dessert(),
+    msgShow: false,
+    msgType: false,
+    msg: ''
   }),
 
   computed: {
@@ -439,6 +496,29 @@ export default {
       // this.editedItem = Object.assign({}, item);
       this.editedItem = item;
       this.dialogDelete = true;
+    },
+
+    saveCol(item) {
+      this.msgShow = true;
+      this.msgType = 'success';
+      this.msg = 'Data edit saved';
+      console.log('item:', item);
+    },
+
+    cancelCol() {
+      this.msgShow = true;
+      this.msgType = 'warning';
+      this.msg = 'Data edit canceled';
+    },
+
+    openCol() {
+      this.msgShow = true;
+      this.msgType = 'info';
+      this.msg = 'Dialog opened';
+    },
+
+    closeCol() {
+      console.log('Dialog closed');
     }
   }
 };

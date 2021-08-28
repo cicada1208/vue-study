@@ -1,13 +1,15 @@
 <template>
   <!-- or using @input="visibleChange" -->
   <v-snackbar
-    :value="visible"
-    :color="colorDisplay"
+    :value="msgShow"
+    :color="msgColor"
     :timeout="timeout"
     @input="$emit('input', $event)"
-    centered
+    :centered="centered"
+    :top="top"
+    :bottom="bottom"
   >
-    <span class="text-break">{{ msgDisplay }}</span>
+    <span class="text-break">{{ msgText }}</span>
     <template v-slot:action="{ attrs }">
       <v-icon v-bind="attrs" @click="$emit('input', false)">
         mdi-close-circle
@@ -20,11 +22,11 @@
 export default {
   name: 'msg-snackbar',
   model: {
-    prop: 'visible',
+    prop: 'msgShow',
     event: 'input'
   },
   props: {
-    visible: {
+    msgShow: {
       type: Boolean,
       default: false
     },
@@ -47,10 +49,22 @@ export default {
     timeout: {
       type: Number,
       default: 5000
+    },
+    centered: {
+      type: Boolean,
+      default: false
+    },
+    top: {
+      type: Boolean,
+      default: false
+    },
+    bottom: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
-    msgDisplay() {
+    msgText() {
       let result = this.msg;
       if (!this.msg) {
         if (!this.msgType || this.msgType === 'error') result = '處理失敗！';
@@ -58,7 +72,7 @@ export default {
       }
       return result;
     },
-    colorDisplay() {
+    msgColor() {
       let result = this.msgType;
       if (!this.msgType) result = 'error';
       else if (this.msgType === true) result = 'success';
