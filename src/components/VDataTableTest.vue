@@ -189,6 +189,11 @@
             </td>
           </tr>
         </template>
+        <template v-slot:footer>
+          <div class="ml-4">
+            This is a footer
+          </div>
+        </template>
         <template v-slot:item.calories="{ item }">
           <v-chip :color="getCaloriesColor(item.calories)" dark>
             {{ item.calories }}
@@ -253,13 +258,32 @@
             mdi-delete
           </v-icon>
         </template>
-        <template v-slot:footer>
-          <div class="ml-4">
-            This is a footer
-          </div>
-        </template>
         <template v-slot:expanded-item="{ headers, item }">
           <td :colspan="headers.length">More info about {{ item.name }}</td>
+        </template>
+        <template
+          v-slot:group.header="{
+            headers,
+            groupBy,
+            group,
+            isOpen,
+            toggle,
+            remove
+          }"
+        >
+          <td :colspan="headers.length">
+            <v-row>
+              <v-col cols="auto">
+                <v-icon @click="toggle" small>{{
+                  isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                }}</v-icon>
+              </v-col>
+              <v-col cols="auto">{{ groupBy + ': ' + group }}</v-col>
+              <v-col cols="auto">
+                <v-icon @click="remove" small>mdi-close</v-icon></v-col
+              >
+            </v-row>
+          </td>
         </template>
       </v-data-table>
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
@@ -411,7 +435,8 @@ export default {
           value: 'name',
           align: 'start',
           sortable: false,
-          groupable: false
+          groupable: false,
+          class: 'text-no-wrap'
         },
         {
           text: 'Calories',
@@ -420,26 +445,54 @@ export default {
           filter: value => {
             if (!this.calories) return true;
             return value < parseInt(this.calories);
-          }
+          },
+          class: 'text-no-wrap'
         },
-        { text: 'Fat (g)', value: 'fat', groupable: false },
-        { text: 'Carbs (g)', value: 'carbs', groupable: false },
-        { text: 'Protein (g)', value: 'protein', groupable: false },
+        {
+          text: 'Fat (g)',
+          value: 'fat',
+          groupable: false,
+          class: 'text-no-wrap'
+        },
+        {
+          text: 'Carbs (g)',
+          value: 'carbs',
+          groupable: false,
+          class: 'text-no-wrap'
+        },
+        {
+          text: 'Protein (g)',
+          value: 'protein',
+          groupable: false,
+          class: 'text-no-wrap'
+        },
         {
           text: 'Iron (%)',
           value: 'iron',
           filterable: false,
-          groupable: false
+          groupable: false,
+          class: 'text-no-wrap'
         },
-        { text: 'Gluten-Free', value: 'glutenfree', groupable: false },
-        { text: 'Category', value: 'category' },
+        {
+          text: 'Gluten-Free',
+          value: 'glutenfree',
+          groupable: false,
+          class: 'text-no-wrap'
+        },
+        { text: 'Category', value: 'category', class: 'text-no-wrap' },
         {
           text: 'Actions',
           value: 'actions',
           sortable: false,
-          groupable: false
+          groupable: false,
+          class: 'text-no-wrap'
         },
-        { text: 'Expand', value: 'data-table-expand', groupable: false }
+        {
+          text: 'Expand',
+          value: 'data-table-expand',
+          groupable: false,
+          class: 'text-no-wrap'
+        }
       ];
     },
 
