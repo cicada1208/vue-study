@@ -36,6 +36,7 @@
             </v-icon>
           </template>
         </v-expansion-panel-header>
+        <!-- v-expansion-panel-content: 展開過的 v-expansion-panel-content 其內容才會 render -->
         <v-expansion-panel-content>
           <v-text-field
             v-model="trip.name"

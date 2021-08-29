@@ -155,6 +155,9 @@
     <h2>v-expansion-panel & v-date-picker:</h2>
     <v-expansion-panel-test />
 
+    <h2>v-tabs:</h2>
+    <v-tabs-test />
+
     <h2>v-window & v-pagination:</h2>
     <v-window-test />
 
@@ -279,6 +282,11 @@ export default {
       import(
         /* webpackChunkName: "vdata.iterator.test" */
         '@/components/VDataIteratorTest.vue'
+      ),
+    VTabsTest: () =>
+      import(
+        /* webpackChunkName: "vtabs.test" */
+        '@/components/VTabsTest.vue'
       )
   },
 

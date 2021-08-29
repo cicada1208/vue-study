@@ -416,7 +416,7 @@ export default {
       min: 0,
       max: 100,
       step: 10,
-      thumbColor: 'info'
+      thumbColor: 'primary'
     },
     snackbar: false
   }),
