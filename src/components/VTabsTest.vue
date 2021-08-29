@@ -22,8 +22,8 @@
             next-icon="mdi-arrow-right-bold-box-outline"
             prev-icon="mdi-arrow-left-bold-box-outline"
             icons-and-text
-            grow
             slider-color="yellow"
+            grow
           >
             <!-- v-tabs property: align-with-title、centered、right、grow 可擇一配置-->
             <v-tab v-for="item in items" :key="item">
@@ -34,7 +34,7 @@
         </template>
       </v-toolbar>
 
-      <v-tabs v-model="tab" vertical>
+      <v-tabs v-model="tab" vertical active-class="basil--text cornsilk">
         <v-tabs-slider color="yellow"></v-tabs-slider>
 
         <v-tab v-for="item in items" :key="item" class="justify-start">

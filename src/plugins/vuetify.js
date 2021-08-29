@@ -35,8 +35,9 @@ export default new Vuetify({
         success: '#81C784',
         error: '#E57373',
         info: '#64B5F6',
-        warning: '#FFB74D'
-        // testcolor: '#B9B7B7', // 自定義顏色，可用於 component color="testcolor"
+        warning: '#FFB74D',
+        basil: '#356859', // 自定義顏色，可用於 component color="basil"
+        cornsilk: 'FFF8DC'
       },
       dark: {
         primary: '#455A64',
