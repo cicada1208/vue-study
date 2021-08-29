@@ -32,8 +32,8 @@
         show-group-by
         group-by="category"
         group-desc
+        :items-per-page.sync="itemsPerPage"
         :page.sync="page"
-        :items-per-page="itemsPerPage"
         @page-count="pageCount = $event"
         :footer-props="{
           showFirstLastPage: true,
@@ -415,9 +415,9 @@ export default {
     expandedItems: [],
     search: '',
     calories: '',
+    itemsPerPage: -1,
     page: 1,
     pageCount: 0,
-    itemsPerPage: -1,
     dialog: false,
     dialogDelete: false,
     editedIndex: -1,
@@ -531,6 +531,7 @@ export default {
       console.log('items:', this.items);
       console.log('selectedItems:', this.selectedItems);
       console.log('expandedItems:', this.expandedItems);
+      console.log('itemsPerPage:', this.itemsPerPage);
     },
 
     getCaloriesColor(calories) {

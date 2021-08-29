@@ -3,12 +3,13 @@
     <v-data-iterator
       :items="items"
       item-key="name"
-      :items-per-page.sync="itemsPerPage"
-      :page.sync="page"
+      :single-expand="singleExpand"
+      :expanded.sync="expandedItems"
       :search="search"
       :sort-by="sortBy.toLowerCase()"
       :sort-desc="sortDesc"
-      :single-expand="singleExpand"
+      :items-per-page.sync="itemsPerPage"
+      :page.sync="page"
       hide-default-footer
       dark
     >
@@ -84,7 +85,7 @@
           </v-col>
         </v-row>
       </template>
-      <template v-slot:footer>
+      <template v-slot:footer="{ updateOptions }">
         <v-row class="mt-2" align="center" justify="center">
           <span class="grey--text ml-3">Items per page</span>
           <v-menu offset-y open-on-hover>
@@ -102,10 +103,11 @@
               </v-btn>
             </template>
             <v-list>
+              <!-- @click="updateItemsPerPage(number)" -->
               <v-list-item
                 v-for="(number, index) in itemsPerPageArray"
                 :key="index"
-                @click="updateItemsPerPage(number)"
+                @click="updateOptions({ itemsPerPage: number })"
               >
                 <v-list-item-title>{{ number }}</v-list-item-title>
               </v-list-item>
@@ -132,13 +134,6 @@
 <script>
 export default {
   data: () => ({
-    singleExpand: false,
-    search: '',
-    sortBy: 'name',
-    sortDesc: false,
-    itemsPerPage: 2,
-    itemsPerPageArray: [1, 2, 4],
-    page: 1,
     items: [
       {
         name: 'Frozen Yogurt',
@@ -156,7 +151,15 @@ export default {
         name: 'Cupcake',
         calories: 305
       }
-    ]
+    ],
+    singleExpand: false,
+    expandedItems: [],
+    search: '',
+    sortBy: 'name',
+    sortDesc: false,
+    itemsPerPage: 2,
+    itemsPerPageArray: [1, 2, 4],
+    page: 1
   }),
   computed: {
     sortCols() {
