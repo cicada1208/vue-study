@@ -175,6 +175,9 @@
 
     <h2>v-calendar:</h2>
     <v-calendar-test />
+
+    <h2>v-timeline:</h2>
+    <v-timeline-test />
   </v-container>
 </template>
 
@@ -287,6 +290,11 @@ export default {
       import(
         /* webpackChunkName: "vtabs.test" */
         '@/components/VTabsTest.vue'
+      ),
+    VTimelineTest: () =>
+      import(
+        /* webpackChunkName: "vtimeline.test" */
+        '@/components/VTimelineTest.vue'
       )
   },
 
