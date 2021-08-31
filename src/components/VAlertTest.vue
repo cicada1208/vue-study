@@ -23,7 +23,7 @@
 <script>
 export default {
   data: () => ({
-    alert: true,
-  }),
+    alert: true
+  })
 };
 </script>
