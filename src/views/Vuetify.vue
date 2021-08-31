@@ -146,10 +146,10 @@
     <h2>v-form:</h2>
     <v-form-test />
 
-    <h2>v-dialog:</h2>
+    <h2>v-dialog & v-tooltip:</h2>
     <v-dialog-test />
 
-    <h2>v-menu:</h2>
+    <h2>v-menu & v-tooltip:</h2>
     <v-menu-test />
 
     <h2>v-expansion-panel & v-date-picker:</h2>
