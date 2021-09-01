@@ -137,6 +137,9 @@
     <h2>v-list:</h2>
     <v-list-test />
 
+    <h2>v-treeview:</h2>
+    <v-treeview-test />
+
     <h2>v-autocomplete:</h2>
     <v-autocomplete-test />
 
@@ -295,6 +298,11 @@ export default {
       import(
         /* webpackChunkName: "vtimeline.test" */
         '@/components/VTimelineTest.vue'
+      ),
+    VTreeviewTest: () =>
+      import(
+        /* webpackChunkName: "vtreeview.test" */
+        '@/components/VTreeviewTest.vue'
       )
   },
 
