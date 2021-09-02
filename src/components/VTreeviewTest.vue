@@ -2,12 +2,19 @@
   <v-container fluid>
     <v-treeview
       :items="items"
-      color="primary"
-      activatable
-      hoverable
-      open-on-click
       item-disabled="locked"
+      return-object
+      v-model="selectedItems"
       selectable
+      selected-color="basil"
+      :active.sync="activedItems"
+      activatable
+      color="primary"
+      :open.sync="openedItems"
+      open-on-click
+      open-all
+      hoverable
+      transition
     ></v-treeview>
   </v-container>
 </template>
@@ -26,20 +33,23 @@ export default {
         ]
       },
       {
-        id: 5,
+        id: 4,
         name: 'Documents :',
         children: [
           {
-            id: 6,
+            id: 5,
             name: 'vuetify :',
             children: [
-              { id: 8, name: 'index : ts' },
-              { id: 9, name: 'bootstrap : ts', locked: true }
+              { id: 6, name: 'index : ts' },
+              { id: 7, name: 'bootstrap : ts' }
             ]
           }
         ]
       }
-    ]
+    ],
+    selectedItems: [],
+    openedItems: [],
+    activedItems: []
   })
 };
 </script>
