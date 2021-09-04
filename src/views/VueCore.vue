@@ -682,7 +682,7 @@ export default {
 
   // directives: 自定義指令，局部註冊
   directives: {
-    // 自定義指令 v-focus
+    // 自定義指令 v-focus，亦即 autofocus
     focus: {
       // Hook Functions: bind、inserted...
       // bind: 只調用一次，指令第一次綁定到元素時調用。在這裡可以進行一次性的初始化設置。
@@ -694,7 +694,7 @@ export default {
         );
       },
 
-      // inserted: 當被綁定的元素插入到 DOM 時調用。
+      // inserted: 當被綁定的元素插入到父節點時調用。
       inserted: function(el) {
         el.focus();
       }

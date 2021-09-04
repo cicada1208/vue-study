@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import { Ripple, VList } from 'vuetify/lib';
+// Translation provided by Vuetify (javascript)
+import zhHant from 'vuetify/lib/locale/zh-Hant';
 import DatetimePicker from 'vuetify-datetime-picker';
-
 // minify-css-string: Remove new lines and extra space from a string of css.
 // 縮小生成的主題樣式
 // npm install minify-css-string
@@ -19,6 +20,7 @@ Vue.use(Vuetify, {
   // https://vuetifyjs.com/zh-Hans/features/treeshaking/
   components: { VList }
 });
+
 Vue.use(DatetimePicker);
 
 // 可再自定更改主題: this.$vuetify.theme.dark = true;
@@ -36,7 +38,7 @@ export default new Vuetify({
         error: '#E57373',
         info: '#64B5F6',
         warning: '#FFB74D',
-        basil: '#356859', // 自定義顏色，可用於 component color="basil"
+        basil: '#356859', // 自定義顏色
         cornsilk: 'FFF8DC'
       },
       dark: {
@@ -49,5 +51,9 @@ export default new Vuetify({
     options: {
       minifyTheme
     }
+  },
+  lang: {
+    locales: { zhHant },
+    current: 'zhHant'
   }
 });

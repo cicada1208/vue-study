@@ -67,7 +67,7 @@
     </v-main>
 
     <!-- 滾動指令 $vuetify.goTo:
-    target: 可以是從頁面頂部的像素偏移，也可是css選擇器，或是元素引用。 -->
+    target: 可以是從頁面頂部的像素偏移，也可是 css 選擇器，或是元素引用 this.$refs.xxx。 -->
     <v-btn
       @click="$vuetify.goTo(target, options)"
       fixed
