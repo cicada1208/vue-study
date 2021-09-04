@@ -96,44 +96,44 @@ export default {
       {
         path: '/',
         text: 'Home',
-        icon: 'mdi-home',
+        icon: 'mdi-home'
       },
       {
         path: '/vue.core',
         text: 'VueCore',
-        icon: 'mdi-vuejs',
+        icon: 'mdi-vuejs'
       },
       {
         path: '/user/cicada/post/123?search=pig&type=small',
         text: 'VueRouter',
-        icon: 'mdi-router',
+        icon: 'mdi-router'
       },
       {
         path: '/user/plumes/post/456',
         text: 'VueRouter2',
-        icon: 'mdi-router',
+        icon: 'mdi-router'
       },
       {
         path: '/vuex',
         text: 'Vuex',
-        icon: 'mdi-database',
+        icon: 'mdi-database'
       },
       {
         path: '/api.query',
         text: 'ApiQuery',
-        icon: 'mdi-database-search',
+        icon: 'mdi-database-search'
       },
       {
         path: '/vuetify',
         text: 'Vuetify',
-        icon: 'mdi-vuetify',
+        icon: 'mdi-vuetify'
       },
       {
         path: '/css.test',
         text: 'CssTest',
-        icon: 'mdi-language-css3',
-      },
-    ],
+        icon: 'mdi-language-css3'
+      }
+    ]
   }),
 
   computed: {
@@ -147,10 +147,10 @@ export default {
       return {
         duration: 300,
         offset: 0,
-        easing: 'easeInOutCubic',
+        easing: 'easeInOutCubic'
       };
-    },
-  },
+    }
+  }
 };
 </script>
 
