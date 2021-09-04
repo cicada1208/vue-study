@@ -15,7 +15,13 @@
       open-all
       hoverable
       transition
-    ></v-treeview>
+    >
+      <template v-slot:prepend="{ open }">
+        <v-icon>
+          {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+        </v-icon>
+      </template>
+    </v-treeview>
   </v-container>
 </template>
 
