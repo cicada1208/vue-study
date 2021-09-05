@@ -159,6 +159,7 @@ export default {
 @import '@/styles/base.module.scss';
 @import '@/styles/transition.module.scss';
 @import '@/styles/position.module.scss';
+// @import '~vuetify/src/styles/styles.sass';
 
 #nav {
   padding: 30px;
