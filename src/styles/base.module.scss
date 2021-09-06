@@ -1,8 +1,11 @@
+@import 'test';
+
 $title-color: cadetblue;
 
 // 元素選擇器
 h2 {
-  color: $title-color;
+  // color: $title-color;
+  color: $test-color;
 }
 
 // 類選擇器
