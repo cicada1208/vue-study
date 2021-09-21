@@ -3,6 +3,8 @@
 // private members: _ 或 - 開頭的 variable、mixin、function，無法引用。
 // public members: 需透過 namespace 在當前文件引用，不會傳遞給之後引用的文件。
 @use 'vars';
+@use 'transition';
+@use 'position';
 
 // To load a module with configuration.
 // $title-color need define with !default
