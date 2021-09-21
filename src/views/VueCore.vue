@@ -64,9 +64,9 @@
     />
     <br />
     <textarea v-model="msg" placeholder="multiple lines" v-focus="msg" />
-    <p :class="baseStyle.multiline">msg: {{ msg }}</p>
-    <p :class="baseStyle.multiline">msgReverseGetter: {{ msgReverseGetter }}</p>
-    <p :class="baseStyleVue.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
+    <p :class="cssmStyle.multiline">msg: {{ msg }}</p>
+    <p :class="cssmStyle.multiline">msgReverseGetter: {{ msgReverseGetter }}</p>
+    <p :class="cssmStyleVue.multiline">msgGetter: {{ msgGetterAndSetter }}</p>
 
     <h2>v-model number:</h2>
     <!-- 即使在type="number"時，HTML輸入元素的值也總會返回字符串。
@@ -365,7 +365,7 @@ import { debounce, shuffle } from 'lodash-es';
 import PropSlot from '@/components/PropSlot.vue';
 import Loading from '@/components/Loading.vue';
 import Error from '@/components/Error.vue';
-import baseStyle from '@/styles/base.module.scss'; // CSS Modules
+import cssmStyle from '@/styles/cssmodule.module.scss'; // css modules
 
 // 處理組件加載狀態
 const Posts = () => ({
@@ -464,8 +464,8 @@ export default {
       };
     },
 
-    baseStyle() {
-      return baseStyle;
+    cssmStyle() {
+      return cssmStyle;
     },
 
     lazyLoading() {
@@ -763,8 +763,8 @@ export default {
 }
 </style>
 
-<style lang="scss" module="baseStyleVue" src="@/styles/base.module.scss">
-// module: Vue 提供的 CSS Modules。
-// 若未指定計算屬性名稱 baseStyleVue，取用方式為 <p :class="$style.multiline">
-// 若有指定計算屬性名稱 baseStyleVue，取用方式為 <p :class="baseStyleVue.multiline">
+<style lang="scss" module="cssmStyleVue" src="@/styles/cssmodule.module.scss">
+// module: Vue 提供的 css modules。
+// 若未指定計算屬性名稱 cssmStyleVue，取用方式為 <p :class="$style.multiline">
+// 若有指定計算屬性名稱 cssmStyleVue，取用方式為 <p :class="cssmStyleVue.multiline">
 </style>

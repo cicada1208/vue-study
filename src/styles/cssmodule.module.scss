@@ -1,0 +1,10 @@
+// cssmodule.module.scss:
+// 使用 css modules 時，無法使用 sass @use，會報錯 SassError: @use rules must be written before any other rules.
+
+.multiline {
+  // composes: css modules composition, compose class names from other css modules. Extending works only for local-scoped selectors and only if the selector is a single class name.
+  // class="multiline" 以此方式無法套用 composes 樣式。
+  // :class="cssmStyleVue.multiline" 須以此方式套用 composes 樣式。
+  composes: text-blue text-bold from './composes.module.scss';
+  white-space: pre-wrap;
+}

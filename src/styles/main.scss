@@ -1,0 +1,5 @@
+@use 'vars';
+
+h2 {
+  color: vars.$title-color;
+}
