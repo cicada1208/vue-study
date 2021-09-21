@@ -1,14 +1,16 @@
-.sticky-bottom {
+@mixin position-sticky {
   // 相對於 nearest scrolling ancestor 和 nearest block-level ancestor 基於 top, right, bottom, left 偏移
   position: -webkit-sticky;
   position: sticky;
+}
+
+.sticky-bottom {
+  @include position-sticky;
   bottom: 7px;
 }
 
 .sticky-top {
-  // 相對於 nearest scrolling ancestor 和 nearest block-level ancestor 基於 top, right, bottom, left 偏移
-  position: -webkit-sticky;
-  position: sticky;
+  @include position-sticky;
   top: 65px;
   z-index: 1;
 }
