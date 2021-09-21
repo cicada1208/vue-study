@@ -29,12 +29,28 @@ module.exports = {
         // compiler: 可將模板字符串編譯成為 JavaScript 渲染函數的代碼。
         // vue.runtime.esm.js: 只包含 runtime。
         // vue.esm.js: 完整版包含 compiler and runtime。
-        vue$: 'vue/dist/vue.esm.js',
-      },
-    },
+        vue$: 'vue/dist/vue.esm.js'
+      }
+    }
   },
 
   publicPath: process.env.NODE_ENV === 'production' ? `/${pkgJson.name}/` : '/',
 
-  transpileDependencies: ['vuetify'],
+  // 若於 App.vue 或各個 component 的 style 使用 @use 出現下列錯誤訊息
+  // SassError: @use rules must be written before any other rules.
+  // 是因 vuetify 將 shared global sass variables 導入至各個 component，
+  // 導致 @use 無法置頂，可於下列將所需先行導入。
+  // https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `@use '@/styles/vars'`
+      },
+      scss: {
+        additionalData: `@use '@/styles/vars';`
+      }
+    }
+  },
+
+  transpileDependencies: ['vuetify']
 };

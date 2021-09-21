@@ -78,7 +78,7 @@
             loader: '/Users/cicadawang/Documents/GitHub/vue-study/node_modules/cache-loader/dist/cjs.js',
             options: {
               cacheDirectory: '/Users/cicadawang/Documents/GitHub/vue-study/node_modules/.cache/vue-loader',
-              cacheIdentifier: '384e50dc'
+              cacheIdentifier: '20179f64'
             }
           },
           {
@@ -88,7 +88,7 @@
                 whitespace: 'condense'
               },
               cacheDirectory: '/Users/cicadawang/Documents/GitHub/vue-study/node_modules/.cache/vue-loader',
-              cacheIdentifier: '384e50dc',
+              cacheIdentifier: '20179f64',
               transformAssetUrls: {
                 'v-app-bar': 'src',
                 'v-carousel-item': [
@@ -538,7 +538,7 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
-                  additionalData: '@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
+                  additionalData: '@use \'@/styles/vars\';\n@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
                 }
               }
             ]
@@ -621,7 +621,7 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
-                  additionalData: '@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
+                  additionalData: '@use \'@/styles/vars\';\n@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
                 }
               }
             ]
@@ -707,7 +707,7 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
-                  additionalData: '@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
+                  additionalData: '@use \'@/styles/vars\';\n@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
                 }
               }
             ]
@@ -789,7 +789,7 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
-                  additionalData: '@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
+                  additionalData: '@use \'@/styles/vars\';\n@import \'@/styles/variables.scss\';\n@import \'~vuetify/src/styles/styles.sass\';'
                 }
               }
             ]
@@ -881,10 +881,10 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
+                  additionalData: '@use \'@/styles/vars\'\n@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\'',
                   sassOptions: {
                     indentedSyntax: true
-                  },
-                  additionalData: '@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\''
+                  }
                 }
               }
             ]
@@ -967,10 +967,10 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
+                  additionalData: '@use \'@/styles/vars\'\n@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\'',
                   sassOptions: {
                     indentedSyntax: true
-                  },
-                  additionalData: '@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\''
+                  }
                 }
               }
             ]
@@ -1056,10 +1056,10 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
+                  additionalData: '@use \'@/styles/vars\'\n@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\'',
                   sassOptions: {
                     indentedSyntax: true
-                  },
-                  additionalData: '@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\''
+                  }
                 }
               }
             ]
@@ -1141,10 +1141,10 @@
                       return _call(f, Array.prototype.slice.apply(arguments));
                     }
                   },
+                  additionalData: '@use \'@/styles/vars\'\n@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\'',
                   sassOptions: {
                     indentedSyntax: true
-                  },
-                  additionalData: '@import \'@/styles/variables.scss\'\n@import \'~vuetify/src/styles/styles.sass\''
+                  }
                 }
               }
             ]
@@ -1468,7 +1468,7 @@
             loader: '/Users/cicadawang/Documents/GitHub/vue-study/node_modules/cache-loader/dist/cjs.js',
             options: {
               cacheDirectory: '/Users/cicadawang/Documents/GitHub/vue-study/node_modules/.cache/babel-loader',
-              cacheIdentifier: '7cf3a3c6'
+              cacheIdentifier: '728b1216'
             }
           },
           {
@@ -1494,7 +1494,7 @@
                 '.vue'
               ],
               cache: true,
-              cacheIdentifier: '0881e1c2',
+              cacheIdentifier: '9982d1d2',
               emitWarning: false,
               emitError: false,
               eslintPath: '/Users/cicadawang/Documents/GitHub/vue-study/node_modules/eslint',
