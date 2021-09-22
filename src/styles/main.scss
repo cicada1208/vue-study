@@ -10,9 +10,9 @@
 // To load a module with configuration.
 // $title-color need define with !default
 // @use 'settings' with (
-//   $colors-title-color:#356859
+//   $title-color:#356859
 // );
 
 h2 {
-  color: settings.$colors-title-color;
+  color: settings.$title-color;
 }

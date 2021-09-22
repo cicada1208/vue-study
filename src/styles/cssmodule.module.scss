@@ -1,5 +1,5 @@
 // cssmodule.module.scss:
-// 使用 css modules 時，無法使用 sass @use，會報錯 SassError: @use rules must be written before any other rules.
+// 使用 css modules 時，無法使用 sass @use，會報錯 SassError: @use rules must be written before any other rules. 這可能也是 vuetify sass variables 導入的原因?
 
 .multiline {
   // composes: css modules composition, compose class names from other css modules. Extending works only for local-scoped selectors and only if the selector is a single class name.
