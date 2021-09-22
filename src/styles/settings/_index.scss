@@ -1,0 +1,12 @@
+// _index.scss: _ 開頭的檔案 sass 會跳過，不會編譯成 css。
+// @forward: 可將 module _colors、_fonts 的 public members
+// 傳遞至入口文件 _index，爾後其他文件引用時 @use 'settings';
+// 便可以 namespace settings 引用 public members。
+// @forward 'module' 中若有 css 也只是被傳遞，直至以 @use 使用時才會被編譯出來。
+
+// @forward 'colors';
+// @forward 'fonts';
+
+// 為避免命名衝突，可為 members 加入前綴
+@forward 'colors' as colors-*;
+@forward 'fonts' as fonts-*;

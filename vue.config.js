@@ -44,10 +44,10 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        additionalData: `@use '@/styles/vars'`
+        additionalData: `@use '@/styles/settings'`
       },
       scss: {
-        additionalData: `@use '@/styles/vars';`
+        additionalData: `@use '@/styles/settings';`
       }
     }
   },
