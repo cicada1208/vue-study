@@ -157,7 +157,7 @@ export default {
 <style lang="scss">
 // @import: with the ability to import Sass and CSS stylesheets, providing access to mixins, functions, and variables and combining multiple stylesheets' CSS together.
 // @import 將會棄用，改使用 @use，於 vue.config.js 導入
-// @import '@/styles/main.scss';
+// @import '@/styles/main';
 
 #nav {
   padding: 30px;
