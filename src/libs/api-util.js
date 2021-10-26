@@ -21,12 +21,12 @@ function axiosRs(
     data,
     method,
     headers: headers || {
-      'content-type': 'application/json',
+      'content-type': 'application/json'
     },
-    ...restOption,
+    ...restOption
   })
-    .then((response) => (rs.content = response.data))
-    .catch((error) => {
+    .then(response => (rs.content = response.data))
+    .catch(error => {
       if (error.response) rs.content = error.response.data;
       else rs.error = error.message;
     })
@@ -47,12 +47,12 @@ function axiosPs({
     data,
     method,
     headers: headers || {
-      'content-type': 'application/json',
+      'content-type': 'application/json'
     },
-    ...restOption,
+    ...restOption
   })
-    .then((response) => response.data)
-    .catch((error) => {
+    .then(response => response.data)
+    .catch(error => {
       if (error.response) return error.response.data;
       else return error.message;
     });
@@ -73,14 +73,14 @@ function axiosCb({
     data,
     method,
     headers: headers || {
-      'content-type': 'application/json',
+      'content-type': 'application/json'
     },
-    ...restOption,
+    ...restOption
   })
-    .then((response) => {
+    .then(response => {
       cb(null, response.data);
     })
-    .catch((error) => {
+    .catch(error => {
       cb(error, null);
     });
 }
@@ -88,5 +88,5 @@ function axiosCb({
 export default {
   axiosRs,
   axiosPs,
-  axiosCb,
+  axiosCb
 };

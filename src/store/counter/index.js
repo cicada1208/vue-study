@@ -9,7 +9,7 @@ import type from './type';
 // };
 // 下列宣告方式，return new object，各自獨立。
 const state = () => ({
-  [type.state.countState]: 0,
+  [type.state.countState]: 0
 });
 
 // getters: 相當於 store computed property，會緩存，依賴改變才重算，
@@ -19,12 +19,12 @@ const state = () => ({
 // rootState: 根節點狀態
 // rootGetters: 根節點 getters
 const getters = {
-  [type.getters.countStateDesp]: (state) => {
+  [type.getters.countStateDesp]: state => {
     return state.countState + '次';
   },
-  [type.getters.countStateDespFunc]: (state) => (unit) => {
+  [type.getters.countStateDespFunc]: state => unit => {
     return state.countState + unit;
-  },
+  }
 };
 
 // mutations: 改變 store state 唯一途徑，提交 store.commit mutation，記錄狀態變更，
@@ -45,7 +45,7 @@ const mutations = {
   },
   [type.mutations.countStateSet](state, amount = 1) {
     state.countState = amount;
-  },
+  }
 };
 
 // actions: 透過 store.dispatch 觸發 action，然後 commit mutation，不直接變更狀態，
@@ -67,7 +67,7 @@ const actions = {
     // setTimeout(() => {
     //   commit(type.mutations.countStateIncrement, amount);
     // }, 1000);
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => {
         commit(type.mutations.countStateIncrement, amount);
         let msg = 'increment done.';
@@ -79,7 +79,7 @@ const actions = {
     // await: 等 + 後，再 -
     await dispatch(type.actions.countStateIncrementAsync, amount);
     commit(type.mutations.countStateDecrement, { amount: amount / 2 });
-  },
+  }
 };
 
 export default {
@@ -92,5 +92,5 @@ export default {
   state,
   getters,
   mutations,
-  actions,
+  actions
 };
