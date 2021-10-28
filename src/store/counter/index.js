@@ -3,7 +3,7 @@ import type from './type';
 // state: 響應式資料
 // mutation 若對 state 某個 object 加入新 property，
 // 使用此方式 state.obj = { ...state.obj, newProp: 123 }。
-// 下列宣告方式，若 object 來自別處和別人共用，則會互相影響。
+// 下列宣告方式，若該 counter module 會註冊多個實例，則會互相影響。
 // const state = {
 //   [type.state.countState]: 0, // countState: 0,
 // };
