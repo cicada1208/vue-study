@@ -1,5 +1,14 @@
 <template>
   <v-container fluid>
+    {{ 'loading:' + this.testRst.loading }} <br />
+    {{ 'content:' + this.testRst.content }} <br />
+    {{ 'Code:' + this.testRst.content.Code }} <br />
+    {{ 'Succ:' + this.testRst.content.Succ }} <br />
+    {{ 'Data:' + this.testRst.content.Data }} <br />
+    {{ 'Msg:' + this.testRst.content.Msg }} <br />
+    {{ 'content2:' + this.testRst2.content }} <br />
+    <v-btn color="success" @click="testclick">text</v-btn>
+
     <loading-dialog v-model="albumRst.loading" />
 
     <div v-if="albumRst.error">
@@ -23,7 +32,7 @@
 </template>
 
 <script>
-import apiUtil from '../libs/api-util';
+import apiUtil, { ndbApi, ndbApiPs } from '../libs/api-util';
 
 export default {
   name: 'api-query',
@@ -38,7 +47,9 @@ export default {
 
   data() {
     return {
-      albumRst: { loading: false, content: {}, error: '' }
+      albumRst: { loading: false, content: {}, error: '' },
+      testRst: { loading: false, content: {} },
+      testRst2: { loading: false, content: {} }
     };
   },
 
@@ -46,7 +57,7 @@ export default {
     async fetchAlbum() {
       // this.error = this.content = null;
       // this.loading = true;
-      const url = 'https://itunes.apple.com/search?term=twice&limit=50';
+      const url = 'https://itunes.apple.com/search?term=twice&limit=10';
       // // const cb = (err, data) => {
       // //   this.loading = false;
       // //   if (err) this.error = err.toString();
@@ -60,6 +71,30 @@ export default {
     },
     viewAlbum(link) {
       window.open(link);
+    },
+
+    testclick() {
+      this.testRst.content.Msg = 'test';
+    },
+    async fetchTest() {
+      ndbApi.post(this.testRst, 'Users/QueryUser', {
+        params: { option: 2 },
+        data: {
+          userId: '10964',
+          isActive: true
+        }
+      });
+      ndbApi.get(this.testRst2, 'Test/GetTest', {
+        params: { option: 10 }
+      });
+      const data = await ndbApiPs.post('Users/QueryUser', {
+        params: { option: 2 },
+        data: {
+          userId: '10964',
+          isActive: true
+        }
+      });
+      console.log('data:', data);
     }
   },
 
@@ -68,6 +103,7 @@ export default {
   created() {
     // 組件創建完後獲取數據
     this.fetchAlbum();
+    this.fetchTest();
   },
 
   // watch: 一個對象，鍵是需要觀察的表達式，若需觀察 data property e.f 鍵可為 'e.f'
