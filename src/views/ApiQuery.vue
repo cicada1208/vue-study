@@ -6,8 +6,13 @@
     {{ 'Succ:' + this.testRst.content.Succ }} <br />
     {{ 'Data:' + this.testRst.content.Data }} <br />
     {{ 'Msg:' + this.testRst.content.Msg }} <br />
+
+    {{ 'loading2:' + this.testRst2.loading }} <br />
     {{ 'content2:' + this.testRst2.content }} <br />
-    <v-btn color="success" @click="testclick">text</v-btn>
+    {{ 'Code2:' + this.testRst2.content.Code }} <br />
+    {{ 'Succ2:' + this.testRst2.content.Succ }} <br />
+    {{ 'Data2:' + this.testRst2.content.Data }} <br />
+    {{ 'Msg2:' + this.testRst2.content.Msg }} <br />
 
     <loading-dialog v-model="albumRst.loading" />
 
@@ -32,7 +37,7 @@
 </template>
 
 <script>
-import apiUtil, { ndbApi, ndbApiPs } from '../libs/api-util';
+import apiUtil, { ndbApi } from '../libs/api-util';
 
 export default {
   name: 'api-query',
@@ -63,7 +68,7 @@ export default {
       // //   if (err) this.error = err.toString();
       // //   else this.content = data.results;
       // // };
-      // // apiUtil.axiosCb({ cb, url, method: 'GET' });
+      // // apiUtil.axiosCb(cb, { url, method: 'GET' });
       // const data = await apiUtil.axiosPs({ url, method: 'GET' });
       // this.content = data.results;
       // this.loading = false;
@@ -73,9 +78,6 @@ export default {
       window.open(link);
     },
 
-    testclick() {
-      this.testRst.content.Msg = 'test';
-    },
     async fetchTest() {
       ndbApi.post(this.testRst, 'Users/QueryUser', {
         params: { option: 2 },
@@ -87,7 +89,7 @@ export default {
       ndbApi.get(this.testRst2, 'Test/GetTest', {
         params: { option: 10 }
       });
-      const data = await ndbApiPs.post('Users/QueryUser', {
+      const data = await ndbApi.postPs('Users/QueryUser', {
         params: { option: 2 },
         data: {
           userId: '10964',

@@ -1,13 +1,14 @@
 import axios from 'axios';
+import baseApi from './base-api';
 
-const ndbUrl = 'http://localhost:9977/';
-
-// global default
+// axios global default
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['Accept'] = 'application/json';
 
-// model
-const apiError = error => ({
+const ndbBaseUrl = 'http://localhost:9977/';
+
+// model for ndbApi
+const ndbApiError = error => ({
   Succ: false,
   Code: 500,
   Msg: error || '處理失敗！',
@@ -15,254 +16,9 @@ const apiError = error => ({
   RowsAffected: 0
 });
 
-// NdbApi: instance default
-const ndbAxios = axios.create({
-  baseURL: ndbUrl,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
-});
+const ndbApi = new baseApi(ndbBaseUrl, ndbApiError);
 
-// NdbApi: response specific json and with loading
-const ndbApi = {
-  get(
-    rst,
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    ndbApiBase(rst, url, {
-      params, // url parameters
-      data, // request body
-      method: 'GET',
-      headers,
-      ...restOption
-    });
-  },
-  post(
-    rst,
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    ndbApiBase(rst, url, {
-      params, // url parameters
-      data, // request body
-      method: 'POST',
-      headers,
-      ...restOption
-    });
-  },
-  put(
-    rst,
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    ndbApiBase(rst, url, {
-      params, // url parameters
-      data, // request body
-      method: 'PUT',
-      headers,
-      ...restOption
-    });
-  },
-  patch(
-    rst,
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    ndbApiBase(rst, url, {
-      params, // url parameters
-      data, // request body
-      method: 'PATCH',
-      headers,
-      ...restOption
-    });
-  },
-  delete(
-    rst,
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    ndbApiBase(rst, url, {
-      params, // url parameters
-      data, // request body
-      method: 'DELETE',
-      headers,
-      ...restOption
-    });
-  }
-};
-
-function ndbApiBase(
-  rst,
-  url,
-  {
-    params, // url parameters
-    data = null, // request body
-    method = 'POST',
-    headers,
-    ...restOption
-  }
-) {
-  rst.loading = true;
-  rst.content = {};
-
-  ndbAxios({
-    url,
-    params,
-    data,
-    method,
-    headers,
-    ...restOption
-  })
-    .then(response => (rst.content = response.data))
-    .catch(error => {
-      if (error.response) rst.content = error.response.data;
-      else rst.content = apiError(error.message);
-    })
-    .finally(() => (rst.loading = false));
-}
-
-// NdbApi: response specific json and return promise
-const ndbApiPs = {
-  get(
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    return ndbApiPsBase(url, {
-      params, // url parameters
-      data, // request body
-      method: 'GET',
-      headers,
-      ...restOption
-    });
-  },
-  post(
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    return ndbApiPsBase(url, {
-      params, // url parameters
-      data, // request body
-      method: 'POST',
-      headers,
-      ...restOption
-    });
-  },
-  put(
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    return ndbApiPsBase(url, {
-      params, // url parameters
-      data, // request body
-      method: 'PUT',
-      headers,
-      ...restOption
-    });
-  },
-  patch(
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    return ndbApiPsBase(url, {
-      params, // url parameters
-      data, // request body
-      method: 'PATCH',
-      headers,
-      ...restOption
-    });
-  },
-  delete(
-    url,
-    {
-      params, // url parameters
-      data = null, // request body
-      headers,
-      ...restOption
-    }
-  ) {
-    return ndbApiPsBase(url, {
-      params, // url parameters
-      data, // request body
-      method: 'DELETE',
-      headers,
-      ...restOption
-    });
-  }
-};
-
-function ndbApiPsBase(
-  url,
-  {
-    params, // url parameters
-    data = null, // request body
-    method = 'POST',
-    headers,
-    ...restOption
-  }
-) {
-  return ndbAxios({
-    url,
-    params,
-    data,
-    method,
-    headers,
-    ...restOption
-  })
-    .then(response => response.data)
-    .catch(error => {
-      if (error.response) return error.response.data;
-      else return apiError(error.message);
-    });
-}
-
-// Api response no specific json and with loading
+// response no specific json and with loading
 function axiosRs(
   rst,
   {
@@ -290,14 +46,16 @@ function axiosRs(
     .catch(error => {
       if (error.response) rst.error = error.response.data || error.message;
       else rst.error = error.message;
+      console.error('axiosRs error:', rst.error);
     })
     .finally(() => (rst.loading = false));
 }
 
+// response no specific json and return promise
 function axiosPs({
   url,
   params, // url parameters
-  data, // request body
+  data = null, // request body
   method = 'POST',
   headers,
   ...restOption
@@ -307,42 +65,36 @@ function axiosPs({
     params,
     data,
     method,
-    headers: headers || {
-      'content-type': 'application/json'
-    },
+    headers,
     ...restOption
   })
     .then(response => response.data)
     .catch(error => {
-      if (error.response) return error.response.data;
+      console.error('axiosPs error:', error.response.data || error.message);
+      if (error.response) return error.response.data || error.message;
       else return error.message;
     });
 }
 
-function axiosCb({
+// response no specific json and using callback
+function axiosCb(
   cb,
-  url,
-  params,
-  data,
-  method = 'POST',
-  headers,
-  ...restOption
-}) {
+  { url, params, data = null, method = 'POST', headers, ...restOption }
+) {
   axios({
     url,
     params,
     data,
     method,
-    headers: headers || {
-      'content-type': 'application/json'
-    },
+    headers,
     ...restOption
   })
     .then(response => {
       cb(null, response.data);
     })
     .catch(error => {
-      cb(error, null);
+      if (error.response) cb(error.response.data, null);
+      else cb(error.message, null);
     });
 }
 
@@ -352,4 +104,4 @@ export default {
   axiosCb
 };
 
-export { ndbApi, ndbApiPs };
+export { ndbApi };
