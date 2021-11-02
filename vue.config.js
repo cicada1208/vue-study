@@ -2,14 +2,14 @@
 // development: vue inspect > webpack.dev.output.txt
 // production: vue inspect --mode production > webpack.prd.output.txt
 
-const pkgJson = require('./package.json');
+const pkg = require('./package.json');
 
 // 環境變量 BASE_URL: 與 vue.config.js 的 publicPath 相符，即應用部署的基礎路徑。
 // 用法同 webpack 的 output.publicPath，但 Vue CLI 在其他地方也需用到此值，
 // 所以請設定在 vue.config.js 的 publicPath。
 
 // 環境變量 VUE_APP_VERSION: 程式版本為新增的自定義變數
-process.env.VUE_APP_VERSION = pkgJson.version;
+process.env.VUE_APP_VERSION = pkg.version;
 
 module.exports = {
   // configureWebpack: 調整 webpack 配置，該對象將會被 webpack-merge 合併最終的 webpack 配置。
@@ -34,7 +34,7 @@ module.exports = {
     }
   },
 
-  publicPath: process.env.NODE_ENV === 'production' ? `/${pkgJson.name}/` : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? `/${pkg.name}/` : '/',
 
   // 若於 App.vue 或各個 component 的 style 使用 @use 出現下列錯誤訊息
   // SassError: @use rules must be written before any other rules.
