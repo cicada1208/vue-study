@@ -39,7 +39,7 @@ module.exports = {
   // 若於 App.vue 或各個 component 的 style 使用 @use 出現下列錯誤訊息
   // SassError: @use rules must be written before any other rules.
   // 是因 vuetify 將 shared global sass variables 導入至各個 component，
-  // 導致 @use 無法置頂，可於下列將所需先行導入。
+  // 導致 @use 無法置頂，可於下列將所需先行導入。.
   // https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
   css: {
     loaderOptions: {
