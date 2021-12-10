@@ -26,21 +26,6 @@
       "file": "${file}",
       "skipFiles": ["<node_internals>/**", "node_modules/**/*.js"]
     },
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "chrome:vue",
-      "url": "http://localhost:8080",
-      "webRoot": "${workspaceFolder}/src",
-      "breakOnLoad": true,
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "webpack:///src/*.vue": "${webRoot}/*.vue",
-        "webpack:///./src/*.js": "${webRoot}/*.js"
-      },
-      "preLaunchTask": "serve",
-      "skipFiles": ["<node_internals>/**", "node_modules/**/*.js", "runtime.js"]
-    }
     // {
     //   "type": "chrome",
     //   "request": "launch",
@@ -61,5 +46,41 @@
     //   "preLaunchTask": "serve",
     //   "skipFiles": ["<node_internals>/**", "node_modules/**/*.js", "runtime.js"]
     // }
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "chrome:vue.js",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true,
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///src/*.vue": "${webRoot}/*.vue",
+        "webpack:///./src/*.js": "${webRoot}/*.js"
+      },
+      "preLaunchTask": "serve",
+      "skipFiles": ["<node_internals>/**", "node_modules/**/*.js", "runtime.js"]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "chrome:vue.ts",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true,
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./src/*.vue": "${webRoot}/*.vue",
+        "webpack:///./src/*.js": "${webRoot}/*.js",
+        "webpack:///./src/*.ts": "${webRoot}/*.ts"
+      },
+      "preLaunchTask": "serve",
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**/*.js",
+        "runtime.js",
+        "**/webpack:/**"
+      ]
+    }
   ]
 }
