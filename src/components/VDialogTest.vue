@@ -84,7 +84,7 @@
           :loading="loading"
           :disabled="loading"
           color="success"
-          @click="loading = true"
+          @click.stop="loading = true"
         >
           Loading Dialog
         </v-btn>

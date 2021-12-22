@@ -1,19 +1,5 @@
 <template>
   <v-container fluid>
-    {{ 'loading:' + this.testRst.loading }} <br />
-    {{ 'content:' + this.testRst.content }} <br />
-    {{ 'Code:' + this.testRst.content.Code }} <br />
-    {{ 'Succ:' + this.testRst.content.Succ }} <br />
-    {{ 'Data:' + this.testRst.content.Data }} <br />
-    {{ 'Msg:' + this.testRst.content.Msg }} <br />
-
-    {{ 'loading2:' + this.testRst2.loading }} <br />
-    {{ 'content2:' + this.testRst2.content }} <br />
-    {{ 'Code2:' + this.testRst2.content.Code }} <br />
-    {{ 'Succ2:' + this.testRst2.content.Succ }} <br />
-    {{ 'Data2:' + this.testRst2.content.Data }} <br />
-    {{ 'Msg2:' + this.testRst2.content.Msg }} <br />
-
     <loading-dialog v-model="albumRst.loading" />
 
     <div v-if="albumRst.error">
@@ -37,7 +23,7 @@
 </template>
 
 <script>
-import apiUtil, { ndbApi } from '../libs/api-util';
+import apiUtil from '../libs/api-util';
 
 export default {
   name: 'api-query',
@@ -52,9 +38,7 @@ export default {
 
   data() {
     return {
-      albumRst: { loading: false, content: {}, error: '' },
-      testRst: { loading: false, content: {} },
-      testRst2: { loading: false, content: {} }
+      albumRst: { loading: false, content: {}, error: '' }
     };
   },
 
@@ -76,27 +60,6 @@ export default {
     },
     viewAlbum(link) {
       window.open(link);
-    },
-
-    async fetchTest() {
-      ndbApi.post(this.testRst, 'Users/QueryUser', {
-        params: { option: 2 },
-        data: {
-          userId: '10964',
-          isActive: true
-        }
-      });
-      ndbApi.get(this.testRst2, 'Test/GetTest', {
-        params: { option: 10 }
-      });
-      const data = await ndbApi.postPs('Users/QueryUser', {
-        params: { option: 2 },
-        data: {
-          userId: '10964',
-          isActive: true
-        }
-      });
-      console.log('data:', data);
     }
   },
 
@@ -105,7 +68,6 @@ export default {
   created() {
     // 組件創建完後獲取數據
     this.fetchAlbum();
-    this.fetchTest();
   },
 
   // watch: 一個對象，鍵是需要觀察的表達式，若需觀察 data property e.f 鍵可為 'e.f'
