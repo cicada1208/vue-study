@@ -287,13 +287,13 @@
         </template>
 
         <template v-slot:header.data-table-select>
-          <v-checkbox v-model="selectAll" />
+          <v-simple-checkbox v-model="selectAll" />
         </template>
         <template v-slot:item.data-table-select="{ isSelected, select, item }">
-          <v-checkbox
+          <v-simple-checkbox
+            v-if="item.calories >= 160"
             :value="isSelected"
-            @click="select(!isSelected)"
-            :disabled="item.calories < 160"
+            @input="select(!isSelected)"
           />
         </template>
       </v-data-table>
