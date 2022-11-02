@@ -285,6 +285,17 @@
             </v-row>
           </td>
         </template>
+
+        <template v-slot:header.data-table-select>
+          <v-checkbox v-model="selectAll" />
+        </template>
+        <template v-slot:item.data-table-select="{ isSelected, select, item }">
+          <v-checkbox
+            :value="isSelected"
+            @click="select(!isSelected)"
+            :disabled="item.calories < 160"
+          />
+        </template>
       </v-data-table>
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
 
@@ -498,6 +509,20 @@ export default {
 
     formTitle() {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+    },
+
+    selectAll: {
+      get() {
+        return (
+          this.items.filter(i => i.calories >= 160).length ===
+          this.selectedItems.length
+        );
+      },
+      set(val) {
+        if (val) {
+          this.selectedItems = this.items.filter(i => i.calories >= 160);
+        } else this.selectedItems = [];
+      }
     }
   },
 
