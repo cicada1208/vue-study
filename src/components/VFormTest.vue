@@ -438,6 +438,7 @@ export default {
       console.log('pickerDate:', this.pickerDate);
       console.log('time:', this.time, typeof this.time);
       console.log('datetime:', this.datetime, typeof this.datetime);
+      console.log('files:', this.files);
     },
     validate() {
       // 頁面載入時雖會執行 nameRules、emailRules 驗證，

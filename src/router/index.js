@@ -9,11 +9,11 @@ Vue.use(VueRouter);
 const UserHome = { template: '<div>home</div>' };
 const UserProfile = {
   template:
-    '<div>profile, $route.params.userName: {{$route.params.userName}}</div>',
+    '<div>profile, $route.params.userName: {{$route.params.userName}}</div>'
 };
 const UserNote = {
   props: ['userName'],
-  template: '<div>note, props.userName: {{userName}}</div>',
+  template: '<div>note, props.userName: {{userName}}</div>'
 };
 
 // 定義路由
@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: Home
   },
   {
     path: '/vue.core',
@@ -30,7 +30,7 @@ const routes = [
     // this generates a separate chunk (vue.core.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "vue.core" */ '@/views/VueCore.vue'),
+      import(/* webpackChunkName: "vue.core" */ '@/views/VueCore.vue')
   },
   {
     // 動態路徑參數(dynamic segment)
@@ -55,39 +55,45 @@ const routes = [
         path: 'all',
         name: 'UserAll',
         // 一個視圖(router-view)由一組件(component)渲染
-        components: { default: UserHome, profile: UserProfile, note: UserNote },
-      },
-    ],
+        components: { default: UserHome, profile: UserProfile, note: UserNote }
+      }
+    ]
   },
   {
     path: '/vuex',
     name: 'Vuex',
-    component: () => import(/* webpackChunkName: "vuex" */ '@/views/Vuex.vue'),
+    component: () => import(/* webpackChunkName: "vuex" */ '@/views/Vuex.vue')
   },
   {
     path: '/api.query',
     name: 'ApiQuery',
     component: () =>
-      import(/* webpackChunkName: "api.query" */ '@/views/ApiQuery.vue'),
+      import(/* webpackChunkName: "api.query" */ '@/views/ApiQuery.vue')
   },
   {
     path: '/vuetify',
     name: 'Vuetify',
     component: () =>
-      import(/* webpackChunkName: "vuetify" */ '@/views/Vuetify.vue'),
+      import(/* webpackChunkName: "vuetify" */ '@/views/Vuetify.vue')
   },
   {
     path: '/css.test',
     name: 'CssTest',
     component: () =>
-      import(/* webpackChunkName: "css.test" */ '@/views/CssTest.vue'),
+      import(/* webpackChunkName: "css.test" */ '@/views/CssTest.vue')
+  },
+  {
+    path: '/file.test',
+    name: 'FileTest',
+    component: () =>
+      import(/* webpackChunkName: "file.test" */ '@/views/FileTest.vue')
   },
   {
     path: '*', // 通配符，常用於客戶端404錯誤
     name: 'NotFound',
     component: () =>
-      import(/* webpackChunkName: "notfound" */ '@/components/NotFound.vue'),
-  },
+      import(/* webpackChunkName: "notfound" */ '@/components/NotFound.vue')
+  }
 ];
 
 // 創建 router 實例
@@ -107,7 +113,7 @@ const router = new VueRouter({
     }
     // return 期望滾動到哪個位置
     return goTo(scrollTo);
-  },
+  }
 });
 
 export default router;

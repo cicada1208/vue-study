@@ -132,6 +132,11 @@ export default {
         path: '/css.test',
         text: 'CssTest',
         icon: 'mdi-language-css3'
+      },
+      {
+        path: '/file.test',
+        text: 'FileTest',
+        icon: 'mdi-file'
       }
     ]
   }),
