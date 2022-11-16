@@ -12,7 +12,19 @@
     <v-btn @click="$refs.fileInput.click()">Select images</v-btn>
 
     <h2 class="mt-4">drag file:</h2>
-    <v-card id="dragZone" width="300" height="200"></v-card>
+    <v-card
+      id="dragZone"
+      width="150"
+      color="grey lighten-3"
+      class="text-center"
+    >
+      <v-icon large>mdi-cloud-upload-outline</v-icon>
+      <br />
+      <span>Drag images here</span>
+    </v-card>
+
+    <h2 class="mt-4">image display:</h2>
+    <div id="displayZone"></div>
   </v-container>
 </template>
 
@@ -20,7 +32,33 @@
 export default {
   methods: {
     selectImages(e) {
-      console.log('files:', e.target.files);
+      this.handleImages(e.target.files);
+    },
+
+    handleImages(files) {
+      console.log('files:', files);
+      let imageType = /image.*/;
+      let displayZone = document.getElementById('displayZone');
+      let list = document.createElement('ul');
+      for (let i = 0; i < files.length; i++) {
+        if (!files[i].type.match(imageType)) continue;
+
+        let li = document.createElement('li');
+        list.appendChild(li);
+
+        let img = document.createElement('img');
+        img.src = window.URL.createObjectURL(files[i]);
+        img.height = 60;
+        img.onload = function() {
+          window.URL.revokeObjectURL(this.src);
+        };
+        li.appendChild(img);
+
+        let info = document.createElement('span');
+        info.innerHTML = files[i].name + ': ' + files[i].size + ' bytes';
+        li.appendChild(info);
+      }
+      displayZone.appendChild(list);
     },
 
     dragenter(e) {
@@ -39,7 +77,7 @@ export default {
 
       var dt = e.dataTransfer;
       var files = dt.files;
-      console.log('files:', files);
+      this.handleImages(files);
     }
   },
 
