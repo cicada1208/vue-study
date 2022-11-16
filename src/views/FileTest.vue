@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
     <h2>file input:</h2>
+    <!-- accept: 除了 MIME type 也可為副檔名 -->
+    <!-- accept=".jpg, .png"-->
     <input
       ref="fileInput"
       type="file"
