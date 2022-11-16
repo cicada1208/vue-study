@@ -134,6 +134,11 @@ export default {
         icon: 'mdi-language-css3'
       },
       {
+        path: '/dom.event',
+        text: 'DomEvent',
+        icon: 'mdi-rotate-3d-variant'
+      },
+      {
         path: '/file.test',
         text: 'FileTest',
         icon: 'mdi-file'

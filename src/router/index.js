@@ -83,6 +83,12 @@ const routes = [
       import(/* webpackChunkName: "css.test" */ '@/views/CssTest.vue')
   },
   {
+    path: '/dom.event',
+    name: 'DomEvent',
+    component: () =>
+      import(/* webpackChunkName: "dom.event" */ '@/views/DomEvent.vue')
+  },
+  {
     path: '/file.test',
     name: 'FileTest',
     component: () =>
