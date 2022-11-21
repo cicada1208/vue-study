@@ -63,20 +63,24 @@ export default {
       displayZone.appendChild(list);
     },
 
-    dragenter(e) {
-      e.stopPropagation();
+    dragover(e) {
+      // prevent default to allow drop
       e.preventDefault();
     },
 
-    dragover(e) {
-      e.stopPropagation();
-      e.preventDefault();
+    dragenter(e) {
+      e.target.classList.add('dragenter');
+    },
+
+    dragleave(e) {
+      e.target.classList.remove('dragenter');
     },
 
     drop(e) {
-      e.stopPropagation();
+      // prevent default action (open as link for some elements)
       e.preventDefault();
 
+      e.target.classList.remove('dragenter');
       var dt = e.dataTransfer;
       var files = dt.files;
       this.handleImages(files);
@@ -85,9 +89,16 @@ export default {
 
   mounted() {
     let dragZone = document.getElementById('dragZone');
-    dragZone.addEventListener('dragenter', this.dragenter, false);
-    dragZone.addEventListener('dragover', this.dragover, false);
-    dragZone.addEventListener('drop', this.drop, false);
+    dragZone.addEventListener('dragover', this.dragover);
+    dragZone.addEventListener('dragenter', this.dragenter);
+    dragZone.addEventListener('dragleave', this.dragleave);
+    dragZone.addEventListener('drop', this.drop);
   }
 };
 </script>
+
+<style lang="scss" scoped>
+#dragZone.dragenter {
+  opacity: 0.5;
+}
+</style>
