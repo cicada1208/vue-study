@@ -63,17 +63,17 @@ export default {
       displayZone.appendChild(list);
     },
 
-    dragover(e) {
-      // prevent default to allow drop
-      e.preventDefault();
-    },
-
     dragenter(e) {
       e.target.classList.add('dragenter');
     },
 
     dragleave(e) {
       e.target.classList.remove('dragenter');
+    },
+
+    dragover(e) {
+      // prevent default to allow drop
+      e.preventDefault();
     },
 
     drop(e) {
