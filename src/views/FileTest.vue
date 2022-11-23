@@ -64,8 +64,8 @@ export default {
 
     downloadFirstFile(file) {
       if (!file) return;
-      var blobURL = URL.createObjectURL(file);
-      var a = document.createElement('a');
+      let blobURL = URL.createObjectURL(file);
+      let a = document.createElement('a');
       a.href = blobURL;
       a.download = file.name;
       a.click();
@@ -92,11 +92,18 @@ export default {
       e.preventDefault();
 
       e.target.classList.remove('dragenter');
-      var dt = e.dataTransfer;
-      var files = dt.files;
+      let dt = e.dataTransfer;
+      let files = dt.files;
       console.log('files:', files);
       this.displayImages(files);
       this.downloadFirstFile(files?.[0]);
+
+      console.log('items:');
+      const items = [...dt.items]; // array-like 並不一定有 forEach，可透過 spread syntax 轉換為 array
+      items.forEach(item => {
+        console.log(`kind:${item.kind}, type:${item.type}`);
+        item.getAsString(str => console.log(`getAsString:${str}`));
+      });
     }
   },
 
