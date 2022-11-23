@@ -34,11 +34,10 @@
 export default {
   methods: {
     selectImages(e) {
-      this.handleImages(e.target.files);
+      this.displayImages(e.target.files);
     },
 
-    handleImages(files) {
-      console.log('files:', files);
+    displayImages(files) {
       let imageType = /image.*/;
       let displayZone = document.getElementById('displayZone');
       let list = document.createElement('ul');
@@ -63,6 +62,18 @@ export default {
       displayZone.appendChild(list);
     },
 
+    downloadFirstFile(file) {
+      if (!file) return;
+      var blobURL = URL.createObjectURL(file);
+      var a = document.createElement('a');
+      a.href = blobURL;
+      a.download = file.name;
+      a.click();
+      // a.style.display = 'none';
+      document.body.appendChild(a);
+      window.URL.revokeObjectURL(blobURL);
+    },
+
     dragenter(e) {
       e.target.classList.add('dragenter');
     },
@@ -83,7 +94,9 @@ export default {
       e.target.classList.remove('dragenter');
       var dt = e.dataTransfer;
       var files = dt.files;
-      this.handleImages(files);
+      console.log('files:', files);
+      this.displayImages(files);
+      this.downloadFirstFile(files?.[0]);
     }
   },
 
