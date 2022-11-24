@@ -50,12 +50,18 @@ export default {
       // prevent default action (open as link for some elements)
       e.preventDefault();
       e.target.classList.remove('dragenter');
+
       let dt = e.dataTransfer;
-      let files = dt.files; // 若非文件則為空
+      let files = dt.files; // 若拖曳的項目非文件則為空
       console.log('files:', files);
       this.displayImages(files);
       this.downloadFirstFile(files?.[0]);
       this.handleDataTransferItems(dt.items);
+
+      // DataTransfer.getData(format): 快捷地獲取拖曳內容
+      // format: DataTransfer.items 中的 type 值，以此選擇要讀取的值
+      let text = dt.getData('text/plain'); // 此處可省略為 dt.getData('text')
+      console.log('getData[text/plain]:', text);
     },
 
     selectImages(e) {
