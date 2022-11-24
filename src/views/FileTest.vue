@@ -33,11 +33,37 @@
 <script>
 export default {
   methods: {
+    dragenter(e) {
+      e.target.classList.add('dragenter');
+    },
+
+    dragleave(e) {
+      e.target.classList.remove('dragenter');
+    },
+
+    dragover(e) {
+      // prevent default to allow drop
+      e.preventDefault();
+    },
+
+    drop(e) {
+      // prevent default action (open as link for some elements)
+      e.preventDefault();
+      e.target.classList.remove('dragenter');
+      let dt = e.dataTransfer;
+      let files = dt.files; // 若非文件則為空
+      console.log('files:', files);
+      this.displayImages(files);
+      this.downloadFirstFile(files?.[0]);
+      this.handleDataTransferItems(dt.items);
+    },
+
     selectImages(e) {
       this.displayImages(e.target.files);
     },
 
     displayImages(files) {
+      if (files.length === 0) return;
       let imageType = /image.*/;
       let displayZone = document.getElementById('displayZone');
       let list = document.createElement('ul');
@@ -74,35 +100,39 @@ export default {
       window.URL.revokeObjectURL(blobURL);
     },
 
-    dragenter(e) {
-      e.target.classList.add('dragenter');
-    },
-
-    dragleave(e) {
-      e.target.classList.remove('dragenter');
-    },
-
-    dragover(e) {
-      // prevent default to allow drop
-      e.preventDefault();
-    },
-
-    drop(e) {
-      // prevent default action (open as link for some elements)
-      e.preventDefault();
-
-      e.target.classList.remove('dragenter');
-      let dt = e.dataTransfer;
-      let files = dt.files;
-      console.log('files:', files);
-      this.displayImages(files);
-      this.downloadFirstFile(files?.[0]);
-
+    handleDataTransferItems(dtItems) {
       console.log('items:');
-      const items = [...dt.items]; // array-like 並不一定有 forEach，可透過 spread syntax 轉換為 array
+      // array-like 並不一定有 forEach，可透過 spread syntax 轉換為 array
+      const items = [...dtItems];
       items.forEach(item => {
-        console.log(`kind:${item.kind}, type:${item.type}`);
-        item.getAsString(str => console.log(`getAsString:${str}`));
+        // console.log(`kind:${item.kind}, type:${item.type}`);
+        switch (item.kind) {
+          case 'string':
+            if (item.type.includes('text/plain')) {
+              item.getAsString(str => {
+                // str 是存文本，於此處理
+                console.log(`getAsString[text/plain]: ${str}`);
+              });
+            } else if (item.type.includes('text/html')) {
+              item.getAsString(str => {
+                // str 是富文本，於此處理
+                console.log(`getAsString[text/html]: ${str}`);
+              });
+            } else if (item.type.includes('text/uri-list')) {
+              item.getAsString(str => {
+                // str 是 uri，於此處理
+                console.log(`getAsString[text/uri-list]: ${str}`);
+              });
+            }
+            break;
+          case 'file':
+            if (item.type.match(/image.*/)) {
+              // file 是圖片，可上傳或其他處理
+              let file = item.getAsFile();
+              console.log(`getAsFile[image/*]:`, file);
+            }
+            break;
+        }
       });
     }
   },
