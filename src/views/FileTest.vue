@@ -60,7 +60,7 @@ export default {
 
       // DataTransfer.getData(format): 快捷地獲取拖曳內容
       // format: DataTransfer.items 中的 type 值，以此選擇要讀取的值
-      let text = dt.getData('text/plain'); // 此處可省略為 dt.getData('text')
+      let text = dt.getData('text/plain'); //  此方法為同步，此處可省略為 dt.getData('text')
       console.log('getData[text/plain]:', text);
     },
 
@@ -115,6 +115,7 @@ export default {
         switch (item.kind) {
           case 'string':
             if (item.type.includes('text/plain')) {
+              // 此方法為非同步
               item.getAsString(str => {
                 // str 是存文本，於此處理
                 console.log(`getAsString[text/plain]: ${str}`);
@@ -134,7 +135,7 @@ export default {
           case 'file':
             if (item.type.match(/image.*/)) {
               // file 是圖片，可上傳或其他處理
-              let file = item.getAsFile();
+              let file = item.getAsFile(); // File object
               console.log(`getAsFile[image/*]:`, file);
             }
             break;
