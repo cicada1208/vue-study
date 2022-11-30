@@ -34,11 +34,13 @@
 export default {
   methods: {
     dragenter(e) {
-      e.target.classList.add('dragenter');
+      e.target.style.opacity = 0.5;
+      // e.target.classList.add('dragenter');
     },
 
     dragleave(e) {
-      e.target.classList.remove('dragenter');
+      e.target.style.opacity = 1;
+      // e.target.classList.remove('dragenter');
     },
 
     dragover(e) {
