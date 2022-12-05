@@ -120,6 +120,35 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
+                    label="Date"
+                    v-model="dateComputed"
+                    readonly
+                    clearable
+                    prepend-icon="mdi-calendar"
+                    v-bind="attrs"
+                    v-on="on"
+                    :rules="[ruleUtil.required()]"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="dateComputed"
+                  locale="zh-TW"
+                  :day-format="date => new Date(date).getDate()"
+                  no-title
+                  scrollable
+                ></v-date-picker>
+              </v-menu>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <v-menu
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
                     v-model="time"
                     label="Time"
                     readonly
@@ -389,6 +418,7 @@ export default {
     files: [],
     note: '',
     dates: [moment().format('YYYY-MM-DD')],
+    date: moment().format('YYYYMMDD'),
     minDate: moment().format('YYYY-MM-01'),
     pickerDate: null,
     time: null,
@@ -420,6 +450,19 @@ export default {
     },
     snackbar: false
   }),
+  computed: {
+    dateComputed: {
+      get() {
+        if (this.date) return moment(this.date).format('YYYY-MM-DD');
+        else return this.date; // null
+      },
+      set(value) {
+        if (value) this.date = moment(value).format('YYYYMMDD');
+        // this.date format is YYYYMMDD
+        else this.date = value; // null
+      }
+    }
+  },
   methods: {
     log() {
       console.log('valid:', this.valid);
@@ -436,6 +479,7 @@ export default {
       console.log('vswitch:', this.vswitch, typeof this.vswitch);
       console.log('dates:', this.dates);
       console.log('pickerDate:', this.pickerDate);
+      console.log('date:', this.date);
       console.log('time:', this.time, typeof this.time);
       console.log('datetime:', this.datetime, typeof this.datetime);
       console.log('files:', this.files);
