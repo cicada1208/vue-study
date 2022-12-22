@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <h2>file input:</h2>
+    <h2>input element select images:</h2>
     <!-- accept: 除了 MIME type 也可為副檔名 -->
     <!-- accept=".jpg, .png"-->
     <input
@@ -13,7 +13,7 @@
     />
     <v-btn @click="$refs.fileInput.click()">Select images</v-btn>
 
-    <h2 class="mt-4">drag file:</h2>
+    <h2 class="mt-4">drag files:</h2>
     <v-card
       id="dragZone"
       width="150"
@@ -25,13 +25,34 @@
       <span>Drag images here</span>
     </v-card>
 
-    <h2 class="mt-4">image display:</h2>
+    <h2 class="mt-4">display images:</h2>
     <div id="displayZone"></div>
+
+    <h2 class="mt-4">v-file-input element import excel:</h2>
+    <v-file-input
+      label="選擇匯入的Excel"
+      v-model="excel"
+      accept=".xls, .xlsx"
+      @change="importExcel"
+      @click:clear="excelItems = []"
+      prepend-icon="mdi-file-excel-outline"
+      outlined
+      dense
+      hide-details
+    />
+    <v-data-table :items="excelItems" :items-per-page="-1" />
   </v-container>
 </template>
 
 <script>
+import XLSX from 'xlsx';
+
 export default {
+  data: () => ({
+    excel: null,
+    excelItems: []
+  }),
+
   methods: {
     dragenter(e) {
       e.target.style.opacity = 0.5;
@@ -143,6 +164,60 @@ export default {
             break;
         }
       });
+    },
+
+    importExcel(file) {
+      if (!file) return;
+      else if (!/\.(xls|xlsx)$/.test(file.name.toLowerCase())) {
+        alert('檔案格式錯誤，僅接受 xls 或 xlsx');
+        return;
+      }
+
+      const fileReader = new FileReader();
+      fileReader.onload = ev => {
+        try {
+          this.excelItems = []; //清空接收數據
+
+          const data = ev.target.result;
+          const workbook = XLSX.read(data, {
+            type: 'binary'
+          });
+          const wsname = workbook.SheetNames[0]; //讀取第一個sheet
+          const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); //生成json表格内容(ex. {column: data, __rownum__: int})
+          console.log('ws:', ws);
+
+          // for (var i in ws) {
+          //   var empId = ws[i].員編.toString();
+          //   var kind = kindPair[ws[i].類別];
+          //   var dateStr = ws[i].加班歸屬日;
+          //   var startDate = ws[i].加班起始日期;
+          //   var startTime = ws[i].加班起始時間;
+          //   var endDate = ws[i].加班結束日期;
+          //   var endTime = ws[i].加班結束時間;
+          //   var dining = parseFloat(ws[i].用餐時數);
+          //   var apply = parseFloat(ws[i].申請時數);
+          //   var sheetData = {
+          //     empId: empId,
+          //     kind: kind,
+          //     dateStr: dateStrAddSymbol(dateStr.toString(), '-'),
+          //     startDate: dateStrAddSymbol(startDate.toString(), '-'),
+          //     startTime: timeStrAddSymbol(startTime.toString(), ':'),
+          //     endDate: dateStrAddSymbol(endDate.toString(), '-'),
+          //     endTime: timeStrAddSymbol(endTime.toString(), ':'),
+          //     dining: dining,
+          //     apply: apply,
+          //     note: ws[i].說明,
+          //     filler: filler
+          //   };
+          //   this.excelItems.push(sheetData);
+          // }
+        } catch (err) {
+          this.excel = null;
+          this.excelItems = [];
+          alert(err);
+        }
+      };
+      fileReader.readAsBinaryString(file);
     }
   },
 
