@@ -34,23 +34,31 @@
       v-model="excel"
       accept=".xls, .xlsx"
       @change="importExcel"
-      @click:clear="excelItems = []"
+      @click:clear="
+        excelItems = [];
+        excelheaders = [];
+      "
       prepend-icon="mdi-file-excel-outline"
       outlined
       dense
       hide-details
     />
-    <v-data-table :items="excelItems" :items-per-page="-1" />
+    <v-data-table
+      :headers="excelheaders"
+      :items="excelItems"
+      :items-per-page="-1"
+    />
   </v-container>
 </template>
 
 <script>
-import XLSX from 'xlsx';
+import { utils, read } from 'xlsx';
 
 export default {
   data: () => ({
     excel: null,
-    excelItems: []
+    excelItems: [],
+    excelheaders: []
   }),
 
   methods: {
@@ -174,46 +182,24 @@ export default {
       }
 
       const fileReader = new FileReader();
-      fileReader.onload = ev => {
+      fileReader.onload = e => {
         try {
-          this.excelItems = []; //清空接收數據
-
-          const data = ev.target.result;
-          const workbook = XLSX.read(data, {
+          const data = e.target.result;
+          const wb = read(data, {
             type: 'binary'
           });
-          const wsname = workbook.SheetNames[0]; //讀取第一個sheet
-          const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); //生成json表格内容(ex. {column: data, __rownum__: int})
-          console.log('ws:', ws);
-
-          // for (var i in ws) {
-          //   var empId = ws[i].員編.toString();
-          //   var kind = kindPair[ws[i].類別];
-          //   var dateStr = ws[i].加班歸屬日;
-          //   var startDate = ws[i].加班起始日期;
-          //   var startTime = ws[i].加班起始時間;
-          //   var endDate = ws[i].加班結束日期;
-          //   var endTime = ws[i].加班結束時間;
-          //   var dining = parseFloat(ws[i].用餐時數);
-          //   var apply = parseFloat(ws[i].申請時數);
-          //   var sheetData = {
-          //     empId: empId,
-          //     kind: kind,
-          //     dateStr: dateStrAddSymbol(dateStr.toString(), '-'),
-          //     startDate: dateStrAddSymbol(startDate.toString(), '-'),
-          //     startTime: timeStrAddSymbol(startTime.toString(), ':'),
-          //     endDate: dateStrAddSymbol(endDate.toString(), '-'),
-          //     endTime: timeStrAddSymbol(endTime.toString(), ':'),
-          //     dining: dining,
-          //     apply: apply,
-          //     note: ws[i].說明,
-          //     filler: filler
-          //   };
-          //   this.excelItems.push(sheetData);
-          // }
+          const wsname = wb.SheetNames[0];
+          const ws = utils.sheet_to_json(wb.Sheets[wsname]); // ex. {column: data, __rowNum__: int}
+          this.excelItems = ws;
+          this.excelheaders = [];
+          if (ws.length > 0)
+            Object.keys(ws[0]).forEach(col => {
+              this.excelheaders.push({ text: col, value: col });
+            });
         } catch (err) {
           this.excel = null;
           this.excelItems = [];
+          this.excelheaders = [];
           alert(err);
         }
       };
