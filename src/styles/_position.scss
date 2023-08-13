@@ -1,7 +1,8 @@
 @mixin position-sticky {
-  // 相對於 nearest scrolling ancestor 和 nearest block-level ancestor 基於 top, right, bottom, left 偏移
-  position: -webkit-sticky;
+  // 相對於 nearest scrolling ancestor, nearest block-level ancestor
+  // 基於 top, right, bottom, left 的偏移
   position: sticky;
+  position: -webkit-sticky;
 }
 
 .sticky-bottom {
